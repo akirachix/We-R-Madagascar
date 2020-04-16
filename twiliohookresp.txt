@@ -1,0 +1,7 @@
+<QueryDict: {'SmsMessageSid': ['SM8769de63878fcbbe32b34ffe2b44ad18'],
+'NumMedia': ['0'], 'SmsSid': ['SM8769de63878fcbbe32b34ffe2b44ad18'],
+ 'SmsStatus': ['received'], 'Body': ['12323'],
+ 'To': ['whatsapp:+14155238886'],
+  'NumSegments': ['1'], 'MessageSid': ['SM8769de63878fcbbe32b34ffe2b44ad18'],
+  'AccountSid': ['AC3e26a1d41ec8d9299ee3db690083f0e6'],
+   'From': ['whatsapp:+9779842583634'], 'ApiVersion': ['2010-04-01']}>

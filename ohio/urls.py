@@ -40,6 +40,7 @@ urlpatterns = [
     path('api/v1/pilots', registryviews.PilotList.as_view()),
     path('api/v1/pilots/<uuid:pk>', registryviews.PilotDetail.as_view()),
     path('api/v1/pilots/<uuid:pk>/privilaged', registryviews.PilotDetailPrivilaged.as_view()),
+    path('whatsapp/', include('whatsappmsg.urls')),
     
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
