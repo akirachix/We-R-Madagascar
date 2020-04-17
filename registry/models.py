@@ -211,3 +211,16 @@ class Aircraft(models.Model):
 
     def __str__(self):
         return self.model
+
+class Complain(models.Model):
+    title = models.CharField(max_length=500, null=False, default='')
+    subject = models.CharField(max_length=100,),
+    created_date = models.DateTimeField(auto_created=True),
+    complainer_name = models.CharField(max_length=100),
+    complainer_address = models.CharField(max_length=200),
+    complainer_phone = models.IntegerField(max_length=10, default=0)
+    class Meta:
+        permissions = (
+            ('can_view', "Can view complain"),
+            ('can_edit', "Can edit complain")
+        )
