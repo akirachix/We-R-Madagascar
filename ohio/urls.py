@@ -23,6 +23,7 @@ from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 admin.autodiscover()
+from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,6 +42,9 @@ urlpatterns = [
     path('api/v1/pilots/<uuid:pk>', registryviews.PilotDetail.as_view()),
     path('api/v1/pilots/<uuid:pk>/privilaged', registryviews.PilotDetailPrivilaged.as_view()),
     path('whatsapp/', include('whatsappmsg.urls')),
+    #JWT token
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

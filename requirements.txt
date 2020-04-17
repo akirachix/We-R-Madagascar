@@ -8,3 +8,5 @@ gunicorn
 cryptography
 django-extensions
 djangorestframework-jwt
+twilio
+djangorestframework_simplejwt

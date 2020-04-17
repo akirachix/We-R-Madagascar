@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'registry',
     'twilio',
-    'whatsappmsg'
-
+    'whatsappmsg',
 ]
 
 MIDDLEWARE = [
