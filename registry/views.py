@@ -29,7 +29,7 @@ class OperatorList(mixins.ListModelMixin,
 	"""
 	List all operators, or create a new operator.
 	"""
-	permission_classes = (IsAuthenticated,)
+	# permission_classes = (IsAuthenticated,)
 
 	queryset = Operator.objects.all()
 	serializer_class = OperatorSerializer

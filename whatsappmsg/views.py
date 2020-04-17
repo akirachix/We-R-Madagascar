@@ -14,7 +14,7 @@ def reply_whatsapp(request):
         response = MessagingResponse()
         print(request.POST.get('Body'))
         msg = request.POST.get('Body')
-        response.message("Thanks for asking drone registry, we will check your number {} ".format(msg))
+        response.message("Thanks for asking drone registry, we will check your number {}, Please send you gps".format(msg))
         return HttpResponse(str(response))
     else:
         return ""
