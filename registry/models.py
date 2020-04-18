@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 import uuid
 # Create your models here.
@@ -8,6 +9,8 @@ from dateutil.relativedelta import relativedelta
 from django.utils.translation import ugettext_lazy as _
 import string, random 
 from django.core.validators import RegexValidator
+
+from ohio import settings
 
 
 class Person(models.Model):
@@ -218,7 +221,7 @@ class Complain(models.Model):
     created_date = models.DateTimeField(auto_created=True),
     complainer_name = models.CharField(max_length=100),
     complainer_address = models.CharField(max_length=200),
-    complainer_phone = models.IntegerField(max_length=10, default=0)
+    complainer_phone = models.CharField(max_length=10, default=0)
     class Meta:
         permissions = (
             ('can_view', "Can view complain"),

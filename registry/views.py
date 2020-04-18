@@ -16,9 +16,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from registry.models import Activity, Authorization, Contact, Operator, Aircraft, Pilot, Test, TestValidity
-from registry.serializers import (ContactSerializer, OperatorSerializer, PilotSerializer, 
-                                  PrivilagedContactSerializer, PrivilagedPilotSerializer,
-                                  PrivilagedOperatorSerializer, AircraftSerializer, AircraftESNSerializer)
+from registry.serializers import (ContactSerializer, OperatorSerializer, PilotSerializer,
+								  PrivilagedContactSerializer, PrivilagedPilotSerializer,
+								  PrivilagedOperatorSerializer, AircraftSerializer, AircraftESNSerializer)
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from six.moves.urllib import request as req
@@ -171,14 +171,18 @@ class PilotDetailPrivilaged(mixins.RetrieveModelMixin,
 	"""
 	Retrieve, update or delete a Pilot instance.
 	"""
-	
-
 	queryset = Pilot.objects.all()
 	serializer_class = PrivilagedPilotSerializer
 
 	def get(self, request, *args, **kwargs):
 	    return self.retrieve(request, *args, **kwargs)
 
+# class UserViewSet(viewsets.ModelViewSet):
+# 	queryset = User.objects.all()
+# 	serializer_class = UserSerializer
+#
+# 	def get(self, request, *args, **kwargs):
+# 		return self.retrieve(request, *args, **kwargs)
 
 class HomeView(TemplateView):
     template_name ='registry/index.html'

@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from registry.models import Activity, Authorization, Operator, Contact, Aircraft, Pilot, Address, Person, Test, TypeCertificate
 
-
 class AddressSerializer(serializers.ModelSerializer):
 
 
