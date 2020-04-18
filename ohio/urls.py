@@ -17,11 +17,16 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
+from rest_framework import routers
+from rest_framework.routers import DefaultRouter
 from rest_framework.urlpatterns import format_suffix_patterns
 from registry import views as registryviews
 from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+
+# from registry.views import UserViewSet
+
 admin.autodiscover()
 from rest_framework_simplejwt import views as jwt_views
 
@@ -42,11 +47,7 @@ urlpatterns = [
     path('api/v1/pilots/<uuid:pk>', registryviews.PilotDetail.as_view()),
     path('api/v1/pilots/<uuid:pk>/privilaged', registryviews.PilotDetailPrivilaged.as_view()),
     path('whatsapp/', include('whatsappmsg.urls')),
-    #JWT token. the access token will expire in 5 minute and to acquire new token required refresh token
-    #http post http://127.0.0.1:8000/api/token/refresh/ refresh=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTU0NTMwODIyMiwianRpIjoiNzAyOGFlNjc0ZTdjNDZlMDlmMzUwYjg3MjU1NGUxODQiLCJ1c2VyX2lkIjoxfQ.Md8AO3dDrQBvWYWeZsd_A1J39z6b6HEwWIUZ7ilOiPE
-    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    
+    path('api/v1/user/', include('authentication.urls'))
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
