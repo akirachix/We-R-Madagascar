@@ -1,28 +1,38 @@
-## Drone Registry Sandbox
-
-This is a GUTMA sandbox for working on a interoperable drone registry. It has three main things, you can start in the order below: 
-
-1. [Registry Landscape Whitepaper](https://github.com/gutma-org/droneregistry/blob/master/documents/registration-white-paper.md)
-2. Interoperatble API Specification, the technical specification for a registry. You can see the API specification and explore API endpoints at [https://droneregistry.herokuapp.com](https://droneregistry.herokuapp.com) 
-3. A working API with all endpoints and sample data for you to explore [https://droneregistry.herokuapp.com/api/v1/](https://droneregistry.herokuapp.com/api/v1/)
+## Drone Registry 
 
 
-## Contribute
-
-You can open issues to this repository, review the Landscape document to review the background and look at open issues to look at the current work in progress. 
-
-## Technical Details  / Self-install
+## Setting up a development environment
 
 This is a Django project that uses Django and Django Rest Framework and the API Specification 
 
-### 1. Install Dependencies
-Python 3 is required for this and install dependencies using `pip install -r requirements.txt`.
+### 1. Install pipenv
+`pip install --user pipenv`
 
-### 2. Create Initial Database
+### 2. Download source code
+```
+git clone git@github.com:naxadevelopers/twilio.git
+cd twilio
+```
+### 3. Create Virtual Environment & Install dependencies
+```
+pipenv install -r requirements.txt --python=python3
+```
+
+### 4. Activate Virtual Environment
+```
+pipenv shell
+```
+
+### 5. Create Initial Database
 Use `python manage.py migrate` to create the initial database tables locally. It will use the default SQLLite. 
 
-### 3. Populate initial data
+### 6. Populate initial data
 Use `python manage.py loaddata registry/defaultregistrydata.json` to populate initial data. 
 
-### 4. Launch browser 
+### 7. Run Server
+```
+python manage.py runserver
+```
+
+### 8. Launch browser 
 Launch browser to http://localhost:8000/api/v1/ to launch the API Explorer
