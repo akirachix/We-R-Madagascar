@@ -111,3 +111,7 @@ dmypy.json
 twiliohookresp.txt
 hint.txt
 /hint.txt
+pyvenv.cfg
+.vscode
+.idea
+/uploads
