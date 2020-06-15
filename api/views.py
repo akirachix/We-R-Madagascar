@@ -6,6 +6,9 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from  rest_framework import  status
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
 
 class FlightRegistryView(ModelViewSet):
     queryset = FlightRegistry.objects.all()
@@ -23,6 +26,7 @@ class FlightRegistryView(ModelViewSet):
 
     def create(self, request):
         serializer = FlightRegistrySerializer(data=request.data)
+        print(request.data)
         if serializer.is_valid():
             serializer.save()
             uri = "http://127.0.0.1:8000/np/api/v1/whcomplain/"
@@ -37,6 +41,10 @@ class WhComplainView(ModelViewSet):
     queryset = WhatsappComplain.objects.all()
     serializer_class = WhatsappComplainSerializer
 
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(WhComplainView, self).dispatch(*args, **kwargs)
+    
     def get_permissions(self):
         """
         Instantiates and returns the list of permissions that this view requires.
