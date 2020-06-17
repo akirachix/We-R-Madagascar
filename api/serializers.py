@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from flightres.models import WhatsappComplain, FlightRegistry
+from flightres.models import Report, FlightRegistry
 
 class FlightRegistrySerializer(serializers.ModelSerializer):
     class  Meta:
@@ -8,5 +8,5 @@ class FlightRegistrySerializer(serializers.ModelSerializer):
 
 class WhatsappComplainSerializer(serializers.ModelSerializer):
     class  Meta:
-        model = WhatsappComplain
+        model = Report
         fields = '__all__'

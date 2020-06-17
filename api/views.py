@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from  flightres.models import WhatsappComplain, FlightRegistry
+from  flightres.models import Report, FlightRegistry
 from  .serializers import  FlightRegistrySerializer, WhatsappComplainSerializer
 
 from rest_framework.viewsets import ModelViewSet
@@ -25,20 +25,20 @@ class FlightRegistryView(ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def create(self, request):
-        serializer = FlightRegistrySerializer(data=request.data)
         print(request.data)
+        serializer = FlightRegistrySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             uri = "http://127.0.0.1:8000/np/api/v1/whcomplain/"
             response_data = uri + serializer.data['uav_uid']
             print(response_data, uri, serializer.data['uav_uid'])
-            return Response({'track_url': response_data, 'data': serializer.data},status=status.HTTP_201_CREATED)
+            return Response({'track_url': response_data, 'data': serializer.data},status=status.HTTP_200_OK,content_type="application/json")
         return Response({'Message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 
 class WhComplainView(ModelViewSet):
-    queryset = WhatsappComplain.objects.all()
+    queryset = Report.objects.all()
     serializer_class = WhatsappComplainSerializer
 
     @method_decorator(csrf_exempt)
@@ -60,8 +60,8 @@ class WhComplainView(ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             uri = "http://127.0.0.1:8000/np/api/v1/flightres/"
-            response_data = uri + serializer.data['uav_uid']
-            return Response({'track_url': response_data, 'data': serializer.data},status=status.HTTP_201_CREATED)
+            response_data = uri + str(serializer.data['uav_uid'])
+            return Response({'track_url': response_data, 'data': serializer.data},status=status.HTTP_200_OK,)
         return Response({'Message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST,)
 
 
