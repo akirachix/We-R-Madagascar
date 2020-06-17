@@ -33,7 +33,7 @@ class Report(models.Model):
     latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     complainer_name = models.CharField(max_length=50, null=True, blank=True)
-    complainer_number = models.CharField(max_length=15, blank=True, null=True)
+    complainer_number = models.CharField(max_length=30, blank=True, null=True)
     photo = models.FileField(upload_to='uploads/WhComplains', blank=True, null=True)
     # note = models.TextField(blank=True, null=True,unique=False)
     reply = models.TextField(default='')
