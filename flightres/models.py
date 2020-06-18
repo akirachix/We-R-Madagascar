@@ -31,7 +31,7 @@ class FlightPermission(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        if self.old_is_approved != self.is_approved
+        if self.old_is_approved != self.is_approved:
             print("SENDING" + self.pilot_phone_number)
             uri = "np/api/v1/flightres/"
             response_data = uri + str(self.uav_uid)
