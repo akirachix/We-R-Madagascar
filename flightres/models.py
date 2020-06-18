@@ -7,17 +7,42 @@ from api.twilio import Twilio
 
 class FlightRegistry(models.Model):
     """This model is used for flight registration"""
-    uav_uid = models.CharField(max_length=20, primary_key=True)
-    flight_date = models.DateTimeField()
-    flight_purpose = models.CharField(max_length=200)
-    flight_plan = models.FileField(upload_to='uploads/FlightPlan')
-    flight_insurance = models.FileField(upload_to='uploads/Insurance')
-    pilot_name = models.CharField(max_length=50)
-    pilot_phone_number = models.CharField(max_length=15)
-    pilot_cv = models.FileField(upload_to='uploads/PilotCV')
+    uav_uid = models.AutoField(primary_key=True)
+    uav_uuid = models.CharField(max_length=20, null=True, blank=True)
+    flight_start_date = models.CharField(max_length=300, null=True, blank=True)
+    flight_end_date = models.CharField(max_length=300, null=True, blank=True)
+    flight_time = models.CharField(max_length=300, null=True, blank=True)
+    flight_purpose = models.CharField(max_length=200, null=True, blank=True)
+    company_name = models.CharField(max_length=200, null=True, blank=True)
+    # flight_plan = models.FileField(upload_to='uploads/FlightPlan')
+    # flight_insurance = models.FileField(upload_to='uploads/Insurance')
+    pilot_name = models.CharField(max_length=50, null=True, blank=True)
+    pilot_phone_number = models.CharField(max_length=50, null=True, blank=True)
+    # pilot_cv = models.FileField(upload_to='uploads/PilotCV')
+    pilot_cv_url = models.URLField(max_length=200, null=True, blank=True)
+    flight_plan_url = models.URLField(max_length=200, null=True, blank=True)
+    flight_insurance_url = models.URLField(max_length=200, null=True, blank=True)
+    is_approved = models.BooleanField(default=False)
+    twilio = Twilio()
+
+    def __init__(self, *args, **kwargs):
+        super(FlightRegistry, self).__init__(*args, **kwargs)
+        self.old_is_approved = self.is_approved
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if (self.old_is_approved != self.is_approved) & self.is_approved:
+            print("SENDING" + self.pilot_phone_number)
+            uri = "np/api/v1/flightres/"
+            response_data = uri + str(self.uav_uid)
+            print(response_data)
+            message = "Your flight plan has been approved. You can find more details at xyz.com/details/1"
+            self.twilio.send_message(self.pilot_phone_number, message)
+
+        super().save(force_insert, force_update, using, update_fields)
 
     def __str__(self):
-        return self.uav_uid
+        return str(self.uav_uid)
 
 
 class FlightRegistryAdmin(admin.ModelAdmin):
@@ -36,7 +61,7 @@ class Report(models.Model):
     complainer_number = models.CharField(max_length=30, blank=True, null=True)
     # photo = models.FileField(upload_to='uploads/WhComplains', blank=True, null=True)
     # note = models.TextField(blank=True, null=True,unique=False)
-    image_url = models.URLField(max_length=200,null=True, blank=True)
+    image_url = models.URLField(max_length=200, null=True, blank=True)
 
     reply = models.TextField(default='')
     category = models.TextField(default='')

@@ -30,7 +30,7 @@ class FlightRegistryView(ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             uri = "http://127.0.0.1:8000/np/api/v1/whcomplain/"
-            response_data = uri + serializer.data['uav_uid']
+            response_data = uri + str(serializer.data['uav_uid'])
             print(response_data, uri, serializer.data['uav_uid'])
             return Response({'track_url': response_data, 'data': serializer.data},status=status.HTTP_200_OK,content_type="application/json")
         return Response({'Message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
