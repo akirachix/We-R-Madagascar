@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from  flightres.models import Report, FlightRegistry
+from  flightres.models import Report, FlightPermission
 from  .serializers import  FlightRegistrySerializer, WhatsappComplainSerializer
 
 from rest_framework.viewsets import ModelViewSet
@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 class FlightRegistryView(ModelViewSet):
-    queryset = FlightRegistry.objects.all()
+    queryset = FlightPermission.objects.all()
     serializer_class = FlightRegistrySerializer
 
     def get_permissions(self):

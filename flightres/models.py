@@ -5,7 +5,7 @@ import uuid
 from api.twilio import Twilio
 
 
-class FlightRegistry(models.Model):
+class FlightPermission(models.Model):
     """This model is used for flight registration"""
     uav_uid = models.AutoField(primary_key=True)
     uav_uuid = models.CharField(max_length=20, null=True, blank=True)
@@ -26,12 +26,12 @@ class FlightRegistry(models.Model):
     twilio = Twilio()
 
     def __init__(self, *args, **kwargs):
-        super(FlightRegistry, self).__init__(*args, **kwargs)
+        super(FlightPermission, self).__init__(*args, **kwargs)
         self.old_is_approved = self.is_approved
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        if (self.old_is_approved != self.is_approved) & self.is_approved:
+        if self.old_is_approved != self.is_approved
             print("SENDING" + self.pilot_phone_number)
             uri = "np/api/v1/flightres/"
             response_data = uri + str(self.uav_uid)
