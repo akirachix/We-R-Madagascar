@@ -37,7 +37,7 @@ class FlightPermission(models.Model):
             response_data = uri + str(self.uav_uid)
             print(response_data)
             message = "Your flight plan has been approved. You can find more details at xyz.com/details/1"
-            self.twilio.send_message(self.pilot_phone_number, message)
+            # self.twilio.send_message(self.pilot_phone_number, message)
 
         super().save(force_insert, force_update, using, update_fields)
 
