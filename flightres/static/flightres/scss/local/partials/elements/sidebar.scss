@@ -1,0 +1,464 @@
+.ims-wrapper{
+    aside{
+        &.sidebar{
+            .breadcrumb-back{
+                margin-bottom: 1.5rem;
+                button{
+                    text-transform: initial;
+                    padding:0;
+                    i{
+                        color:$body-color;
+                        margin-right: .5rem;
+                    }
+                    span{
+                        color:$secondary-color;
+                        font-size: 1.5rem;
+                        text-transform: capitalize;
+                        font-weight: 700;
+                    }
+                }
+            }
+            .sidebar-in{
+                background-color: $grey-color;
+                padding:1.5rem;
+                border:1px solid $border-color;
+                @media screen and (max-width:1366px){
+                    padding:.6125rem;
+                }
+            }
+            @media #{$breakpoint-ls}{
+                margin-bottom: 2rem;
+            }
+            .aside-header{
+                @include display-flex(flex);
+                @include justify-content-between;
+                @include align-items-center;
+                a{
+                    &.gov-logo{
+                        max-width: 280px;
+                    }
+                    &.ims-logo{
+                        max-width: 60px;
+                    }
+                }
+    
+            }
+            .aside-body{
+                overflow-y:auto;
+                -webkit-overflow-scrolling:touch;
+                -ms-overflow-style:-ms-autohiding-scrollbar;
+                max-height: calc(100vh - 187px);
+                height: 100vh;
+                &::-webkit-scrollbar {
+                    width: 4px;
+                    background: $border-color;
+                    @include radius(4px);
+                }
+    
+                &::-webkit-scrollbar-track {
+                    background-color:$border-color;
+                    @include radius(4px);
+                }
+    
+                &::-webkit-scrollbar-thumb {
+                    @include radius(4px);
+                    background: $border-dark;
+                }
+                @media #{$breakpoint-ls}{
+                    max-height: initial;
+                    height: auto;
+                    overflow-y: initial;
+                }
+                .form-group{
+                    &.filter-list{
+                        @include display-flex(flex);
+                        @include justify-content-between;
+                        @include align-items-start;
+                        padding:.775rem 0;
+                        margin:0;
+                        @include flex-wrap(nowrap);
+                        label{
+                            @include flex(0 0 35%);
+                            max-width: 35%;
+                            margin:0;
+                            color:$body-dark;
+                        }
+                        .filter-content{
+                            @include flex(0 0 65%);
+                            max-width: 65%;
+                            .custom-select{
+                                &:not(:last-child){
+                                    margin-bottom: .5rem;
+                                }
+                            }
+                            label{
+                                flex:initial;
+                                max-width: initial;
+                            }
+                        }
+                        &:not(:last-child){
+                            border-bottom: 1px solid $border-color;
+                        }
+                        @media #{$breakpoint-sm}{
+                            @include flex-wrap(wrap);
+                            label,.filter-content{
+                                @include flex(0 0 100%);
+                                max-width: 100%;
+                            }
+                            label{
+                                margin-bottom: .5rem;
+                            }
+                        }
+                    }
+                }
+                ul{
+                    &.content-list{
+                        margin-top:2rem;
+                        li{
+                            background-color: $white-color;
+                            @include radius(5px);
+                            margin-bottom: .6125rem;
+                            padding:.6125rem;
+                            padding-bottom: .5rem;
+                            @include transition(all .4s linear);
+                            
+                            .dataset-item{
+                                
+                                .dataset-header{
+                                    @include display-flex(flex);
+                                    @include justify-content-start;
+                                    @include align-items-start;
+                                    @media #{$breakpoint-sm}{
+                                        @include flex-wrap(wrap);
+                                    }
+                                }
+                                .content-icon{
+                                    @include flex(0 0 60px);
+                                    max-width: 60px;
+                                    span{
+                                        background-color: $secondary-light;
+                                        width:50px;
+                                        height: 50px;
+                                        @include display-flex(flex);
+                                        @include justify-content-center;
+                                        @include align-items-center;
+                                        @include flex-direction-column(column);
+                                        @include radius(50%);
+                                        i{
+                                            color:$secondary-color;
+                                            font-size: 1.5rem;
+                                        }
+                                    }
+                                }
+                                .dataset-header-content{
+                                    @include display-flex(flex);
+                                        @include justify-content-between;
+                                        @include align-items-center;
+                                        flex-grow: 1;
+                                        .content-header-left{
+                                            flex-grow: 1;
+                                            span{
+                                                color:$blue-color;
+                                                font-size: .775rem;
+                                            }
+                                            h4{
+                                                color:$secondary-color;
+                                                font-size: .9125rem;
+                                                margin-bottom: .35rem;
+                                            }
+                                            p{
+                                                @include display-flex(flex);
+                                                @include justify-content-start;
+                                                @include align-items-center;
+                                                font-size: .8125rem;
+                                                span{
+                                                    color:$body-color;
+                                                }
+                                                i{
+                                                    font-size: 1.2rem;
+                                                    margin-right: .6125rem;
+                                                }
+                                            }
+                                            @media screen and (max-width:1366px){
+                                                h4{
+                                                    font-size: .875rem;
+                                                }
+                                                p{
+                                                    font-size: .775rem;
+                                                }
+                                            }
+                                        }
+                                        
+                                }
+                                .dataset-body{
+                                    padding:.6125rem 0;
+                                    @include display-flex(flex);
+                                    @include justify-content-start;
+                                    @include align-items-center;
+                                    @include flex-wrap(wrap);
+                                    
+                                    .dataset-detail-list{
+                                        @include flex(0 0 50%);
+                                        max-width: 50%;
+                                        margin-top:.5rem;
+                                        span{
+                                            font-size: .775rem;
+                                        }
+                                        p{
+                                            font-size: .875rem;
+                                            color:$heading-color;
+                                        }
+                                    }
+                                    
+                                }
+                                
+                                .dataset-footer{
+                                    text-align: center;
+                                    border-top:1px solid $border-color;
+                                    padding-top:.5rem;
+                                    @include display-flex(flex);
+                                    @include justify-content-between;
+                                    @include align-items-center;
+                                    @include flex-wrap(wrap);
+                                    a{
+                                        font-weight: 600;
+                                        text-transform: capitalize;
+                                        display: block;
+                                        color:$secondary-color;
+                                        font-size: .775rem;
+                                        &.common-button{
+                                            padding:0;
+                                            color:$body-color;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            &:hover{
+                                background-color: $secondary-light;
+                                .dataset-item{
+                                    .content-icon{
+                                        span{
+                                            background-color: $white-color;
+                                        }
+                                    }
+                                }
+                                .dataset-footer{
+                                    border-color: $secondary-color;
+                                    a{
+                                        color:$secondary-color;
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                .apply-button{
+                    margin-top:1rem;
+                    button{
+                        padding:.25rem .6125rem;
+                       
+                    } 
+                }
+                .sidebar-title{
+                    @include display-flex(flex);
+                    @include justify-content-between;
+                    @include align-items-center;
+                    margin-bottom: 1.5rem;
+                    h3{
+                        font-size: 1.3rem;
+                        font-weight: 700;
+                        color:$secondary-color;
+                    }
+                    button{
+                        padding:0;
+                    }
+                }
+                .sidebar-image{
+                    .images-list{
+                        figure{
+                            min-height: 100%;
+                            @include cover(center);
+                            height: 170px;
+                            position: relative;
+                            
+                            figcaption{
+                                @include display-flex(flex);
+                                @include justify-content-between;
+                                @include align-items-center;
+                                position: absolute;
+                                bottom:0;
+                                left:0;
+                                right:0;
+                                padding:.6125rem;
+                                background: transparent linear-gradient(180deg, #000B1A00 0%, #000B1A 100%) 0% 0% no-repeat padding-box;
+                                .caption-content{
+                                    color:$white-color;
+                                    h4{
+                                        color:$white-color;
+                                        font-size: 1.1rem;
+                                    }
+                                    time{
+                                        font-size: .775rem;
+                                    }
+                                }
+                            }
+                            &:not(:last-child){
+                                margin-bottom: .6125rem;
+                            }
+                        }
+                    }
+                }
+                .sidebar-about{
+                    margin-top:1.5rem;
+                    .about-in{
+                        @include display-flex(flex);
+                        @include justify-content-start;
+                        @include align-items-stretch;  
+                        figure{
+                            @include cover(center);
+                            min-height: 100%;
+                            @include flex(0 0 300px);
+                            max-width: 150px;
+                        }
+                        .about-content{
+                            padding:1rem;
+                            background-color: $primary-light;
+                            h2{
+                                font-size: 1.2rem;
+                                font-weight: 700;
+                                span{
+                                    color:$primary-color;
+                                }
+                            }
+                            p{
+                                margin:1rem 0;
+                            }
+                            button{
+    
+                            }
+                        }
+                        @media #{$breakpoint-sm}{
+                            figure{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                ul{
+                    &.checkbox-list{
+                        li{
+                            a{
+                                @include display-flex(flex);
+                                @include justify-content-between;
+                                @include align-items-center;
+                                font-weight: 500;
+                                color:$body-color;
+                                padding:.35rem .6125rem;
+                                &:hover{
+                                    background-color: $primary-light;
+                                }
+                                
+                                .custom-checkbox{
+                                    margin:0;
+                                    label{
+                                        font-size: .875rem;
+                                        @include display-flex(flex);
+                                        @include justify-content-start;
+                                        @include align-items-center;
+                                        font-weight: 400;
+                                        i{
+                                            font-size: 1.2rem;
+                                            margin-right: .5rem;
+                                        }
+                                        @media screen and (max-width:1366px){
+                                            font-size: .775rem;
+                                            i{
+                                                font-size: 1rem;
+                                            }
+                                        }
+                                    }
+                                }
+                                span{
+                                    &.counter{
+                                        color:$body-color;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.left-sidebar{
+                position: absolute;
+                top:0;
+                left:1.7rem;
+                z-index: 999;
+                @include radius(10px);
+                max-height: calc(100vh - 130px);
+                height: 100vh;
+                background-color: transparent;
+                padding:0;
+                .sidebar-in{
+                    background-color: $grey-color;
+                    padding:1rem;
+                    .aside-body{
+                        display: none;
+                    }
+                }
+            }
+        }
+        
+    }
+    &.meta-wrapper{
+        aside{
+            &.sidebar{
+                .aside-header{
+                    @include justify-content-start;
+                    i{
+                        color:$primary-color;
+                        font-size: 1.7rem;
+                        margin-right: .5rem;
+                    }
+                    span{
+                        letter-spacing: 2px;
+                        color:$secondary-color;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+                }
+                .aside-body{
+                    max-height: calc(100vh - 260px);
+                    @media #{$breakpoint-ls}{
+                        max-height: initial;
+                        height: auto;
+                        overflow-y: initial;
+                    }
+                    .form-group{
+                        &.filter-list{
+                            display: block;
+                            label{
+                                @include flex(0 0 100%);
+                                max-width: 1000%;
+                                margin:0;
+                                color:$body-dark;
+                            }
+                            .filter-content{
+                                @include flex(0 0 100%);
+                                max-width: 100%;
+                                margin-top:.6125rem;
+                                label{
+                                    flex:initial;
+                                    max-width: initial;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -28,7 +28,7 @@ from django.conf.urls.static import static
 # from drf_yasg import openapi
 from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
-
+from django.contrib.auth.views import LoginView, LogoutView
 
 # from registry.views import UserViewSet
 
@@ -47,7 +47,9 @@ from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', registryviews.HomeView.as_view()),
+    # path('', registryviews.HomeView.as_view()),
+    path('', LoginView.as_view()),
+    path('logout/', LogoutView.as_view()),
     path('api/v1/', registryviews.APIView.as_view()),
     path('api/v1/operators', registryviews.OperatorList.as_view()),
     path('api/v1/operators/<uuid:pk>', registryviews.OperatorDetail.as_view()),

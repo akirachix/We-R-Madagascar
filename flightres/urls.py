@@ -1,8 +1,8 @@
 from django.urls import path
 
 # importing views from views..py
-from .views import GeeksList
+from .views import FlightPermissionList
 
 urlpatterns = [
-    path('', GeeksList.as_view()),
+    path('', FlightPermissionList.as_view(), name="dashboard"),
 ]

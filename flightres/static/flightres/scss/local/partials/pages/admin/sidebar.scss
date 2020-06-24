@@ -1,0 +1,175 @@
+aside{
+    &.admin-sidebar{
+        background-color: $primary-color;
+        color:$white-color;
+        max-height: 100vh;
+        height: 100vh;
+        z-index: 999;
+        .admin-aside-header{
+            padding:1.5rem;
+            border-bottom: 1px solid $primary-light;
+            @include display-flex(flex);
+            @include justify-content-between;
+            @include align-items-center;
+            margin-bottom: 1.5rem;
+            .toggle-sidebar {
+                position: relative;
+                width: 24px;
+                height: 24px;
+                @include transition(all .5s ease-in-out);
+                display: inline-block;
+    
+                span {
+                    position: absolute;
+                    height: 3px;
+                    border-radius: 30px;
+                    width: 100%;
+                    background-color: $white-color;
+                    top: 0;
+                    transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+                    z-index: 1101;
+    
+                    &:nth-child(1) {
+                        top: 0;
+                    }
+    
+                    &:nth-child(2),
+                    &:nth-child(3) {
+                        top: 8px;
+                    }
+    
+                    &:nth-child(4) {
+                        top: 16px;
+                    }
+                }
+            }
+        }
+        .admin-aside-body{
+            ul{
+                &.admin-aside-menu{
+                    li{
+                        position: relative;
+                        @include transition(all .5s ease-in-out);
+                        a{
+                            @include display-flex(flex);
+                            @include justify-content-start;
+                            @include align-items-center;
+                            color:$white-color;
+                            padding:.6125rem 1.5rem;
+                            font-weight: 600;
+                            font-size: .9125rem;
+                            i{
+                                margin-right: .6125rem;
+                            }
+                            span{
+                                flex-grow: 1;
+                                text-transform: capitalize;
+
+                            }
+                        }
+                        &.is-submenu{
+                            .submenu{
+                                display: none;
+                                li{
+                                    a{
+                                        padding-left:3.5rem;
+                                        font-size: .875rem;
+                                    }
+                                }
+                            }
+                            &::after{
+                                content: "chevron_right";
+                                font-family: "Material Icons";
+                                text-transform: initial;
+                                position: absolute;
+                                right: 10px;
+                                top:5px;
+                                font-size: 1.5rem;
+                            }
+                            &.active{
+                                background-color: $primary-light;
+                                &::after{
+                                    content:'expand_less';
+                                }
+                            }
+                            &:hover{
+                                background-color: $primary-light;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.drone-admin-wrapper{
+    &.sidebar-collapse{
+        aside{
+            &.admin-sidebar{
+                .admin-aside-header{
+                    padding: 1rem .6125rem;
+                    img{
+                        display: none;
+                    }
+                }
+                .admin-aside-body{
+                    ul{
+                        &.admin-aside-menu{
+                            li{
+                                a{
+                                    padding:.6125rem;
+                                    i{
+                                        margin:0;
+                                    }
+                                    span{
+                                        display: none;
+        
+                                    }
+                                }
+                                &.is-submenu{
+                                    .submenu{
+                                        display: initial;
+                                        position: absolute;
+                                        left:100%;
+                                        top:100%;
+                                        width: 150px;
+                                        background-color: $primary-color;
+                                        @include transition(all .5s ease-in-out);
+                                        opacity: 0;
+                                        visibility: hidden;
+                                        pointer-events: none;
+                                        z-index: 999;
+                                        li{
+                                            a{
+                                                padding:.6125rem 1rem;
+                                                font-size: .875rem;
+                                            }
+                                        }
+                                    }
+                                    &::after{
+                                        display: none;
+                                    }
+                                    
+                                    &:hover{
+                                        background-color: $primary-light;
+                                        .submenu{
+                                            opacity: 1;
+                                            visibility: visible;
+                                            top:0;
+                                            pointer-events: initial;
+                                            li{
+                                                &:hover{
+                                                    background-color: $primary-light;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

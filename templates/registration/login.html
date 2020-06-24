@@ -1,0 +1,120 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Drone Registry Nepal">
+    <meta property="og:image" content="preview.html">
+    <meta property="og:site_name" content="Drone Registry Nepal">
+    <meta property="og:title" content="Drone Registry Nepal">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://naxa.com.np">
+
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Drone Registry Nepal">
+    <meta name="twitter:creator" content="@Drone Registry Nepal">
+    <meta name="twitter:title" content="Drone Registry Nepal">
+    <meta name="twitter:description" content="Drone Registry Nepal">
+    <meta name="twitter:image" content="preview.html">
+
+    <!--title-->
+    <title>Drone Registry Nepal</title>
+
+    <!-- faveicon start   -->
+    <link rel="icon" type="image/png" href="{% static '/flightres/img/favicon.png' %}" sizes="32x32">
+
+    <!-- stylesheet start -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static "flightres/css/bootstrap.min.css" %}"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static "flightres/css/style.css" %}">
+</head>
+
+<body class="">
+<!-- login page start -->
+
+<div class="authentication">
+    <!-- login form start -->
+    <div class="auth-form login-form">
+        <div class="login-content">
+            <header class="login-header">
+                <h3>Welcome back!</h3>
+                <b>Please log in to your account using email & password.</b>
+            </header>
+            <form class="card auth_form" method="post" action="">
+                {% csrf_token %}
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="" class="">Username</label>
+                    <input name="username" type="text" class="form-control" placeholder="username"/>
+                </div>
+                <div class="form-group">
+                    <label for="" class="">password</label>
+                    <input name="password" type="password" class="form-control" placeholder="username"/>
+                </div>
+                <div class="form-group forgot-password">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="Remember" name="Remember">
+                        <label class="custom-control-label" for="Remember">Remember me</label>
+                    </div>
+                    <a href="#">Forgot Password ?</a>
+                </div>
+
+                <footer class="login-footer">
+                    <button type="submit" class="common-button is-bg">Sign in</button>
+                    <p><span>Don’t have an account yet?</span><a href="register.html"> Create a account</a></p>
+                </footer>
+            </form>
+
+
+            <p class="privacy"><a href="#">Privacy</a><a href="#">Terms of Service</a></p>
+
+        </div>
+
+    </div>
+    <div class="login-figure">
+        <div class="login-figure-content">
+            <header class="login-figure-header">
+                <a href="../../flightres/templates/flightres/flightpermission_list.html">
+                    <img src="{% static 'flightres/img/admin-logo.png' %}" alt="risk management logo"/>
+                </a>
+                <p>A Small Leap towards better drone flight permission in Nepal.</p>
+            </header>
+            <figure class="login-map" style="background-image: url(../../static/flightres/img/lognin-bg.jpg);">
+                <div class="copyright">
+                    <p>© 2020 Drone Registry Nepal. All rights reserved.</p>
+                </div>
+            </figure>
+        </div>
+    </div>
+</div>
+
+
+<!-- Jquery Core Js -->
+<script src="{% static "/flightres/js/jquery-3.4.1.min.js" %} "></script>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+<script src="{% static "/flightres/js/map.js" %}"></script>
+<script src="../../static/flightres/js/ims.js"></script>
+
+</body>
+
+</html>
