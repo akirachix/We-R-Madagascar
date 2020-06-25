@@ -22,6 +22,7 @@ class FlightPermission(models.Model):
     pilot_cv_url = models.URLField(max_length=200, null=True, blank=True)
     flight_plan_url = models.URLField(max_length=200, null=True, blank=True)
     flight_insurance_url = models.URLField(max_length=200, null=True, blank=True)
+    location = models.URLField(max_length=200, null=True, blank=True)
     is_approved = models.BooleanField(default=False)
     twilio = Twilio()
 
@@ -37,7 +38,7 @@ class FlightPermission(models.Model):
             response_data = uri + str(self.uav_uid)
             print(response_data)
             message = "Your flight plan has been approved. You can find more details at xyz.com/details/1"
-            # self.twilio.send_message(self.pilot_phone_number, message)
+            self.twilio.send_message(self.pilot_phone_number, message)
 
         super().save(force_insert, force_update, using, update_fields)
 

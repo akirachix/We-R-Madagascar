@@ -140,7 +140,7 @@
                         <td>
                             <time>{{ object.flight_end_date }}</time>
                         </td>
-                        <td>Nepal</td>
+                        <td>{{ object.location }}</td>
                         <td><b>{{ object.flight_purpose }}</b></td>
                         <td>{{ object.pilot_name }}</td>
 
@@ -149,7 +149,7 @@
                         </td>
                         <!--- <td><a href="{% url 'dashboard:flightperm-detail' pk=object.uav_uid %}" ><i class="material-icons">chevron_right</i></a> -->
                         </td>
-                        <td><a href="#" modal-link="open-modal" class="modal-link"><i class="material-icons">chevron_right</i></a>
+                        <!---<td><a href="#" modal-link="open-modal" class="modal-link"><i class="material-icons">chevron_right</i></a>-->
                         </td>
                     {% empty %}
                         <li>No objects yet.</li>
