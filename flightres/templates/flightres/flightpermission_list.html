@@ -147,9 +147,9 @@
                         <td><span
                                 class="status {{ object.is_approved|yesno:"approved,denied" }}">{{ object.is_approved|yesno:"approved,denied" }}</span>
                         </td>
-                        <td><a href="{% url 'dashboard:flightperm-detail' pk=object.uav_uid %}" ><i class="material-icons">chevron_right</i></a>
+                        <!--- <td><a href="{% url 'dashboard:flightperm-detail' pk=object.uav_uid %}" ><i class="material-icons">chevron_right</i></a> -->
                         </td>
-                        <!-- <td><a href="#" modal-link="open-modal" class="modal-link"><i class="material-icons">chevron_right</i></a> -->
+                        <td><a href="#" modal-link="open-modal" class="modal-link"><i class="material-icons">chevron_right</i></a>
                         </td>
                     {% empty %}
                         <li>No objects yet.</li>
@@ -162,7 +162,7 @@
     </main>
 
 </div>
-<!-- <div class="popup" id="open-modal">
+<div class="popup" id="open-modal">
     <div class="popup-container lg-popup map-popup">
         <div class="popup-body">
             <span class="close-icon"><i class="material-icons">close</i></span>
@@ -225,16 +225,17 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
+-
 
 
 <!-- Jquery Core Js -->
-<script src="../../static/flightres/js/jquery-3.4.1.min.js"></script>
+<script src="{% static 'flightres/js/jquery-3.4.1.min.js' %}"></script>
 <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-<script src="../../static/flightres/js/map.js"></script>
-<script src="../../static/flightres/datatable/datatables.min.js"></script>
-<script src="../../static/flightres/js/custom-datatable.js"></script>
-<script src="../../static/flightres/js/drone.js"></script>
+<script src="{% static  'flightres/js/map.js' %}"></script>
+<script src="{% static  'flightres/datatable/datatables.min.js' %}"></script>
+<script src="{% static  'flightres/js/custom-datatable.js' %}"></script>
+<script src="{% static  'flightres/js/drone.js' %}"></script>
 
 </body>
 
