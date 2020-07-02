@@ -32,6 +32,7 @@ def date_validation_view(request):
             data = {
                 'valid': is_valid_date
             }
+            
             return JsonResponse(data)
 
         except MultiValueDictKeyError as e:
