@@ -14,6 +14,8 @@ class FlightPermission(models.Model):
     flight_time = models.CharField(max_length=300, null=True, blank=True)
     flight_purpose = models.CharField(max_length=200, null=True, blank=True)
     company_name = models.CharField(max_length=200, null=True, blank=True)
+    latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, blank=True)
     # flight_plan = models.FileField(upload_to='uploads/FlightPlan')
     # flight_insurance = models.FileField(upload_to='uploads/Insurance')
     pilot_name = models.CharField(max_length=50, null=True, blank=True)

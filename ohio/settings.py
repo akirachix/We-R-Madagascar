@@ -105,7 +105,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ohio.wsgi.application'
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = 'np/dashboard'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases

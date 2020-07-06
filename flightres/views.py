@@ -6,20 +6,13 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import FlightPermission
 
-
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission
 
-def flightPermissionDetail(request, pk):
-    perm = FlightPermission.objects.get(uav_uid = pk)
-    return render(request, 'flightres/flightpermission_detail.html', {'perm': perm})
-
 @login_required
 def approvePerm(request,pk, action):
-    print("dfghjkl============")
     selected_perm = get_object_or_404(FlightPermission, uav_uid=pk)
-    selected_perm.is_approved = False
     if action == 'approve':
         selected_perm.is_approved = True
     elif action == 'deny':
@@ -27,3 +20,7 @@ def approvePerm(request,pk, action):
     selected_perm.save()
     return redirect('/np/dashboard')
 
+@login_required
+def verifiedFlightresView(request, pk):
+    selected_flight = get_object_or_404(FlightPermission, uav_uid=pk)
+    return render(request, 'flightres/verified_pg.html', {'object': selected_flight})
