@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, reverse
 
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -17,11 +17,13 @@ def flightPermissionDetail(request, pk):
 
 @login_required
 def approvePerm(request,pk, action):
+    print("dfghjkl============")
     selected_perm = get_object_or_404(FlightPermission, uav_uid=pk)
+    selected_perm.is_approved = False
     if action == 'approve':
         selected_perm.is_approved = True
     elif action == 'deny':
         selected_perm.is_approved = False
     selected_perm.save()
-    return redirect('/np/dashboard/flightperm_detail/{}'.format(pk))
+    return redirect('/np/dashboard')
 
