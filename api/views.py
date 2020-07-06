@@ -55,7 +55,7 @@ class FlightRegistryView(ModelViewSet):
             permission_classes = [AllowAny]
         return [permission() for permission in permission_classes]
 
-    def create(self, request):
+    def create(self, request, **kwargs):
         print(request.data)
         serializer = FlightRegistrySerializer(data=request.data)
         if serializer.is_valid():
@@ -86,7 +86,7 @@ class WhComplainView(ModelViewSet):
             permission_classes = [AllowAny]
         return [permission() for permission in permission_classes]
 
-    def create(self, request):
+    def create(self, request, **kwargs):
         serializer = WhatsappComplainSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
