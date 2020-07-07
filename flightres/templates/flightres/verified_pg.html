@@ -24,7 +24,7 @@
     <meta name="twitter:image" content="preview.html">
 
     <!--title-->
-    <title> Registry Nepal</title>
+    <title>Drone Registry Nepal</title>
 
     <!-- faveicon start   -->
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" sizes="32x32">
@@ -110,7 +110,7 @@
                                             </b><span>{{ object.pilot_phone_number }}</span>
                                         </p>
                                         <p><b>Pilot CV URL: </b><span><a
-                                                    href="#">{{ object.pilot_phone_number }}</a></span>
+                                                    href="{{ object.pilot_cv_url }}">{{ object.pilot_cv_url }}</a></span>
                                         </p>
                                     </div>
                                 </div>

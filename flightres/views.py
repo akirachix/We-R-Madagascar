@@ -14,13 +14,18 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
 def approvePerm(request,pk, action):
     selected_perm = get_object_or_404(FlightPermission, uav_uid=pk)
     if action == 'approve':
-        selected_perm.is_approved = True
+        selected_perm.status = 'Approved'
     elif action == 'deny':
-        selected_perm.is_approved = False
+        selected_perm.status = 'Rejected'
     selected_perm.save()
     return redirect('/np/dashboard')
 
 @login_required
-def verifiedFlightresView(request, pk):
+def flightReqResponseView(request, pk):
     selected_flight = get_object_or_404(FlightPermission, uav_uid=pk)
-    return render(request, 'flightres/verified_pg.html', {'object': selected_flight})
+    if selected_flight.status == 'Approved':
+        return render(request, 'flightres/verified_pg.html', {'object': selected_flight})
+    elif selected_flight.status == 'Rejected':
+        return render(request, 'flightres/reject_pg.html', {'object': selected_flight})
+    else:
+        return render(request, 'flightres/pending_pg.html')

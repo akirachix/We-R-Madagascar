@@ -39,7 +39,7 @@
       $('.modal-link').on('click', function () {
         var targetId = $(this).attr('modal-link');
         $('#' + targetId).addClass('open');
-        $('.body-container').addClass('blur-bg');
+        // $('.body-container').addClass('blur-bg');
       });
     }
     formModal();

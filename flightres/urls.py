@@ -1,10 +1,10 @@
 from django.urls import path
 
 # importing views from views..py
-from .views import FlightPermissionList, approvePerm, verifiedFlightresView
+from .views import FlightPermissionList, approvePerm, flightReqResponseView
 
 urlpatterns = [
     path('', FlightPermissionList.as_view(), name="dashboard"),
     path('approve_perm/<int:pk>/<str:action>', approvePerm, name='approve-perm'),
-    path('flightres/<int:pk>', verifiedFlightresView, name='verified-flightres-view'),
+    path('request_response/<int:pk>', flightReqResponseView, name='request-response'),
 ]
