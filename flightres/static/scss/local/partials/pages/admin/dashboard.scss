@@ -1,0 +1,490 @@
+@import "main";
+@import "sidebar";
+
+.drone-admin-wrapper{
+    // @include display-flex(flex);
+    // @include justify-content-between;
+    // @include align-items-stretch;
+    width:100%;
+    aside{
+        @include transition(all 1s ease-in-out);
+        &.admin-sidebar{
+            // @include flex(0 0 350px);
+            max-width: 350px;
+            width:100%;
+            position: fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            display: inline-block;
+            @media #{$breakpoint-lg-desktop}{
+                max-width: 285px;
+            }
+            @media #{$breakpoint-desktop}{
+                max-width: 245px;
+            }
+            @media #{$breakpoint-xl}{
+                max-width: 200px;
+            }
+        }
+    }
+    main{
+        &.admin-main{
+            // flex-grow: 1;
+            width:calc(100% - 350px);
+            padding: 3.75rem 2.325rem 1rem;
+            @include transition(all 1s ease-in-out);
+            float:right;
+            @media #{$breakpoint-lg-desktop}{
+                width:calc(100% - 280px);
+                padding: 2rem 2.25rem 1rem;
+            }
+            @media #{$breakpoint-desktop}{
+                width:calc(100% - 245px);
+                padding: 1.5rem 2rem 1rem;
+            }
+            @media #{$breakpoint-xl}{
+                width:calc(100% - 200px);
+                padding: 1.25rem 1.5rem 1rem;
+            }
+        }
+        .main-card{
+            .dashboard-title{
+                margin-top: 20px;
+                h1{
+                    font-size: 32px;
+                    line-height: 64px;
+                    font-weight: 400;
+                    color: $text-color;
+                    span{
+                        font-weight: 600;
+                    }
+                }
+                @media #{$breakpoint-lg-desktop}{
+                    margin-top: 15px;
+                    h1{
+                        font-size: 26px;
+                        line-height: 60px;
+                    }
+                }
+                @media #{$breakpoint-desktop}{
+                    h1{
+                        font-size: 22px;
+                        line-height: 55px;
+                    }
+                }
+                @media #{$breakpoint-xl}{
+                    h1{
+                        font-size: 18px;
+                        line-height: 40px;
+                    }
+                }
+                @media #{$breakpoint-pt}{
+                    h1{
+                        font-size: 16px;
+                        line-height: 34px;
+                    }
+                }
+            }
+            .drone-info{
+                margin: 35px 0;
+              /*   @include display-flex(flex);
+                @include align-items-stretch; */
+                @media #{$breakpoint-lg-desktop}{
+                    margin: 20px 0 30px;
+                }
+                @media #{$breakpoint-desktop}{
+                    margin: 15px 0 20px;
+                }
+               
+                .info-content{
+                    @include transition(all .4s ease);
+                    /* flex: 0 0 24%;
+                    max-width: 24%; */
+                    height: 100%;
+                        @include  radius(10px);
+                        background: $white-color;
+                        padding: 25px 20px 30px;
+                        // margin-right: 1.5%;
+                        transform: translate(0,0);
+                        cursor: pointer;
+                        @media #{$breakpoint-lg-desktop}{
+                            @include  radius(7px);
+                            padding: 20px 15px 25px;
+                        }
+                        @media #{$breakpoint-desktop}{
+                            @include  radius(5px);
+                            padding: 10px 15px 20px;
+                        }
+                        &:hover{
+                            transform: translate(0, -3px);
+                            @include box-shadow(0 0 18px 1px $blue-light-shade);
+                        }
+                        &.info-content-wrap{
+                            @include  radius(0px);
+                            background: transparent;
+                            padding: 0;
+                            margin-right: 0;
+                            transform: translate(0,0);
+                            cursor: none;
+                        }
+
+                    .total-count{
+                        @include display-flex(flex);
+                        @include justify-content-between;
+                        @include align-items-center;
+                        margin-bottom: 20px;
+                        @media #{$breakpoint-desktop}{
+                            margin-bottom: 20px;
+                            transform: translate(0px, 6px);
+                        }
+                        @media #{$breakpoint-xl}{
+                            margin-bottom: 14px;
+                        }
+                        h4{
+                            font-size: 42px;
+                            line-height: 24px;
+                            color: $text-shade;
+                            font-weight: 700;
+                            @media #{$breakpoint-lg-desktop}{
+                                font-size: 34px;
+                                line-height: 20px;
+                            }
+                            @media #{$breakpoint-desktop}{
+                                font-size: 28px;
+                                line-height: 18px;
+                            }
+                            @media #{$breakpoint-xl}{
+                                font-size: 24px;
+                            }
+                            @media #{$breakpoint-pt}{
+                                font-size: 20px;
+                            }
+                        }
+                        span{
+                            @include radius(50%);
+                            width: 54px;
+                            height: 54px;
+                            @include flex-hr-center;
+                            i{
+                                font-size: 32px;
+                                line-height: 26px;
+                            }
+                            @media #{$breakpoint-lg-desktop}{
+                                width: 45px;
+                                height: 45px;
+                                i{
+                                    font-size: 26px;
+                                    line-height: 24px;
+                                }
+                            }
+                            @media #{$breakpoint-desktop}{
+                                width: 35px;
+                                height: 35px;
+                                i{
+                                    font-size: 22px;
+                                    line-height: 22px;
+                                }
+                            }
+                            @media #{$breakpoint-xl}{
+                                width: 30px;
+                                height: 30px;
+                                i{
+                                    font-size:18px;
+                                }
+                            }
+                            @media #{$breakpoint-pt}{
+                                width: 28px;
+                                height: 28px;
+                                i{
+                                    font-size:17px;
+                                }
+                            }
+                            &.span-dark{
+                                background: $purple-shade;
+                                i{
+                                    color: $blue-shade;
+                                }
+                            }
+                            &.span-light{
+                                background: $blue-light-shade;
+                                i{
+                                    color: $secondary-color;
+                                }
+                            }
+                        }
+                    }
+                    .count-label{
+                        display: block;
+                        color: $text-color;
+                        font-size: 1rem;
+                        line-height: 26px;
+                        @media #{$breakpoint-lg-desktop}{
+                            font-size: .875rem;
+                            line-height: 18px;
+                        }
+                        @media #{$breakpoint-desktop}{
+                            font-size: .683rem;
+                            line-height: 16px;
+                        }
+                        @media #{$breakpoint-xl}{
+                            font-size: .625rem;
+                        }
+                        @media #{$breakpoint-pt}{
+                            font-size: .525rem;
+                            line-height: 12px;
+                        }
+                    }
+                    
+                    .info-content-part{
+                        background: $white-color;
+                        padding: 14px 20px 8px;
+                        @include  radius(10px);
+                        @include transition(all .4s ease);
+                        transform: translate(0,0);
+                        cursor: pointer;
+                        @media #{$breakpoint-lg-desktop}{
+                            @include  radius(7px);
+                            padding: 10px 15px 6px;
+                        }
+                        @media #{$breakpoint-desktop}{
+                            @include  radius(5px);
+                            padding: 6px 10px 4px;
+                        }
+                        &:hover{
+                            transform: translate(0, -3px);
+                            @include box-shadow(0 0 18px 1px $blue-light-shade);
+                        }
+                        &:not(:last-child){
+                            margin-bottom: 10px;
+                            @media #{$breakpoint-lg-desktop}{
+                                margin-bottom: 6px;
+                            }
+                        }
+                        .total-count{
+                            margin-bottom: 0;
+                            transform: translate(0px, 0);
+                            @include align-items-start;
+                            h4{
+                                font-size: 24px;
+                                line-height: 24px;
+                                font-weight: 800;
+                                span{
+                                    width: 100%;
+                                    color: $text-color;
+                                    font-size: 1rem;
+                                    line-height: 28px;
+                                    font-weight: 400;
+                                    height: auto;
+                                }
+                                @media #{$breakpoint-lg-desktop}{
+                                    font-size: 20px;
+                                    line-height: 20px;
+                                    span{
+                                        font-size: .8rem;
+                                        line-height: 24px;
+                                    }
+                                }
+                                @media #{$breakpoint-desktop}{
+                                    font-size: 16px;
+                                    line-height: 18px;
+                                    span{
+                                        font-size: .683rem;
+                                        line-height: 20px;
+                                    }
+                                }
+                                @media #{$breakpoint-xl}{
+                                    font-size: 14px;
+                                    line-height: 16px;
+                                    span{
+                                        font-size: .625rem;
+                                        line-height: 18px;
+                                    }
+                                }
+                                @media #{$breakpoint-pt}{
+                                    font-size: 13px;
+                                    span{
+                                        margin-top: 2px;
+                                        font-size: .525rem;
+                                        line-height: 12px;
+                                    }
+                                }
+                            }  
+                        }
+                    }
+                }
+            }
+            .chart-section{
+                .main-card{
+                    background: $white-color;
+                    height: 100%;
+                    @include radius(5px);
+                    .card-header{
+                        padding: 26px 26px 18px;
+                        border-bottom: .25px solid $body-light;
+                        @media #{$breakpoint-lg-desktop}{
+                            padding: 20px 26px 12px;
+                        }
+                        @media #{$breakpoint-desktop}{
+                            padding: 15px 26px 10px;
+                        }
+                        @media #{$breakpoint-xl}{
+                            padding: 12px 20px 6px;
+                        }
+                        h1{
+                            font-size: 17px;
+                            line-height: 28px;
+                            font-weight: 600;
+                            color: $text-color;
+                            letter-spacing: 2.6px;
+                            @media #{$breakpoint-lg-desktop}{
+                                font-size: 15px;
+                                line-height: 24px;
+                                letter-spacing: 2.3px;
+                            }
+                            @media #{$breakpoint-desktop}{
+                                font-size: 12px;
+                                line-height: 20px;
+                                letter-spacing: 2px;
+                            }
+                            @media #{$breakpoint-xl}{
+                                font-size: 10px;
+                            }
+                            @include display-flex(flex);
+                            @include align-items-center;
+                            @include justify-content-between;
+                            a{
+                                cursor: pointer;
+                                @include display-flex(flex);
+                                @include radius( 50%);
+                                padding: 2px 3px;
+                                &:hover{
+                                    background: $blue-light-shade;
+                                }
+                                i{
+                                    font-size: 24px;
+                                    line-height: 26px;
+                                    color: $body-light;
+                                    font-weight: 400;
+                                    @media #{$breakpoint-lg-desktop}{
+                                        font-size: 20px;
+                                        line-height: 20px;
+                                    }
+                                    @media #{$breakpoint-desktop}{
+                                        font-size: 18px;
+                                        line-height: 18px;
+                                    }
+                                    @media #{$breakpoint-xl}{
+                                        font-size: 16px;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                    .card-body{
+                        padding: 1.25rem 1.25rem 4rem;
+                        @include display-flex(flex);
+                        @include align-items-center;
+                        @media #{$breakpoint-lg-desktop}{
+                            padding: 1.25rem 1.25rem 2rem;
+                            margin-bottom: -30px; 
+                        }
+                        #pie-chart{
+                            @media #{$breakpoint-lg-desktop}{
+                                // transform: scale(.8);
+                            }
+                            @media #{$breakpoint-desktop}{
+                                // transform: scale(0.6) translate(-90px, 0px);
+                                // min-width: 550px;
+                            }
+                            // width: 100%;
+                            & > div{
+                                // width: 100% !important;
+                            }
+                            svg, foreignObject{
+                                // width: 100% !important;
+                            }
+                        }
+                        #line-chart{
+                   /*          width: 100% !important;
+                            height: 110% !important;
+                            & > div{
+                                height: 100% !important;
+                                width: 100% !important;
+                            }
+                            svg{
+                                width: 100% !important;
+                                height: 100% !important;
+                            }
+                            foreignObject{
+                                width: 100% !important;
+                                height: 114% !important;
+                            } */
+                        }
+                    }
+                }
+            }
+            .card-body{
+                table{
+                    &.dataTable{
+                        thead {
+                            th{
+                                border-bottom: 0;
+                                padding: 10px;
+                                font-size: 14px;
+                                @media #{$breakpoint-lg-desktop}{
+                                    font-size: 13px;
+                                }
+                                @media #{$breakpoint-desktop}{
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+                        tbody{
+                            td{
+                                padding: 8px 10px;
+                                color: $blackshade-color;
+                                font-size: 15px;
+                                line-height: 20px;
+                                @media #{$breakpoint-lg-desktop}{
+                                    font-size: 14px;
+                                    line-height: 18px;
+                                }
+                                @media #{$breakpoint-desktop}{
+                                    font-size: 13px;
+                                    line-height: 16px;
+                                }
+                                b{
+                                    max-width: 200px;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                }
+                            }
+                        }
+                    } 
+                }
+                .dataTables_scroll{
+                    padding-top: 20px;
+                    .dataTables_scrollHead{
+                        padding-bottom: 20px;
+                    }
+                }
+            }
+        }
+    }
+    &.sidebar-collapse{
+        aside{
+            &.admin-sidebar{
+                max-width:50px;
+    
+            }
+        }
+        main{
+            &.admin-main{
+                width:calc(100% - 50px);
+            }
+        }
+    }
+}

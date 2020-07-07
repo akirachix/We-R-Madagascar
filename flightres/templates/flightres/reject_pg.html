@@ -1,0 +1,185 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Drone Registry Nepal">
+    <meta property="og:image" content="preview.html">
+    <meta property="og:site_name" content="Drone Registry Nepal">
+    <meta property="og:title" content="Drone Registry Nepal">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://naxa.com.np">
+
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Drone Registry Nepal">
+    <meta name="twitter:creator" content="@Drone Registry Nepal">
+    <meta name="twitter:title" content="Drone Registry Nepal">
+    <meta name="twitter:description" content="Drone Registry Nepal">
+    <meta name="twitter:image" content="preview.html">
+
+    <!--title-->
+    <title>Drone Registry Nepal</title>
+
+    <!-- faveicon start   -->
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" sizes="32x32">
+
+    <!-- stylesheet start -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class="permit-pg">
+        <div class="landing-section">
+            <div class="top-bar"></div>
+            <div class="contents">
+                <div class="container-fluid">
+                    <div class="wrapper">
+                        <a href="home.html" class="logo"><img src="{% static 'img/logo-blue.png' %}" alt="Drone Registry" /></a>
+                        <figure class="center-image"><img src="{% static 'img/drone_and_Clouds.svg' %}" alt="Drone" /></figure>
+                        <div class="message">
+                            <h1>Thanks for your request.</h1>
+                            <figure class="result"><img src="{% static 'img/rejected.svg' %}" alt="rejected"></figure>
+                            <p>Your permission request has been rejected.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="details-section">
+            <div class="container-fluid">
+                <div class="wrapper">
+                    <h2>Permission request details</h2>
+                    <div class="details-wrap">
+                        <div class="row row-details">
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Operators Info</h6>
+                                    <div class="info">
+                                        <p><b>Name: </b><span>
+                                                {{ object.company_name }}
+                                            </span>
+                                        </p>
+                                        <p><b>License ID:
+                                            </b><span></span>
+                                        </p>
+                                        <p><b>Operator Type:
+                                            </b><span></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Flight Info</h6>
+                                    <div class="info">
+                                        <p><b>Flight Start Date:
+                                            </b><span>{{ object.flight_start_date }}</span>
+                                        </p>
+                                        <p><b>Flight End Date:
+                                            </b><span>{{ object.flight_end_date }}</span>
+                                        </p>
+                                        <p><b>Flight Time:
+                                            </b><span>{{ object.flight_time }}</span>
+                                        </p>
+                                        <p><b>Flight Purpose:
+                                            </b><span>{{ object.flight_purpose }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Pilot Info</h6>
+                                    <div class="info">
+                                        <p><b>Pilot Name:
+                                            </b><span>{{ object.pilot_name }}</span>
+                                        </p>
+                                        <p><b>Pilot Phone Number:
+                                            </b><span>{{ object.pilot_phone_number }}</span>
+                                        </p>
+                                        <p><b>Pilot CV URL: </b><span><a
+                                                    href="{{ object.pilot_cv_url }}">{{ object.pilot_cv_url }}</a></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-details">
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Location map</h6>
+                                    <div class="map">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.22270889729!2d85.33026571548211!3d27.710409231963293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb190b6cfae8cd%3A0xb54327d56a797ef6!2sGyaneshwor%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1593652778081!5m2!1sen!2snp"
+                                            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                                            tabindex="0"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Flight plan</h6>
+                                    <div class="map">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.22270889729!2d85.33026571548211!3d27.710409231963293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb190b6cfae8cd%3A0xb54327d56a797ef6!2sGyaneshwor%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1593652778081!5m2!1sen!2snp"
+                                            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                                            tabindex="0"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Images</h6>
+                                    <div class="row g-lg-2 g-3">
+                                        <div class="col-md-6 col-6">
+                                            <figure><img src="./img/img-gallery1.png" alt="img"></figure>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <figure><img src="./img/img-gallery2.png" alt="img"></figure>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <figure><img src="./img/img-gallery3.png" alt="img"></figure>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <figure><img src="./img/img-gallery5.png" alt="img"></figure>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="site-footer home-footer">
+                    <div class="wrapper">
+                        <div class="footer-in">
+                            <p class="footer-left">© 2020 Drone Registry Nepal. All rights reserved.</p>
+                            <p class="footer-right"><span>Developed by <a href="#/">NAXA</a></span></p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!-- Jquery Core Js -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'datatable/datatables.min.js' %}"></script>
+    <script src="{% static 'js/custom-datatable.js' %}"></script>
+    <script src="{% static 'js/drone.js' %}"></script>
+
+</body>
+
+</html>

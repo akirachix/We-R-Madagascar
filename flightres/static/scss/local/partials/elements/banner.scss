@@ -1,0 +1,162 @@
+.home-pg{
+    @include transition(all .3s linear);
+    background: $white-color;
+}
+.wrap-container{
+    @media #{$breakpoint-lg-desktop}{
+        padding: 0 15vh;
+    }
+    @media #{$breakpoint-desktop}{
+        padding: 0 14vh;
+    }
+    @media #{$breakpoint-lg}{
+        padding: 0 4vh;
+    }
+}
+main.banner-section{
+    &::after{
+        background-image: url(./.././img/clouds.svg), url(./.././img/Droneldpi.svg), url(./.././img/ss_drone.svg), url(./.././img/using_laptop.svg), url(./.././img/chatting.svg), url(./.././img/girl_flying_drone.svg), url(./.././img/boy_flying_drone.svg);
+        background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+        background-size: 800px, 190px, 135px, 245px, 116px, 150px, 160px;
+        background-position: 104% 200px, 69.5% 285px, 90.5% 255px, 45% 85%, 62% 76%, 79% 73%, 95% 89%;
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        @media #{$breakpoint-desktop}{
+            background-size: 600px, 136px, 100px, 200px, 94px, 115px, 135px;
+            background-position: 98% 160px, 68% 222px, 88% 198px, 45% 88%, 62% 76%, 79% 73%, 95% 89%;
+        }
+        @media #{$breakpoint-lg-desktop}{
+            background-size: 520px, 110px, 88px, 170px, 80px, 95px, 100px;
+            background-position: 103% 127px, 69.5% 183px, 90% 156px, 45% 85%, 62% 74%, 79% 71%, 95% 86%;
+        }
+        @media #{$breakpoint-xl}{
+            background-size: 535px, 92px, 70px, 145px, 64px, 78px, 85px;
+            background-position: 105% 100px, 64% 162px, 88% 136px, 45% 85%, 62% 77%, 79% 73%, 95% 87%;
+        }
+        @media #{$breakpoint-ls}{
+           background-position: 105% 100px, 62% 162px, 87% 136px, 45% 85%, 62% 77%, 79% 73%, 95% 87%;
+        }
+        @media #{$breakpoint-lg}{
+            background-position: 109% 120px, 62% 180px, 88% 156px, 35% 86%, 53% 70%, 74% 59%, 90% 84%;
+        }
+        @media #{$breakpoint-pt}{
+            background-position: 109% 116px, 47% 180px, 82% 156px, 28% 86%, 50% 70%, 77% 59%, 93% 78%;
+        }
+        @media #{$breakpoint-sm}{
+            background-image: url(./.././img/Droneldpi.svg), url(./.././img/boy_flying_drone.svg);
+            background-position: 36% 168px, 86% 84%;
+            background-size: 104px, 90px;
+        }
+    }
+    height:  calc(100vh - 50px);
+    @media #{$breakpoint-desktop}{
+        height: calc(100vh - 20px);
+    }
+    @media #{$breakpoint-lg}{
+        height: calc(100vh - 60px);
+    }
+    width: 100%;
+    @include display-flex(flex);
+    @include justify-content-center;
+    @include align-items-center;
+    .banner{
+        margin-top: -130px;
+        @media #{$breakpoint-lg-desktop}{
+            margin-top: -100px;
+        }
+        @media #{$breakpoint-desktop}{
+            margin-top: -70px;
+        }
+        @media #{$breakpoint-sm}{
+            @include flex_hr_center;
+            text-align: center;
+        }
+        h1{
+            max-width: 790px;
+            color: $text-color;
+            font-size: 54px;
+            line-height: 64px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            @media #{$breakpoint-lg-desktop}{
+                max-width: 520px;
+                font-size: 40px;
+                line-height: 50px;
+                margin-bottom: 30px;
+            }
+            @media #{$breakpoint-desktop}{
+                max-width: 420px;
+                font-size: 32px;
+                line-height: 40px;
+                margin-bottom: 20px;
+            }
+            @media #{$breakpoint-xl}{
+                max-width: 380px;
+                font-size: 26px;
+                line-height: 30px;
+            }
+        }
+        h2{
+            max-width: 675px;
+           font-size: 19px;
+           line-height: 34px;
+           font-weight: 400;;
+            color: $heading-color;
+            @media #{$breakpoint-lg-desktop}{
+                max-width: 580px;
+                font-size: 16px;
+                line-height: 28px;
+            }
+            @media #{$breakpoint-desktop}{
+                max-width: 500px;
+                font-size: 14px;
+                line-height: 22px;
+            }
+            @media #{$breakpoint-xl}{
+                max-width: 450px;
+                font-size: 12px;
+                line-height: 18px;
+            }
+        }
+          
+        .button-wrap{
+            margin-top: 80px;
+            height: 36px;
+            button{
+                width: 154px;
+                @include radius(4px);
+            }
+            @media #{$breakpoint-lg-desktop}{
+                margin-top: 70px;
+                button{
+                    width: 135px;
+                }   
+            }
+            @media #{$breakpoint-desktop}{
+                margin-top: 55px;
+                button{
+                    width: 110px;
+                    height: 30px;
+                    @include radius(3px);
+                }
+            }
+            @media #{$breakpoint-xl}{
+                margin-top: 45px;
+                button{
+                    width: 100px;
+                    height: 22px;
+                }
+            }
+            @include display-flex(flex);
+          
+        }
+    }
+}

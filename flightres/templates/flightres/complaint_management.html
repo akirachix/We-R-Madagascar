@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Drone Registry Nepal">
+    <meta property="og:image" content="preview.html">
+    <meta property="og:site_name" content="Drone Registry Nepal">
+    <meta property="og:title" content="Drone Registry Nepal">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://naxa.com.np">
+
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Drone Registry Nepal">
+    <meta name="twitter:creator" content="@Drone Registry Nepal">
+    <meta name="twitter:title" content="Drone Registry Nepal">
+    <meta name="twitter:description" content="Drone Registry Nepal">
+    <meta name="twitter:image" content="preview.html">
+
+    <!--title-->
+    <title>Drone Registry Nepal</title>
+
+    <!-- faveicon start   -->
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
+
+    <!-- stylesheet start -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="">
+    <div class="body-container">
+        <div class="drone-admin-wrapper">
+            <aside class="admin-sidebar">
+                <header class="admin-aside-header">
+                    <a href="home.html"><img src="img/admin-logo.png" alt="Drone logo" /></a>
+                    <a href="#" class="toggle-sidebar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </header>
+                <div class="admin-aside-body">
+                    <ul class="admin-aside-menu">
+                        <li class="is-submenu">
+                            <a href="permission_management.html" class="menu-title">
+                                <i class="material-icons">border_all</i>
+                                <span>Permission Management</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="javascript:void(0);">Management</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="is-submenu">
+                            <a href="javascript:void(0);" class="menu-title">
+                                <i class="material-icons">group</i>
+                                <span>Operators Database</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="javascript:void(0);">Management</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="is-submenu">
+                            <a href="javascript:void(0);" class="menu-title">
+                                <i class="material-icons">airplanemode_active</i>
+                                <span>Drone Database</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="javascript:void(0);">Management</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="is-submenu">
+                            <a href="complaint_management.html" class="menu-title">
+                                <i class="material-icons">equalizer</i>
+                                <span>Complaints </span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="#/">Manage complaints</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="is-submenu">
+                            <a href="#/" class="menu-title">
+                                <i class="material-icons">settings</i>
+                                <span>Pagewise Management </span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="javascript:void(0);">Management</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+            <main class="admin-main">
+                <div class="main-card">
+                    <div class="card-header">
+                        <h1>Complaints MANAGEMENT / manage Complaints</h1>
+                    </div>
+                    <div class="card-body">
+                        <table id="admin-datatable" class="admin-datatable">
+                            <thead>
+                                <tr>
+                                    <th class="serial-th">SN</th>
+                                    <th>Date</th>
+                                    <th>Complaints ID</th>
+                                    <th>Complaint Category</th>
+                                    <th>Message</th>
+                                    <th>Sender Name</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th class="modal-th"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><time>07 November, 2020</time></td>
+                                    <td>ID-1234</td>
+                                    <td>Privacy</td>
+                                    <td><b>Please find the message...</b></td>
+                                    <td>Randy Pierce</td>
+                                    <td>New Baneshwor, Kathmandu</td>
+                                    <td><span class="status approved">Solved</span></td>
+                                    <td><a href="#" modal-link="open-modal-complaint" class="modal-link"><i class="material-icons">chevron_right</i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><time>07 November, 2020</time></td>
+                                    <td>ID-1234</td>
+                                    <td>Privacy</td>
+                                    <td><b>Please find the message...</b></td>
+                                    <td>Randy Pierce</td>
+                                    <td>New Baneshwor, Kathmandu</td>
+                                    <td><span class="status approved">Solved</span></td>
+                                    <td><a href="#" modal-link="open-modal-complaint" class="modal-link"><i class="material-icons">chevron_right</i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><time>07 November, 2020</time></td>
+                                    <td>ID-1234</td>
+                                    <td>Privacy</td>
+                                    <td><b>Please find the message...</b></td>
+                                    <td>Randy Pierce</td>
+                                    <td>New Baneshwor, Kathmandu</td>
+                                    <td><span class="status approved">Solved</span></td>
+                                    <td><a href="#" modal-link="open-modal-complaint" class="modal-link"><i class="material-icons">chevron_right</i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><time>07 November, 2020</time></td>
+                                    <td>ID-1234</td>
+                                    <td>Privacy</td>
+                                    <td><b>Please find the message...</b></td>
+                                    <td>Randy Pierce</td>
+                                    <td>New Baneshwor, Kathmandu</td>
+                                    <td><span class="status approved">Solved</span></td>
+                                    <td><a href="#" modal-link="open-modal-complaint" class="modal-link"><i class="material-icons">chevron_right</i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td><time>07 November, 2020</time></td>
+                                    <td>ID-1234</td>
+                                    <td>Privacy</td>
+                                    <td><b>Please find the message...</b></td>
+                                    <td>Randy Pierce</td>
+                                    <td>New Baneshwor, Kathmandu</td>
+                                    <td><span class="status approved">Solved</span></td>
+                                    <td><a href="#" modal-link="open-modal-complaint" class="modal-link"><i class="material-icons">chevron_right</i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td><time>07 November, 2020</time></td>
+                                    <td>ID-1234</td>
+                                    <td>Privacy</td>
+                                    <td><b>Please find the message...</b></td>
+                                    <td>Randy Pierce</td>
+                                    <td>New Baneshwor, Kathmandu</td>
+                                    <td><span class="status approved">Solved</span></td>
+                                    <td><a href="#" modal-link="open-modal-complaint" class="modal-link"><i class="material-icons">chevron_right</i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td><time>07 November, 2020</time></td>
+                                    <td>ID-1234</td>
+                                    <td>Privacy</td>
+                                    <td><b>Please find the message...</b></td>
+                                    <td>Randy Pierce</td>
+                                    <td>New Baneshwor, Kathmandu</td>
+                                    <td><span class="status approved">Solved</span></td>
+                                    <td><a href="#" modal-link="open-modal-complaint" class="modal-link"><i class="material-icons">chevron_right</i></a></td>
+                                </tr>
+
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+            
+        </div>
+    </div>
+
+    <div class="popup" id="open-modal-escalated">
+        <div class="popup-container sm-popup map-popup">
+            <div class="popup-body">
+                <span class="close-icon"><i class="material-icons">close</i></span>
+                <div class="popup-header">
+                    <h3>Escalate Issue</h3>
+                    
+                </div>
+                <div class="popup-content">
+                    <div class="drone-details">
+                        <div class="row"> 
+                            <div class="col-xl-12 col-sm-12">
+                                <div class="drone-content col-left">
+                                    <ul>
+                                        <li>
+                                            <h4>Police Contacts</h4>
+                                            <div class="content-list">
+                                                <p><b>Kathmandu</b><span>(009)036-3782</span></p>
+                                                <p><b>Lima</b><span>(195)362-6460</span></p>
+                                                <p><b>Amsterdam</b><span>(195)362-6460</span></p>
+                                                <p><b>Shenzen</b><span>(195)362-6460</span></p>
+                                                <p><b>Helsinki</b><span>(195)362-6460</span></p>
+                                            </div>
+                                            <div class="button-wrap">
+                                                <button class="common-button is-bg escalate-button">Escalate</button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="popup-footer popup-permission">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="open-modal-complaint">
+        <div class="popup-container lg-popup map-popup">
+            <div class="popup-body">
+                <span class="close-icon"><i class="material-icons">close</i></span>
+                <div class="popup-header">
+                    <h3>Complaint management for <b>ID 1234</b></h3>
+                    
+                </div>
+                <div class="popup-content">
+                    <div class="drone-details">
+                        <div class="row gx-md-3 gx-lg-3"> 
+                            <div class="col-xl-5 col-sm-12 order-2">
+                                <div class="info-content col-left">
+                                    <ul>
+                                        <li>
+                                            <h4>Sender info</h4>
+                                            <div class="content-list">
+                                                <p><b>Name</b><span>Ram Thapa</span></p>
+                                                <p><b>Location</b><span>Putalisadak, Kathmandu</span></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h4>Additional info</h4>
+                                            <div class="content-list">
+                                                <div class="image-content">
+                                                    <figure><img src="./img/drone-img.jpg" alt=""></figure>
+                                                    <figure><img src="./img/drone-img2.jpg" alt=""></figure>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h4>Flight Permission Nearby</h4>
+                                            <div class="permit-list">
+                                                <p>Permission Request for ID123</p>
+                                                <p>Permission Request for ID123</p>
+                                                <p>Permission Request for ID123</p>
+                                                <p>Permission Request for ID123</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+    
+                            </div>
+                            <div class="col-xl-7 col-sm-12  order1">
+                                <div class="complaint-content col-right">
+                                    <h3 class="title">COMPLAINT MESSAGE <span>Mark as Resolved</span></h3>
+                                    <div class="info-para">
+                                        <h6>Complain Category: <span>Privacy</span></h6>
+                                        <span class="time">May 10, 2020 at 01:34 AM</span>
+                                    </div>
+                                    <div class="info-block">
+                                        <p>Etiam convallis elementum sapien, a aliquam turpis aliquam vitae. Praesent sollicitudin felis vel mi facilisis posuere. Nulla ultrices facilisis justo, non varius nisl semper vel. Interdum et malesuada fames ac ante ipsum| primis in faucibus. Phasellus at ante mattis, condimentum velit et, dignissim nunc. Integer.</p>
+                                    </div>
+                                    <div class="button-wrap">
+                                        <button class="common-button is-bg escalate-button" popup-link="open-modal-escalated">Issue Escalated</button>
+                                    </div>
+                                    <form action="">
+                                        <textarea>ADD a Internal note..</textarea>
+                                        <div class="textarea-message">
+                                            <textarea>Write a Message..</textarea>
+                                            <p>Characters remaining <span>90/90</span></p>
+                                        </div>
+                                    </form>
+                                    <div class="buttons is-end">
+                                        <button class="common-button is-bg">Reply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="popup-footer popup-permission">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery Core Js -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'datatable/datatables.min.js' %}"></script>
+    <script src="{% static 'js/custom-datatable.js' %}"></script>
+    <script src="{% static 'js/drone.js' %}"></script>
+
+</body>
+
+</html>

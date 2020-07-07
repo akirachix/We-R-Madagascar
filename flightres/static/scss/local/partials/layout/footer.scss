@@ -1,0 +1,141 @@
+
+footer{
+    &.site-footer{
+        padding-bottom: 1.75rem;
+        font-size:.875rem;
+        color: $body-color;
+        line-height: 16px;
+        font-weight: 400;
+        @media #{$breakpoint-lg-desktop}{
+            font-size: .683rem;
+            line-height: 14px;
+        }
+        @media #{$breakpoint-desktop}{
+            font-size: .585rem;
+            line-height: 12px;
+            padding-bottom: 1.25rem;
+        }
+        .top-footer{
+            @include display-flex(flex);
+            @include justify-content-between;
+            @include align-items-center;
+            @media #{$breakpoint-ls}{
+                @include flex-wrap(wrap);
+                @include justify-content-center; 
+            }
+            .footer-menu{
+                @include display-flex(flex);
+                @include justify-content-end;
+                @include align-items-center;
+                @media #{$breakpoint-ls}{
+                    @include justify-content-center;
+                    @include flex-wrap(wrap); 
+                }
+                ul{
+                    flex-grow: 1;
+                    @include display-flex(flex);
+                    @include justify-content-end;
+                    @include align-items-center;
+                    @include flex-wrap(wrap);
+                    li{
+                        margin-left: 1rem;
+                        a{
+                            font-weight: 600;
+                            color:$body-color;
+                        }
+                    }
+                }
+            }
+        }
+        .bottom-footer{
+            padding-top:1rem;
+            @include display-flex(flex);
+            @include justify-content-between;
+            @include align-items-center;
+            @include flex-wrap(wrap);
+            p{
+                @include display-flex(flex);
+                @include align-items-center;
+                
+                a{
+                    color:$body-color;
+                    text-decoration: underline;
+                    @include transition(all .4s ease-in-out);
+                    &:not(:last-child){
+                        &::after{
+                            content:'|';
+                            display: inline-flex;
+                            margin:0 .5rem;
+                        }
+                    }
+                    &:hover{
+                        color:$primary-color;
+                    }
+                }
+                &.privacy{
+                    @include justify-content-start;
+                }
+                &.copyright{
+                    @include justify-content-end;
+                }
+            }
+        }
+        .footer-in{
+            @include display-flex(flex);
+            @include justify-content-between;
+            @include align-items-center;
+            @media #{$breakpoint-md}{
+                @include flex-wrap(wrap); 
+            }
+            @media #{$breakpoint-sm}{
+                @include flex_hr_center;
+                text-align: center;
+                p{
+                    &.footer-left{
+                        margin-bottom: 3px;
+                    }
+                }
+            }
+            p{
+                color:$body-color;
+
+                &.footer-right{
+                    span{
+                        &:not(:last-child){
+                            &::after{
+                                content:'|';
+                                display: inline-flex;
+                                margin:0 .75rem;
+                                @media #{$breakpoint-lg-desktop}{
+                                    margin: 0 .5rem;
+                                }
+                                @media #{$breakpoint-desktop}{
+                                    margin: 0 .325rem;
+                                }
+                            }
+                        }
+                    }
+                }
+                a{
+                    color: $body-color;
+                    text-decoration: underline;
+                    @include transition(all .4s ease);
+                    &:hover{
+                        color: $secondary-color;
+                    }
+                }
+            }
+            @media #{$breakpoint-xs}{
+                @include flex-wrap(wrap); 
+                @include justify-content-center;
+                text-align: center;
+                p{
+                    font-size: .585rem;
+                    &.footer-right{
+                        margin-top:.1rem;
+                    }
+                }
+            }
+        }
+    }
+}
