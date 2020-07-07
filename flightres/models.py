@@ -13,7 +13,7 @@ class FlightPermission(models.Model):
     )
     """This model is used for flight registration"""
     uav_uid = models.AutoField(primary_key=True)
-    uav_uuid = models.CharField(max_length=20, null=True, blank=True)
+    uav_uuid = models.ForeignKey("registry.Aircraft", to_field='unid', db_column='uav_uuid', related_name='uav_uuid', null=True, blank=True, on_delete=models.CASCADE)
     flight_start_date = models.CharField(max_length=300, null=True, blank=True)
     flight_end_date = models.CharField(max_length=300, null=True, blank=True)
     flight_time = models.CharField(max_length=300, null=True, blank=True)
@@ -31,6 +31,7 @@ class FlightPermission(models.Model):
     flight_insurance_url = models.URLField(max_length=200, null=True, blank=True)
     status = models.TextField(choices = STATUS_CHOICES, default='Pending')
     location = models.URLField(max_length=200, null=True, blank=True)
+
     twilio = Twilio()
 
     def __init__(self, *args, **kwargs):
@@ -41,7 +42,7 @@ class FlightPermission(models.Model):
              update_fields=None):
         if self.old_status != self.status:
             print("SENDING" + self.pilot_phone_number)
-            uri = "np/api/v1/flightres/"
+            uri = "np/dashboard/request_response/"
             response_data = uri + str(self.uav_uid)
             print(response_data)
             message = "Your flight plan has been approved. You can find more details at xyz.com/details/1"
@@ -59,6 +60,10 @@ class FlightRegistryAdmin(admin.ModelAdmin):
 
 
 class Report(models.Model):
+    STATUS_CHOICE = (
+        ('Pending', 'Pending'),
+        ('Resolved', 'Resolved')
+    )
     """This model is used for storing complaints sent via WhatsApp"""
     uav_uid = models.AutoField(primary_key=True)
     message = models.TextField(null=False, default='')
@@ -67,10 +72,10 @@ class Report(models.Model):
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     complainer_name = models.CharField(max_length=50, null=True, blank=True)
     complainer_number = models.CharField(max_length=30, blank=True, null=True)
-    # photo = models.FileField(upload_to='uploads/WhComplains', blank=True, null=True)
-    # note = models.TextField(blank=True, null=True,unique=False)
+    photo = models.FileField(upload_to='uploads/WhComplains', blank=True, null=True)
+    note = models.TextField(blank=True, null=True,unique=False)
     image_url = models.URLField(max_length=200, null=True, blank=True)
-
+    status = models.CharField(choices=STATUS_CHOICE, max_length=15, default='Pending')
     reply = models.TextField(default='')
     category = models.TextField(default='')
     is_escalated = models.BooleanField(default=False)
