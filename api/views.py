@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 from twilio.twiml.messaging_response import MessagingResponse
-from registry.models import SheetRegister
+from registry.models import SheetRegister, Aircraft
 from flightres.models import Report, FlightPermission
 from .serializers import FlightRegistrySerializer, WhatsappComplainSerializer,\
     SheetRegisterSerializer
@@ -17,6 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.http import JsonResponse
 from rest_framework import viewsets
+from rest_framework.views import APIView
 
 
 @csrf_exempt
@@ -131,3 +132,19 @@ class SheetUploadView(ModelViewSet):
                             status=status.HTTP_200_OK,)
         return Response({'Message': serializer.errors},
                         status=status.HTTP_400_BAD_REQUEST,)
+
+
+class UniqueTeatDataView(APIView):
+
+    def post(self, request, format=None):
+        data = request.data
+        uin = data.get('uin')
+        print(uin)
+        if Aircraft.objects.filter(unid=uin).exists():
+            return Response(
+                {'data': "UIN Already exists"}, status=status.HTTP_200_OK, )
+        else:
+            return Response(
+                {'data': "UIN is available to entry"},
+                status=status.HTTP_200_OK, )
+
