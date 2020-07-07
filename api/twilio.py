@@ -8,10 +8,6 @@ class Twilio:
     # client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
     def send_message(self, receiver, message):
-        message = self.client.messages.create(
-            from_='whatsapp:+14155238886',
-            body=message,
-            to=receiver
-        )
+        # message = self.client.messages.create(,,
 
         print(message.sid)
