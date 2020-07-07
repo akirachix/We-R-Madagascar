@@ -17,4 +17,4 @@ def reply_whatsapp(request):
         response.message("Thanks for asking drone registry, we will check your number {}, Please send you gps".format(msg))
         return HttpResponse(str(response))
     else:
-        return ""
+        return HttpResponse("")

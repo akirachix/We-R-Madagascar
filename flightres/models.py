@@ -30,6 +30,7 @@ class FlightPermission(models.Model):
     flight_plan_url = models.URLField(max_length=200, null=True, blank=True)
     flight_insurance_url = models.URLField(max_length=200, null=True, blank=True)
     status = models.TextField(choices = STATUS_CHOICES, default='Pending')
+    location = models.URLField(max_length=200, null=True, blank=True)
     twilio = Twilio()
 
     def __init__(self, *args, **kwargs):
