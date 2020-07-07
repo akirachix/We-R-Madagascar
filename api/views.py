@@ -4,10 +4,10 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 from twilio.twiml.messaging_response import MessagingResponse
-
+from registry.models import SheetRegister, Aircraft
 from flightres.models import Report, FlightPermission
-from .serializers import FlightRegistrySerializer, WhatsappComplainSerializer
-
+from .serializers import FlightRegistrySerializer, WhatsappComplainSerializer,\
+    SheetRegisterSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
@@ -16,6 +16,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.http import JsonResponse
+from rest_framework import viewsets
+from rest_framework.views import APIView
 
 
 @csrf_exempt
@@ -94,3 +96,55 @@ class WhComplainView(ModelViewSet):
             response_data = uri + str(serializer.data['uav_uid'])
             return Response({'track_url': response_data, 'data': serializer.data}, status=status.HTTP_200_OK, )
         return Response({'Message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST, )
+
+
+class SheetUploadView(ModelViewSet):
+    queryset = SheetRegister.objects.all()
+    serializer_class = SheetRegisterSerializer
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(SheetUploadView, self).dispatch(*args, **kwargs)
+
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.action in ['create', 'update', 'partial_update', 'list',
+                           'retrieve']:
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        serializer.save(created_by=user)
+
+    def create(self, request):
+        serializer = SheetRegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            uri = "http://127.0.0.1:8000/np/api/v1/flightres/"
+            # response_data = uri + str(serializer.data['uav_uid'])
+            return Response({
+                             'data': serializer.data},
+                            status=status.HTTP_200_OK,)
+        return Response({'Message': serializer.errors},
+                        status=status.HTTP_400_BAD_REQUEST,)
+
+
+class UniqueTeatDataView(APIView):
+
+    def post(self, request, format=None):
+        data = request.data
+        uin = data.get('uin')
+        print(uin)
+        if Aircraft.objects.filter(unid=uin).exists():
+            return Response(
+                {'data': "UIN Already exists"}, status=status.HTTP_200_OK, )
+        else:
+            return Response(
+                {'data': "UIN is available to entry"},
+                status=status.HTTP_200_OK, )
+
