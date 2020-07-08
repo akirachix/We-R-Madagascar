@@ -115,3 +115,5 @@ pyvenv.cfg
 .vscode
 .idea
 /uploads
+
+*.xlsx
