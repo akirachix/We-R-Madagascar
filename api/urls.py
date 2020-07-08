@@ -10,5 +10,4 @@ router.register(r'sheet-upload', SheetUploadView)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('check-unique/', UniqueTeatDataView.as_view()),
 ]

@@ -145,15 +145,17 @@ class SheetUploadView(ModelViewSet):
 
 
 class UniqueTeatDataView(APIView):
+    permission_classes = (AllowAny,)
 
     def post(self, request, format=None):
         data = request.data
-        uin = data.get('uin')
+        print(data)
+        uin = data.get('unid')
         print(uin)
         if Aircraft.objects.filter(unid=uin).exists():
             return Response(
-                {'data': "UIN Already exists"}, status=status.HTTP_200_OK, )
+                {'valid': True}, status=status.HTTP_200_OK, )
         else:
             return Response(
-                {'data': "UIN is available to entry"},
+                {'data': False},
                 status=status.HTTP_200_OK, )
