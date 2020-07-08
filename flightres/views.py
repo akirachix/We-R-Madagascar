@@ -27,7 +27,7 @@ def approvePerm(request,pk, action):
     selected_perm.save()
     return redirect('/np/dashboard')
 
-@login_required
+
 def flightReqResponseView(request, pk):
     selected_flight = get_object_or_404(FlightPermission, uav_uid=pk)
     if selected_flight.status == 'Approved':
