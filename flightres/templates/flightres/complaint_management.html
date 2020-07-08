@@ -142,7 +142,6 @@
                                     <td>{{ object.location }}</td>
                                     <td><span class="status approved">Solved</span></td>
                                     <td>
-                                        <!-- <a href="#" modal-link="open-modal-complaint" class="modal-link"><i class="material-icons">chevron_right</i></a> -->
                                         <button data-toggle="modal" data-target="#open-modal-complaint" modal-link="open-modal-complaint"
                                             type="button" class="btn modal-link">
                                             <i class="material-icons">chevron_right</i></i>
@@ -192,7 +191,7 @@
                                                                 </div>
                                                                 <div class="col-xl-7 col-sm-12  order1">
                                                                     <div class="complaint-content col-right">
-                                                                        <h3 class="title">COMPLAINT MESSAGE <span><a class="common-button is-bg" style="background-color: ;" href="#">Mark as Resolved</a> </span></h3>
+                                                                        <h3 class="title">COMPLAINT MESSAGE <span><a class="common-button is-bg" href="{% url 'dashboard:update-complain' pk=object.uav_uid action='status' %}">Mark as Resolved</a> </span></h3>
                                                                         <div class="info-para">
                                                                             <h6>Complain Category: <span>{{ object.category }}</span></h6>
                                                                             <span class="time">{{ object.created_at }}</span>
@@ -203,16 +202,16 @@
                                                                         <div class="button-wrap">
                                                                             <button class="common-button is-bg escalate-button" popup-link="open-modal-escalated">Issue Escalated</button>
                                                                         </div>
-                                                                        <form action="">
-                                                                            <textarea>ADD a Internal note..</textarea>
+                                                                        <form action="{% url 'dashboard:submit-reply' pk=object.pk %}" method="POST">
+                                                                            {% csrf_token %}
+                                                                            <textarea class="form-control" id="note" type="text" name="note">ADD a Internal note..</textarea>
                                                                             <div class="textarea-message">
-                                                                                <textarea>Write a Message..</textarea>
-                                                                                <p>Characters remaining <span>90/90</span></p>
+                                                                                <textarea class="form-control" id="reply" type="text" name="reply">Write a Message..</textarea>
+                                                                            </div>
+                                                                            <div class="buttons is-end">
+                                                                                <button type="submit" class="common-button is-bg">Reply</button>
                                                                             </div>
                                                                         </form>
-                                                                        <div class="buttons is-end">
-                                                                            <button class="common-button is-bg">Reply</button>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -248,7 +247,7 @@
                                                                                     <p><b>Helsinki</b><span>(195)362-6460</span></p>
                                                                                 </div>
                                                                                 <div class="button-wrap">
-                                                                                    <button class="common-button is-bg escalate-button">Escalate</button>
+                                                                                    <a class="common-button is-bg" href="{% url 'dashboard:update-complain' pk=object.uav_uid action='escalate' %}">Escalate</a>
                                                                                 </div>
                                                                             </li>
                                                                         </ul>
