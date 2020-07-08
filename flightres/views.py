@@ -5,6 +5,14 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import FlightPermission, Report
 
+@login_required
+def homeView(request):
+    return render(request, 'flightres/home.html')
+
+@login_required
+def dashboardView(request):
+    return render(request, 'flightres/dashboard.html')
+
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission

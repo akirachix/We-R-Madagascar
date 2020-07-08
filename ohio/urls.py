@@ -29,6 +29,7 @@ from django.conf.urls.static import static
 from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
 from django.contrib.auth.views import LoginView, LogoutView
+from flightres.views import homeView
 
 # from registry.views import UserViewSet
 
@@ -47,8 +48,8 @@ from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', registryviews.HomeView.as_view()),
-    path('', LoginView.as_view()),
+    path('', homeView),
+    path('login/', LoginView.as_view()),
     path('logout/', LogoutView.as_view()),
     path('api/v1/', registryviews.APIView.as_view()),
     path('api/v1/operators', registryviews.OperatorList.as_view()),

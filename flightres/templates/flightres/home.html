@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -26,7 +27,7 @@
     <title>Drone Registry Nepal</title>
 
     <!-- faveicon start   -->
-    <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" sizes="32x32">
 
     <!-- stylesheet start -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -60,7 +61,7 @@
             <div class="wrap-container">
                 <div class="header-in">
                     <a href="home.html" class="logo">
-                        <img src="./img/logo-blue.png"/>
+                        <img src="{% static 'img/logo-blue.png' %}"/>
                     </a>
                     <div class="menu-wrap">
                         <div class="menu">
