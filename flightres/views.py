@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import FlightPermission, Report
 
-@login_required
+
 def homeView(request):
     return render(request, 'flightres/home.html')
 
@@ -45,7 +45,7 @@ def updateComplain(request, pk, action):
     elif action == 'escalate':
         selected_complain.is_escalated = True
     selected_complain.save()
-    return redirect('/np/dashboard/complain_list')
+    return redirect('/np/dashboard/complain')
 
 @login_required
 def submitReply(request, pk):
@@ -53,7 +53,7 @@ def submitReply(request, pk):
     selected_complain.note = request.POST.get('note')
     selected_complain.reply = request.POST.get('reply')
     selected_complain.save()
-    return redirect('/np/dashboard/complain_list')
+    return redirect('/np/dashboard/complain')
 
 class ComplainListView(LoginRequiredMixin, ListView):
     template_name = 'flightres/complaint_management.html'
