@@ -150,12 +150,12 @@ class UniqueTeatDataView(APIView):
     def post(self, request, format=None):
         data = request.data
         print(data)
-        uin = data.get('unid')
+        uin = data.get('uuid')
         print(uin)
         if Aircraft.objects.filter(unid=uin).exists():
             return Response(
                 {'valid': True}, status=status.HTTP_200_OK, )
         else:
             return Response(
-                {'data': False},
+                {'valid': False},
                 status=status.HTTP_200_OK, )
