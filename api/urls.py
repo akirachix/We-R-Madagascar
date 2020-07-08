@@ -7,7 +7,6 @@ router = SimpleRouter()
 router.register(r'flightres', FlightRegistryView, 'FlighResAPI')
 router.register(r'whcomplain', WhComplainView, 'WHComplaintAPI')
 router.register(r'sheet-upload', SheetUploadView)
-router.register(r'sheet-upload-old', SheetUploadView)
 
 urlpatterns = [
     path('', include(router.urls)),

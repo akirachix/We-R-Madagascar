@@ -1,23 +1,23 @@
 from datetime import datetime
 
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.utils.datastructures import MultiValueDictKeyError
-from twilio.twiml.messaging_response import MessagingResponse
-from registry.models import SheetRegister, Aircraft
-from flightres.models import Report, FlightPermission
-from .serializers import FlightRegistrySerializer, WhatsappComplainSerializer,\
-    SheetRegisterSerializer
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
-from rest_framework import status
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.clickjacking import xframe_options_exempt
 from django.http import JsonResponse
-from rest_framework import viewsets
+from django.utils.datastructures import MultiValueDictKeyError
+from django.utils.decorators import method_decorator
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
+
+from flightres.models import Report, FlightPermission
+from registry.models import Aircraft
+from registry.models import SheetRegister
+from registry.utils.preprocessor import Preprocessor
+from .serializers import FlightRegistrySerializer, WhatsappComplainSerializer, \
+    SheetRegisterSerializer
 
 
 @csrf_exempt
@@ -61,11 +61,11 @@ class FlightRegistryView(ModelViewSet):
         serializer = FlightRegistrySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            
+
             uri = "http://127.0.0.1:8000/np/api/v1/flightres/"
             response_data = uri + str(serializer.data['uav_uid'])
             print(response_data, uri, serializer.data['uav_uid'])
-            
+
             return Response({'track_url': response_data, 'data': serializer.data}, status=status.HTTP_200_OK,
                             content_type="application/json")
 
@@ -129,11 +129,19 @@ class SheetUploadView(ModelViewSet):
             serializer.save()
             uri = "http://127.0.0.1:8000/np/api/v1/flightres/"
             # response_data = uri + str(serializer.data['uav_uid'])
+
+            sheet = serializer.data.get('upload_sheet')
+
+            excel_processor = Preprocessor(
+                sheet,
+                "x", "y")
+            excel_processor.parse()
+
             return Response({
-                             'data': serializer.data},
-                            status=status.HTTP_200_OK,)
+                'data': serializer.data},
+                status=status.HTTP_200_OK, )
         return Response({'Message': serializer.errors},
-                        status=status.HTTP_400_BAD_REQUEST,)
+                        status=status.HTTP_400_BAD_REQUEST, )
 
 
 class UniqueTeatDataView(APIView):
@@ -149,4 +157,3 @@ class UniqueTeatDataView(APIView):
             return Response(
                 {'data': "UIN is available to entry"},
                 status=status.HTTP_200_OK, )
-

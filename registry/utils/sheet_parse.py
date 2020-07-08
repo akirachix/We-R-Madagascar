@@ -22,7 +22,11 @@ def parse_items_content(file_obj, institute, user_id):
     clean_df = df[df["UIN"].notnull()].iloc[:, 0:80]
     na_to_zero_df = clean_df.fillna(0)
     data = na_to_zero_df.values.tolist()
-    print("hello", data)
+
+    Manufacturer.objects.all().delete()
+    Operator.objects.all().delete()
+    Aircraft.objects.all().delete()
+
     with transaction.atomic():
         for row in data:
             manufacturer, _ = Manufacturer.objects.get_or_create(
@@ -43,10 +47,11 @@ def parse_items_content(file_obj, institute, user_id):
                 )
             except Exception as e:
                 print("operatoroperatoroperator error", str(e))
-            print("operator", operator)
+            # print("operator", operator)
             try:
                 aircraft = Aircraft(
-                    color=row[9], manufacturer=manufacturer,
+                    color=row[9],
+                    manufacturer=manufacturer,
                     operator=operator,
                     unid=row[2], mass=row[12]
                 )
