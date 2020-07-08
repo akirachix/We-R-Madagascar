@@ -58,11 +58,10 @@ class FlightRegistryView(ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def create(self, request, **kwargs):
-        print(request.data)
         serializer = FlightRegistrySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            uri = "http://127.0.0.1:8000/np/api/v1/whcomplain/"
+            uri = "http://127.0.0.1:8000/np/api/v1/flightres/"
             response_data = uri + str(serializer.data['uav_uid'])
             print(response_data, uri, serializer.data['uav_uid'])
             return Response({'track_url': response_data, 'data': serializer.data}, status=status.HTTP_200_OK,
@@ -92,7 +91,7 @@ class WhComplainView(ModelViewSet):
         serializer = WhatsappComplainSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            uri = "http://127.0.0.1:8000/np/api/v1/flightres/"
+            uri = "http://127.0.0.1:8000/np/api/v1/whcomplain/"
             response_data = uri + str(serializer.data['uav_uid'])
             return Response({'track_url': response_data, 'data': serializer.data}, status=status.HTTP_200_OK, )
         return Response({'Message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST, )

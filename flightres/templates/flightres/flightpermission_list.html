@@ -53,7 +53,7 @@
                 <div class="admin-aside-body">
                     <ul class="admin-aside-menu">
                         <li class="is-submenu">
-                            <a href="permission_management.html" class="menu-title">
+                            <a href="{% url 'dashboard:dashboard' %}" class="menu-title">
                                 <i class="material-icons">border_all</i>
                                 <span>Permission Management</span>
                             </a>
@@ -86,7 +86,7 @@
                             </ul>
                         </li>
                         <li class="is-submenu">
-                            <a href="complaint_management.html" class="menu-title">
+                            <a href="{% url 'dashboard:complain-list' %}" class="menu-title">
                                 <i class="material-icons">equalizer</i>
                                 <span>Complaints </span>
                             </a>
