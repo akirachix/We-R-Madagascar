@@ -87,8 +87,9 @@ $(document).ready(function () {
     }).addTo(map);
 
     Kritipur.bindPopup(customPopup, customOptions);
-
-
+    var long = '{{ object.longitude }}'
+    console.log("TWO")
+    console.log(long)
     map.flyTo([lat, lon], 13)
     //   myMap.panTo([2, 22]);
 
