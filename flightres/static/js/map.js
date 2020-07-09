@@ -9,6 +9,8 @@ $(document).ready(function () {
 
     var lat = document.getElementById("lat").value;
     var lon = document.getElementById("lon").value;
+
+    console.log("test")
     console.log(lat)
     console.log(lon)
     osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
