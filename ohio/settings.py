@@ -173,7 +173,7 @@ CELERY_BROKER_URL = 'redis://[::1]:6379/0'
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # django_heroku.settings(locals())
 
 AUTH_USER_MODEL = 'authentication.User'
