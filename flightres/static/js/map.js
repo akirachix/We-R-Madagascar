@@ -6,7 +6,7 @@ $(document).ready(function () {
         zoom: 12,
     });
 
-    console.log("Sexy")
+
     var lat = document.getElementById("lat").value;
     var lon = document.getElementById("lon").value;
     console.log(lat)
