@@ -26,19 +26,7 @@ $(document).ready(function () {
         maxZoom: 20,
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
     });
-    // var markerIcon = [
-    // 	["Kritipur",27.67988,85.27544],
-    // 	["Pokhara",28.26689,83.96851],
-    // 	["Waling",27.98333,83.76667],
-    // 	["Banepa",27.62979,85.52138],
-    // 	["Butwal",27.70055,83.44836],
-    // 	];
 
-    // 	for (var i = 0; i < markerIcon.length; i++) {
-    // 		marker = new L.marker([markerIcon[i][1],markerIcon[i][2]])
-    // 			.bindPopup(markerIcon[i][0])
-    // 			.addTo(map);
-    // 	}
 
     var baseLayers = {
         "OpenStreetMap": osm,
@@ -49,29 +37,9 @@ $(document).ready(function () {
 
     };
 
-    // var latLong = [{
-    // 	"lat": 27.67988,
-    // 	"lng": 85.27544
-    //   }, {
-    // 	"lat": 28.26689,
-    // 	"lng": 83.96851
-    //   }, {
-    // 	"lat": 27.98333,
-    // 	"lng": 83.76667
-    //   }, {
-    // 	"lat": 27.62979,
-    // 	"lng": 85.52138
-    //   }, {
-    // 	"lat": 27.70055,
-    // 	"lng": 83.44836
-    //   }];
+
     customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
-    var customOptions =
-        {
-            'maxWidth': '400',
-            'width': '200',
-            'className': 'popupCustom'
-        }
+
     // var Kritipur = L.circle([lat, lon], {
     //     color: '#047c41',
     //     fillColor: '#047c41',
@@ -86,7 +54,7 @@ $(document).ready(function () {
     // map.flyTo([lat, lon], 13)
     //   myMap.panTo([2, 22]);
 
-    layerswitcher = L.control.layers(baseLayers, {}, {collapsed: true}).addTo(map);
+    layerswitcher = L.control.layers(baseLayers, {}, {collapsed: false}).addTo(map);
 });
 
 $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
