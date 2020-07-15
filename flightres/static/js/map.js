@@ -93,7 +93,7 @@ $(document).ready(function () {
     map.flyTo([lat, lon], 13)
     //   myMap.panTo([2, 22]);
 
-    layerswitcher = L.control.layers(baseLayers, {}, {collapsed: false}).addTo(map);
+    layerswitcher = L.control.layers(baseLayers, {}, {collapsed: true}).addTo(map);
 });
 
 $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
