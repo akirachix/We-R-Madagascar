@@ -6,13 +6,6 @@ $(document).ready(function () {
         zoom: 12,
     });
 
-
-    var lat = document.getElementById("lat").value;
-    var lon = document.getElementById("lon").value;
-
-    console.log("test")
-    console.log(lat)
-    console.log(lon)
     osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
@@ -79,18 +72,18 @@ $(document).ready(function () {
             'width': '200',
             'className': 'popupCustom'
         }
-    var Kritipur = L.circle([lat, lon], {
-        color: '#047c41',
-        fillColor: '#047c41',
-        fillOpacity: 0.7,
-        radius: 400
-    }).addTo(map);
+    // var Kritipur = L.circle([lat, lon], {
+    //     color: '#047c41',
+    //     fillColor: '#047c41',
+    //     fillOpacity: 0.7,
+    //     radius: 400
+    // }).addTo(map);
 
-    Kritipur.bindPopup(customPopup, customOptions);
-    var long = '{{ object.longitude }}'
-    console.log("TWO")
-    console.log(long)
-    map.flyTo([lat, lon], 13)
+    // Kritipur.bindPopup(customPopup, customOptions);
+    // var long = '{{ object.longitude }}'
+    // console.log("TWO")
+    // console.log(long)
+    // map.flyTo([lat, lon], 13)
     //   myMap.panTo([2, 22]);
 
     layerswitcher = L.control.layers(baseLayers, {}, {collapsed: true}).addTo(map);

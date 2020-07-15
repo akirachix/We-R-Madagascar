@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Authorization, Activity, Operator, Contact, Aircraft, Person, Address, Pilot, Complain
+from .models import Authorization, Activity, Operator, Contact, Aircraft, Person, Address, Pilot, Complain, Manufacturer
 
 admin.site.register(Authorization)
 admin.site.register(Activity)
@@ -10,3 +10,4 @@ admin.site.register(Person)
 admin.site.register(Address)
 admin.site.register(Pilot)
 admin.site.register(Complain)
+admin.site.register(Manufacturer)
