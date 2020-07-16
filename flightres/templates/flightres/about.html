@@ -1,0 +1,219 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Drone Registry Nepal">
+    <meta property="og:image" content="preview.html">
+    <meta property="og:site_name" content="Drone Registry Nepal">
+    <meta property="og:title" content="Drone Registry Nepal">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://naxa.com.np">
+
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Drone Registry Nepal">
+    <meta name="twitter:creator" content="@Drone Registry Nepal">
+    <meta name="twitter:title" content="Drone Registry Nepal">
+    <meta name="twitter:description" content="Drone Registry Nepal">
+    <meta name="twitter:image" content="preview.html">
+
+    <!--title-->
+    <title>Drone Registry Nepal</title>
+
+    <!-- faveicon start   -->
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
+
+     <!-- stylesheet start -->
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+     <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="home-pg">
+
+    <header class="site-header">
+        <div class="top-header">
+            <div class="container">
+                <div class="wrap-container">
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">How to use</a></li>
+                        <li class=form-group>
+                            <select class="form-control" name="lang" id="lang">
+                            <option value="Eng">Eng</option>
+                            <option value="Nep">Nep</option>
+                            </select>
+                            <i class="material-icons">arrow_drop_down</i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="wrap-container">
+                <div class="header-in">
+                    <a href="{% url 'home' %}" class="logo">
+                        <img src="{% static 'img/logo-blue.png' %}"/>
+                    </a>
+                    <div class="menu-wrap">
+                        <div class="menu">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'home' %}" class="active span-15">Home</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'dashboard:guidelines' %}" class="span-15">UAV Guidelines</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="common-button is-bg">Drone Map</button>
+                    </div>
+                    <div class="toggle-button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="about-section">
+        <div class="container">
+            <div class="wrap-container">
+                <div class="row no-gutters about-row">
+                    <div class="col-md-6">
+                        <div class="col-about-wrap">
+                            <div class="drone-reg-info">
+                                 <h1>Drone Registry</h1>
+                                 <br>
+                                 <p class="para-bold"> Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu,  consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibu</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-about-wrap">
+                            <div class="drone-reg-bg">
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-gutters about-row">
+                    <div class="col-md-6">
+                        <div class="col-about-wrap">
+                            <div class="drone-reg-info">
+                                 <p class="para-light"> Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu,  consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibu</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-about-wrap">
+                            <div class="drone-reg-info">
+                                <p class="para-light"> Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu,  consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibu</p>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main class="drone-objectives">
+        <div class="container">
+            <div class="wrap-container">
+                <br><br>
+                <h3>Objectives</h3>
+                <br>
+                <ul class="objectives-list">
+                    <li>
+                        <span class="bullets"><i class="material-icons">check_circle</i></span>
+                        <span class="list-para">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span>
+                     </li>
+                     <li>
+                        <span class="bullets"><i class="material-icons">check_circle</i></span>
+                        <span class="list-para">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                     </li>
+                     <li>
+                        <span class="bullets"><i class="material-icons">check_circle</i></span>
+                        <span class="list-para">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                     </li>
+                     <li>
+                        <span class="bullets"><i class="material-icons">check_circle</i></span>
+                        <span class="list-para">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                     </li>
+                     <li>
+                        <span class="bullets"><i class="material-icons">check_circle</i></span>
+                        <span class="list-para">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <main class="about-logo">
+        <div class="container">
+            <div class="wrap-container">
+                <div class="row no-gutters no-gutters row-logo">
+                    <div class="col-md-4 col-logo">
+                        <div class="logo-lists">
+                            <span class="title">Implemented by</span>
+                            <div class="image-logo">
+                                <img src="{% static 'img/Nepal-logo.jpg' %}" alt="Nepal Government">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4  col-logo">
+                        <div class="logo-lists">
+                            <span class="title">Developed by</span>
+                            <div class="image-logo">
+                                <img src="{% static 'img/naxa-logo.png' %}" alt="Naxa">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-logo">
+                        <div class="logo-lists">
+                            <span class="title">Supported by</span>
+                            <div class="image-logo">
+                                <img src="{% static 'img/CAAN_LOGO.png' %}" alt="CAAN-logo">
+                                <img src="{% static 'img/We_Robotics.webp' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer home-footer">
+        <div class="container">
+            <div class="wrap-container">
+                <div class="footer-in">
+                    <p  class="footer-left">© 2020 Drone Registry Nepal. All rights reserved.</p>
+                    <p class="footer-right"><span>News and Notice</span><span>Press Release</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Jquery Core Js -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'datatable/datatables.min.js' %}"></script>
+    <script src="{% static 'js/drone.js' %}"
+</body>
+
+</html>

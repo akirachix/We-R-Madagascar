@@ -66,15 +66,15 @@
                     <div class="menu">
                         <ul>
                             <li>
-                                <a href="home.html" class="active span-15">Home</a>
+                                <a href="{% url 'home' %} class="active span-15">Home</a>
                             </li>
                             <li>
-                                <a href="#/" class="span-15">About</a>
+                                <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
                             </li>
 
                         </ul>
                     </div>
-                    <button class="common-button is-bg">UAV Guidelines</button>
+                    <a href="{% url 'dashboard:guidelines' %}" class="common-button is-bg">UAV Guidelines</a>
                 </div>
                 <div class="toggle-button">
                     <span></span>

@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block body %}
+
     <main class="admin-main">
         <div class="main-card">
             <div class="card-header">
@@ -10,6 +11,7 @@
             <div class="card-body">
                 <table id="admin-datatable" class="admin-datatable">
                     <thead>
+
                     <tr>
                         <th class="serial-th">SN</th>
                         <th>Start Date</th>
@@ -20,39 +22,38 @@
                         <th>Status</th>
                         <th class="modal-th"></th>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     {% for object in object_list %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td>
-                                <time>{{ object.flight_start_date }}</time>
-                            </td>
-                            <td>
-                                <time>{{ object.flight_end_date }}</time>
-                            </td>
-                            <td><b>Permission detail {{ object.uav_uid }}</b></td>
-                            <td>{{ object.pilot_name }}</td>
-                            <td>Latitude: {{ object.latitude }} Longitude: {{ object.longitude }}</td>
-                            {% if object.status == 'Approved' %}
-                                <td><span class="status approved">{{ object.status }}</span></td>
-                            {% elif object.status == 'Rejected' %}
-                                <td><span class="status failed">{{ object.status }}</span></td>
-                            {% else %}
-                                <td><span class="status pending">{{ object.status }}</span></td>
-                            {% endif %}
-                            <td class="table-action">
-                                <button data-toggle="modal" data-target="#open-modal" modal-link="open-modal"
-                                        type="button"
-                                        class="btn modal-link">
-                                    <i class="material-icons">chevron_right</i></i>
-                                </button>
-                                <div class="popup" id="open-modal">
-                                    <div class="popup-container lg-popup map-popup">
-                                        <div class="popup-body">
-                                            <span class="close-icon"><i class="material-icons">close</i></span>
-                                            <div class="popup-header">
-                                                <h3>Permission Request for <b>ID {{ object.uav_uid }}</b></h3>
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            <time>{{ object.flight_start_date }}</time>
+                        </td>
+                        <td>
+                            <time>{{ object.flight_end_date }}</time>
+                        </td>
+                        <td><b>Permission detail {{ object.uav_uid }}</b></td>
+                        <td>{{ object.pilot_name }}</td>
+                        <td>Latitude: {{ object.latitude }} Longitude: {{ object.longitude }}</td>
+                        {% if object.status == 'Approved' %}
+                        <td><span class="status approved">{{ object.status }}</span></td>
+                        {% elif object.status == 'Rejected' %}
+                        <td><span class="status failed">{{ object.status }}</span></td>
+                        {% else %}
+                        <td><span class="status pending">{{ object.status }}</span></td>
+                        {% endif %}
+                        <td class="table-action">
+                            <button data-toggle="modal" data-target="#open-modal" modal-link="open-modal" type="button"
+                                class="btn modal-link">
+                                <i class="material-icons">chevron_right</i></i>
+                            </button>
+                            <div class="popup" id="open-modal">
+                                <div class="popup-container lg-popup map-popup">
+                                    <div class="popup-body">
+                                        <span class="close-icon"><i class="material-icons">close</i></span>
+                                        <div class="popup-header">
+                                            <h3>Permission Request for <b>ID {{ object.uav_uid }}</b></h3>
 
                                             </div>
                                             <div class="popup-content">
@@ -77,13 +78,13 @@
                                                                                 <span>{{ object.uav_uuid.operator.email }}</span>
                                                                             </p>
 
+                                                                    </div>
+                                                                </li>
+                                                                <br>
+                                                                <li>
+                                                                    <h4>Flight info</h4>
+                                                                    <div class="content-list">
 
-                                                                        </div>
-                                                                    </li>
-                                                                    <br>
-                                                                    <li>
-                                                                        <h4>Flight info</h4>
-                                                                        <div class="content-list">
 
                                                                             <p><b>Start Date:
                                                                             </b><span>{{ object.flight_start_date }}</span>
@@ -113,10 +114,12 @@
                                                                         <h4>Pilot info</h4>
                                                                         <div class="content-list">
                                                                             <p><b>Pilot Name: </b><span>
+
                                                                                 {{ object.pilot_name }}
                                                                             </span>
-                                                                            <p><b>Pilot Phone Number:
+                                                                        <p><b>Pilot Phone Number:
                                                                             </b><span>{{ object.pilot_phone_number }}</span>
+
                                                                             </p>
                                                                             <p><b>Pilot CV: </b><span><u><a
                                                                                     href="{{ object.pilot_cv_url }}"
@@ -127,13 +130,16 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
+
                                                         </div>
-                                                        <div class="col-xl-7 col-sm-12">
-                                                            <div class="map-content col-right">
-                                                                <div class="custom-tab">
-                                                                    <ul class="tab-list is-bg">
-                                                                        <li><a href="#location" class="current">Location
+                                                    </div>
+                                                    <div class="col-xl-7 col-sm-12">
+                                                        <div class="map-content col-right">
+                                                            <div class="custom-tab">
+                                                                <ul class="tab-list is-bg">
+                                                                    <li><a href="#location" class="current">Location
                                                                             Map</a></li>
+
                                                                         <li><a href="#flight">Flight Plan</a></li>
                                                                         <li><a href="#img-gallery">Images</a></li>
                                                                     </ul>
@@ -182,30 +188,32 @@
                                                                         {#                                                                                    alt="img"></figure>#}
                                                                         {#                                                                        </div>#}
                                                                     </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="popup-footer buttons is-end">
-                                                <div class="buttons is-end">
-                                                    <a href="{% url 'dashboard:approve-perm' pk=object.uav_uid action='approve' %}"
-                                                       class="btn btn-success is-bg">Approve</a> &nbsp;&nbsp;
-                                                    <a href="{% url 'dashboard:approve-perm' pk=object.uav_uid action='deny' %}"
-                                                       class="btn btn-danger is-border">Deny</a>
-                                                </div>
+                                        </div>
+                                        <div class="popup-footer buttons is-end">
+                                            <div class="buttons is-end">
+                                                <a href="{% url 'dashboard:approve-perm' pk=object.uav_uid action='approve' %}"
+                                                    class="btn btn-success is-bg">Approve</a> &nbsp;&nbsp;
+                                                <a href="{% url 'dashboard:approve-perm' pk=object.uav_uid action='deny' %}"
+                                                    class="btn btn-danger is-border">Deny</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                    </tr>
                     {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
+
     </main>
 
     <script type="text/javascript">
@@ -215,5 +223,6 @@
         {% endfor %}
     </script>
     <script src="{% static 'js/map.js' %}"></script>
+
 
 {% endblock body %}
