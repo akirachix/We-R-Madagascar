@@ -31,92 +31,92 @@
 
     <!-- stylesheet start -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
 <body class="home-pg">
 
-<header class="site-header">
-    <div class="top-header">
+    <header class="site-header">
+        <div class="top-header">
+            <div class="container">
+                <div class="wrap-container">
+                    <ul>
+                        <li><a href="/login">Login</a></li>
+                        <li class=form-group>
+                            <select class="form-control" name="lang" id="lang">
+                                <option value="Eng">Eng</option>
+                                <option value="Nep">Nep</option>
+                            </select>
+                            <i class="material-icons">arrow_drop_down</i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="wrap-container">
-                <ul>
-                    <li><a href="/login">Login</a></li>
-                    <li class=form-group>
-                        <select class="form-control" name="lang" id="lang">
-                            <option value="Eng">Eng</option>
-                            <option value="Nep">Nep</option>
-                        </select>
-                        <i class="material-icons">arrow_drop_down</i>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="wrap-container">
-            <div class="header-in">
-                <a href="home.html" class="logo">
-                    <img src="{% static 'img/logo-blue.png' %}"/>
-                </a>
-                <div class="menu-wrap">
-                    <div class="menu">
-                        <ul>
-                            <li>
-                                <a href="{% url 'home' %} class="active span-15">Home</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
-                            </li>
+                <div class="header-in">
+                    <a href="home.html" class="logo">
+                        <img src="{% static 'img/logo-blue.png' %}" />
+                    </a>
+                    <div class="menu-wrap">
+                        <div class="menu">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'home' %}" class="active span-15">Home</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
+                                </li>
 
-                        </ul>
+                            </ul>
+                        </div>
+                        <a href="{% url 'dashboard:guidelines' %}" class="common-button is-bg">UAV Guidelines</a>
                     </div>
-                    <a href="{% url 'dashboard:guidelines' %}" class="common-button is-bg">UAV Guidelines</a>
-                </div>
-                <div class="toggle-button">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<main class="banner-section">
-    <div class="container container-mod">
-        <div class="wrap-container">
-            <div class="row no-gutters">
-                <div class="col-lg-9 col-md-12 col-12">
-                    <div class="banner">
-                        <h1>Register drone here and stay protected.</h1>
-                        <h2>As an operator, manufacturer or remote pilot, you need to first register yourself.
-                            Registered users can add their compliant and apply to fly!.</h2>
+                    <div class="toggle-button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
-<footer class="site-footer home-footer">
-    <div class="container">
-        <div class="wrap-container">
-            <div class="footer-in">
-                <p class="footer-left">© 2020 Drone Registry Nepal. All rights reserved.</p>
+    </header>
+    <main class="banner-section">
+        <div class="container container-mod">
+            <div class="wrap-container">
+                <div class="row no-gutters">
+                    <div class="col-lg-9 col-md-12 col-12">
+                        <div class="banner">
+                            <h1>Register drone here and stay protected.</h1>
+                            <h2>As an operator, manufacturer or remote pilot, you need to first register yourself.
+                                Registered users can add their compliant and apply to fly!.</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
-<!-- Jquery Core Js -->
-<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-<script src="{% static 'js/map.js' %}"></script>
-<script src="{% static 'datatable/datatables.min.js' %}"></script>
-<script src="{% static 'js/custom-datatable.js' %}"></script>
-<script src="{% static 'js/drone.js' %}"></script>
+    </main>
+    <footer class="site-footer home-footer">
+        <div class="container">
+            <div class="wrap-container">
+                <div class="footer-in">
+                    <p class="footer-left">© 2020 Drone Registry Nepal. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Jquery Core Js -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'datatable/datatables.min.js' %}"></script>
+    <script src="{% static 'js/custom-datatable.js' %}"></script>
+    <script src="{% static 'js/drone.js' %}"></script>
 </body>
 
 </html>

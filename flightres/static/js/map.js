@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     var map = L.map('map').setView([lat, long], 15);
     // var map = L.map('map', {
