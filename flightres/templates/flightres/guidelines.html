@@ -45,8 +45,7 @@
             <div class="container">
                 <div class="wrap-container">
                     <ul>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">How to use</a></li>
+                        <li><a href="/login">Login</a></li>
                         <li class=form-group>
                             <select class="form-control" name="lang" id="lang">
                                 <option value="Eng">Eng</option>
@@ -61,7 +60,7 @@
         <div class="container">
             <div class="wrap-container">
                 <div class="header-in">
-                    <a href="{% url 'home' %}" class="logo">
+                    <a href="home.html" class="logo">
                         <img src="{% static 'img/logo-blue.png' %}" />
                     </a>
                     <div class="menu-wrap">
@@ -73,12 +72,10 @@
                                 <li>
                                     <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
                                 </li>
-                                <li>
-                                    <a href="{% url 'dashboard:guidelines' %}" class="span-15">UAV Guidelines</a>
-                                </li>
+
                             </ul>
                         </div>
-                        <button class="common-button is-bg">Drone Map</button>
+                        <a href="{% url 'dashboard:guidelines' %}" class="common-button is-bg">UAV Guidelines</a>
                     </div>
                     <div class="toggle-button">
                         <span></span>
