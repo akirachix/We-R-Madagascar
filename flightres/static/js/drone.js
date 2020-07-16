@@ -47,7 +47,7 @@
       $('.buttons .cancel-button, .close-icon').on('click', function (e) {
         e.preventDefault();
         $(this).closest('.popup').removeClass('open');
-        $('.body-container').removeClass('blur-bg');
+        // $('.body-container').removeClass('blur-bg');
       });
     }
     // closePopup();

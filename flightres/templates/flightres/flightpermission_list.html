@@ -61,7 +61,7 @@
                                                 <div class="drone-details">
                                                     <div class="row gx-md-3 gx-lg-3">
                                                         <div class="col-xl-5 col-sm-12">
-                                                               <div class="drone-content col-left">
+                                                            <div class="drone-content col-left">
                                                                 <ul>
                                                                     <li>
                                                                         <h4>Operators info</h4>
@@ -79,12 +79,12 @@
                                                                                 <span>{{ object.uav_uuid.operator.email }}</span>
                                                                             </p>
 
-                                                                    </div>
-                                                                </li>
-                                                                <br>
-                                                                <li>
-                                                                    <h4>Flight info</h4>
-                                                                    <div class="content-list">
+                                                                        </div>
+                                                                    </li>
+                                                                    <br>
+                                                                    <li>
+                                                                        <h4>Flight info</h4>
+                                                                        <div class="content-list">
 
 
                                                                             <p><b>Start Date:
@@ -118,7 +118,7 @@
 
                                                                                 {{ object.pilot_name }}
                                                                             </span>
-                                                                        <p><b>Pilot Phone Number:
+                                                                            <p><b>Pilot Phone Number:
                                                                             </b><span>{{ object.pilot_phone_number }}</span>
 
                                                                             </p>
@@ -177,14 +177,14 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="buttons is-end">
-                                                                    <button type=""
-                                                                            class="common-button is-border cancel-button">
-                                                                        Deny
-                                                                    </button>
-                                                                    <button type="submit" class="common-button is-bg">
-                                                                        Approve
-                                                                    </button>
+                                                                <div class="popup-footer buttons is-end">
+                                                                    <div class="buttons is-end">
+                                                                        <a href="{% url 'dashboard:approve-perm' pk=object.uav_uid action='approve' %}"
+                                                                           class="btn btn-success is-bg">Approve</a>
+                                                                        &nbsp;&nbsp;
+                                                                        <a href="{% url 'dashboard:approve-perm' pk=object.uav_uid action='deny' %}"
+                                                                           class="btn btn-danger is-border">Deny</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
