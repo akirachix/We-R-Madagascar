@@ -547,15 +547,20 @@
                             }
                             -webkit-animation: fadeIn 1s linear;
                             animation: fadeIn 1s linear;
+                            height: calc(100% - 10%);
+                            @media #{$breakpoint-desktop}{
+                                height: calc(100% - 18%);
+                            }
                             #map{
                                 @include radius(4px);
-                                min-height: 320px;
-                                @media #{$breakpoint-lg-desktop}{
+                                // min-height: 320px;
+                                height: 100%;
+                                /* @media #{$breakpoint-lg-desktop}{
                                     min-height: 300px;
                                 }
                                 @media #{$breakpoint-desktop}{
                                     min-height: 260px;
-                                }
+                                } */
 
                             }
                             @media #{$breakpoint-desktop}{
