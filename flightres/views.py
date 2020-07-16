@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, reverse
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import FlightPermission, Report
 
@@ -64,3 +64,9 @@ def submitReply(request, pk):
 class ComplainListView(LoginRequiredMixin, ListView):
     template_name = 'flightres/complaint_management.html'
     model = Report
+
+class AboutPageView(TemplateView):
+    template_name = 'flightres/about.html'
+
+class GuidelinesPageView(TemplateView):
+    template_name = 'flightres/guidelines.html'

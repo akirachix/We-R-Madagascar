@@ -48,7 +48,7 @@ from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homeView),
+    path('', homeView, name='home'),
     path('login/', LoginView.as_view()),
     path('logout/', LogoutView.as_view()),
     path('api/v1/', registryviews.APIView.as_view()),

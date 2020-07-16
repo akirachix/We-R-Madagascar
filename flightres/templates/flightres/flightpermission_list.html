@@ -2,14 +2,16 @@
 {% load static %}
 
 {% block body %}
-<main class="admin-main">
-    <div class="main-card">
-        <div class="card-header">
-            <h1>PERMISSIONS MANAGEMENT / manage permissions</h1>
-        </div>
-        <div class="card-body">
-            <table id="admin-datatable" class="admin-datatable">
-                <thead>
+
+    <main class="admin-main">
+        <div class="main-card">
+            <div class="card-header">
+                <h1>FLIGHT PERMISSION / MANAGE FLIGHT PERMISSION</h1>
+            </div>
+            <div class="card-body">
+                <table id="admin-datatable" class="admin-datatable">
+                    <thead>
+
                     <tr>
                         <th class="serial-th">SN</th>
                         <th>Start Date</th>
@@ -53,27 +55,28 @@
                                         <div class="popup-header">
                                             <h3>Permission Request for <b>ID {{ object.uav_uid }}</b></h3>
 
-                                        </div>
-                                        <div class="popup-content">
-                                            <div class="drone-details">
-                                                <div class="row gx-md-3 gx-lg-3">
-                                                    <div class="col-xl-5 col-sm-12">
-                                                        <div class="drone-content col-left">
-                                                            <ul>
-                                                                <li>
-                                                                    <h4>Operators info</h4>
-                                                                    <div class="content-list">
-                                                                        <p><b>Company Name:
-                                                                            </b></p>
-                                                                        <span>{{ object.uav_uuid.operator }}</span>
-
-                                                                        <p><b>Company Phone Number:
-                                                                            </b></p>
-                                                                        <span>{{ object.uav_uuid.operator.phone_number }}</span>
-
-                                                                        <p><b>Company Email:
-                                                                            </b></p>
-                                                                        <span>{{ object.uav_uuid.operator.email }}</span>
+                                            </div>
+                                            <div class="popup-content">
+                                                <div class="drone-details">
+                                                    <div class="row gx-md-3 gx-lg-3">
+                                                        <div class="col-xl-5 col-sm-12">
+                                                            <div class="drone-content col-left">
+                                                                <ul>
+                                                                    <li>
+                                                                        <h4>Operators info</h4>
+                                                                        <div class="content-list">
+                                                                            <p>
+                                                                                <b>Company Name:</b>
+                                                                                <span>{{ object.uav_uuid.operator }}</span>
+                                                                            </p>
+                                                                            <p>
+                                                                                <b>Phone Number:</b>
+                                                                                <span>{{ object.uav_uuid.operator.phone_number }}</span>
+                                                                            </p>
+                                                                            <p>
+                                                                                <b>Email:</b>
+                                                                                <span>{{ object.uav_uuid.operator.email }}</span>
+                                                                            </p>
 
                                                                     </div>
                                                                 </li>
@@ -82,47 +85,52 @@
                                                                     <h4>Flight info</h4>
                                                                     <div class="content-list">
 
-                                                                        <p><b>Flight Start Date:
-                                                                            </b><span>{{ object.flight_start_date }}</span>
-                                                                        </p>
-                                                                        <p><b>Flight End Date:
-                                                                            </b><span>{{ object.flight_end_date }}</span>
-                                                                        </p>
-                                                                        <p><b>Flight Time:
-                                                                            </b><span>{{ object.flight_time }}</span>
-                                                                        </p>
-                                                                        <p><b>Flight Purpose:
-                                                                            </b><span>{{ object.flight_purpose }}</span>
-                                                                        </p>
-                                                                        <p><b>Aircraft Name:
-                                                                            </b><span>{{ object.uav_uuid.popular_name }}</span>
-                                                                        </p>
 
-                                                                        <p><b>Drone Insurance: </b><span><u><a
-                                                                                        href='{{ object.flight_insurance_url }}'
-                                                                                        target="_blank">Link to
+                                                                            <p><b>Start Date:
+                                                                            </b><span>{{ object.flight_start_date }}</span>
+                                                                            </p>
+                                                                            <p><b>End Date:
+                                                                            </b><span>{{ object.flight_end_date }}</span>
+                                                                            </p>
+                                                                            <p><b> Time:
+                                                                            </b><span>{{ object.flight_time }}</span>
+                                                                            </p>
+                                                                            <p><b>Purpose:
+                                                                            </b><span>{{ object.flight_purpose }}</span>
+                                                                            </p>
+                                                                            <p><b>Aircraft Name:
+                                                                            </b><span>{{ object.uav_uuid.popular_name }}</span>
+                                                                            </p>
+
+                                                                            <p><b>Drone Insurance: </b><span><u><a
+                                                                                    href='{{ object.flight_insurance_url }}'
+                                                                                    target="_blank">Link to
                                                                                         document</a></u></span>
-                                                                        </p>
-                                                                    </div>
-                                                                </li>
-                                                                <br>
-                                                                <li>
-                                                                    <h4>Pilot info</h4>
-                                                                    <div class="content-list">
-                                                                        <p><b>Pilot Name: </b><span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </li>
+                                                                    <br>
+                                                                    <li>
+                                                                        <h4>Pilot info</h4>
+                                                                        <div class="content-list">
+                                                                            <p><b>Pilot Name: </b><span>
+
                                                                                 {{ object.pilot_name }}
                                                                             </span>
                                                                         <p><b>Pilot Phone Number:
                                                                             </b><span>{{ object.pilot_phone_number }}</span>
-                                                                        </p>
-                                                                        <p><b>Pilot CV: </b><span><u><a
-                                                                                        href="{{ object.pilot_cv_url }}"
-                                                                                        target="_blank">Link to
+
+                                                                            </p>
+                                                                            <p><b>Pilot CV: </b><span><u><a
+                                                                                    href="{{ object.pilot_cv_url }}"
+                                                                                    target="_blank">Link to
                                                                                         CV</a></u></span>
-                                                                        </p>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
+                                                                            </p>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-7 col-sm-12">
@@ -131,53 +139,56 @@
                                                                 <ul class="tab-list is-bg">
                                                                     <li><a href="#location" class="current">Location
                                                                             Map</a></li>
-                                                                    <li><a href="#flight">Flight Plan</a></li>
-                                                                    <li><a href="#img-gallery">Images</a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="tab-content-holder" id="location">
-                                                                <div id="map" class="map"></div>
-                                                            </div>
-                                                            <div class="tab-content-holder" style="" id="flight">
-                                                                <p><span><u><a href="{{ object.flight_plan_url }}"
-                                                                                target="_blank">Link to flight
+
+                                                                        <li><a href="#flight">Flight Plan</a></li>
+                                                                        <li><a href="#img-gallery">Images</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="tab-content-holder" id="location">
+                                                                    <div id="map" class="map"></div>
+                                                                </div>
+                                                                <div class="tab-content-holder" style="" id="flight">
+                                                                    <p><span><u><a href="{{ object.flight_plan_url }}"
+                                                                                   target="_blank">Link to flight
                                                                                 plan</a></u></span>
-                                                                </p>
-                                                                <div id="map" class="map"></div>
-                                                            </div>
-                                                            <div class="tab-content-holder" id="img-gallery">
-                                                                <div class="row g-2">
-                                                                    <span>No Images Yet!</span>
-                                                                    {#                                                                        <div class="col-md-4">#}
-                                                                    {#                                                                            <figure><img#}
-                                                                    {#                                                                                    src="{% static 'img/img-gallery1.png' %}"#}
-                                                                    {#                                                                                    alt="img"></figure>#}
-                                                                    {#                                                                        </div>#}
-                                                                    {#                                                                        <div class="col-md-4">#}
-                                                                    {#                                                                            <figure><img#}
-                                                                    {#                                                                                    src="{% static 'img/img-gallery2.png' %}"#}
-                                                                    {#                                                                                    alt="img"></figure>#}
-                                                                    {#                                                                        </div>#}
-                                                                    {#                                                                        <div class="col-md-4">#}
-                                                                    {#                                                                            <figure><img#}
-                                                                    {#                                                                                    src="{% static 'img/img-gallery3.png' %}"#}
-                                                                    {#                                                                                    alt="img"></figure>#}
-                                                                    {#                                                                        </div>#}
-                                                                    {#                                                                        <div class="col-md-4">#}
-                                                                    {#                                                                            <figure><img#}
-                                                                    {#                                                                                    src="{% static 'img/img-gallery4.png' %}"#}
-                                                                    {#                                                                                    alt="img"></figure>#}
-                                                                    {#                                                                        </div>#}
-                                                                    {#                                                                        <div class="col-md-4">#}
-                                                                    {#                                                                            <figure><img#}
-                                                                    {#                                                                                    src="{% static 'img/img-gallery5.png' %}"#}
-                                                                    {#                                                                                    alt="img"></figure>#}
-                                                                    {#                                                                        </div>#}
-                                                                    {#                                                                        <div class="col-md-4">#}
-                                                                    {#                                                                            <figure><img#}
-                                                                    {#                                                                                    src="{% static 'img/img-gallery6.png' %}"#}
-                                                                    {#                                                                                    alt="img"></figure>#}
-                                                                    {#                                                                        </div>#}
+                                                                    </p>
+                                                                    <div id="map" class="map"></div>
+                                                                </div>
+                                                                <div class="tab-content-holder" id="img-gallery">
+                                                                    <div class="row g-2">
+                                                                        <span>No Images Yet!</span>
+                                                                        {#                                                                        <div class="col-md-4">#}
+                                                                        {#                                                                            <figure><img#}
+                                                                        {#                                                                                    src="{% static 'img/img-gallery1.png' %}"#}
+                                                                        {#                                                                                    alt="img"></figure>#}
+                                                                        {#                                                                        </div>#}
+                                                                        {#                                                                        <div class="col-md-4">#}
+                                                                        {#                                                                            <figure><img#}
+                                                                        {#                                                                                    src="{% static 'img/img-gallery2.png' %}"#}
+                                                                        {#                                                                                    alt="img"></figure>#}
+                                                                        {#                                                                        </div>#}
+                                                                        {#                                                                        <div class="col-md-4">#}
+                                                                        {#                                                                            <figure><img#}
+                                                                        {#                                                                                    src="{% static 'img/img-gallery3.png' %}"#}
+                                                                        {#                                                                                    alt="img"></figure>#}
+                                                                        {#                                                                        </div>#}
+                                                                        {#                                                                        <div class="col-md-4">#}
+                                                                        {#                                                                            <figure><img#}
+                                                                        {#                                                                                    src="{% static 'img/img-gallery4.png' %}"#}
+                                                                        {#                                                                                    alt="img"></figure>#}
+                                                                        {#                                                                        </div>#}
+                                                                        {#                                                                        <div class="col-md-4">#}
+                                                                        {#                                                                            <figure><img#}
+                                                                        {#                                                                                    src="{% static 'img/img-gallery5.png' %}"#}
+                                                                        {#                                                                                    alt="img"></figure>#}
+                                                                        {#                                                                        </div>#}
+                                                                        {#                                                                        <div class="col-md-4">#}
+                                                                        {#                                                                            <figure><img#}
+                                                                        {#                                                                                    src="{% static 'img/img-gallery6.png' %}"#}
+                                                                        {#                                                                                    alt="img"></figure>#}
+                                                                        {#                                                                        </div>#}
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -202,15 +213,16 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</main>
 
-<script type="text/javascript">
-    {% for object in object_list %}
-        let lat = '{{ object.latitude|safe }}';
-        let long = '{{ object.longitude|safe }}';
-    {% endfor %}
-</script>
-<script src="{% static 'js/map.js' %}"></script>
+    </main>
+
+    <script type="text/javascript">
+        {% for object in object_list %}
+            let lat = '{{ object.latitude|safe }}';
+            let long = '{{ object.longitude|safe }}';
+        {% endfor %}
+    </script>
+    <script src="{% static 'js/map.js' %}"></script>
+
 
 {% endblock body %}

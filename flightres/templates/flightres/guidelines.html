@@ -1,0 +1,496 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Drone Registry Nepal">
+    <meta property="og:image" content="preview.html">
+    <meta property="og:site_name" content="Drone Registry Nepal">
+    <meta property="og:title" content="Drone Registry Nepal">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://naxa.com.np">
+
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Drone Registry Nepal">
+    <meta name="twitter:creator" content="@Drone Registry Nepal">
+    <meta name="twitter:title" content="Drone Registry Nepal">
+    <meta name="twitter:description" content="Drone Registry Nepal">
+    <meta name="twitter:image" content="preview.html">
+
+    <!--title-->
+    <title>Drone Registry Nepal</title>
+
+    <!-- faveicon start   -->
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
+
+    <!-- stylesheet start -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-grid.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="home-pg">
+
+    <header class="site-header">
+        <div class="top-header">
+            <div class="container">
+                <div class="wrap-container">
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">How to use</a></li>
+                        <li class=form-group>
+                            <select class="form-control" name="lang" id="lang">
+                                <option value="Eng">Eng</option>
+                                <option value="Nep">Nep</option>
+                            </select>
+                            <i class="material-icons">arrow_drop_down</i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="wrap-container">
+                <div class="header-in">
+                    <a href="{% url 'home' %}" class="logo">
+                        <img src="{% static 'img/logo-blue.png' %}" />
+                    </a>
+                    <div class="menu-wrap">
+                        <div class="menu">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'home' %}" class="active span-15">Home</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'dashboard:guidelines' %}" class="span-15">UAV Guidelines</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="common-button is-bg">Drone Map</button>
+                    </div>
+                    <div class="toggle-button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="guidelines-main">
+        <div class="container">
+            <div class="wrap-container">
+                <h2>Anyone applying for drone permissions can get their drone permit from chief district office of the
+                    proposed project location, if they are flying a drone less than 2 km.</h2>
+                <div class="guidelines-row">
+                    <h4>Government of Nepal has different concern for drone operation.</h4>
+                    <div class="row no-gutters gx-2 gy-5">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="col-wrap">
+                                <div class="logo-img logo-fixed"><img src="{% static 'img/CAAN_LOGO.png' %}" alt="CANN">
+                                </div>
+                                <div class="info">
+                                    <h6>Civil Aviation Authority of Nepal (CAAN )</h6>
+                                    <p class="info-para">CAAN is mainly concerned about collision with other aircrafts
+                                        i.e. safety. They believe that drone flying poses security threats, weakens air
+                                        safety and encroaches personal privacy.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="col-wrap">
+                                <div class="logo-img"><img src="{% static 'img/Nepal-logo.jpg' %}" alt="GON logo"></div>
+                                <div class="info">
+                                    <h6>Ministry of Information and Communication</h6>
+                                    <p class="info-para">They are concerned about the frequency of the remote control of
+                                        the device used. This frequency might create interference with devices being
+                                        used by security personals and communication.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="col-wrap">
+                                <div class="logo-img"><img src="{% static 'img/Nepal-logo.jpg' %}" alt="GON logo"></div>
+                                <div class="info">
+                                    <h6>Home Ministry</h6>
+                                    <p class="info-para">Drones in its original terms means the vehicles which are being
+                                        used by military to strike weapons in different areas. As such, the home
+                                        ministry which looks after country’s security is worried if people use drones
+                                        for illegal activities.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="col-wrap">
+                                <div class="logo-img"><img src="{% static 'img/Nepal-logo.jpg' %}" alt="GON logo"></div>
+                                <div class="info">
+                                    <h6>Relevant Line Ministries</h6>
+                                    <p class="info-para">Drones in its original terms means the vehicles which are being
+                                        used by military to strike weapons in different areas. As such, the home
+                                        ministry which looks after country’s security is worried if people use drones
+                                        for illegal activities.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quote-section">
+                        <p>
+                            "Beside above agencies, line agencies needs also to be contacted for drone permissions eg.
+                            National parks department for flying in protected areas, ministry of tourism for movie shoot
+                            in mountains.
+                            <br><br />
+                            As per the recent regulations of Nepal, the permissions are granted to the local government.
+                            So any agencies can give the permissions according to the flight plan and spot."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main class="guidelines-rules">
+        <div class="container">
+            <div class="wrap-container">
+                <h3 class="section-title">Drone Regulations in Nepal</h3>
+                <div class="rules-row">
+                    <div class="row gx-2 gy-4">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="rules-wrap">
+                                <h6 class="title">2015</h6>
+                                <span>CANN</span>
+                                <a href="#/" class="link-wrap">
+                                    <i class="material-icons">get_app</i>
+                                    <span class="link">Drone Regulation Nepal after Earthquake.</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="rules-wrap">
+                                <h6 class="title">2015</h6>
+                                <span>MoHA</span>
+                                <a href="#/" class="link-wrap">
+                                    <i class="material-icons">get_app</i>
+                                    <span class="link">Drone Regulation Nepal after Earthquake.</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="rules-wrap">
+                                <h6 class="title">2019</h6>
+                                <span>CANN</span>
+                                <a href="#/" class="link-wrap">
+                                    <i class="material-icons">get_app</i>
+                                    <span class="link">Drone Regulation Nepal after Earthquake.</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="rules-wrap">
+                                <h6 class="title">2019</h6>
+                                <span>MoHA</span>
+                                <a href="#/" class="link-wrap">
+                                    <i class="material-icons">get_app</i>
+                                    <span class="link">Drone Regulation Nepal after Earthquake.</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main class="guidelines-permission">
+        <div class="container">
+            <div class="wrap-container">
+                <h3 class="section-title">As per latest 2015, granting permission depends on the category.</h3>
+                <div class="permission-row">
+                    <div class="row gy-4">
+                        <div class="col-lg-8 col md-8 col-sm-12">
+                            <ul class="nav-wrap">
+                                <li class="nav-item active"><a href="#categoryA">Category A</a><span
+                                        class="bottom-border"></span></li>
+                                <li class="nav-item"><a href="#categoryB">Category B</a><span
+                                        class="bottom-border"></span></li>
+                                <li class="nav-item"><a href="#categoryC">Category C</a><span
+                                        class="bottom-border"></span></li>
+                                <li class="nav-item"><a href="#categoryD">Category D</a><span
+                                        class="bottom-border"></span></li>
+                            </ul>
+                            <div class="category-content">
+                                <div class="category-table" id="categoryA">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th>Weight</th>
+                                                <td>Up to 250kg</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Level of Risk</th>
+                                                <td>Very low risk operations</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Permission Process</th>
+                                                <td>Process 1001</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Drone Example</th>
+                                                <td>Phantom</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="category-table" id="categoryB">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th>Weight</th>
+                                                <td>Up to 150kg</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Level of Risk</th>
+                                                <td>low risk operations</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Permission Process</th>
+                                                <td>Process 1101</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Drone Example</th>
+                                                <td>Phantom</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="category-table" id="categoryC">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th>Weight</th>
+                                                <td>Up to 350kg</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Level of Risk</th>
+                                                <td>moderate risk operations</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Permission Process</th>
+                                                <td>Process 1201</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Drone Example</th>
+                                                <td>Phantom</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="category-table" id="categoryD">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th>Weight</th>
+                                                <td>Up to 120kg</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Level of Risk</th>
+                                                <td>Very low risk operations</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Permission Process</th>
+                                                <td>Process 1121</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Drone Example</th>
+                                                <td>Phantom</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 col md-4 col-sm-12">
+                            <ul class="nav-wrap nav-steps">
+                                <li class="nav-item"><a href="#/">STEPS</a></li>
+                            </ul>
+                            <div class="category-content">
+                                <ul class="category-lists">
+                                    <li>
+                                        <div class="icon-wrap"><span class="icon-span icon-blue"><i
+                                                    class="material-icons">account_box</i></span></div>
+                                        <div class="step-process">
+                                            <span>1. Submit your documents</span>
+                                            <a
+                                                href="#/">https://caanepal.gov.np/storage/app/media/uploaded-files/RPA-Application-1.pdf</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="icon-wrap"><span class="icon-span icon-light-blue"><i
+                                                    class="material-icons">assignment</i></span></div>
+                                        <div class="step-process">
+                                            <span>2. Fill up a form and submit to our office</span>
+                                            <a
+                                                href="#/">https://caanepal.gov.np/storage/app/media/uploaded-files/RPA-Application-1.pdf</a>
+
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="icon-wrap"><span class="icon-span icon-blue"><i
+                                                    class="material-icons">assignment</i></span></div>
+                                        <div class="step-process">
+                                            <span>3. Step 3</span>
+                                            <a
+                                                href="#/">https://caanepal.gov.np/storage/app/media/uploaded-files/RPA-Application-1.pdf</a>
+
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main class="guideline-condition">
+        <div class="container">
+            <div class="wrap-container">
+                <h3 class="section-title">Special conditions for operating Drone and restricted fly zone in Nepal</h3>
+                <ul class="guideline-list-wrap">
+                    <li class="list-item">
+                        <i class="material-icons">check_circle</i>
+                        <span>No need to get CAAN for permission if the drone is under 2 kg (4.4 lb) and you are using
+                            it under 200m (656 feet) on your
+                            personal properties like inside your house, land, and garden.</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="material-icons">check_circle</i>
+                        <span> Drone must be flown within the visual line of sight (normally within 500 m horizontally
+                            and 400 feet vertically) of its remote pilot (the person in charge of operating drone).
+                            Operations beyond these distances must be
+                            approved by the CAAN (the basic premise being for the operator to prove that he/she can fly
+                            it safely).</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="material-icons">check_circle</i>
+                        <span>Unmanned aircraft shall be permitted to be operated in day VMC conditions only.</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="material-icons">check_circle</i>
+                        <span>CAAN permission is required for all flights that are being conducted for aerial work
+                            subject to the approval of
+                            concerned Authority having jurisdiction over such aerial work.</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="material-icons">check_circle</i>
+                        <span>If the operations are to be conducted in a Restricted or Prohibited area, prior approval
+                            from the concerned Authority is required before applying for CAAN permission.</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="material-icons">check_circle</i>
+                        <span>Airport areas including take-off and approach paths shall be free of all UAV activity at
+                            all times regardless of altitude.</span>
+                    </li>
+                    <li class="list-item">
+                        <i class="material-icons">check_circle</i>
+                        <span>To use drone in Nepal, you cannot get permission for longer period of time like for a year
+                            but can get for short period of time.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="site-footer home-footer">
+        <div class="container">
+            <div class="wrap-container">
+                <div class="footer-in">
+                    <p class="footer-left">© 2020 Drone Registry Nepal. All rights reserved.</p>
+                    <p class="footer-right"><span>News and Notice</span><span>Press Release</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="guideline-popup">
+        <a href="#/" class="popup-info">
+            <span class="img-span">
+                <img src="{% static 'img/tourist.svg' %}" alt="Tourist_guideline">
+            </span>
+        </a>
+        <div class="guideline-popup-content">
+            <a href="#/" class="icon-close"><i class="material-icons">close</i></a>
+            <div class="content-wrap">
+                <div class="img-wrap">
+                    <img src="{% static 'img/tourist.svg' %}" alt="tourist-svg">
+                </div>
+                <div class="content-aside">
+                    <h4 class=title>Are you foreigner and planning to fly drone in Nepal?</h4>
+                    <div class="row gy-4 row-container">
+                        <div class="col-lg-5 col-md-12 column">
+                            <div class="col-wrap">
+                                <span class="title-case">Case I: Shall obtain prior permission from following
+                                    agencies:</span>
+                                <ul class="case-wrap">
+                                    <li class="case-item"><i class="material-icons">check_circle</i><span>Department of
+                                            Tourism</span></li>
+                                    <li class="case-item"><i class="material-icons">check_circle</i><span>Ministry of
+                                            Home Affairs</span></li>
+                                    <li class="case-item"><i class="material-icons">check_circle</i><span>Civil Avation
+                                            Authority of Nepal(not necessary for UAV less than 2kg and below 200ft from
+                                            ground level)</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-12 column">
+                            <div class="col-wrap">
+                                <span class="title-case">Case II: Shall obtain prior permission from following
+                                    agencies:</span>
+                                <ul class="case-wrap">
+                                    <li class="case-item"><i class="material-icons">check_circle</i><span>Department of
+                                            Tourism</span></li>
+                                    <li class="case-item"><i class="material-icons">check_circle</i><span>Ministry of
+                                            Home Affairs</span></li>
+                                    <li class="case-item"><i class="material-icons">check_circle</i><span>Civil Avation
+                                            Authority of Nepal(not necessary for UAV less than 2kg and below 200ft from
+                                            ground level)</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery Core Js -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'datatable/datatables.min.js' %}"></script>
+    <script src="{% static 'custom-datatable.js' %}"></script>
+    <script src="{% static 'js/drone.js' %}"></script>
+
+</body>
+
+</html>

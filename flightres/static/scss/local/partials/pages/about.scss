@@ -1,0 +1,273 @@
+.about-section{
+    margin: 120px 0 100px;
+    @media #{$breakpoint-desktop}{
+        margin: 100px 0 80px;
+    }
+    @media #{$breakpoint-md}{
+       margin: 80px 0 30px;
+    }
+    .wrap-container{
+        .about-row{
+            &:not(:last-child){
+                margin-bottom: 60px;
+                @media #{$breakpoint-desktop}{
+                    margin-bottom: 40px;
+                }
+            }
+        }
+    }
+    .col-about-wrap{
+        height: 100%;
+       
+    }
+    .drone-reg-info{
+       h1{
+        font-size: 30px;
+        line-height: 42px;
+        margin-bottom: 27px;
+        font-weight: 600;
+        color: $text-color;
+        @media #{$breakpoint-lg-desktop}{
+            font-size: 26px;
+            line-height:38px
+        }
+        @media #{$breakpoint-desktop}{
+            font-size: 22px;
+            line-height:30px
+        }
+        @media #{$breakpoint-sm}{
+            text-align: center;
+        }
+       }
+       p{
+        font-size: 14px;
+        line-height: 24px;
+        @media #{$breakpoint-lg-desktop}{
+            font-size:12px;
+            line-height:22px;
+        }
+        @media #{$breakpoint-desktop}{
+            font-size: 10px;
+            line-height: 20px;
+        }
+        @media #{$breakpoint-md}{
+            text-align: justify;
+        }
+         &.para-bold{
+            max-width: 535px;
+            font-weight: 600;
+            color: $text-color;
+        } 
+        &.para-light{
+            font-weight: 400;
+            color: $heading-color;
+            @media #{$breakpoint-md}{
+                margin-bottom: 30px;
+            }
+        }
+       }
+    }
+    .drone-reg-bg{
+        background-image: url('./.././img/clouds_blue.svg'), url('./.././img/boy_flying_drone.svg'), url("./.././img/Droneldpi.svg");
+        background-size: contain, 72% 74%, 18% 24%;
+        background-repeat: no-repeat, no-repeat, no-repeat;
+        background-position: center, bottom right, 18% 0;
+        height: 100%;
+        @media #{$breakpoint-lg-desktop}{
+            background-size: contain, 74% 67%, 17% 22%;
+        }
+        @media #{$breakpoint-md}{
+            margin-top: 30px;
+            height: 260px;
+        }
+    
+        @media #{$breakpoint-xs}{
+            background-position: center, bottom right, 8% 0;
+            background-size: contain, 74% 67%, 24% 19%;
+        }
+        @media #{$breakpoint-xxs}{
+            background-size: 0, 74% 67%, 24% 19%;
+        }
+    }
+}
+
+.drone-objectives{
+    margin-bottom: 100px;
+    @media #{$breakpoint-desktop}{
+        margin-bottom: 80px;
+    }
+    h3{
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 40px;
+        color: $heading-color;
+        margin-bottom: 25px;
+        @media #{$breakpoint-lg-desktop}{
+            font-size: 22px;
+            line-height: 38px;
+            margin-bottom: 20px;
+        }
+        @media #{$breakpoint-desktop}{
+            font-size: 18px;
+            line-height: 34px;
+            margin-bottom: 18px;
+        }
+        @media #{$breakpoint-sm}{
+            text-align: center;
+        }
+    }
+    ul.objectives-list{
+        li{
+            @include display-flex(flex);
+            @include align-items-start;
+            &:not(:last-child){
+                margin-bottom: 15px;
+                @media #{$breakpoint-desktop}{
+                    margin-bottom: 10px;
+                }
+            }
+            span{
+                display: block;
+                &:not(:last-child){
+                    margin-right: 15px;
+                    @media #{$breakpoint-desktop}{
+                        margin-right: 10px;
+                    }
+                }
+                &.bullets{
+                    i{
+                        font-size: 21px;
+                        line-height: 24px;
+                        font-weight: 400;
+                        color: $secondary-color;
+                        @media #{$breakpoint-lg-desktop}{
+                            font-size:18px;
+                            line-height: 20px;
+                        }
+                        @media #{$breakpoint-desktop}{
+                            font-size: 15px;
+                            line-height:18px;
+                        }
+                    }
+                }
+                &.list-para{
+                    font-size: 14px;
+                    line-height: 24px;
+                    font-weight: 400;
+                    color: $heading-color;
+                    @media #{$breakpoint-lg-desktop}{
+                        font-size: 12px;
+                        line-height:22px;
+                    }
+                    @media #{$breakpoint-desktop}{
+                        font-size: 10px;
+                        line-height: 18px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.about-logo{
+    margin-bottom: 150px;
+    @media #{$breakpoint-lg-desktop}{
+        margin-bottom: 130px;
+    }
+    @media #{$breakpoint-desktop}{
+        margin-bottom: 100px;
+    }
+    .row-logo{
+        .col-logo{
+            &:first-child{
+                img{
+                    max-width: 100px;
+                    @media #{$breakpoint-lg-desktop}{
+                        max-width: 80px;
+                    }
+                    @media #{$breakpoint-desktop}{
+                        max-width: 60px;
+                    }
+                }
+            }
+            &:nth-child(2){
+                img{
+                    max-width: 110px;
+                    @media #{$breakpoint-lg-desktop}{
+                        max-width: 90px;
+                    }
+                    @media #{$breakpoint-desktop}{
+                        max-width: 70px;
+                    }
+                }
+            }
+            &:last-child{
+                img{
+                    &:first-child{
+                        max-width: 250px;
+                        margin-right: 20px;
+                        @media #{$breakpoint-lg-desktop}{
+                            max-width: 230px;
+                            margin-right: 15px;
+                        }
+                        @media #{$breakpoint-desktop}{
+                            max-width: 180px;
+                            margin-right: 10px;
+                        }
+                    }
+                    &:last-child{
+                        max-width: 150px;
+                        @media #{$breakpoint-lg-desktop}{
+                            max-width: 130px;
+                        }
+                        @media #{$breakpoint-desktop}{
+                            max-width: 100px;
+                        }
+                        @media #{$breakpoint-xs}{
+                            margin-top: 30px;
+                        }
+                       
+                    }
+                }
+            }
+        }
+    }
+    .logo-lists{
+        @media #{$breakpoint-md}{
+            margin-bottom: 40px;
+            @include display-flex(flex);
+            @include align-items-center;
+            @include justify-content-center;
+            @include align-items-center;
+            @include flex-direction-column(column);
+        }
+        span.title{
+            font-size: 14px;
+            line-height: 24px;
+            font-weight: 400;
+            color: $body-color;
+            display: block;
+            margin-bottom: 20px;
+            @media #{$breakpoint-lg-desktop}{
+                font-size: 12px;
+                line-height: 22px;
+            }
+            @media #{$breakpoint-desktop}{
+                font-size: 10px;
+                line-height: 20px;
+                margin-bottom:15px;
+            }
+            @media #{$breakpoint-md}{
+                margin-bottom: 10px;
+            }
+        }
+        .image-logo{
+            @include display-flex(flex);
+            @include align-items-start;
+            @media #{$breakpoint-xs}{
+                @include flex-direction-column(column);
+                @include align-items-center;
+            }
+        }
+    }
+}
