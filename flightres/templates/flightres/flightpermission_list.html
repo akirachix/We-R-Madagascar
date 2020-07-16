@@ -61,32 +61,72 @@
                                                 <div class="drone-details">
                                                     <div class="row gx-md-3 gx-lg-3">
                                                         <div class="col-xl-5 col-sm-12">
-                                                            <div class="drone-content col-left">
+                                                               <div class="drone-content col-left">
                                                                 <ul>
                                                                     <li>
                                                                         <h4>Operators info</h4>
                                                                         <div class="content-list">
-                                                                            <p><b>Name</b><span>Ram Thapa</span></p>
-                                                                            <p><b>License ID</b><span>ID 1234</span></p>
-                                                                            <p><b>Operator Type</b><span>Omega</span>
+                                                                            <p>
+                                                                                <b>Company Name:</b>
+                                                                                <span>{{ object.uav_uuid.operator }}</span>
+                                                                            </p>
+                                                                            <p>
+                                                                                <b>Phone Number:</b>
+                                                                                <span>{{ object.uav_uuid.operator.phone_number }}</span>
+                                                                            </p>
+                                                                            <p>
+                                                                                <b>Email:</b>
+                                                                                <span>{{ object.uav_uuid.operator.email }}</span>
+                                                                            </p>
+
+                                                                    </div>
+                                                                </li>
+                                                                <br>
+                                                                <li>
+                                                                    <h4>Flight info</h4>
+                                                                    <div class="content-list">
+
+
+                                                                            <p><b>Start Date:
+                                                                            </b><span>{{ object.flight_start_date }}</span>
+                                                                            </p>
+                                                                            <p><b>End Date:
+                                                                            </b><span>{{ object.flight_end_date }}</span>
+                                                                            </p>
+                                                                            <p><b> Time:
+                                                                            </b><span>{{ object.flight_time }}</span>
+                                                                            </p>
+                                                                            <p><b>Purpose:
+                                                                            </b><span>{{ object.flight_purpose }}</span>
+                                                                            </p>
+                                                                            <p><b>Aircraft Name:
+                                                                            </b><span>{{ object.uav_uuid.popular_name }}</span>
+                                                                            </p>
+
+                                                                            <p><b>Drone Insurance: </b><span><u><a
+                                                                                    href='{{ object.flight_insurance_url }}'
+                                                                                    target="_blank">Link to
+                                                                                        document</a></u></span>
                                                                             </p>
                                                                         </div>
                                                                     </li>
-                                                                    <li>
-                                                                        <h4>Flight info</h4>
-                                                                        <div class="content-list">
-                                                                            <p><b>Name</b><span>Ram Thapa</span></p>
-                                                                            <p><b>License ID</b><span>ID 1234</span></p>
-                                                                            <p><b>Operator Type</b><span>Omega</span>
-                                                                            </p>
-                                                                        </div>
-                                                                    </li>
+                                                                    <br>
                                                                     <li>
                                                                         <h4>Pilot info</h4>
                                                                         <div class="content-list">
-                                                                            <p><b>Drone type</b><span>Phantom</span></p>
-                                                                            <p><b>Drone License
-                                                                                ID</b><span>ID 1234</span></p>
+                                                                            <p><b>Pilot Name: </b><span>
+
+                                                                                {{ object.pilot_name }}
+                                                                            </span>
+                                                                        <p><b>Pilot Phone Number:
+                                                                            </b><span>{{ object.pilot_phone_number }}</span>
+
+                                                                            </p>
+                                                                            <p><b>Pilot CV: </b><span><u><a
+                                                                                    href="{{ object.pilot_cv_url }}"
+                                                                                    target="_blank">Link to
+                                                                                        CV</a></u></span>
+                                                                            </p>
                                                                         </div>
                                                                     </li>
                                                                 </ul>
