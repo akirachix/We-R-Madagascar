@@ -1,10 +1,18 @@
 $(document).ready(function () {
-    // var map = L.map('map').setView([27.7, 85.4], 7);
-    var map = L.map('map', {
-        // layers: [base],
-        center: new L.LatLng(27.7, 85.4),
-        zoom: 12,
-    });
+    var map = L.map('map').setView([lat, long], 15);
+    // var map = L.map('map', {
+    //     // layers: [base],
+    //     center: new L.LatLng(lat, long),
+    //     zoom: 12,
+    // });
+    var mark = L.marker([lat, long]).addTo(map);
+
+    var circle = L.circle([lat, long], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 100
+    }).addTo(map);
 
     osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -54,7 +62,7 @@ $(document).ready(function () {
     // map.flyTo([lat, lon], 13)
     //   myMap.panTo([2, 22]);
 
-    layerswitcher = L.control.layers(baseLayers, {}, {collapsed: false}).addTo(map);
+    layerswitcher = L.control.layers(baseLayers, {}, {collapsed: true}).addTo(map);
 });
 
 $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
