@@ -3,7 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
+from django.core import serializers
+
 from .models import FlightPermission, Report
+from registry.models import Aircraft, Operator
 
 
 def homeView(request):
@@ -14,10 +18,27 @@ def homeView(request):
 def dashboardView(request):
     return render(request, 'flightres/dashboard.html')
 
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+
+
 
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission
+    queryset = FlightPermission.objects.all()
+    template_name = 'flightres/flightpermission_list.html'
+
+    def get_context_data(self, *args, **kwargs):
+        com = super(FlightPermissionList, self).get_context_data(*args, **kwargs)
+        data = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid__operator__phone_number',
+                'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
+                'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_name', 'pilot_phone_number',
+                'pilot_cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
+                )
+        json_data = json.dumps(list(data), cls=DjangoJSONEncoder)
+        com['json_data'] = json_data
+        return com
 
 
 @login_required
@@ -70,3 +91,9 @@ class AboutPageView(TemplateView):
 
 class GuidelinesPageView(TemplateView):
     template_name = 'flightres/guidelines.html'
+
+class OperdatorDatabaseView(LoginRequiredMixin, ListView):
+    template_name = 'flightres/operators_db.html'
+    queryset = Aircraft.objects.all()
+
+

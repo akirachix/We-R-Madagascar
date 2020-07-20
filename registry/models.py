@@ -430,6 +430,11 @@ class Aircraft(models.Model):
     color = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    certification_number = models.CharField(max_length=20, blank=True, null=True)
+    initial_issued_date = models.DateTimeField(blank=True, null=True)
+    renewal_date = models.DateTimeField(blank=True, null=True)
+    validity = models.FloatField(max_length=3, blank=True, null=True)
+    remarks = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         return self.model

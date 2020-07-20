@@ -1,69 +1,230 @@
+function permApproval(uid, status) {
+    console.log(uid, status)
+}
 
 $(document).ready(function () {
-    var map = L.map('map').setView([lat, long], 15);
-    // var map = L.map('map', {
-    //     // layers: [base],
-    //     center: new L.LatLng(lat, long),
-    //     zoom: 12,
-    // });
-    var mark = L.marker([lat, long]).addTo(map);
-
-    var circle = L.circle([lat, long], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 100
-    }).addTo(map);
-
-    osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-    });
-    googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-    });
-    googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-    });
-    googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-    });
+    // var lat = document.getElementById('map').getAttribute('value').split(',')[0]
+    // var long = document.getElementById('map').getAttribute('value').split(',')[1]
 
 
-    var baseLayers = {
-        "OpenStreetMap": osm,
-        "Google Streets": googleStreets,
-        "Google Hybrid": googleHybrid,
-        "Google Satellite": googleSat,
-        "Google Terrain": googleTerrain,
+    var expandBtn = document.getElementsByClassName('expandData')
 
-    };
+    flight_objects = flight_objects.replace(/&quot;/g, '"').replace(/uav_uuid__operator__company_name/g, 'company_name');
+    flight_object = JSON.parse(flight_objects)
 
 
-    customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+    for (var i = 0; i < expandBtn.length; i++) {
+        expandBtn[i].addEventListener('click', function (e) {
+            // console.log('clicked');
+            object_id = e.target.id.split('_')[1]
+            for (j = 0; j < flight_object.length; j++) {
+                if (object_id == flight_object[j].uav_uid) {
+                    createModal(flight_object[j])
+                }
+            }
+        })
+    }
 
-    // var Kritipur = L.circle([lat, lon], {
-    //     color: '#047c41',
-    //     fillColor: '#047c41',
-    //     fillOpacity: 0.7,
-    //     radius: 400
-    // }).addTo(map);
+    function createModal(data) {
+        var html1 = `
+        <div class="popup-body">
+            <span class="close-icon"><i class="material-icons">close</i></span>
+            <div class="popup-header">
+                <h3>Permission Request for <b>ID `+ data.uav_uid + `</b></h3>
+            </div>
+            <div class="popup-content">
+                <div class="drone-details">
+                    <div class="row gx-md-3 gx-lg-3">
+                        <div class="col-xl-5 col-sm-12">
+                            <div class="drone-content col-left">
+                                <ul>
+                                    <li>
+                                        <h4>Operators info</h4>
+                                        <div class="content-list">
+                                            <p>
+                                                <b>Company Name:</b>
+                                                <span>`+ data.company_name + `</span>
+                                            </p>
+                                            <p>
+                                                <b>Phone Number:</b>
+                                                <span>`+ data.uav_uuid__operator__phone_number + `</span>
+                                            </p>
+                                            <p>
+                                                <b>Email:</b>
+                                                <span>`+ data.uav_uuid__operator__email + `</span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <br>
+                                    <li>
+                                        <h4>Flight info</h4>
+                                        <div class="content-list">
+                                            <p><b>Start Date:
+                                                </b><span>`+ data.flight_start_date + `</span>
+                                            </p>
+                                            <p><b>End Date:
+                                                </b><span>`+ data.flight_end_date + `</span>
+                                            </p>
+                                            <p><b> Time:
+                                                </b><span>`+ data.flight_time + `</span>
+                                            </p>
+                                            <p><b>Purpose:
+                                                </b><span>`+ data.flight_purpose + `</span>
+                                            </p>
+                                            <p><b>Aircraft Name:
+                                                </b><span>`+ data.uav_uuid__popular_name + `</span>
+                                            </p>
+                                            <p><b>Drone Insurance: </b><span><u><a
+                                                href=`+ data.flight_insurance_url + `
+                                                            target="_blank">Link to
+                                                            document</a></u></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <br>
+                                    <li>
+                                        <h4>Pilot info</h4>
+                                        <div class="content-list">
+                                            <p><b>Pilot Name: </b><span>
+                                                `+ data.pilot_name + `
+                                                </span>
+                                                <p><b>Pilot Phone Number:
+                                                </b><span>`+ data.pilot_phone_number + `</span>
+                                                </p>
+                                                <p><b>Pilot CV: </b><span><u><a
+                                                    href=`+ data.pilot_cv_url + `
+                                                            target="_blank">Link to
+                                                            CV</a></u></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-7 col-sm-12">
+                            <div class="map-content col-right">
+                                <div class="custom-tab">
+                                    <ul class="tab-list is-bg">
+                                        <li><a href="#location" class="current">Location Map</a></li>
+                                        <li><a href="#flight">Flight Plan</a></li>
+                                        <li><a href="#img-gallery">images</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content-holder" id="location">
+                                    <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `"></div>
+                                </div>
+                                <div class="tab-content-holder" id="flight">
+                                    <div id="flight_map"></div>
+                                </div>
+                                <div class="tab-content-holder" id="img-gallery">
+                                    <div class="row g-2">
+                                        <div class="col-md-4">
+                                            <figure><img src="./img/img-gallery1.png" alt="img"></figure>
+                                            </div>
+                                        <div class="col-md-4">
+                                            <figure><img src="./img/img-gallery2.png" alt="img"></figure>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <figure><img src="./img/img-gallery3.png" alt="img"></figure>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <figure><img src="./img/img-gallery4.png" alt="img"></figure>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <figure><img src="./img/img-gallery5.png" alt="img"></figure>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <figure><img src="./img/img-gallery6.png" alt="img"></figure>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="popup-footer buttons is-end">
+                                    <div class="buttons is-end">
+                                        <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/approve"
+                                            class="btn btn-success is-bg">Approve</a>
+                                            &nbsp;&nbsp;
+                                        <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/deny"
+                                            class="btn btn-danger is-border">Deny</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`
+        document.getElementById('modal-dialog').innerHTML = html1
+        plotMap(data)
+    }
 
-    // Kritipur.bindPopup(customPopup, customOptions);
-    // var long = '{{ object.longitude }}'
-    // console.log("TWO")
-    // console.log(long)
-    // map.flyTo([lat, lon], 13)
-    //   myMap.panTo([2, 22]);
+    function plotMap(data) {
+        var map = L.map('map').setView([data.latitude, data.longitude], 8);
+        // var map = L.map('map', {
+        //     // layers: [base],
+        //     center: new L.LatLng(lat, lon),
+        //     zoom: 12,
+        // });
+        var mark = L.marker([data.latitude, data.longitude]).addTo(map);
 
-    layerswitcher = L.control.layers(baseLayers, {}, {collapsed: true}).addTo(map);
+        // console.log(flight_object)
+
+        var circle = L.circle([data.latitude, data.longitude], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 100
+        }).addTo(map);
+
+        osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        })
+
+        googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(map);
+        googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+
+
+        var baseLayers = {
+            "OpenStreetMap": osm,
+            "Google Streets": googleStreets,
+            "Google Hybrid": googleHybrid,
+            "Google Satellite": googleSat,
+            "Google Terrain": googleTerrain,
+
+        };
+
+
+        customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+
+        // var Kritipur = L.circle([lat, lon], {
+        //     color: '#047c41',
+        //     fillColor: '#047c41',
+        //     fillOpacity: 0.7,
+        //     radius: 400
+        // }).addTo(map);
+
+        // Kritipur.bindPopup(customPopup, customOptions);
+        // var long = '{{ object.longitude }}'
+        // console.log("TWO")
+        // console.log(long)
+        // map.flyTo([lat, lon], 13)
+        //   myMap.panTo([2, 22]);
+
+        layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
+    }
 });
 
 $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');

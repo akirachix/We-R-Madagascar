@@ -1,0 +1,122 @@
+{% extends 'flightres/base.html' %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom-charts.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/apexcharts.css' %}">
+{% endblock links %}
+
+{% block body %}
+<main class="admin-main">
+    <div class="main-card">
+        <div class="card-header">
+            <h1>Operators Database</h1>
+        </div>
+        <div class="card-body">
+            <table id="admin-datatable" class="admin-datatable">
+                <thead>
+                    <tr>
+                        <th class="serial-th">S.N.</th>
+                        <th>Certificate Number</th>
+                        <th>Unique Identification Number</th>
+                        <th>Owner</th>
+                        <th>Address</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>UAV Manufacturer & Model</th>
+                        <th>Date of Manufacture</th>
+                        <th>RPA/Drone Type</th>
+                        <th>Weight (Kg)</th>
+                        <th>Color</th>
+                        <th>Initial Issued Date</th>
+                        <th>Renewal Date</th>
+                        <th>Validity</th>
+                        <th>Remarks</th>
+                        <th class="modal-th"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in object_list %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ object.certification_number }}</td>
+                        <td>{{ object.unid }}</td>
+                        <td><b>{{ object.operator.company_name }}</b></td>
+                        <td>{{ object.operator.address.address_line_1 }}
+                            ,{{ object.operator.address.city }}
+                            ,{{ object.operator.address.country }}
+                        </td>
+                        <td>{{ object.operator.phone_number }}</td>
+                        <td>{{ object.operator.email }}</td>
+                        <td>{{ object.manufacturer.full_name }} | {{ object.model }}</td>
+                        <td>{{ object.begin_date.date }}</td>
+                        <td>{{ object.category }}</td>
+                        <td>{{ object.mass }}</td>
+                        <td>{{ object.color }}</td>
+                        <td>{{ object.initial_issued_date.date }}</td>
+                        <td>{{ object.renewal_date.date }}</td>
+                        <td>{{ object.validity }}</td>
+                        <td>{{ object.remarks }}</td>
+                        <td><a modal-link="opt{{object.id}}" class="modal-link"><i class="material-icons"
+                                    data-toggle="modal" data-target="#opt{{object.id}}">chevron_right</i></a>
+                            <div class="popup" tabindex="-1" role="dialog" id="opt{{object.id}}">
+                                <div class="popup-container lg-popup map-popup">
+                                    <div class="popup-body">
+                                        <span class="close-icon"><i class="material-icons">close</i></span>
+                                        <div class="popup-header">
+                                            <h3>Operators Database for <b>Aircraft {{ object.popular_name }}</b></h3>
+
+                                        </div>
+                                        <div class="popup-content">
+                                            <div class="drone-details">
+                                                <div class="row gx-md-3 gx-lg-3">
+                                                    <div class="col-xl-12 col-sm-12">
+                                                        <div class="drone-content col-left col-operators">
+                                                            <ul>
+                                                                <li>
+                                                                    <h4>Operators info</h4>
+                                                                    <div class="content-list">
+                                                                        <p><b>Certificate
+                                                                                Number</b><span>{{ object.certification_number }}</span>
+                                                                        </p>
+                                                                        <p><b>Unique Identification
+                                                                                Number</b><span>{{ object.unid }}</span>
+                                                                        </p>
+                                                                        <p><b>Company
+                                                                                Name</b><span>{{ object.operator.company_name }}</span>
+                                                                        </p>
+                                                                        <p><b>Manufacturer & Model</b><span>
+                                                                                {{ object.operator.address.address_line_1 }}
+                                                                                ,{{ object.operator.address.city }}
+                                                                                ,{{ object.operator.address.country }}</span>
+                                                                        </p>
+                                                                        <p><b>Registration
+                                                                                Mark</b><span>{{ object.registration_mark }}</span>
+                                                                        </p>
+                                                                        <p><b>Color</b><span>{{ object.color }}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="popup-footer popup-permission">
+                                            <!-- <button type="" class="common-button is-border cancel-button">Dany</button>
+                                                    <button type="submit" class="common-button is-bg">Approved</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+{% endblock body %}

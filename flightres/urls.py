@@ -2,7 +2,7 @@ from django.urls import path
 
 # importing views from views..py
 from .views import FlightPermissionList, approvePerm, flightReqResponseView, ComplainListView, dashboardView, \
-        updateComplain, submitReply, AboutPageView, GuidelinesPageView
+        updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView
 
 urlpatterns = [
     path('', dashboardView, name='dashboard'),
@@ -17,4 +17,5 @@ urlpatterns = [
     path('submit_reply/<int:pk>', submitReply, name='submit-reply'),
     path('about', AboutPageView.as_view(), name='about'),
     path('guidelines', GuidelinesPageView.as_view(), name='guidelines'),
+    path('operators', OperdatorDatabaseView.as_view(), name='operators'),
 ]
