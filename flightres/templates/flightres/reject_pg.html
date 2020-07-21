@@ -44,8 +44,10 @@
             <div class="contents">
                 <div class="container-fluid">
                     <div class="wrapper">
-                        <a href="home.html" class="logo"><img src="{% static 'img/logo-blue.png' %}" alt="Drone Registry" /></a>
-                        <figure class="center-image"><img src="{% static 'img/drone_and_Clouds.svg' %}" alt="Drone" /></figure>
+                        <a href="home.html" class="logo"><img src="{% static 'img/logo-blue.png' %}"
+                                alt="Drone Registry" /></a>
+                        <figure class="center-image"><img src="{% static 'img/drone_and_Clouds.svg' %}" alt="Drone" />
+                        </figure>
                         <div class="message">
                             <h1>Thanks for your request.</h1>
                             <figure class="result"><img src="{% static 'img/rejected.svg' %}" alt="rejected"></figure>
@@ -65,15 +67,15 @@
                                 <div class="details-info">
                                     <h6 class="col-title">Operators Info</h6>
                                     <div class="info">
-                                        <p><b>Name: </b><span>
-                                                {{ object.company_name }}
+                                        <p><b>Company Name: </b><span>
+                                                {{ object.uav_uuid.operator.company_name }}
                                             </span>
                                         </p>
-                                        <p><b>License ID:
-                                            </b><span></span>
+                                        <p><b>Phone Number:
+                                            </b><span>{{ object.uav_uuid.operator.phone_number }}</span>
                                         </p>
-                                        <p><b>Operator Type:
-                                            </b><span></span>
+                                        <p><b>Email:
+                                            </b><span>{{ object.uav_uuid.operator.email }}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -82,17 +84,23 @@
                                 <div class="details-info">
                                     <h6 class="col-title">Flight Info</h6>
                                     <div class="info">
-                                        <p><b>Flight Start Date:
+                                        <p><b>Start Date:
                                             </b><span>{{ object.flight_start_date }}</span>
                                         </p>
-                                        <p><b>Flight End Date:
+                                        <p><b>End Date:
                                             </b><span>{{ object.flight_end_date }}</span>
                                         </p>
-                                        <p><b>Flight Time:
+                                        <p><b>Time:
                                             </b><span>{{ object.flight_time }}</span>
                                         </p>
                                         <p><b>Flight Purpose:
                                             </b><span>{{ object.flight_purpose }}</span>
+                                        </p>
+                                        <p><b>Aircraft Name:
+                                            </b><span>{{ object.uav_uuid.popular_name }}</span>
+                                        </p>
+                                        <p><b>Drone Insurance:
+                                            </b><span><a href="{{ object.flight_insurance_url }}">View File</span></a>
                                         </p>
                                     </div>
                                 </div>
@@ -107,8 +115,8 @@
                                         <p><b>Pilot Phone Number:
                                             </b><span>{{ object.pilot_phone_number }}</span>
                                         </p>
-                                        <p><b>Pilot CV URL: </b><span><a
-                                                    href="{{ object.pilot_cv_url }}">{{ object.pilot_cv_url }}</a></span>
+                                        <p><b>Pilot CV URL: </b><span><a href="{{ object.pilot_cv_url }}">View
+                                                    File</a></span>
                                         </p>
                                     </div>
                                 </div>
@@ -120,21 +128,18 @@
                                 <div class="details-info">
                                     <h6 class="col-title">Location map</h6>
                                     <div class="map">
-                                        <iframe
-                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.22270889729!2d85.33026571548211!3d27.710409231963293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb190b6cfae8cd%3A0xb54327d56a797ef6!2sGyaneshwor%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1593652778081!5m2!1sen!2snp"
-                                            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-                                            tabindex="0"></iframe>
+                                        <iframe src="{{ object.location }}" frameborder="0" style="border:0;"
+                                            allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-7 column">
                                 <div class="details-info">
                                     <h6 class="col-title">Flight plan</h6>
+                                    <!-- <a href="{{ object.flight_plan_url }}">Map</a> -->
                                     <div class="map">
-                                        <iframe
-                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.22270889729!2d85.33026571548211!3d27.710409231963293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb190b6cfae8cd%3A0xb54327d56a797ef6!2sGyaneshwor%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1593652778081!5m2!1sen!2snp"
-                                            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-                                            tabindex="0"></iframe>
+                                        <iframe src="{{ object.flight_plan_url }}" frameborder="0" style="border:0;"
+                                            allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                                     </div>
                                 </div>
                             </div>
@@ -143,16 +148,16 @@
                                     <h6 class="col-title">Images</h6>
                                     <div class="row g-lg-2 g-3">
                                         <div class="col-md-6 col-6">
-                                            <figure><img src="./img/img-gallery1.png" alt="img"></figure>
+                                            <figure><img src="{% static 'img/img-gallery1.png' %}" alt="img"></figure>
                                         </div>
                                         <div class="col-md-6 col-6">
-                                            <figure><img src="./img/img-gallery2.png" alt="img"></figure>
+                                            <figure><img src="{% static 'img/img-gallery2.png' %}" alt="img"></figure>
                                         </div>
                                         <div class="col-md-6 col-6">
-                                            <figure><img src="./img/img-gallery3.png" alt="img"></figure>
+                                            <figure><img src="{% static 'img/img-gallery3.png' %}" alt="img"></figure>
                                         </div>
                                         <div class="col-md-6 col-6">
-                                            <figure><img src="./img/img-gallery5.png" alt="img"></figure>
+                                            <figure><img src="{% static 'img/img-gallery5.png' %}" alt="img"></figure>
                                         </div>
                                     </div>
                                 </div>

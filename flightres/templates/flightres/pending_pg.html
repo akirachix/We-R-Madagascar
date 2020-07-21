@@ -51,10 +51,133 @@
                         <div class="message">
                             <h1>Thanks for your request.</h1>
                             <figure class="result"><img src="{% static '/img/pending.svg' %}" alt="verified"></figure>
-                            <p>Your permission request is pending. You will notified when your request is processed further.</p>
+                            <p> Your permission request is pending. You will notified when your request is processed further.</p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="details-section">
+            <div class="container-fluid">
+                <div class="wrapper">
+                    <h2>Permission request details</h2>
+                    <div class="details-wrap">
+                        <div class="row row-details">
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Operators Info</h6>
+                                    <div class="info">
+                                        <p><b>Company Name: </b><span>
+                                                {{ object.uav_uuid.operator.company_name }}
+                                            </span>
+                                        </p>
+                                        <p><b>Phone Number:
+                                            </b><span>{{ object.uav_uuid.operator.phone_number }}</span>
+                                        </p>
+                                        <p><b>Email:
+                                            </b><span>{{ object.uav_uuid.operator.email }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Flight Info</h6>
+                                    <div class="info">
+                                        <p><b>Start Date:
+                                            </b><span>{{ object.flight_start_date }}</span>
+                                        </p>
+                                        <p><b>End Date:
+                                            </b><span>{{ object.flight_end_date }}</span>
+                                        </p>
+                                        <p><b>Time:
+                                            </b><span>{{ object.flight_time }}</span>
+                                        </p>
+                                        <p><b>Flight Purpose:
+                                            </b><span>{{ object.flight_purpose }}</span>
+                                        </p>
+                                        <p><b>Aircraft Name:
+                                            </b><span>{{ object.uav_uuid.popular_name }}</span>
+                                        </p>
+                                        <p><b>Drone Insurance:
+                                            </b><span><a href="{{ object.flight_insurance_url }}">View File</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Pilot Info</h6>
+                                    <div class="info">
+                                        <p><b>Pilot Name:
+                                            </b><span>{{ object.pilot_name }}</span>
+                                        </p>
+                                        <p><b>Pilot Phone Number:
+                                            </b><span>{{ object.pilot_phone_number }}</span>
+                                        </p>
+                                        <p><b>Pilot CV URL: </b><span><a
+                                                    href="{{ object.pilot_cv_url }}">View File</a></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-details">
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Location map</h6>
+                                    <div class="map">
+                                        <iframe
+                                        src="{{ object.location }}"
+                                            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                                            tabindex="0"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Flight plan</h6>
+                                    <!-- <a href="{{ object.flight_plan_url }}">Map</a> -->
+                                    <div class="map">
+                                        <iframe
+                                            src="{{ object.flight_plan_url }}"
+                                            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                                            tabindex="0"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Images</h6>
+                                    <div class="row g-lg-2 g-3">
+                                        <div class="col-md-6 col-6">
+                                            <figure><img src="{% static 'img/img-gallery1.png' %}" alt="img"></figure>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <figure><img src="{% static 'img/img-gallery2.png' %}" alt="img"></figure>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <figure><img src="{% static 'img/img-gallery3.png' %}" alt="img"></figure>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <figure><img src="{% static 'img/img-gallery5.png' %}" alt="img"></figure>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="site-footer home-footer">
+                    <div class="wrapper">
+                        <div class="footer-in">
+                            <p class="footer-left">© 2020 Drone Registry Nepal. All rights reserved.</p>
+                            <p class="footer-right"><span>Developed by <a href="#/">NAXA</a></span></p>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
     </div>
