@@ -4950,7 +4950,8 @@ footer.site-footer {
   .main-card .card-body {
     flex: 1 1 auto;
     min-height: 1px;
-    padding: 1.25rem; }
+    padding: 1.25rem;
+    position: relative; }
 
 .popup,
 .window-popup {
@@ -5551,9 +5552,13 @@ footer.site-footer {
           top: 0; }
         .popup .popup-container.map-popup .popup-body .popup-content .col-right .tab-content-holder,
         .window-popup .popup-container.map-popup .popup-body .popup-content .col-right .tab-content-holder {
+          display: none;
           -webkit-animation: fadeIn 1s linear;
           animation: fadeIn 1s linear;
           height: calc(100% - 10%); }
+          .popup .popup-container.map-popup .popup-body .popup-content .col-right .tab-content-holder.current,
+          .window-popup .popup-container.map-popup .popup-body .popup-content .col-right .tab-content-holder.current {
+            display: block; }
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0; }
@@ -5895,7 +5900,8 @@ footer.site-footer {
                 -webkit-border-radius: 5px;
                 -moz-border-radius: 5px;
                 -ms-border-radius: 5px;
-                border-radius: 5px; }
+                border-radius: 5px;
+                cursor: pointer; }
               @media only screen and (max-width: 1560px) {
                 .popup .popup-container.map-popup .popup-body .popup-content .col-left ul li .image-content figure,
                 .window-popup .popup-container.map-popup .popup-body .popup-content .col-left ul li .image-content figure {
@@ -7674,38 +7680,51 @@ aside.admin-sidebar {
                      width: 100% !important;
                      height: 114% !important;
                  } */ }
-  .drone-admin-wrapper main .main-card .card-body table.dataTable thead th {
-    border-bottom: 0;
-    padding: 10px;
-    font-size: 14px; }
-    @media only screen and (max-width: 1560px) {
-      .drone-admin-wrapper main .main-card .card-body table.dataTable thead th {
-        font-size: 13px; } }
-    @media only screen and (max-width: 1440px) {
-      .drone-admin-wrapper main .main-card .card-body table.dataTable thead th {
-        font-size: 12px; } }
-  .drone-admin-wrapper main .main-card .card-body table.dataTable tbody td {
-    padding: 8px 10px;
-    color: #4D4F5C;
-    font-size: 15px;
-    line-height: 20px; }
-    @media only screen and (max-width: 1560px) {
-      .drone-admin-wrapper main .main-card .card-body table.dataTable tbody td {
-        font-size: 14px;
-        line-height: 18px; } }
-    @media only screen and (max-width: 1440px) {
-      .drone-admin-wrapper main .main-card .card-body table.dataTable tbody td {
-        font-size: 13px;
-        line-height: 16px; } }
-    .drone-admin-wrapper main .main-card .card-body table.dataTable tbody td b {
-      max-width: 200px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap; }
-  .drone-admin-wrapper main .main-card .card-body .dataTables_scroll {
-    padding-top: 20px; }
-    .drone-admin-wrapper main .main-card .card-body .dataTables_scroll .dataTables_scrollHead {
-      padding-bottom: 20px; }
+  .drone-admin-wrapper main .main-card .card-body {
+    position: relative; }
+    .drone-admin-wrapper main .main-card .card-body .link-btn {
+      position: absolute;
+      height: 35px;
+      min-height: 35px;
+      z-index: 1;
+      right: 24px; }
+      .drone-admin-wrapper main .main-card .card-body .link-btn a {
+        color: #ffffff; }
+    .drone-admin-wrapper main .main-card .card-body .dataTables_wrapper .dataTables_filter {
+      right: 180px;
+      position: relative; }
+    .drone-admin-wrapper main .main-card .card-body table.dataTable thead th {
+      border-bottom: 0;
+      padding: 10px;
+      font-size: 14px; }
+      @media only screen and (max-width: 1560px) {
+        .drone-admin-wrapper main .main-card .card-body table.dataTable thead th {
+          font-size: 13px; } }
+      @media only screen and (max-width: 1440px) {
+        .drone-admin-wrapper main .main-card .card-body table.dataTable thead th {
+          font-size: 12px; } }
+    .drone-admin-wrapper main .main-card .card-body table.dataTable tbody td {
+      padding: 8px 10px;
+      color: #4D4F5C;
+      font-size: 15px;
+      line-height: 20px; }
+      @media only screen and (max-width: 1560px) {
+        .drone-admin-wrapper main .main-card .card-body table.dataTable tbody td {
+          font-size: 14px;
+          line-height: 18px; } }
+      @media only screen and (max-width: 1440px) {
+        .drone-admin-wrapper main .main-card .card-body table.dataTable tbody td {
+          font-size: 13px;
+          line-height: 16px; } }
+      .drone-admin-wrapper main .main-card .card-body table.dataTable tbody td b {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
+    .drone-admin-wrapper main .main-card .card-body .dataTables_scroll {
+      padding-top: 20px; }
+      .drone-admin-wrapper main .main-card .card-body .dataTables_scroll .dataTables_scrollHead {
+        padding-bottom: 20px; }
   .drone-admin-wrapper.sidebar-collapse aside.admin-sidebar {
     max-width: 50px; }
   .drone-admin-wrapper.sidebar-collapse main.admin-main {

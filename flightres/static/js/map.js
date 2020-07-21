@@ -97,69 +97,53 @@ $(document).ready(function () {
                                                             CV</a></u></span>
                                             </p>
                                         </div>
+									</li>
+									<li>
+                                        <h4>Documentation</h4>
+                                        <div class="row g-2">
+											<div class="col-md-4">
+												<div class="file-upload">
+													<a href="`+ data.pilot_cv_url + `" class="file-link">
+														<div class="file-icon">
+															<i class="material-icons">description</i>
+														</div>
+														<div class="file-info">
+                                                            <div class ="file-wrap">
+                                                                <p>Pilot CV</p>
+                                                            </div>
+                                                        </div>
+													</a>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="file-upload">
+													<a href="`+ data.flight_plan_url + `" class="file-link">
+														<div class="file-icon">
+															<i class="material-icons">description</i>
+														</div>
+														<p>Flight Plan URL</p>
+													</a>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="file-upload">
+													<a href="#" class="file-link">
+														<div class="file-icon">
+															<i class="material-icons">description</i>
+														</div>
+														<p>Images</p>
+													</a>
+												</div>
+											</div>
+                                    	</div>
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+						</div>
                         <div class="col-xl-7 col-sm-12">
                             <div class="map-content col-right">
-                                <div class="custom-tab">
-                                    <ul class="tab-list is-bg">
-                                        <li><a href="#location" class="current">Location Map</a></li>
-                                        <li><a href="#img-gallery">Documentaion</a></li>
-                                    </ul>
-                                </div>
-                                <div class="tab-content-holder" id="location">
+                                <div class="tab-content-holder current" id="location">
                                     <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `"></div>
-                                </div>
-                                <div class="tab-content-holder" id="img-gallery">
-                                    <div class="row g-2">
-                                        <div class="col-md-4">
-                                            <div class="file-upload">
-                                                <a href="`+ data.pilot_cv_url + `" class="file-link">
-                                                    <div class="file-icon">
-                                                        <i class="material-icons">description</i>
-                                                    </div>
-                                                    <div class="file-info">
-                                                        <div class ="file-wrap">
-                                                            <i class="material-icons">description</i>
-                                                            <p>Pilot Cv</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="file-upload">
-                                                <a href="`+ data.flight_plan_url + `" class="file-link">
-                                                    <div class="file-icon">
-                                                        <i class="material-icons">image</i>
-                                                    </div>
-                                                    <div class="file-info">
-                                                        <div class ="file-wrap">
-                                                            <i class="material-icons">image</i>
-                                                            <p>flight-plan.pix4d</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="file-upload">
-                                                <a href="#" class="file-link">
-                                                    <div class="file-icon">
-                                                        <i class="material-icons">description</i>
-                                                    </div>
-                                                    <div class="file-info">
-                                                        <div class ="file-wrap">
-                                                            <i class="material-icons">description</i>
-                                                            <p>Location image</p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="buttons is-end">
                                     <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/approve" class="common-button is-bg">Approve</a>

@@ -13,7 +13,6 @@
     opacity: 0;
     visibility: hidden;
     @include transition(all .5s ease-in-out);
-
     .popup-container {
         @include display-flex(flex);
         @include flex-direction-row(row);
@@ -536,7 +535,10 @@
                             }
                         }
                         .tab-content-holder{
-                          
+                            display: none;
+                            &.current{
+                                display: block;
+                            }
                             @-webkit-keyframes fadeIn {
                                 0%   {opacity: 0;}
                                 100% {opacity: 1;}
@@ -827,6 +829,7 @@
                                             max-width: 100%;
                                             height: 100%;
                                             @include radius(5px);
+                                            cursor: pointer;
                                         }
                                         @media #{$breakpoint-lg-desktop}{
                                             width: 70px;

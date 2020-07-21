@@ -426,6 +426,23 @@
                 }
             }
             .card-body{
+                position: relative;
+                .link-btn {
+                    position: absolute;
+                    height: 35px;
+                    min-height: 35px;
+                    z-index: 1;
+                    right: 24px;
+                    a{
+                     color: $white-color;
+                    }
+                }
+                .dataTables_wrapper {
+                    .dataTables_filter {
+                        right: 180px;
+                        position: relative;
+                    }
+                }
                 table{
                     &.dataTable{
                         thead {

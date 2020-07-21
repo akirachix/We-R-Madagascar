@@ -35,6 +35,7 @@
       });
     }
     popUp_escalate();
+
     function formModal() {
       $('.modal-link').on('click', function () {
         var targetId = $(this).attr('modal-link');
@@ -43,6 +44,7 @@
       });
     }
     formModal();
+
     function closePopup() {
       $('.buttons .cancel-button, .close-icon').on('click', function (e) {
         e.preventDefault();
@@ -50,7 +52,8 @@
         // $('.body-container').removeClass('blur-bg');
       });
     }
-    // closePopup();
+    closePopup();
+    
     function accMenu() {
 
       $('.acc-list').find('.acc-header').on('click', function () {
@@ -199,6 +202,18 @@
     }
     customTab();
 
+    function customTab1() {
+      $('ul.tab-list li a').click(function () {
+        var tab_id = $(this).attr('data-target');
+  
+        $('ul.tab-list li a').removeClass('current');
+        $('.tab-content-holder').removeClass('current');
+  
+        $(this).addClass('current');
+        $("#" + tab_id).addClass('current');
+      })
+    }
+    customTab1();
 
     $('.tr-header').click(function () {
       $(this).toggleClass('active');
@@ -235,19 +250,19 @@
   tab_list_nav();
 
   function header_li(){
-    $('.menu li').on('click', 'a', function(){
+    $('.menu ul li').on('click', 'a', function(){
       if($(this).closest('a').next().hasClass('active')){
-        $('.menu li a').removeClass('active');
+        $('.menu ul li a').removeClass('active');
     }
     else{
-      $('.menu li a').removeClass('active');
+      $('.menu ul li a').removeClass('active');
     }
     $(this).closest('a').addClass('active');
     })
   }
   header_li();
 
-  function tab_li(){
+/*   function tab_li(){
     $('#flight').hide();
     $('#img-gallery').hide();
     $(document).ready(function(){
@@ -260,7 +275,7 @@
         })
     });
   }
-  tab_li();
+  tab_li(); */
 
   function guidelines_li(){
     $('.nav-wrap').on('click', 'li', function(){
