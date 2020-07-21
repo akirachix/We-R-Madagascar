@@ -106,38 +106,62 @@ $(document).ready(function () {
                                 <div class="custom-tab">
                                     <ul class="tab-list is-bg">
                                         <li><a href="#location" class="current">Location Map</a></li>
-                                        <li><a href="#flight">Flight Plan</a></li>
-                                        <li><a href="#img-gallery">images</a></li>
+                                        <li><a href="#img-gallery">Documentaion</a></li>
                                     </ul>
                                 </div>
                                 <div class="tab-content-holder" id="location">
                                     <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `"></div>
                                 </div>
-                                <div class="tab-content-holder" id="flight">
-                                    <div id="flight_map"></div>
-                                </div>
                                 <div class="tab-content-holder" id="img-gallery">
                                     <div class="row g-2">
                                         <div class="col-md-4">
-                                            <figure><img src="./img/img-gallery1.png" alt="img"></figure>
+                                            <div class="file-upload">
+                                                <a href="`+ data.pilot_cv_url + `" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">description</i>
+                                                    </div>
+                                                    <div class="file-info">
+                                                        <div class ="file-wrap">
+                                                            <i class="material-icons">description</i>
+                                                            <p>Pilot Cv</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
-                                        <div class="col-md-4">
-                                            <figure><img src="./img/img-gallery2.png" alt="img"></figure>
                                         </div>
                                         <div class="col-md-4">
-                                            <figure><img src="./img/img-gallery3.png" alt="img"></figure>
+                                            <div class="file-upload">
+                                                <a href="`+ data.flight_plan_url + `" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">image</i>
+                                                    </div>
+                                                    <div class="file-info">
+                                                        <div class ="file-wrap">
+                                                            <i class="material-icons">image</i>
+                                                            <p>flight-plan.pix4d</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <figure><img src="./img/img-gallery4.png" alt="img"></figure>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <figure><img src="./img/img-gallery5.png" alt="img"></figure>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <figure><img src="./img/img-gallery6.png" alt="img"></figure>
+                                            <div class="file-upload">
+                                                <a href="#" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">description</i>
+                                                    </div>
+                                                    <div class="file-info">
+                                                        <div class ="file-wrap">
+                                                            <i class="material-icons">description</i>
+                                                            <p>Location image</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="popup-footer buttons is-end">
                                     <div class="buttons is-end">
                                         <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/approve"
