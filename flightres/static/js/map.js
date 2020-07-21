@@ -161,15 +161,9 @@ $(document).ready(function () {
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="popup-footer buttons is-end">
-                                    <div class="buttons is-end">
-                                        <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/approve"
-                                            class="btn btn-success is-bg">Approve</a>
-                                            &nbsp;&nbsp;
-                                        <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/deny"
-                                            class="btn btn-danger is-border">Deny</a>
-                                    </div>
+                                <div class="buttons is-end">
+                                    <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/approve" class="common-button is-bg">Approve</a>
+                                    <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/deny" class="common-button is-border cancel-button">Deny</a>
                                 </div>
                             </div>
                         </div>
