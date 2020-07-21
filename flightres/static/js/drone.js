@@ -66,6 +66,11 @@
     }
     accMenu();
 
+
+    $(document).ready(function () {
+      $('#admin-datatable').DataTable();
+      $('.dataTables_length').addClass('bs-select');
+    });
     // for li a active
     // function filterDropdown() {
     //   $('.admin-aside-menu > li.is-submenu > a').on('click', function(e) {
@@ -257,6 +262,48 @@
   }
   tab_li();
 
+  function guidelines_li(){
+    $('.nav-wrap').on('click', 'li', function(){
+      if($(this).closest('li').next().hasClass('active')){
+        $('.nav-wrap li').removeClass('active');
+    }
+    else{
+      $('.nav-wrap li').removeClass('active');
+    }
+    $(this).closest('li').addClass('active');
+    })
+  }
+  guidelines_li();
+
+  function guideline_tab(){
+    $('#categoryB').hide();
+    $('#categoryC').hide();
+    $('#categoryD').hide();
+    $(document).ready(function(){
+        $('.nav-wrap li').on('click', 'a', function(e){
+          e.preventDefault();
+          $('#categoryA').hide();
+          $('#categoryB').hide();
+          $('#categoryC').hide();
+          $('#categoryD').hide();
+          $($(this).attr("href")).show();
+        })
+    });
+  }
+  guideline_tab();
+
+  function popup_info(){
+    $('.guideline-popup').on('click','a.popup-info', function(e){
+      e.preventDefault();
+      $('.guideline-popup').addClass('open');
+    });
+    $('.guideline-popup').on('click','a.icon-close', function(e){
+      e.preventDefault();
+      $('.guideline-popup').removeClass('open');
+    });
+
+  }
+  popup_info();
   //pie-chart
   var options = {
     series: [60, 30, 90],

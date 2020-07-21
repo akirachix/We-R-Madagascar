@@ -314,7 +314,7 @@
                             height: calc(100% - 46px);
                         }
                     }
-                    figure{
+                    /* figure{
                         margin-top: 8px;
                         @media #{$breakpoint-md}{
                             margin-top: 0;
@@ -335,6 +335,93 @@
                               height: 100%;
                             }
                            
+                        }
+                    } */
+                    .file-upload{
+                        height: 100%;
+                        @media #{$breakpoint-md}{
+                            max-width: 130px;
+                            margin: 0 auto;
+
+                        }
+                        .file-link{
+                            display: block;
+                            height: 100%;
+                            @include radius(4px);
+                            border: 1px solid $gray-light;
+                            cursor: pointer;
+                            @include transition(all .3s ease);
+                            transform: translateY(0);
+                            @media #{$breakpoint-desktop}{
+                                border: .5px solid $gray-light;
+                            }
+                            &:hover{
+                                transform: translateY(-3px);
+                            }
+                            .file-icon{
+                                padding:  30px 20px;
+                                height: calc(100% - 22%);
+                                @include flex_hr_center;
+                                @media #{$breakpoint-lg-desktop}{
+                                    padding: 25px 20px;
+                                }
+                                i{
+                                    color: $blue-shade;
+                                    font-size: 70px;
+                                    font-weight: 400;
+                                    @media #{$breakpoint-lg-desktop}{
+                                        font-size: 60px;
+                                    }
+                                    @media #{$breakpoint-desktop}{
+                                        font-size: 50px;
+                                    }
+                                }
+                            }
+                            .file-info{
+                                padding: 5px  8px;
+                                border-top: 1px solid $gray-light;
+                                @include display-flex(flex);
+                                @include align-items-center;
+                                height: calc(100% - 78%);
+                                @media #{$breakpoint-desktop}{
+                                    border-top: .5px solid $gray-light;
+                                }
+                                .file-wrap{
+                                    @include display-flex(flex);
+                                    i{
+                                        font-size: 18px;
+                                        line-height: 24px;
+                                        font-weight: 400;
+                                        color: $blue-shade;
+                                        margin-right: 5px;
+                                        @media #{$breakpoint-lg-desktop}{
+                                            font-size: 16px;
+                                            margin-right: 3px;
+                                        }
+                                        @media #{$breakpoint-desktop}{
+                                            font-size: 14px;
+                                        }
+                                    }
+                                    p{
+                                        white-space: nowrap; 
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        width: 75px;
+                                        display: inline-block;
+                                        font-size: 12px;
+                                        font-weight: 400;
+                                        color: $body-color;
+                                        line-height: 24px;
+                                        @media #{$breakpoint-lg-desktop}{
+                                            font-size: 11px;
+                                        }
+                                        @media #{$breakpoint-desktop}{
+                                            font-size: 10px;
+                                        }
+                                    }
+                                }
+                            }
+
                         }
                     }
                 }
