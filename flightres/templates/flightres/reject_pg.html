@@ -110,12 +110,12 @@
                                     <h6 class="col-title">Pilot Info</h6>
                                     <div class="info">
                                         <p><b>Pilot Name:
-                                            </b><span>{{ object.pilot_name }}</span>
+                                            </b><span>{{ object.pilot_id.name }}</span>
                                         </p>
                                         <p><b>Pilot Phone Number:
-                                            </b><span>{{ object.pilot_phone_number }}</span>
+                                            </b><span>{{ object.pilot_id.phone_number }}</span>
                                         </p>
-                                        <p><b>Pilot CV URL: </b><span><a href="{{ object.pilot_cv_url }}">View
+                                        <p><b>Pilot CV URL: </b><span><a href="{{ object.pilot_id.cv_url }}">View
                                                     File</a></span>
                                         </p>
                                     </div>

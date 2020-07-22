@@ -86,13 +86,13 @@ $(document).ready(function () {
                                         <h4>Pilot info</h4>
                                         <div class="content-list">
                                             <p><b>Pilot Name: </b><span>
-                                                `+ data.pilot_name + `
+                                                `+ data.pilot_id__name + `
                                                 </span>
                                                 <p><b>Pilot Phone Number:
-                                                </b><span>`+ data.pilot_phone_number + `</span>
+                                                </b><span>`+ data.pilot_id__phone_number + `</span>
                                                 </p>
                                                 <p><b>Pilot CV: </b><span><u><a
-                                                    href=`+ data.pilot_cv_url + `
+                                                    href=`+ data.pilot_id__cv_url + `
                                                             target="_blank">Link to
                                                             CV</a></u></span>
                                             </p>
