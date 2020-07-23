@@ -1,10 +1,15 @@
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.core import serializers
+import requests
+from django.contrib.auth import get_user
 
 from .models import FlightPermission, Report
 from registry.models import Aircraft, Operator
@@ -18,10 +23,6 @@ def homeView(request):
 def dashboardView(request):
     return render(request, 'flightres/dashboard.html')
 
-import json
-from django.core.serializers.json import DjangoJSONEncoder
-
-
 
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
@@ -30,12 +31,13 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
     template_name = 'flightres/flightpermission_list.html'
 
     def get_context_data(self, *args, **kwargs):
-        com = super(FlightPermissionList, self).get_context_data(*args, **kwargs)
+        com = super(FlightPermissionList, self).get_context_data(
+            *args, **kwargs)
         data = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid__operator__phone_number',
-                'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
-                'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number',
-                'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
-                )
+                                               'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
+                                               'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number',
+                                               'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
+                                               )
         json_data = json.dumps(list(data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
         return com
@@ -75,7 +77,6 @@ def updateComplain(request, pk, action):
 
 @login_required
 def submitReply(request, pk):
-    print(request.POST.get('note'), request.POST.get('reply'))
     selected_complain = get_object_or_404(Report, uav_uid=pk)
     selected_complain.note = request.POST.get('note')
     selected_complain.reply = request.POST.get('reply')
@@ -87,14 +88,38 @@ class ComplainListView(LoginRequiredMixin, ListView):
     template_name = 'flightres/complaint_management.html'
     model = Report
 
+
+@login_required
+def uploadSheet(request):
+    if request.method == 'POST' and request.FILES['sheet']:
+        name = request.POST.get('name')
+        myfile = request.FILES['sheet']
+        current_user = get_user(request)
+        fs = FileSystemStorage()
+        fs.location = "./uploads/sheet_uploads"
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+
+        files = {
+            'name': (None, name),
+            'upload_sheet': ('./uploads/sheet_uploads/{}'.format(uploaded_file_url), open('./uploads/sheet_uploads/{}'.format(uploaded_file_url), 'rb')),
+            # 'created_by': current_user
+        }
+
+        response = requests.post(
+            'http://localhost:8000/np/api/v1/sheet-upload/', files=files)
+
+    return redirect('/np/dashboard/permission')
+
+
 class AboutPageView(TemplateView):
     template_name = 'flightres/about.html'
+
 
 class GuidelinesPageView(TemplateView):
     template_name = 'flightres/guidelines.html'
 
+
 class OperdatorDatabaseView(LoginRequiredMixin, ListView):
     template_name = 'flightres/operators_db.html'
     queryset = Aircraft.objects.all()
-
-
