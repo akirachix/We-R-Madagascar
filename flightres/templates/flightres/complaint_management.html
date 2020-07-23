@@ -35,16 +35,14 @@
                         <td>{{ object.location }}</td>
                         <td><span class="status approved">Solved</span></td>
                         <td>
-                            <button data-toggle="modal" data-target="#open-modal-complaint"
-                                modal-link="open-modal-complaint" type="button" class="btn modal-link">
-                                <i class="material-icons">chevron_right</i></i>
-                            </button>
-                            <div class="popup" id="open-modal-complaint">
+                            <a modal-link="complain{{object.uav_uid}}" class="modal-link"><i class="material-icons"
+                                data-toggle="modal" data-target="#complain{{object.uav_uid}}">chevron_right</i></a>
+                            <div class="popup" tabindex="-1" role="dialog" id="complain{{object.uav_uid}}">
                                 <div class="popup-container lg-popup map-popup">
                                     <div class="popup-body">
                                         <span class="close-icon"><i class="material-icons">close</i></span>
                                         <div class="popup-header">
-                                            <h3>Complaint management for <b>ID {{ object.id }}</b></h3>
+                                            <h3>Complaint management for <b>ID {{ object.uav_uid }}</b></h3>
 
                                         </div>
                                         <div class="popup-content">
@@ -107,12 +105,12 @@
                                                                 method="POST">
                                                                 {% csrf_token %}
                                                                 <textarea class="form-control" id="note" type="text"
-                                                                    name="note">ADD a Internal note..</textarea>
+                                                                    name="note">{{ object.note }}</textarea>
                                                                 <div class="textarea-message">
                                                                     <textarea class="form-control" id="reply"
-                                                                        type="text"
-                                                                        name="reply">Write a Message..</textarea>
+                                                                        type="text" name="reply">{{ object.reply }}</textarea>
                                                                 </div>
+                                                                <br>
                                                                 <div class="buttons is-end">
                                                                     <button type="submit"
                                                                         class="common-button is-bg">Reply</button>

@@ -75,6 +75,7 @@ def updateComplain(request, pk, action):
 
 @login_required
 def submitReply(request, pk):
+    print(request.POST.get('note'), request.POST.get('reply'))
     selected_complain = get_object_or_404(Report, uav_uid=pk)
     selected_complain.note = request.POST.get('note')
     selected_complain.reply = request.POST.get('reply')
