@@ -33,8 +33,8 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
         com = super(FlightPermissionList, self).get_context_data(*args, **kwargs)
         data = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid__operator__phone_number',
                 'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
-                'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_name', 'pilot_phone_number',
-                'pilot_cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
+                'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number',
+                'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
                 )
         json_data = json.dumps(list(data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
@@ -59,7 +59,7 @@ def flightReqResponseView(request, pk):
     elif selected_flight.status == 'Rejected':
         return render(request, 'flightres/reject_pg.html', {'object': selected_flight})
     else:
-        return render(request, 'flightres/pending_pg.html')
+        return render(request, 'flightres/pending_pg.html', {'object': selected_flight})
 
 
 @login_required
@@ -75,6 +75,7 @@ def updateComplain(request, pk, action):
 
 @login_required
 def submitReply(request, pk):
+    print(request.POST.get('note'), request.POST.get('reply'))
     selected_complain = get_object_or_404(Report, uav_uid=pk)
     selected_complain.note = request.POST.get('note')
     selected_complain.reply = request.POST.get('reply')
