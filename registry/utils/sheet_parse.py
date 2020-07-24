@@ -23,40 +23,62 @@ def parse_items_content(file_obj, institute, user_id):
     na_to_zero_df = clean_df.fillna(0)
     data = na_to_zero_df.values.tolist()
 
-    Manufacturer.objects.all().delete()
-    Operator.objects.all().delete()
-    Aircraft.objects.all().delete()
+    # Manufacturer.objects.all().delete()
+    # Operator.objects.all().delete()
+    # Aircraft.objects.all().delete()
 
     with transaction.atomic():
         for row in data:
-            manufacturer, _ = Manufacturer.objects.get_or_create(
-                full_name=row[7]
-            )
             try:
-                address, _ = Address.objects.get_or_create(
+                address, _ = Address.objects.update_or_create(
                     address_line_1=row[4],
                     address_line_2=row[4],
                     address_line_3=row[4],
+                    defaults={
+                        'address_line_1': row[4],
+                        'address_line_2': row[4],
+                        'address_line_3': row[4],
+                    }
                 )
             except Exception as e:
-                print("okoko error", str(e))
+                print("address error", str(e))
             try:
-                operator, _ = Operator.objects.get_or_create(
-                    company_name=row[3], address=address,
-                    phone_number=row[5], email=row[6]
+                manufacturer, _ = Manufacturer.objects.update_or_create(
+                    full_name=row[7],
+                    defaults={
+                        'full_name': row[7]
+                    }
                 )
             except Exception as e:
-                print("operatoroperatoroperator error", str(e))
+                print("manufacturer error", str(e))
+            try:
+                operator, _ = Operator.objects.update_or_create(
+                    company_name=row[3],
+                    phone_number=row[5],
+                    defaults={
+                        'company_name': row[3],
+                        'address': address,
+                        'phone_number': row[5],
+                        'email': row[6]
+                    }
+                )
+            except Exception as e:
+                print("operator error", str(e))
             # print("operator", operator)
             try:
-                aircraft = Aircraft(
-                    color=row[9],
-                    manufacturer=manufacturer,
-                    operator=operator,
-                    unid=row[2], mass=row[12]
+                aircraft = Aircraft.objects.update_or_create(
+                    unid=row[2],
+                    defaults={
+                        'unid': row[2],
+                        'color': row[9],
+                        'manufacturer': manufacturer,
+                        'operator': operator,
+                        'mass': row[12],
+                        'validity': int(row[15]) if row[15] != "" else None,
+                        'remarks': row[16] if row[16] != "" else None,
+                        'popular_name': row[7] if row[7] != "" else None
+                    }
                 )
-                aircraft.save()
             except Exception as e:
                 print("aircraft error", str(e))
-            # print("aircraft", aircraft)
         return True, None
