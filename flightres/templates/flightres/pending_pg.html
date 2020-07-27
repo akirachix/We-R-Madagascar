@@ -51,7 +51,8 @@
                         <div class="message">
                             <h1>Thanks for your request.</h1>
                             <figure class="result"><img src="{% static '/img/pending.svg' %}" alt="verified"></figure>
-                            <p> Your permission request is pending. You will notified when your request is processed further.</p>
+                            <p> Your permission request is pending. You will notified when your request is processed
+                                further.</p>
                         </div>
                     </div>
                 </div>
@@ -115,8 +116,8 @@
                                         <p><b>Pilot Phone Number:
                                             </b><span>{{ object.pilot_id.phone_number }}</span>
                                         </p>
-                                        <p><b>Pilot CV URL: </b><span><a
-                                                    href="{{ object.pilot_id.cv_url }}">View File</a></span>
+                                        <p><b>Pilot CV URL: </b><span><a href="{{ object.pilot_id.cv_url }}">View
+                                                    File</a></span>
                                         </p>
                                     </div>
                                 </div>
@@ -124,44 +125,63 @@
                         </div>
 
                         <div class="row row-details">
-                            <div class="col-md-4 col-sm-7 column">
+                            <div class="col-md-6 col-sm-7 column">
                                 <div class="details-info">
                                     <h6 class="col-title">Location map</h6>
                                     <div class="map">
-                                        <iframe
-                                        src="{{ object.location }}"
-                                            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-                                            tabindex="0"></iframe>
+                                        <div id="location-map" style="height: 300px; width: 300px;">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-7 column">
-                                <div class="details-info">
-                                    <h6 class="col-title">Flight plan</h6>
-                                    <!-- <a href="{{ object.flight_plan_url }}">Map</a> -->
-                                    <div class="map">
-                                        <iframe
-                                            src="{{ object.flight_plan_url }}"
-                                            frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
-                                            tabindex="0"></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-7 column">
+                            <div class="col-md-6 col-sm-7 column">
                                 <div class="details-info">
                                     <h6 class="col-title">Images</h6>
-                                    <div class="row g-lg-2 g-3">
-                                        <div class="col-md-6 col-6">
-                                            <figure><img src="{% static 'img/img-gallery1.png' %}" alt="img"></figure>
+                                    <div class="row g-2">
+                                        <div class="col-lg-6 col-md-7">
+                                            <div class="file-upload">
+                                                <a href="#/" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">description</i>
+                                                    </div>
+                                                    <div class="file-info">
+                                                        <div class="file-wrap">
+                                                            <i class="material-icons">description</i>
+                                                            <p>Pilot Cv</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 col-6">
-                                            <figure><img src="{% static 'img/img-gallery2.png' %}" alt="img"></figure>
+                                        <div class="col-lg-6 col-md-7">
+                                            <div class="file-upload">
+                                                <a href="#/" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">map</i>
+                                                    </div>
+                                                    <div class="file-info">
+                                                        <div class="file-wrap">
+                                                            <i class="material-icons">map</i>
+                                                            <p>Flight Plan</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 col-6">
-                                            <figure><img src="{% static 'img/img-gallery3.png' %}" alt="img"></figure>
-                                        </div>
-                                        <div class="col-md-6 col-6">
-                                            <figure><img src="{% static 'img/img-gallery5.png' %}" alt="img"></figure>
+                                        <div class="col-lg-6 col-md-7">
+                                            <div class="file-upload">
+                                                <a href="#/" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">image</i>
+                                                    </div>
+                                                    <div class="file-info">
+                                                        <div class="file-wrap">
+                                                            <i class="material-icons">image</i>
+                                                            <p>Location Images</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -188,6 +208,55 @@
     <script src="{% static 'datatable/datatables.min.js' %}"></script>
     <script src="{% static 'js/custom-datatable.js' %}"></script>
     <script src="{% static 'js/drone.js' %}"></script>
+
+    <script>
+        var lat = '{{ object.latitude|safe }}';
+        var lon = '{{ object.longitude|safe }}';
+
+        var map = L.map('location-map').setView([lat, lon], 15);
+
+        var mark = L.marker([lat, lon], 15).addTo(map);
+
+        var circle = L.circle([lat, lon], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 100
+        }).addTo(map);
+
+        osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        })
+
+        googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(map);
+        googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+
+
+        var baseLayers = {
+            "OpenStreetMap": osm,
+            "Google Streets": googleStreets,
+            "Google Hybrid": googleHybrid,
+            "Google Satellite": googleSat,
+            "Google Terrain": googleTerrain,
+
+        };
+
+        layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
+    </script>
 
 
 </body>

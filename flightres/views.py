@@ -27,8 +27,9 @@ def dashboardView(request):
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission
-    queryset = FlightPermission.objects.all()
+    queryset = FlightPermission.objects.all().order_by('-flight_start_date')
     template_name = 'flightres/flightpermission_list.html'
+    
 
     def get_context_data(self, *args, **kwargs):
         com = super(FlightPermissionList, self).get_context_data(
