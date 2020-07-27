@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from django.core import serializers
 import requests
 from django.contrib.auth import get_user
+import datetime
 
 from .models import FlightPermission, Report
 from registry.models import Aircraft, Operator
@@ -21,7 +22,32 @@ def homeView(request):
 
 @login_required
 def dashboardView(request):
-    return render(request, 'flightres/dashboard.html')
+    # data for cards on top of the dashboard page
+    top_row_data = []
+    drone_op_num = Operator.objects.all().count()
+    drone_num = Aircraft.objects.all().count()
+    complaint_num = Report.objects.all().count()
+    solved_complaints = Report.objects.filter(status='Resolved').count()
+    pending_complaints = Report.objects.filter(status='Pending').count()
+    top_row_data.append([drone_op_num, drone_num, complaint_num,
+                         solved_complaints, pending_complaints])
+
+    #data for pie chart
+    pie_data = []
+    pie_data.append([solved_complaints, pending_complaints])
+
+    day_delta = datetime.timedelta(days=30)
+    start_date = datetime.date(datetime.date.today().year, 1, 1)
+    end_date = datetime.date(datetime.date.today().year, 12, 30)
+    barchart_data = []
+    for i in range(12):
+        getDay = (start_date + i*day_delta)
+        getEndday = getDay + datetime.timedelta(days=30)
+        #data for bar chart
+        total_requests = FlightPermission.objects.filter(created_date__gt=getDay, created_date__lt=getEndday).count()
+        approved_requests = FlightPermission.objects.filter(status='Approved', created_date__gt=getDay, created_date__lt=getEndday).count()
+        barchart_data.append([total_requests, approved_requests])
+    return render(request, 'flightres/dashboard.html', {'top_data': top_row_data, 'bar_data': barchart_data, 'pie_data': pie_data})
 
 
 class FlightPermissionList(LoginRequiredMixin, ListView):
@@ -29,7 +55,6 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
     model = FlightPermission
     queryset = FlightPermission.objects.all().order_by('-flight_start_date')
     template_name = 'flightres/flightpermission_list.html'
-    
 
     def get_context_data(self, *args, **kwargs):
         com = super(FlightPermissionList, self).get_context_data(

@@ -1,9 +1,11 @@
 {% extends 'flightres/base.html' %}
 {% load static %}
 
+
 {% block links %}
-<link rel="stylesheet" href="{% static 'css/apexcharts.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 {% endblock links %}
+
 
 {% block body %}
 <main class="admin-main">
@@ -16,7 +18,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="info-content">
                         <div class="total-count">
-                            <h4>500</h4>
+                            <h4>{{ top_data.0.0 }}</h4>
                             <span class="span-dark"><i class="material-icons">person</i></span>
                         </div>
                         <span class="count-label">Registered Drone Operators</span>
@@ -26,7 +28,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="info-content">
                         <div class="total-count">
-                            <h4>500</h4>
+                            <h4>{{ top_data.0.1 }}</h4>
                             <span class="span-light"><i class="material-icons">local_airport</i></span>
                         </div>
                         <span class="count-label">Registered Drone</span>
@@ -36,7 +38,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="info-content">
                         <div class="total-count">
-                            <h4>500</h4>
+                            <h4>{{ top_data.0.2 }}</h4>
                             <span class="span-dark"><i class="material-icons">email</i></span>
                         </div>
                         <span class="count-label">Registered Complaints</span>
@@ -47,14 +49,14 @@
                     <div class="info-content info-content-wrap">
                         <div class="info-content-part">
                             <div class="total-count">
-                                <h4>500 <span class="count-label">Solved Complaints</span></h4>
+                                <h4>{{ top_data.0.3 }} <span class="count-label">Solved Complaints</span></h4>
                                 <span class="span-light"><i class="material-icons">check_circle</i></span>
                             </div>
 
                         </div>
                         <div class="info-content-part">
                             <div class="total-count">
-                                <h4>500 <span class="count-label">Pending Complaints</span></h4>
+                                <h4>{{ top_data.0.4 }} <span class="count-label">Pending Complaints</span></h4>
                                 <span class="span-light"><i class="material-icons">access_time</i></span>
                             </div>
 
@@ -74,9 +76,9 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <!-- <div class="graph-item"> -->
-                                    <div id="line-chart"></div>
-                                    <!-- </div> -->
+                                    <div class="graph-item">
+                                        <div id="line-chart"></div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -92,7 +94,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="graph-item">
-                                        <!-- <div id="pie-chart"></div> -->
+                                        <div id="pie-chart"></div>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +105,84 @@
         </div>
     </div>
 </main>
+
+<script>
+    //pie-chart
+    var options = {
+        series: [{% for i in pie_data %}{{ i.0}}, {{i.1}}{% if not forloop.last %}, {% endif %}{% endfor %}],
+        colors: ['#FCBA15', '#3346D1'],
+        chart: {
+            width: '100%',
+            type: 'donut',
+        },
+        labels: ['Solved', 'Pending'],
+        /*  responsive: [{
+           breakpoint: 480,
+           options: {
+             chart: {
+               height: 200,
+             },
+             legend: {
+               position: 'right center'
+             },
+           }
+         }] */
+    };
+
+    var chart = new ApexCharts(document.querySelector("#pie-chart"), options);
+    chart.render();
+
+    // line-chart
+    var options = {
+        series: [
+            {
+                name: "Total Requests",
+                data: [{% for i in bar_data %}{{ i.0}}{% if not forloop.last %}, {% endif %}{% endfor %}]
+            },
+            {
+                name: "Approved Requests",
+                data: [{% for i in bar_data %}{{ i.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}]
+            }
+        ],
+        colors: ['#3346D1', '#00BCFF'],
+        chart: {
+            height: 370,
+            type: 'line',
+            zoom: {
+                enabled: false
+            }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    height: 200,
+                },
+            },
+        }],
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            width: 2,
+            curve: 'straight'
+        },
+        markers: {
+            size: 5
+        },
+        grid: {
+            row: {
+                colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+            },
+        },
+        xaxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#line-chart"), options);
+    chart.render();
+
+</script>
 {% endblock body %}
-{% block footer_links %}
-    <script src="js/apexcharts.min.js"></script>
-{% endblock footer_links %}

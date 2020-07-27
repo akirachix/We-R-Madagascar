@@ -28,6 +28,7 @@ class FlightPermission(models.Model):
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, blank=True)
     status = models.TextField(choices = STATUS_CHOICES, default='Pending')
     location = models.URLField(max_length=200, null=True, blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     twilio = Twilio()
 
