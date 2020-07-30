@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Report, FlightPermission, Pilots
+from .models import Report, FlightPermission, Pilots, LocalAuthorities
 
 class FlightRegistryAdmin(admin.ModelAdmin):
-    list_display = ['uav_uid', 'company_name', 'status']
+    list_display = ['uav_uid', 'company_name', 'status', 'latitude', 'longitude']
     search_fields = ['uav_uid',]
 
 class WhatsappComplainAdmin(admin.ModelAdmin):
@@ -13,9 +13,14 @@ class PilotsAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'company']
     search_fields = ['id', 'name']
 
+class LocalAuthoritiesAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'phone_number']
+    search_fields = ['id', 'name', 'phone_number']
+
 admin.site.register(Report, WhatsappComplainAdmin)
 admin.site.register(FlightPermission, FlightRegistryAdmin)
 admin.site.register(Pilots, PilotsAdmin)
+admin.site.register(LocalAuthorities, LocalAuthoritiesAdmin)
 
 
 
