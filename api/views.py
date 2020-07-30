@@ -146,6 +146,27 @@ class SheetUploadView(ModelViewSet):
                         status=status.HTTP_400_BAD_REQUEST, )
 
 
+class OldPermissionIdValidation(APIView):
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        data = request.data
+        print(data)
+        permission_id = data.get('id')
+        try:
+            if FlightPermission.objects.filter(pk=permission_id).exists():
+                return JsonResponse(
+                    {'valid': True}, status=status.HTTP_200_OK, )
+            else:
+                return JsonResponse(
+                    {'valid': False},
+                    status=status.HTTP_200_OK, )
+        except ValueError:
+            return JsonResponse(
+                {'valid': False},
+                status=status.HTTP_200_OK, )
+
+
 class UniqueTeatDataView(APIView):
     permission_classes = (AllowAny,)
 
@@ -155,10 +176,10 @@ class UniqueTeatDataView(APIView):
         uin = data.get('uuid')
         print(uin)
         if Aircraft.objects.filter(unid=uin).exists():
-            return Response(
+            return JsonResponse(
                 {'valid': True}, status=status.HTTP_200_OK, )
         else:
-            return Response(
+            return JsonResponse(
                 {'valid': False},
                 status=status.HTTP_200_OK, )
 
