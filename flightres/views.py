@@ -1,10 +1,17 @@
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.core import serializers
+import decimal
+import requests
+from django.contrib.auth import get_user
+import datetime
 
 from .models import FlightPermission, Report
 from registry.models import Aircraft, Operator
@@ -16,26 +23,48 @@ def homeView(request):
 
 @login_required
 def dashboardView(request):
-    return render(request, 'flightres/dashboard.html')
+    # data for cards on top of the dashboard page
+    top_row_data = []
+    drone_op_num = Operator.objects.all().count()
+    drone_num = Aircraft.objects.all().count()
+    complaint_num = Report.objects.all().count()
+    solved_complaints = Report.objects.filter(status='Resolved').count()
+    pending_complaints = Report.objects.filter(status='Pending').count()
+    top_row_data.append([drone_op_num, drone_num, complaint_num,
+                         solved_complaints, pending_complaints])
 
-import json
-from django.core.serializers.json import DjangoJSONEncoder
+    #data for pie chart
+    pie_data = []
+    pie_data.append([solved_complaints, pending_complaints])
 
+    day_delta = datetime.timedelta(days=30)
+    start_date = datetime.date(datetime.date.today().year, 1, 1)
+    end_date = datetime.date(datetime.date.today().year, 12, 30)
+    barchart_data = []
+    for i in range(12):
+        getDay = (start_date + i*day_delta)
+        getEndday = getDay + datetime.timedelta(days=30)
+        #data for bar chart
+        total_requests = FlightPermission.objects.filter(created_date__gt=getDay, created_date__lt=getEndday).count()
+        approved_requests = FlightPermission.objects.filter(status='Approved', created_date__gt=getDay, created_date__lt=getEndday).count()
+        barchart_data.append([total_requests, approved_requests])
+    return render(request, 'flightres/dashboard.html', {'top_data': top_row_data, 'bar_data': barchart_data, 'pie_data': pie_data})
 
 
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission
-    queryset = FlightPermission.objects.all()
+    queryset = FlightPermission.objects.all().order_by('-flight_start_date')
     template_name = 'flightres/flightpermission_list.html'
 
     def get_context_data(self, *args, **kwargs):
-        com = super(FlightPermissionList, self).get_context_data(*args, **kwargs)
+        com = super(FlightPermissionList, self).get_context_data(
+            *args, **kwargs)
         data = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid__operator__phone_number',
-                'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
-                'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_name', 'pilot_phone_number',
-                'pilot_cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
-                )
+                                               'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
+                                               'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number',
+                                               'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
+                                               )
         json_data = json.dumps(list(data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
         return com
@@ -59,7 +88,7 @@ def flightReqResponseView(request, pk):
     elif selected_flight.status == 'Rejected':
         return render(request, 'flightres/reject_pg.html', {'object': selected_flight})
     else:
-        return render(request, 'flightres/pending_pg.html')
+        return render(request, 'flightres/pending_pg.html', {'object': selected_flight})
 
 
 @login_required
@@ -86,14 +115,66 @@ class ComplainListView(LoginRequiredMixin, ListView):
     template_name = 'flightres/complaint_management.html'
     model = Report
 
+    def get_context_data(self, *args, **kwargs):
+        com = super(ComplainListView, self).get_context_data(
+            *args, **kwargs)
+        complains = Report.objects.all()
+        data = []
+        for complain in complains:
+            this_lat = complain.latitude
+            this_lon = complain.longitude
+            lower_lat = this_lat - decimal.Decimal(0.090)
+            upper_lat = this_lat + decimal.Decimal(0.090)
+            lower_lon = this_lon - decimal.Decimal(0.090)
+            upper_lon = this_lon + decimal.Decimal(0.090)
+            # print(lower_lat, upper_lat, lower_lon, upper_lon)
+            nearby = FlightPermission.objects.filter(latitude__lte=upper_lat,
+                        latitude__gte=lower_lat,
+                        longitude__lte=upper_lon,
+                        longitude__gte=lower_lon)[:4]
+            data.append([complain, nearby])
+        com['data'] = data
+        flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid__operator__phone_number',
+                                               'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
+                                               'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number',
+                                               'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
+                                               )
+        json_data = json.dumps(list(flight_objects), cls=DjangoJSONEncoder)
+        com['json_data'] = json_data
+        # print(data)
+        return com
+
+@login_required
+def uploadSheet(request):
+    if request.method == 'POST' and request.FILES['sheet']:
+        name = request.POST.get('name')
+        myfile = request.FILES['sheet']
+        current_user = get_user(request)
+        fs = FileSystemStorage()
+        fs.location = "./uploads/sheet_uploads"
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+
+        files = {
+            'name': (None, name),
+            'upload_sheet': ('./uploads/sheet_uploads/{}'.format(uploaded_file_url), open('./uploads/sheet_uploads/{}'.format(uploaded_file_url), 'rb')),
+            # 'created_by': current_user
+        }
+
+        response = requests.post(
+            'http://localhost:8000/np/api/v1/sheet-upload/', files=files)
+
+    return redirect('/np/dashboard/permission')
+
+
 class AboutPageView(TemplateView):
     template_name = 'flightres/about.html'
+
 
 class GuidelinesPageView(TemplateView):
     template_name = 'flightres/guidelines.html'
 
+
 class OperdatorDatabaseView(LoginRequiredMixin, ListView):
     template_name = 'flightres/operators_db.html'
     queryset = Aircraft.objects.all()
-
-

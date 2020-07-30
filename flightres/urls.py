@@ -2,13 +2,14 @@ from django.urls import path
 
 # importing views from views..py
 from .views import FlightPermissionList, approvePerm, flightReqResponseView, ComplainListView, dashboardView, \
-        updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView
+        updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView, uploadSheet
 
 urlpatterns = [
     path('', dashboardView, name='dashboard'),
     path('permission', FlightPermissionList.as_view(), name="permission"),
     path('approve_perm/<int:pk>/<str:action>',
          approvePerm, name='approve-perm'),
+    path('upload_sheet', uploadSheet, name="upload-sheet"),
     path('request_response/<int:pk>',
          flightReqResponseView, name='request-response'),
     path('complain', ComplainListView.as_view(), name='complain-list'),
