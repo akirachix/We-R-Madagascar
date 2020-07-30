@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.core import serializers
+import decimal
 import requests
 from django.contrib.auth import get_user
 import datetime
@@ -114,6 +115,34 @@ class ComplainListView(LoginRequiredMixin, ListView):
     template_name = 'flightres/complaint_management.html'
     model = Report
 
+    def get_context_data(self, *args, **kwargs):
+        com = super(ComplainListView, self).get_context_data(
+            *args, **kwargs)
+        complains = Report.objects.all()
+        data = []
+        for complain in complains:
+            this_lat = complain.latitude
+            this_lon = complain.longitude
+            lower_lat = this_lat - decimal.Decimal(0.090)
+            upper_lat = this_lat + decimal.Decimal(0.090)
+            lower_lon = this_lon - decimal.Decimal(0.090)
+            upper_lon = this_lon + decimal.Decimal(0.090)
+            # print(lower_lat, upper_lat, lower_lon, upper_lon)
+            nearby = FlightPermission.objects.filter(latitude__lte=upper_lat,
+                        latitude__gte=lower_lat,
+                        longitude__lte=upper_lon,
+                        longitude__gte=lower_lon)[:4]
+            data.append([complain, nearby])
+        com['data'] = data
+        flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid__operator__phone_number',
+                                               'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
+                                               'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number',
+                                               'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
+                                               )
+        json_data = json.dumps(list(flight_objects), cls=DjangoJSONEncoder)
+        com['json_data'] = json_data
+        # print(data)
+        return com
 
 @login_required
 def uploadSheet(request):

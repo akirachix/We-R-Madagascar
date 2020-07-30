@@ -89,7 +89,7 @@ class Report(models.Model):
         super().save(force_insert, force_update, using, update_fields)
 
     def __str__(self):
-        return "self.uav_uid"
+        return str(self.uav_uid)
 
 
 class Pilots(models.Model):
