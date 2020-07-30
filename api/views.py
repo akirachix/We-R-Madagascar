@@ -54,7 +54,7 @@ class FlightRegistryView(ModelViewSet):
         """
         Instantiates and returns the list of permissions that this view requires.
         """
-        if self.action in ['create', 'update', 'partial_update', 'list', 'retrieve']:
+        if self.action in ['update', 'partial_update', 'list', 'retrieve']:
             permission_classes = [IsAuthenticated]
         else:
             permission_classes = [AllowAny]
@@ -175,7 +175,9 @@ class PilotDetailAPIView(ModelViewSet):
             data = serializer.data
             return Response(serializer.data, status=200)
         except:
-            return Response(data={'Message': "Pilot with ID {} not found. Please add pilot information".format(kwargs['pk'])}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                data={'Message': "Pilot with ID {} not found. Please add pilot information".format(kwargs['pk'])},
+                status=status.HTTP_400_BAD_REQUEST)
 
     def create(self, request, **kwargs):
         serializer = PilotsSerializer(data=request.data)
@@ -203,4 +205,6 @@ class GetPilotFromPermissionView(RetrieveModelMixin, GenericViewSet):
             data = serializer.data
             return Response(serializer.data, status=200)
         except:
-            return Response(data={'Message': "Pilot with ID {} not found. Please add pilot information".format(kwargs['pk'])}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                data={'Message': "Pilot with ID {} not found. Please add pilot information".format(kwargs['pk'])},
+                status=status.HTTP_400_BAD_REQUEST)
