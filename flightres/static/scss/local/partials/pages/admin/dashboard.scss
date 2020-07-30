@@ -96,7 +96,7 @@
                 @media #{$breakpoint-desktop}{
                     margin: 15px 0 20px;
                 }
-               
+
                 .info-content{
                     @include transition(all .4s ease);
                     /* flex: 0 0 24%;
@@ -235,7 +235,7 @@
                             line-height: 12px;
                         }
                     }
-                    
+
                     .info-content-part{
                         background: $white-color;
                         padding: 14px 20px 8px;
@@ -309,7 +309,7 @@
                                         line-height: 12px;
                                     }
                                 }
-                            }  
+                            }
                         }
                     }
                 }
@@ -388,7 +388,7 @@
                         @include align-items-center;
                         @media #{$breakpoint-lg-desktop}{
                             padding: 1.25rem 1.25rem 2rem;
-                            margin-bottom: -30px; 
+                            margin-bottom: -30px;
                         }
                         #pie-chart{
                             @media #{$breakpoint-lg-desktop}{
@@ -480,7 +480,7 @@
                                 }
                             }
                         }
-                    } 
+                    }
                 }
                 .dataTables_scroll{
                     padding-top: 20px;
@@ -495,7 +495,7 @@
         aside{
             &.admin-sidebar{
                 max-width:50px;
-    
+
             }
         }
         main{
