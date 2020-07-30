@@ -30,7 +30,7 @@ $(document).ready(function () {
         <div class="popup-body">
             <span class="close-icon"><i class="material-icons">close</i></span>
             <div class="popup-header">
-                <h3>Permission Request for <b>ID `+ data.uav_uid + `</b></h3>
+                <h3>Permission Request for <b>ID ` + data.uav_uid + `</b></h3>
             </div>
             <div class="popup-content">
                 <div class="drone-details">
@@ -43,15 +43,15 @@ $(document).ready(function () {
                                         <div class="content-list">
                                             <p>
                                                 <b>Company Name:</b>
-                                                <span>`+ data.company_name + `</span>
+                                                <span>` + data.company_name + `</span>
                                             </p>
                                             <p>
                                                 <b>Phone Number:</b>
-                                                <span>`+ data.uav_uuid__operator__phone_number + `</span>
+                                                <span>` + data.uav_uuid__operator__phone_number + `</span>
                                             </p>
                                             <p>
                                                 <b>Email:</b>
-                                                <span>`+ data.uav_uuid__operator__email + `</span>
+                                                <span>` + data.uav_uuid__operator__email + `</span>
                                             </p>
                                         </div>
                                     </li>
@@ -60,24 +60,19 @@ $(document).ready(function () {
                                         <h4>Flight info</h4>
                                         <div class="content-list">
                                             <p><b>Start Date:
-                                                </b><span>`+ data.flight_start_date + `</span>
+                                                </b><span>` + data.flight_start_date + `</span>
                                             </p>
                                             <p><b>End Date:
-                                                </b><span>`+ data.flight_end_date + `</span>
+                                                </b><span>` + data.flight_end_date + `</span>
                                             </p>
                                             <p><b> Time:
-                                                </b><span>`+ data.flight_time + `</span>
+                                                </b><span>` + data.flight_time + `</span>
                                             </p>
                                             <p><b>Purpose:
-                                                </b><span>`+ data.flight_purpose + `</span>
+                                                </b><span>` + data.flight_purpose + `</span>
                                             </p>
                                             <p><b>Aircraft Name:
-                                                </b><span>`+ data.uav_uuid__popular_name + `</span>
-                                            </p>
-                                            <p><b>Drone Insurance: </b><span><u><a
-                                                href=`+ data.flight_insurance_url + `
-                                                            target="_blank">Link to
-                                                            document</a></u></span>
+                                                </b><span>` + data.uav_uuid__popular_name + `</span>
                                             </p>
                                         </div>
                                     </li>
@@ -86,16 +81,12 @@ $(document).ready(function () {
                                         <h4>Pilot info</h4>
                                         <div class="content-list">
                                             <p><b>Pilot Name: </b><span>
-                                                `+ data.pilot_id__name + `
+                                                ` + data.pilot_id__name + `
                                                 </span>
                                                 <p><b>Pilot Phone Number:
-                                                </b><span>`+ data.pilot_id__phone_number + `</span>
+                                                </b><span>` + data.pilot_id__phone_number + `</span>
                                                 </p>
-                                                <p><b>Pilot CV: </b><span><u><a
-                                                    href=`+ data.pilot_id__cv_url + `
-                                                            target="_blank">Link to
-                                                            CV</a></u></span>
-                                            </p>
+                                                
                                         </div>
 									</li>
 									<li>
@@ -103,7 +94,7 @@ $(document).ready(function () {
                                         <div class="row g-2">
 											<div class="col-md-4">
 												<div class="file-upload">
-													<a href="`+ data.pilot_cv_url + `" class="file-link">
+													<a href="` + data.flight_plan_url + `" class="file-link" target="_blank">
 														<div class="file-icon">
 															<i class="material-icons">description</i>
 														</div>
@@ -117,21 +108,21 @@ $(document).ready(function () {
 											</div>
 											<div class="col-md-4">
 												<div class="file-upload">
-													<a href="`+ data.flight_plan_url + `" class="file-link">
+													<a href="` + data.flight_plan_url + `" class="file-link" target="_blank">
 														<div class="file-icon">
 															<i class="material-icons">description</i>
 														</div>
-														<p>Flight Plan URL</p>
+														<p>Flight Plan</p>
 													</a>
 												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="file-upload">
-													<a href="#" class="file-link">
+													<a href="` + data.flight_plan_url + `" class="file-link" target="_blank">
 														<div class="file-icon">
 															<i class="material-icons">description</i>
 														</div>
-														<p>Images</p>
+														<p>Insurance</p>
 													</a>
 												</div>
 											</div>
@@ -143,11 +134,11 @@ $(document).ready(function () {
                         <div class="col-xl-7 col-sm-12">
                             <div class="map-content col-right">
                                 <div class="tab-content-holder current" id="location">
-                                    <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `"></div>
+                                    <div id="map" class="map" value="` + data.latitude + `, ` + data.longitude + `"></div>
                                 </div>
                                 <div class="buttons is-end">
-                                    <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/approve" class="common-button is-bg">Approve</a>
-                                    <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/deny" class="common-button is-border cancel-button">Deny</a>
+                                    <a href="/np/dashboard/approve_perm/` + data.uav_uid + `/approve" class="common-button is-bg">Approve</a>
+                                    <a href="/np/dashboard/approve_perm/` + data.uav_uid + `/deny" class="common-button is-border cancel-button">Deny</a>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +216,7 @@ $(document).ready(function () {
         // map.flyTo([lat, lon], 13)
         //   myMap.panTo([2, 22]);
 
-        layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
+        layerswitcher = L.control.layers(baseLayers, {}, {collapsed: true}).addTo(map);
     }
 });
 
