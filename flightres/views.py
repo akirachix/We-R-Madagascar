@@ -33,7 +33,7 @@ def dashboardView(request):
     top_row_data.append([drone_op_num, drone_num, complaint_num,
                          solved_complaints, pending_complaints])
 
-    #data for pie chart
+    # data for pie chart
     pie_data = []
     pie_data.append([solved_complaints, pending_complaints])
 
@@ -42,13 +42,15 @@ def dashboardView(request):
     end_date = datetime.date(datetime.date.today().year, 12, 30)
     barchart_data = []
     for i in range(12):
-        getDay = (start_date + i*day_delta)
+        getDay = (start_date + i * day_delta)
         getEndday = getDay + datetime.timedelta(days=30)
-        #data for bar chart
+        # data for bar chart
         total_requests = FlightPermission.objects.filter(created_date__gt=getDay, created_date__lt=getEndday).count()
-        approved_requests = FlightPermission.objects.filter(status='Approved', created_date__gt=getDay, created_date__lt=getEndday).count()
+        approved_requests = FlightPermission.objects.filter(status='Approved', created_date__gt=getDay,
+                                                            created_date__lt=getEndday).count()
         barchart_data.append([total_requests, approved_requests])
-    return render(request, 'flightres/dashboard.html', {'top_data': top_row_data, 'bar_data': barchart_data, 'pie_data': pie_data})
+    return render(request, 'flightres/dashboard.html',
+                  {'top_data': top_row_data, 'bar_data': barchart_data, 'pie_data': pie_data})
 
 
 class FlightPermissionList(LoginRequiredMixin, ListView):
@@ -60,10 +62,14 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
     def get_context_data(self, *args, **kwargs):
         com = super(FlightPermissionList, self).get_context_data(
             *args, **kwargs)
-        data = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid__operator__phone_number',
-                                               'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
-                                               'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number',
-                                               'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
+        data = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name',
+                                               'uav_uuid__operator__phone_number',
+                                               'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date',
+                                               'flight_time', 'flight_purpose',
+                                               'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name',
+                                               'pilot_id__phone_number',
+                                               'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
+                                               'location', 'status'
                                                )
         json_data = json.dumps(list(data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
@@ -129,20 +135,25 @@ class ComplainListView(LoginRequiredMixin, ListView):
             upper_lon = this_lon + decimal.Decimal(0.090)
             # print(lower_lat, upper_lat, lower_lon, upper_lon)
             nearby = FlightPermission.objects.filter(latitude__lte=upper_lat,
-                        latitude__gte=lower_lat,
-                        longitude__lte=upper_lon,
-                        longitude__gte=lower_lon)[:4]
+                                                     latitude__gte=lower_lat,
+                                                     longitude__lte=upper_lon,
+                                                     longitude__gte=lower_lon)[:4]
             data.append([complain, nearby])
         com['data'] = data
-        flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid__operator__phone_number',
-                                               'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
-                                               'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number',
-                                               'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
-                                               )
+        flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name',
+                                                         'uav_uuid__operator__phone_number',
+                                                         'uav_uuid__operator__email', 'flight_start_date',
+                                                         'flight_end_date', 'flight_time', 'flight_purpose',
+                                                         'uav_uuid__popular_name', 'flight_insurance_url',
+                                                         'pilot_id__name', 'pilot_id__phone_number',
+                                                         'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
+                                                         'location', 'status'
+                                                         )
         json_data = json.dumps(list(flight_objects), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
         # print(data)
         return com
+
 
 @login_required
 def uploadSheet(request):
@@ -157,7 +168,8 @@ def uploadSheet(request):
 
         files = {
             'name': (None, name),
-            'upload_sheet': ('./uploads/sheet_uploads/{}'.format(uploaded_file_url), open('./uploads/sheet_uploads/{}'.format(uploaded_file_url), 'rb')),
+            'upload_sheet': ('./uploads/sheet_uploads/{}'.format(uploaded_file_url),
+                             open('./uploads/sheet_uploads/{}'.format(uploaded_file_url), 'rb')),
             # 'created_by': current_user
         }
 
