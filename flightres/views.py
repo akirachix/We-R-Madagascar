@@ -63,7 +63,7 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
     def get_context_data(self, *args, **kwargs):
         com = super(FlightPermissionList, self).get_context_data(
             *args, **kwargs)
-        data = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name',
+        raw_data = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name',
                                                'uav_uuid__operator__phone_number',
                                                'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date',
                                                'flight_time', 'flight_purpose',
@@ -72,8 +72,15 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
                                                'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
                                                'location', 'status'
                                                )
-        json_data = json.dumps(list(data), cls=DjangoJSONEncoder)
+        json_data = json.dumps(list(raw_data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
+        object_data = []
+        flight_objects = FlightPermission.objects.all().order_by('-flight_start_date')
+        for flight_object in flight_objects:
+            due = datetime.date.today() - flight_object.flight_start_date
+            due_in = due.days
+            object_data.append([flight_object, due_in])
+        com['object_data'] = object_data
         return com
 
 

@@ -3,104 +3,106 @@
 
 {% block body %}
 
-    <main class="admin-main">
-        <div class="main-card">
-            <div class="card-header">
-                <h1>FLIGHT PERMISSION / MANAGE FLIGHT PERMISSION</h1>
-            </div>
-            <div class="card-body">
-                <button class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal" class="modal-link"
-                                                                data-toggle="modal" data-target="#upload-sheet-modal">Upload
+<main class="admin-main">
+    <div class="main-card">
+        <div class="card-header">
+            <h1>FLIGHT PERMISSION / MANAGE FLIGHT PERMISSION</h1>
+        </div>
+        <div class="card-body">
+            <button class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal" class="modal-link"
+                    data-toggle="modal" data-target="#upload-sheet-modal">Upload
                     Sheet</a></button>
-                <table id="admin-datatable" class="admin-datatable ">
-                    <thead>
+            <table id="admin-datatable" class="admin-datatable ">
+                <thead>
 
                     <tr>
                         <th class="serial-th">ID</th>
                         <th>Start Date</th>
                         <th>End Date</th>
+                        <th>Due in</th>
                         <th>Purpose</th>
                         <th>Flight Location</th>
                         <th>Status</th>
                         <th class="modal-th"></th>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for object in object_list %}
-                        <tr class="highlight">
+                </thead>
+                <tbody>
+                    {% for object, due_in in object_data %}
+                    <tr class="highlight">
+                        <td>{{ object.uav_uid }}</td>
+                        <td>
+                            <time>{{ object.flight_start_date }}</time>
+                        </td>
+                        <td>
+                            <time>{{ object.flight_end_date }}</time>
+                        </td>
 
-                            <td>{{ object.uav_uid }}</td>
-                            <td>
-                                <time>{{ object.flight_start_date }}</time>
-                            </td>
-                            <td>
-                                <time>{{ object.flight_end_date }}</time>
-                            </td>
+                        {% if due_in < 0 %}
+                        <td>---</td>
+                        {% else %}
+                        <td>{{ due_in }} Days</td>
+                        {% endif %}
 
-                            <td>{{ object.pilot_name }}</td>
-                            <td>Latitude: {{ object.latitude }} Longitude: {{ object.longitude }}</td>
-                            {% if object.status == 'Approved' %}
-                                <td><span class="status approved">{{ object.status }}</span></td>
-                            {% elif object.status == 'Rejected' %}
-                                <td><span class="status failed">{{ object.status }}</span></td>
-                            {% else %}
-                                <td><span class="status pending">{{ object.status }}</span></td>
-                            {% endif %}
-                            <td class="table-action">
-                                <button data-toggle="modal" data-target="#open-modal" modal-link="open-modal"
-                                        type="button"
-                                        class="btn modal-link">
-                                    <i id="expand_{{ object.uav_uid }}"
-                                       class="material-icons expandData">chevron_right</i>
-                                </button>
-                                <div class="popup" id="open-modal">
-                                    <div id="modal-dialog"
-                                         class="popup-container lg-popup map-popup">
-                                        <div class="popup-body">
-                                        <span class="close-icon"><i
-                                                class="material-icons">close</i></span>
-                                            <div class="popup-body" id="flightPopUp">
-                                            </div>
+                        <td><b>Permission detail {{ object.uav_uid }}</b></td>
+                        <td>{{ object.pilot_name }}</td>
+                        <td>Latitude: {{ object.latitude }} Longitude: {{ object.longitude }}</td>
+                        {% if object.status == 'Approved' %}
+                        <td><span class="status approved">{{ object.status }}</span></td>
+                        {% elif object.status == 'Rejected' %}
+                        <td><span class="status failed">{{ object.status }}</span></td>
+                        {% else %}
+                        <td><span class="status pending">{{ object.status }}</span></td>
+                        {% endif %}
+                        <td class="table-action">
+                            <button data-toggle="modal" data-target="#open-modal" modal-link="open-modal" type="button"
+                                class="btn modal-link">
+                                <i id="expand_{{object.uav_uid}}" class="material-icons expandData">chevron_right</i>
+                            </button>
+                            <div class="popup" id="open-modal">
+                                <div id="modal-dialog" class="popup-container lg-popup map-popup">
+                                    <div class="popup-body">
+                                        <span class="close-icon"><i class="material-icons">close</i></span>
+                                        <div class="popup-body" id="flightPopUp">
                                         </div>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                    </tr>
                     {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
-        <div class="popup" tabindex="-1" role="dialog" id="upload-sheet-modal">
-            <div class="popup-container lg-popup map-popup">
-                <div class="popup-body">
-                    <span class="close-icon"><i class="material-icons">close</i></span>
-                    <div class="popup-header">
-                        <h3><b>Upload Data Sheets</b></h3>
+    </div>
+    <div class="popup" tabindex="-1" role="dialog" id="upload-sheet-modal">
+        <div class="popup-container lg-popup map-popup">
+            <div class="popup-body">
+                <span class="close-icon"><i class="material-icons">close</i></span>
+                <div class="popup-header">
+                    <h3><b>Upload Data Sheets</b></h3>
 
-                    </div>
-                    <div class="popup-content">
-                        <div class="drone-details">
-                            <div class="row gx-md-3 gx-lg-3">
-                                <div class="col-xl-12 col-sm-12">
-                                    <div class="drone-content col-left col-operators">
-                                        <form action="{% url 'dashboard:upload-sheet' %}" method="POST"
-                                              enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            <div class="form-group">
-                                                <label for="name">Name:</label>
-                                                <input class="form-control" type="text" id="name" name="name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="fileUpload">Upload your file</label>
-                                                <input class="form-control" type="file" name="sheet" id="sheet">
-                                            </div>
-                                            <br>
-                                            <div class="buttons is-end">
-                                                <button type="submit" class="common-button is-bg">Submit</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                </div>
+                <div class="popup-content">
+                    <div class="drone-details">
+                        <div class="row gx-md-3 gx-lg-3">
+                            <div class="col-xl-12 col-sm-12">
+                                <div class="drone-content col-left col-operators">
+                                    <form action="{% url 'dashboard:upload-sheet' %}" method="POST"
+                                        enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="name">Name:</label>
+                                            <input class="form-control" type="text" id="name" name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fileUpload">Upload your file</label>
+                                            <input class="form-control" type="file" name="sheet" id="sheet">
+                                        </div>
+                                        <br>
+                                        <div class="buttons is-end">
+                                            <button type="submit" class="common-button is-bg">Submit</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -108,18 +110,19 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <script type="text/javascript">
-        // var lat;
-        // var lon;
-        // {% for object in object_list %}
-            //     window.lat = '{{ object.latitude|safe }}';
-            //     window.lon = '{{ object.longitude|safe }}';
-            // {% endfor %}
-        var flight_objects = '{{ json_data }}'
-    </script>
+<script type="text/javascript">
+    // var lat;
+    // var lon;
+    // {% for object in object_list %}
+    //     window.lat = '{{ object.latitude|safe }}';
+    //     window.lon = '{{ object.longitude|safe }}';
+    // {% endfor %}
+    var flight_objects = '{{ json_data }}'
+</script>
 
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/map.js' %}"></script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/map.js' %}"></script>
 {% endblock body %}
