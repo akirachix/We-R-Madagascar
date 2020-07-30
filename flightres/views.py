@@ -127,18 +127,23 @@ class ComplainListView(LoginRequiredMixin, ListView):
         complains = Report.objects.all()
         data = []
         for complain in complains:
-            this_lat = complain.latitude
-            this_lon = complain.longitude
-            lower_lat = this_lat - decimal.Decimal(0.090)
-            upper_lat = this_lat + decimal.Decimal(0.090)
-            lower_lon = this_lon - decimal.Decimal(0.090)
-            upper_lon = this_lon + decimal.Decimal(0.090)
-            # print(lower_lat, upper_lat, lower_lon, upper_lon)
-            nearby = FlightPermission.objects.filter(latitude__lte=upper_lat,
-                                                     latitude__gte=lower_lat,
-                                                     longitude__lte=upper_lon,
-                                                     longitude__gte=lower_lon)[:4]
+            nearby = None
+            try:
+                this_lat = complain.latitude
+                this_lon = complain.longitude
+                lower_lat = this_lat - decimal.Decimal(0.090)
+                upper_lat = this_lat + decimal.Decimal(0.090)
+                lower_lon = this_lon - decimal.Decimal(0.090)
+                upper_lon = this_lon + decimal.Decimal(0.090)
+                # print(lower_lat, upper_lat, lower_lon, upper_lon)
+                nearby = FlightPermission.objects.filter(latitude__lte=upper_lat,
+                                                         latitude__gte=lower_lat,
+                                                         longitude__lte=upper_lon,
+                                                         longitude__gte=lower_lon)[:4]
+            except:
+                pass
             data.append([complain, nearby])
+
         com['data'] = data
         flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name',
                                                          'uav_uuid__operator__phone_number',
