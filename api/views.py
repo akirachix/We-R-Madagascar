@@ -168,6 +168,17 @@ class PilotDetailAPIView(ModelViewSet):
     queryset = Pilots.objects.all()
     serializer_class = PilotsSerializer
 
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.action in ['create', 'update', 'partial_update', 'list',
+                           'retrieve']:
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
+
     def retrieve(self, request, *args, **kwargs):
         try:
             instance = self.get_object()
@@ -186,8 +197,7 @@ class PilotDetailAPIView(ModelViewSet):
             base_uri = "http://127.0.0.1:8000/np/api/v1/pilot-data/"
             response_data = base_uri + str(serializer.data['id'])
             new_pilot_id = serializer.data['id']
-            data = {'Message': 'New Pilot Created', 'New pilot ID': serializer.data['id'],
-                    'Get new Pilot Info at': response_data}
+            data = {'pilot_id': serializer.data['id']}
             return JsonResponse(data, status=status.HTTP_200_OK)
 
         return Response({'Message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
