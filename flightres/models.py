@@ -104,3 +104,22 @@ class Pilots(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class LocalAuthorities(models.Model):
+    AUTHORITY_TYPES = (
+        ('Police', 'Police'),
+        ('Others', 'Others')
+    )
+
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=15, null=True, blank=True)
+    latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, blank=True)
+    authority_type = models.CharField(max_length=50, choices=AUTHORITY_TYPES, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name

@@ -27,39 +27,42 @@
                     </thead>
                     <tbody>
                     {% for object in object_list %}
-                        <tr class="highlight">
-                            <td><b>{{ object.uav_uid }}</b></td>
-                            <td>
-                                <time>{{ object.flight_start_date }}</time>
-                            </td>
-                            <td>
-                                <time>{{ object.flight_end_date }}</time>
-                            </td>
-
-                            <td>{{ object.flight_purpose }}</td>
-                            <td>Latitude: {{ object.latitude }} Longitude: {{ object.longitude }}</td>
-                            {% if object.status == 'Approved' %}
-                                <td><span class="status approved">{{ object.status }}</span></td>
-                            {% elif object.status == 'Rejected' %}
-                                <td><span class="status failed">{{ object.status }}</span></td>
-                            {% else %}
-                                <td><span class="status pending">{{ object.status }}</span></td>
-                            {% endif %}
-
-                            <td class="table-action">
-                                <button data-toggle="modal" data-target="#open-modal" modal-link="open-modal"
-                                        type="button"
-                                        class="btn modal-link">
-                                    <i id="expand_{{ object.uav_uid }}"
-                                       class="material-icons expandData">chevron_right</i>
-                                </button>
-                                <div class="popup" id="open-modal">
-                                    <div id="modal-dialog" class="popup-container lg-popup map-popup">
+                    <tr class="highlight">
+                        <td>{{ object.uav_uid }}</td>
+                        <td>
+                            <time>{{ object.flight_start_date }}</time>
+                        </td>
+                        <td>
+                            <time>{{ object.flight_end_date }}</time>
+                        </td>
+                        <td><b>Permission detail {{ object.uav_uid }}</b></td>
+                        <td>{{ object.pilot_name }}</td>
+                        <td>Latitude: {{ object.latitude }} Longitude: {{ object.longitude }}</td>
+                        {% if object.status == 'Approved' %}
+                        <td><span class="status approved">{{ object.status }}</span></td>
+                        {% elif object.status == 'Rejected' %}
+                        <td><span class="status failed">{{ object.status }}</span></td>
+                        {% else %}
+                        <td><span class="status pending">{{ object.status }}</span></td>
+                        {% endif %}
+                        <td class="table-action">
+                            <button data-toggle="modal" data-target="#open-modal" modal-link="open-modal" type="button"
+                                class="btn modal-link">
+                                <i id="expand_{{object.uav_uid}}" class="material-icons expandData">chevron_right</i>
+                            </button>
+                            <div class="popup" id="open-modal">
+                                <div id="modal-dialog"
+                                    class="popup-container lg-popup map-popup">
+                                    <div class="popup-body">
+                                        <span class="close-icon"><i
+                                                class="material-icons">close</i></span>
+                                        <div class="popup-body" id="flightPopUp">
+                                        </div>
                                     </div>
                                 </div>
-
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                    </tr>
                     {% endfor %}
                     </tbody>
                 </table>
@@ -114,5 +117,6 @@
         var flight_objects = '{{ json_data }}'
     </script>
 
-    <script src="{% static 'js/map.js' %}"></script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/map.js' %}"></script>
 {% endblock body %}

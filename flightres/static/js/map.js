@@ -27,135 +27,132 @@ $(document).ready(function () {
 
     function createModal(data) {
         var html1 = `
-        <div class="popup-body">
-            <span class="close-icon"><i class="material-icons">close</i></span>
-            <div class="popup-header">
-                <h3>Permission Request for <b>ID `+ data.uav_uid + `</b></h3>
-            </div>
-            <div class="popup-content">
-                <div class="drone-details">
-                    <div class="row gx-md-3 gx-lg-3">
-                        <div class="col-xl-5 col-sm-12">
-                            <div class="drone-content col-left">
-                                <ul>
-                                    <li>
-                                        <h4>Operators info</h4>
-                                        <div class="content-list">
-                                            <p>
-                                                <b>Company Name:</b>
-                                                <span>`+ data.company_name + `</span>
+        <div class="popup-header">
+            <h3>Permission Request for <b>ID `+ data.uav_uid + `</b></h3>
+        </div>
+        <div class="popup-content">
+            <div class="drone-details">
+                <div class="row gx-md-3 gx-lg-3">
+                    <div class="col-xl-5 col-sm-12">
+                        <div class="drone-content col-left">
+                            <ul>
+                                <li>
+                                    <h4>Operators info</h4>
+                                    <div class="content-list">
+                                        <p>
+                                            <b>Company Name:</b>
+                                            <span>`+ data.company_name + `</span>
+                                        </p>
+                                        <p>
+                                            <b>Phone Number:</b>
+                                            <span>`+ data.uav_uuid__operator__phone_number + `</span>
+                                        </p>
+                                        <p>
+                                            <b>Email:</b>
+                                            <span>`+ data.uav_uuid__operator__email + `</span>
+                                        </p>
+                                    </div>
+                                </li>
+                                <br>
+                                <li>
+                                    <h4>Flight info</h4>
+                                    <div class="content-list">
+                                        <p><b>Start Date:
+                                            </b><span>`+ data.flight_start_date + `</span>
+                                        </p>
+                                        <p><b>End Date:
+                                            </b><span>`+ data.flight_end_date + `</span>
+                                        </p>
+                                        <p><b> Time:
+                                            </b><span>`+ data.flight_time + `</span>
+                                        </p>
+                                        <p><b>Purpose:
+                                            </b><span>`+ data.flight_purpose + `</span>
+                                        </p>
+                                        <p><b>Aircraft Name:
+                                            </b><span>`+ data.uav_uuid__popular_name + `</span>
+                                        </p>
+                                        <p><b>Drone Insurance: </b><span><u><a
+                                            href=`+ data.flight_insurance_url + `
+                                                        target="_blank">Link to
+                                                        document</a></u></span>
+                                        </p>
+                                    </div>
+                                </li>
+                                <br>
+                                <li>
+                                    <h4>Pilot info</h4>
+                                    <div class="content-list">
+                                        <p><b>Pilot Name: </b><span>
+                                            `+ data.pilot_id__name + `
+                                            </span>
+                                            <p><b>Pilot Phone Number:
+                                            </b><span>`+ data.pilot_id__phone_number + `</span>
                                             </p>
-                                            <p>
-                                                <b>Phone Number:</b>
-                                                <span>`+ data.uav_uuid__operator__phone_number + `</span>
-                                            </p>
-                                            <p>
-                                                <b>Email:</b>
-                                                <span>`+ data.uav_uuid__operator__email + `</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <br>
-                                    <li>
-                                        <h4>Flight info</h4>
-                                        <div class="content-list">
-                                            <p><b>Start Date:
-                                                </b><span>`+ data.flight_start_date + `</span>
-                                            </p>
-                                            <p><b>End Date:
-                                                </b><span>`+ data.flight_end_date + `</span>
-                                            </p>
-                                            <p><b> Time:
-                                                </b><span>`+ data.flight_time + `</span>
-                                            </p>
-                                            <p><b>Purpose:
-                                                </b><span>`+ data.flight_purpose + `</span>
-                                            </p>
-                                            <p><b>Aircraft Name:
-                                                </b><span>`+ data.uav_uuid__popular_name + `</span>
-                                            </p>
-                                            <p><b>Drone Insurance: </b><span><u><a
-                                                href=`+ data.flight_insurance_url + `
-                                                            target="_blank">Link to
-                                                            document</a></u></span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <br>
-                                    <li>
-                                        <h4>Pilot info</h4>
-                                        <div class="content-list">
-                                            <p><b>Pilot Name: </b><span>
-                                                `+ data.pilot_id__name + `
-                                                </span>
-                                                <p><b>Pilot Phone Number:
-                                                </b><span>`+ data.pilot_id__phone_number + `</span>
-                                                </p>
-                                                <p><b>Pilot CV: </b><span><u><a
-                                                    href=`+ data.pilot_id__cv_url + `
-                                                            target="_blank">Link to
-                                                            CV</a></u></span>
-                                            </p>
-                                        </div>
-									</li>
-									<li>
-                                        <h4>Documentation</h4>
-                                        <div class="row g-2">
-											<div class="col-md-4">
-												<div class="file-upload">
-													<a href="`+ data.pilot_cv_url + `" class="file-link">
-														<div class="file-icon">
-															<i class="material-icons">description</i>
-														</div>
-														<div class="file-info">
-                                                            <div class ="file-wrap">
-                                                                <p>Pilot CV</p>
-                                                            </div>
+                                            <p><b>Pilot CV: </b><span><u><a
+                                                href=`+ data.pilot_id__cv_url + `
+                                                        target="_blank">Link to
+                                                        CV</a></u></span>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h4>Documentation</h4>
+                                    <div class="row g-2">
+                                        <div class="col-md-4">
+                                            <div class="file-upload">
+                                                <a href="`+ data.pilot_cv_url + `" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">description</i>
+                                                    </div>
+                                                    <div class="file-info">
+                                                        <div class ="file-wrap">
+                                                            <p>Pilot CV</p>
                                                         </div>
-													</a>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="file-upload">
-													<a href="`+ data.flight_plan_url + `" class="file-link">
-														<div class="file-icon">
-															<i class="material-icons">description</i>
-														</div>
-														<p>Flight Plan URL</p>
-													</a>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="file-upload">
-													<a href="#" class="file-link">
-														<div class="file-icon">
-															<i class="material-icons">description</i>
-														</div>
-														<p>Images</p>
-													</a>
-												</div>
-											</div>
-                                    	</div>
-                                    </li>
-                                </ul>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="file-upload">
+                                                <a href="`+ data.flight_plan_url + `" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">description</i>
+                                                    </div>
+                                                    <p>Flight Plan URL</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="file-upload">
+                                                <a href="#" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">description</i>
+                                                    </div>
+                                                    <p>Images</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-sm-12">
+                        <div class="map-content col-right">
+                            <div class="tab-content-holder current" id="location">
+                                <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `"></div>
                             </div>
-						</div>
-                        <div class="col-xl-7 col-sm-12">
-                            <div class="map-content col-right">
-                                <div class="tab-content-holder current" id="location">
-                                    <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `"></div>
-                                </div>
-                                <div class="buttons is-end">
-                                    <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/approve" class="common-button is-bg">Approve</a>
-                                    <a href="/np/dashboard/approve_perm/`+ data.uav_uid +`/deny" class="common-button is-border cancel-button">Deny</a>
-                                </div>
+                            <div class="buttons is-end">
+                                <a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/approve" class="common-button is-bg">Approve</a>
+                                <a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/deny" class="common-button is-border cancel-button">Deny</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>`
-        document.getElementById('modal-dialog').innerHTML = html1
+        document.getElementById('flightPopUp').innerHTML = html1
         plotMap(data)
     }
 
