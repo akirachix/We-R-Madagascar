@@ -16,6 +16,7 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.mixins import RetrieveModelMixin
 
 from flightres.models import Report, FlightPermission, Pilots
+from flightres.utils import validate_lat_lon
 from registry.models import Aircraft
 from registry.models import SheetRegister
 from registry.utils.preprocessor import Preprocessor
@@ -144,6 +145,27 @@ class SheetUploadView(ModelViewSet):
                 status=status.HTTP_200_OK, )
         return Response({'Message': serializer.errors},
                         status=status.HTTP_400_BAD_REQUEST, )
+
+
+class GeoLocationValidation(APIView):
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        data = request.data
+        print(data)
+        lat_lon = data.get('lat_lon')
+        valid, lat, lon = validate_lat_lon(lat_lon)
+        if valid:
+            return JsonResponse(
+                {'valid': True,
+                 'lat': lat,
+                 'lon': lon
+                 },
+                status=status.HTTP_200_OK, )
+        else:
+            return JsonResponse(
+                {'valid': False},
+                status=status.HTTP_200_OK, )
 
 
 class OldPermissionIdValidation(APIView):

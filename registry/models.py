@@ -378,22 +378,23 @@ class Manufacturer(models.Model):
 
 class Aircraft(models.Model):
     AIRCRAFT_CATEGORY = (
-        (0, _('Other')),
-        (1, _('FIXED WING')),
-        (2, _('ROTORCRAFT')),
-        (3, _('LIGHTER-THAN-AIR')),
-        (4, _('HYBRID LIFT')),
+        ('Other', _('Other')),
+        ('FIXED WING', _('FIXED WING')),
+        ('ROTORCRAFT', _('ROTORCRAFT')),
+        ('LIGHTER-THAN-AIR', _('LIGHTER-THAN-AIR')),
+        ('HYBRID LIFT', _('HYBRID LIFT')),
+        ('MULTI-COPTER', _('MULTI-COPTER')),
     )
     AIRCRAFT_SUB_CATEGORY = (
-        (0, _('Other')),
-        (1, _('AIRPLANE')),
-        (2, _('NONPOWERED GLIDER')),
-        (3, _('POWERED GLIDER')),
-        (4, _('HELICOPTER')),
-        (5, _('GYROPLANE')),
-        (6, _('BALLOON')),
-        (6, _('AIRSHIP')),
-        (7, _('UAV')),
+        ('Other', _('Other')),
+        ('AIRPLANE', _('AIRPLANE')),
+        ('NONPOWERED GLIDER', _('NONPOWERED GLIDER')),
+        ('POWERED GLIDER', _('POWERED GLIDER')),
+        ('HELICOPTER', _('HELICOPTER')),
+        ('GYROPLANE', _('GYROPLANE')),
+        ('BALLOON', _('BALLOON')),
+        ('AIRSHIP', _('AIRSHIP')),
+        ('UAV', _('UAV')),
     )
     STATUS_CHOICES = (
         (0, _('Inactive')),
@@ -408,7 +409,7 @@ class Aircraft(models.Model):
     series = models.CharField(max_length=280, blank=True, null=True)
     popular_name = models.CharField(max_length=280, blank=True, null=True)
     manufacturer = models.ForeignKey(Manufacturer, models.CASCADE)
-    category = models.IntegerField(choices=AIRCRAFT_CATEGORY, default=0)
+    category = models.CharField(choices=AIRCRAFT_CATEGORY, max_length=50, default='Other')
     registration_mark = models.CharField(max_length=10, blank=True, null=True)
     sub_category = models.IntegerField(choices=AIRCRAFT_SUB_CATEGORY,
                                        default=7)

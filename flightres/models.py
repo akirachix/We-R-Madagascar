@@ -5,6 +5,7 @@ import uuid
 from api.twilio import Twilio
 
 from registry.models import Aircraft
+from flightres.utils import reverseGeocode
 
 class FlightPermission(models.Model):
     STATUS_CHOICES = (
@@ -71,7 +72,7 @@ class Report(models.Model):
     image_url = models.URLField(max_length=200, null=True, blank=True)
     status = models.CharField(choices=STATUS_CHOICE, max_length=15, default='Pending')
     reply = models.TextField(default='', blank=True, null=True)
-    category = models.TextField(default='')
+    category = models.TextField(default='', blank=True, null=True)
     is_escalated = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -85,6 +86,14 @@ class Report(models.Model):
              update_fields=None):
         if self.old_reply != self.reply:
             self.twilio.send_message(self.complainer_number, self.reply)
+
+        geo_reponse = reverseGeocode(self.location)
+        if geo_reponse == "Inavalid Address":
+            self.latitude = 0
+            self.longitude = 0
+        else:
+            self.latitude = geo_reponse[0]
+            self.longitude = geo_reponse[1]
 
         super().save(force_insert, force_update, using, update_fields)
 

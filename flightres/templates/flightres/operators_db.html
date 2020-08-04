@@ -13,6 +13,9 @@
             <h1>Operators Database</h1>
         </div>
         <div class="card-body">
+            <button class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal" class="modal-link"
+                    data-toggle="modal" data-target="#upload-sheet-modal">Upload
+                    Sheet</a></button>
             <table id="admin-datatable" class="admin-datatable">
                 <thead>
                     <tr>
@@ -24,6 +27,7 @@
                         <th>Contact</th>
                         <th>Email</th>
                         <th>UAV Manufacturer & Model</th>
+                        <th>Serial Number</th>
                         <th>Date of Manufacture</th>
                         <th>RPA/Drone Type</th>
                         <th>Weight (Kg)</th>
@@ -49,6 +53,7 @@
                         <td>{{ object.operator.phone_number }}</td>
                         <td>{{ object.operator.email }}</td>
                         <td>{{ object.manufacturer.full_name }} | {{ object.model }}</td>
+                        <td>{{ object.registration_mark }}</td>
                         <td>{{ object.begin_date.date }}</td>
                         <td>{{ object.category }}</td>
                         <td>{{ object.mass }}</td>
@@ -116,6 +121,43 @@
                     {% endfor %}
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="popup" tabindex="-1" role="dialog" id="upload-sheet-modal">
+        <div class="popup-container lg-popup map-popup">
+            <div class="popup-body">
+                <span class="close-icon"><i class="material-icons">close</i></span>
+                <div class="popup-header">
+                    <h3><b>Upload Data Sheets</b></h3>
+
+                </div>
+                <div class="popup-content">
+                    <div class="drone-details">
+                        <div class="row gx-md-3 gx-lg-3">
+                            <div class="col-xl-12 col-sm-12">
+                                <div class="drone-content col-left col-operators">
+                                    <form action="{% url 'dashboard:upload-sheet' %}" method="POST"
+                                        enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="name">Name:</label>
+                                            <input class="form-control" type="text" id="name" name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fileUpload">Upload your file</label>
+                                            <input class="form-control" type="file" name="sheet" id="sheet">
+                                        </div>
+                                        <br>
+                                        <div class="buttons is-end">
+                                            <button type="submit" class="common-button is-bg">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>

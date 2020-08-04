@@ -186,7 +186,7 @@ def uploadSheet(request):
         response = requests.post(
             'http://localhost:8000/np/api/v1/sheet-upload/', files=files)
 
-    return redirect('/np/dashboard/permission')
+    return redirect('/np/dashboard/operators')
 
 
 class AboutPageView(TemplateView):

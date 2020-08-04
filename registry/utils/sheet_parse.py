@@ -74,6 +74,9 @@ def parse_items_content(file_obj, institute, user_id):
                         'manufacturer': manufacturer,
                         'operator': operator,
                         'mass': row[12],
+                        'registration_mark': row[8].upper() if row[8] != "" else None,
+                        'category': row[11].upper() if row[11] != "" else None,
+                        'certification_number': int(row[1]) if row[1] != "" else None,
                         'validity': int(row[15]) if row[15] != "" else None,
                         'remarks': row[16] if row[16] != "" else None,
                         'popular_name': row[7] if row[7] != "" else None
