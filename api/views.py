@@ -199,10 +199,15 @@ class UniqueTeatDataView(APIView):
         print(data)
         uin = data.get('uuid')
         print(uin)
-        if Aircraft.objects.filter(unid=uin).exists():
-            return JsonResponse(
-                {'valid': True}, status=status.HTTP_200_OK, )
-        else:
+        try:
+            if Aircraft.objects.filter(unid=uin).exists():
+                return JsonResponse(
+                    {'valid': True}, status=status.HTTP_200_OK, )
+            else:
+                return JsonResponse(
+                    {'valid': False},
+                    status=status.HTTP_200_OK, )
+        except ValueError:
             return JsonResponse(
                 {'valid': False},
                 status=status.HTTP_200_OK, )
