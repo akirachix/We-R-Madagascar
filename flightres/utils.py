@@ -1,5 +1,6 @@
 import requests
 import json
+from math import radians, cos, sin, asin, sqrt
 
 
 def reverseGeocode(query):
@@ -18,6 +19,42 @@ def reverseGeocode(query):
         return obj[0]['lat'], obj[0]['lon']
     except KeyError:
         return "Inavalid Address"
+
+
+def validate_dist_to_sensitive_area(lat, lon):
+    sensitive_areas = [
+        {'lat': 27.691163902, 'lon': 85.355331912, 'name': 'Tribhuvan International Airport', 'threshold_in_km': 1},
+        {'lat': 27.7042, 'lon': 85.3067, 'name': 'Kathmandu Durbar Square', 'threshold_in_km': 1},
+        {'lat': 27.6721, 'lon': 85.4281, 'name': 'Bhaktapur Durbar Square', 'threshold_in_km': 1},
+        {'lat': 27.6727, 'lon': 85.3253, 'name': 'Patan Durbar Square', 'threshold_in_km': 1},
+    ]
+
+    for area in sensitive_areas:
+        area['distance'] = haversine(area.get('lat'), area.get('lon'), lat, lon)
+
+    sorted_areas = sorted(sensitive_areas, key=lambda x: x['distance'], reverse=True)
+    if sorted_areas[0]['distance'] < 1:
+        return False, "This is in/near \"No Fly Zone\" {}. Please contact the higher authority for special flight permission".format(
+            sorted_areas[0]['name'])
+
+    return True, ""
+
+
+def haversine(lon1, lat1, lon2, lat2):
+    """
+    Calculate the great circle distance between two points
+    on the earth (specified in decimal degrees)
+    """
+    # convert decimal degrees to radians
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+
+    # haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * asin(sqrt(a))
+    r = 6371  # Radius of earth in kilometers. Use 3956 for miles
+    return c * r
 
 
 def validate_lat_lon(lat_lon):
