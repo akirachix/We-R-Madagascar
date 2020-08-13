@@ -21,7 +21,7 @@ def reverseGeocode(query):
         return "Inavalid Address"
 
 
-def validate_dist_to_sensitive_area(lat, lon):
+def is_near_senstive_area(lat, lon):
     sensitive_areas = [
         {'lat': 27.691163902, 'lon': 85.355331912, 'name': 'Tribhuvan International Airport', 'threshold_in_km': 1},
         {'lat': 27.7042, 'lon': 85.3067, 'name': 'Kathmandu Durbar Square', 'threshold_in_km': 1},
@@ -29,15 +29,17 @@ def validate_dist_to_sensitive_area(lat, lon):
         {'lat': 27.6727, 'lon': 85.3253, 'name': 'Patan Durbar Square', 'threshold_in_km': 1},
     ]
 
+    distances = []
     for area in sensitive_areas:
-        area['distance'] = haversine(area.get('lat'), area.get('lon'), lat, lon)
+        distances.append(haversine(area.get('lat'), area.get('lon'), lat, lon))
 
-    sorted_areas = sorted(sensitive_areas, key=lambda x: x['distance'], reverse=True)
-    if sorted_areas[0]['distance'] < 1:
-        return False, "This is in/near \"No Fly Zone\" {}. Please contact the higher authority for special flight permission".format(
-            sorted_areas[0]['name'])
+    nearest_poi_distance = min(distances)
+    nearest_poi_name = sensitive_areas[distances.index(nearest_poi_distance)].get('name')
+    if nearest_poi_distance < 1:
+        return True, "This is in/near \"No Fly Zone\" {}. Please contact the higher authority for special flight permission".format(
+            nearest_poi_name)
 
-    return True, ""
+    return False, ""
 
 
 def haversine(lon1, lat1, lon2, lat2):
@@ -70,4 +72,4 @@ def validate_lat_lon(lat_lon):
     except ValueError:
         lat = 0
         lon = 0
-    return valid, lat, lon
+        return valid, lat, lon
