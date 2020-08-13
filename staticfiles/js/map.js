@@ -72,11 +72,6 @@ $(document).ready(function () {
                                         <p><b>Aircraft Name:
                                             </b><span>`+ data.uav_uuid__popular_name + `</span>
                                         </p>
-                                        <p><b>Drone Insurance: </b><span><u><a
-                                            href=`+ data.flight_insurance_url + `
-                                                        target="_blank">Link to
-                                                        document</a></u></span>
-                                        </p>
                                     </div>
                                 </li>
                                 <br>
@@ -89,11 +84,6 @@ $(document).ready(function () {
                                             <p><b>Pilot Phone Number:
                                             </b><span>`+ data.pilot_id__phone_number + `</span>
                                             </p>
-                                            <p><b>Pilot CV: </b><span><u><a
-                                                href=`+ data.pilot_id__cv_url + `
-                                                        target="_blank">Link to
-                                                        CV</a></u></span>
-                                        </p>
                                     </div>
                                 </li>
                                 <li>
@@ -119,17 +109,17 @@ $(document).ready(function () {
                                                     <div class="file-icon">
                                                         <i class="material-icons">description</i>
                                                     </div>
-                                                    <p>Flight Plan URL</p>
+                                                    <p>Flight Plan</p>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="file-upload">
-                                                <a href="#" class="file-link">
+                                                <a href="`+ data.flight_insurance_url + `" class="file-link">
                                                     <div class="file-icon">
                                                         <i class="material-icons">description</i>
                                                     </div>
-                                                    <p>Images</p>
+                                                    <p>Drone Insurance</p>
                                                 </a>
                                             </div>
                                         </div>
