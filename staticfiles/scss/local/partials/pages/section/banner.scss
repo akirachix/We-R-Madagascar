@@ -1,0 +1,71 @@
+.banner{
+    @include cover(center);
+    position: relative;
+    .banner-container{
+        @include overlay(transparent);
+        margin:0 auto;
+        
+        .banner-caption{
+            @include display-flex(flex);
+            @include justify-content-center;
+            @include align-items-start;
+            @include flex-direction-column(column);
+            max-width: 780px;
+            h1{
+                font-weight: 600;
+                font-size: 3.5rem;
+                color:$primary-color;
+            }
+            p{
+                margin:2rem 0;
+                font-weight: 600;
+                font-size: 1rem;
+                color:$heading-color;
+            }
+            button{
+                margin-top:1rem;
+            }
+        }
+        @media screen and (min-width: 0) {
+            max-width: 540px;
+            padding:1rem;
+            .banner-caption{
+                h1{
+                    font-size: 1.25rem;
+                }
+            }
+        }
+        @media screen and (min-width: 768px) {
+                max-width: 720px;
+                .banner-caption{
+                    h1{
+                        font-size: 2rem;
+                    }
+                }
+        }
+        @media screen and (min-width: 992px) {
+            max-width: 960px;
+
+            
+        }
+        @media screen and (min-width: 1200px) {
+                max-width: 1140px;
+                .banner-caption{
+                    h1{
+                        font-size: 2.5rem;
+                    }
+                    button{
+                        margin:0;
+                    }
+                }
+        }
+        @media screen and (min-width: 1540px) {
+                max-width: 1366px;
+                .banner-caption{
+                    h1{
+                        font-size: 3.5rem;
+                    }
+                }
+        }
+    }
+}

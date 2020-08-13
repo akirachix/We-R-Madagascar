@@ -1,0 +1,141 @@
+.custom-select {
+    position: relative;
+    min-width: 70px;
+    width: 100%;
+    .search {
+      position: relative;
+      max-width: 94%;
+      margin: 0 auto;
+      margin-top: 0.6125rem;
+    }
+  
+    p {
+      display: inline-block;
+      width: 100%;
+        
+      &.selected-item {
+        border: 1px solid $border-color;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        padding: 0 1rem 0 0.5rem;
+        font-size: 0.775rem;
+        font-weight: 500;
+        @include radius(5px);
+        position: relative;
+        cursor: pointer;
+        color: $body-color;
+        background-color: $white-color;
+        @include line-clamp(1);
+        @include display-flex(flex);
+        @include justify-content-start;
+        @include align-items-center;
+        i{
+            margin-right: .5rem;
+            font-size: 1rem;
+        }
+  
+        &::after {
+          content: "arrow_drop_down";
+          font-family: "Material Icons";
+          position: absolute;
+          right:0;
+          top:0;
+          font-size: 1.3rem;
+          color: $secondary-color;
+          z-index: 99;
+        }
+      }
+    }
+  
+    .select-list {
+      min-width: 120px;
+      width: 100%;
+      position: absolute;
+      top: 100%;
+      z-index: 1000;
+      overflow-y:auto;
+        -webkit-overflow-scrolling:touch;
+        -ms-overflow-style:-ms-autohiding-scrollbar;
+      background-color: $white-color;
+      @include box-shadow(0 5px 15px rgba(0, 0, 0, 0.15));
+      max-height: 300px;
+      display: none;
+      &::-webkit-scrollbar {
+        width: 4px;
+        background: $border-color;
+        @include radius(4px);
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color:$border-color;
+        @include radius(4px);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        @include radius(4px);
+        background: $border-dark;
+    }
+  
+      li {
+        padding: .35rem 0.6125rem;
+        @include display-flex(flex);
+        @include justify-content-start;
+        @include align-items-center;
+        cursor: pointer;
+        @include transition(all 0.3s linear);
+        border-bottom: 1px solid $border-color;
+        label,span {
+          font-size: 0.775rem;
+        }
+        i{
+            font-size: 1.2rem;
+            max-width: 18px;
+            @include flex(0 0 24px);
+            max-width: 24px;
+            line-height: 1;
+        }
+        img{
+            max-width: 14px;
+        }
+  
+        &:hover {
+          background-color: $primary-light-1;
+        }
+      }
+  
+      &.right-dropdown {
+        right: 0;
+      }
+  
+      &.left-dropdown {
+        left: 0;
+      }
+    }
+  
+    &.show-dropdown {
+      p {
+        &.selected-item {
+          border-color: $primary-color;
+          color:$primary-color;
+          &::after {
+            content: "arrow_drop_up";
+            font-family: "Material Icons";
+            float: right;
+            font-size: 1.3rem;
+            color: $primary-color;
+          }
+        }
+      }
+      .select-list{
+          display: block;
+      }
+    }
+    &.is-disable{
+      p{
+        &.selected-item{
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }

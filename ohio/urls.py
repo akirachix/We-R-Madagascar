@@ -13,9 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, handler400, handler404, handler500
 from django.contrib import admin
 from django.urls import path
+from django.views.static import serve
 from django.conf.urls import url, include
 from rest_framework import routers
 from rest_framework.routers import DefaultRouter
@@ -30,8 +31,12 @@ from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
 from django.contrib.auth.views import LoginView, LogoutView
 from flightres.views import homeView
+import django.views.static
 
 # from registry.views import UserViewSet
+
+handler404 = 'flightres.views.view_404'
+handler500 = 'flightres.views.view_500'
 
 admin.autodiscover()
 from rest_framework_simplejwt import views as jwt_views
@@ -68,11 +73,14 @@ urlpatterns = [
     path('api/v1/user/', include('authentication.urls')),
     path('np/api/v1/', include('api.urls')),
     path('np/dashboard/', include(('flightres.urls', 'flightres'), namespace='dashboard')),
-
+    url(r'^assets/(?P<path>.*)$', serve,{'document_root':settings.STATIC_ROOT}),
     # url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     # url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^api-token-auth/', obtain_auth_token),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+
+if settings.DEBUG:
+	urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 urlpatterns = format_suffix_patterns(urlpatterns)

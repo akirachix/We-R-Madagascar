@@ -1,0 +1,94 @@
+ul{
+    &.list{
+        
+        li{
+            a{
+                padding:.6125rem;
+                @include display-flex(flex);
+                @include justify-content-start;
+                @include align-items-center;
+            }
+            i,svg{
+                margin-right: .6125rem;
+                font-size: 1.2rem;
+            }
+            figure{
+                @include flex(0 0 40px);
+                max-width: 40px;
+            }
+            .list-content{
+                flex-grow: 1;
+                h5{
+                    font-size:1rem;
+                    font-weight: 600;
+                    line-height: 1.5;
+                    
+                    @media #{$breakpoint-desktop}{
+                        font-size: .875rem;
+                    }
+                }
+                p{
+                    margin-top:.5rem;
+                    @include line-clamp(2);
+                    @media #{$breakpoint-desktop}{
+                        font-size: .8125rem;
+                    }
+                }
+            }
+            &:not(:last-child){
+                margin-bottom: .5rem;
+            }
+            
+        }
+        &.is-bg{
+            li{
+                background-color: $grey-color;
+            }
+        }
+        &.is-border{
+            li{
+                border:1px solid $border-color;
+            }
+        }
+        &.is-news{
+            li{
+                padding:.6125rem;
+                @include display-flex(flex);
+                @include justify-content-start;
+                @include radius(5px);
+                @include align-items-start;
+                figure{
+                    @include flex(0 0 100px);
+                    max-width: 100px;
+                    img{
+                        max-width: 88px;
+                    }
+                }
+                .poseted-meta{
+                    @include display-flex(flex);
+                    @include justify-content-start;
+                    @include align-items-center;
+                    margin-top:.25rem;
+                    i{
+                        font-size: 1rem;
+                    }
+                    span{
+                        margin:0 .5rem;
+                        text-transform: capitalize;
+                    }
+                    a{
+                        font-weight: 500;
+                    }
+
+                }
+                @media #{$breakpoint-sm}{
+                    @include flex-wrap(wrap);
+                    figure{
+                        margin-bottom: .6125rem;
+                    }
+                }
+            }
+        }
+        
+    }
+}

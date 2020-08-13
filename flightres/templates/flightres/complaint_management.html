@@ -2,6 +2,10 @@
 {% load static %}
 
 
+{% block links %}
+<script src="{% static 'js/modal-image.js' %}"></script>
+{% endblock links %}
+
 {% block body %}
 <main class="admin-main">
     <div class="main-card">
@@ -24,6 +28,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <div id="myModal" class="popup">
+                        <div class="popup-container lg-popup">
+                            <div class="modal-body popup-body">
+                                <span class="close-icon" onclick="closeModal()"><i class="material-icons">close</i></span>
+                                <!-- <a class="close-icon" onclick="closeModal()"><i class="material-icons">close</i></a> -->
+                                <div class="modal-content" id="openFSImage">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     {% for i, j, k in data %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
@@ -65,9 +79,18 @@
                                                                     <h4>Additional info</h4>
                                                                     <div class="content-list">
                                                                         <div class="image-content">
-                                                                            <figure><img src="{{ i.image_url }}" alt="">
+                                                                            <figure>
+                                                                                <button data-toggle="modal"
+                                                                                    data-target="#myModal"
+                                                                                    modal-link="myModal" type="button"
+                                                                                    class="hover-shadow cursor btn modal-link"><img
+                                                                                        id="image_{{i.uav_uid}}"
+                                                                                        class="expandImage"
+                                                                                        src="{{ i.image_url }}"
+                                                                                        alt=""></button>
                                                                             </figure>
                                                                         </div>
+                                                                    </div>
                                                                 </li>
                                                                 <li>
                                                                     <h4>Flight Permission Nearby</h4>
@@ -88,7 +111,8 @@
                                                                                 <div class="popup-body">
                                                                                     <span class="close-icon"><i
                                                                                             class="material-icons">close</i></span>
-                                                                                    <div class="popup-body" id="flightPopUp">
+                                                                                    <div class="popup-body"
+                                                                                        id="flightPopUp">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -196,8 +220,10 @@
 {% endblock body %}
 
 {% block footer_links %}
+<script src="{% static 'js/modal-image.js' %}"></script>
 <script type="text/javascript">
     var flight_objects = '{{ json_data }}'
+    var image_url_objects = '{{image_json_data}}'
 </script>
 <script>
     function permApproval(uid, status) {

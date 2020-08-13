@@ -159,8 +159,11 @@ class ComplainListView(LoginRequiredMixin, ListView):
                                                          'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number',
                                                          'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
                                                          )
+        image_urls = Report.objects.values('uav_uid', 'image_url')
+        image_json_data = json.dumps(list(image_urls), cls=DjangoJSONEncoder)
         json_data = json.dumps(list(flight_objects), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
+        com['image_json_data'] = image_json_data
         # print(data)
         return com
 
@@ -200,3 +203,15 @@ class GuidelinesPageView(TemplateView):
 class OperdatorDatabaseView(LoginRequiredMixin, ListView):
     template_name = 'flightres/operators_db.html'
     queryset = Aircraft.objects.all()
+
+def view_404(request, exception):
+	'''
+	This if for custom 404 template
+	'''
+	return render(request, 'flightres/404.html')
+
+def view_500(request):
+	'''
+	This if for custom 500 template
+	'''
+	return render(request, 'flightres/404.html')
