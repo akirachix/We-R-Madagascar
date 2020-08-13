@@ -22,7 +22,7 @@ from registry.models import Aircraft
 from registry.models import SheetRegister
 from registry.utils.preprocessor import Preprocessor
 from .serializers import FlightRegistrySerializer, WhatsappComplainSerializer, \
-    SheetRegisterSerializer, PilotsSerializer, PilotFromFlightSerializer
+    SheetRegisterSerializer, PilotsSerializer, PilotFromFlightSerializer, WhatsappComplainCreateSerializer
 
 
 @csrf_exempt
@@ -78,7 +78,6 @@ class FlightRegistryView(ModelViewSet):
 
 class WhComplainView(ModelViewSet):
     queryset = Report.objects.all()
-    serializer_class = WhatsappComplainSerializer
 
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
@@ -94,8 +93,14 @@ class WhComplainView(ModelViewSet):
             permission_classes = [AllowAny]
         return [permission() for permission in permission_classes]
 
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return WhatsappComplainCreateSerializer
+        else:
+            return WhatsappComplainSerializer
+
     def create(self, request, **kwargs):
-        serializer = WhatsappComplainSerializer(data=request.data)
+        serializer = WhatsappComplainCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             uri = "http://127.0.0.1:8000/np/api/v1/whcomplain/"

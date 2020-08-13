@@ -14,6 +14,10 @@ class WhatsappComplainSerializer(serializers.ModelSerializer):
         model = Report
         fields = '__all__'
 
+class WhatsappComplainCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        exclude = ('latitude', 'longitude')
 
 class SheetRegisterSerializer(serializers.ModelSerializer):
     class Meta:
