@@ -16,7 +16,7 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.mixins import RetrieveModelMixin
 
 from flightres.models import Report, FlightPermission, Pilots
-from flightres.utils import validate_lat_lon
+from flightres.utils import validate_lat_lon, validate_dist_to_sensitive_area
 from registry.models import Aircraft
 from registry.models import SheetRegister
 from registry.utils.preprocessor import Preprocessor
@@ -152,9 +152,11 @@ class GeoLocationValidation(APIView):
 
     def post(self, request):
         data = request.data
-        print(data)
+        default_message = "The provided latitude longitude is invalid"
         lat_lon = data.get('lat_lon')
         valid, lat, lon = validate_lat_lon(lat_lon)
+        valid, message = validate_dist_to_sensitive_area(lat, lon)
+
         if valid:
             return JsonResponse(
                 {'valid': True,
@@ -164,7 +166,7 @@ class GeoLocationValidation(APIView):
                 status=status.HTTP_200_OK, )
         else:
             return JsonResponse(
-                {'valid': False},
+                {'valid': False, 'message': message},
                 status=status.HTTP_200_OK, )
 
 
