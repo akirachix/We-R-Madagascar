@@ -23,7 +23,7 @@ $(document).ready(function () {
                 {
                     createModal(flight_object[j])
                     // pass id or sth from here to record the deny reason for a particular item
-                    openDenyModal()
+                    openDenyModal(object_id)
                 }
             }
         })
@@ -229,31 +229,23 @@ $(document).ready(function () {
 $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
 
 
-function openDenyModal() {
+function openDenyModal(flight_id) {
     let denyElement = document.getElementById('denyButton')
     denyElement.addEventListener('click', () => {
-        console.log("show pop");
-        let smallPopup = document.getElementById('open-modal-escalated');
+        // console.log("show pop");
+        let smallPopup = document.getElementById('open-modal-deny');
         smallPopup.classList.add('open');
-        //         var denyPopupHtml = `
-
-        //         <div id="modal-dialog" class="popup-container lg-popup map-popup">
-        //             <div class="popup-body">    
-        //         <div class="popup-header">
-        //             <h5>Reason for Denial</h5>
-        //     </div>
-        //     <div class="popup-content">
-        //         <input type="text" placeholder="Reason for denial"></input>
-        //     </div>
-        //     <div class="buttons is-end">
-        //     <span class="common-button is-bg">Save</span>
-        //     <span  class="common-button is-border cancel-button" id="denyClose">Cancel</span>
-        // </div>
-        // </div>
-        // </div>
-        // `
-        // document.getElementById('denyPopup').innerHTML = denyPopupHtml
-        // closePopup();
+        html1 = `
+        <form action="/np/dashboard/deny_perm/`+ flight_id + `" method="POST">
+            <input type="textarea" placeholder="Reason for denial"
+                style="height: 54px; width: 375px; align-self: center;" for="reason"
+                ; name="reason" ;></input>
+            <br>
+            <div class="buttons is-end">
+                <button type="submit" class="common-button is-bg">Submit</button>
+            </div>
+        </form>`
+        // document.getElementById("submit-deny-div").innerHTML = html1
     })
 }
 

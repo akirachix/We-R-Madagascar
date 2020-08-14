@@ -4,8 +4,7 @@ function permApproval(uid, status) {
 
 $(document).ready(function () {
     // var lat = document.getElementById('map').getAttribute('value').split(',')[0]
-    // var long = document.getElementById('map').getAttribute('value').split(',')[1]
-
+    // var long = document.getElementById('map').getAttribute('value').split(',')[1
 
     var expandBtn = document.getElementsByClassName('expandData')
 
@@ -13,13 +12,18 @@ $(document).ready(function () {
     flight_object = JSON.parse(flight_objects)
 
 
-    for (var i = 0; i < expandBtn.length; i++) {
+    for (var i = 0; i < expandBtn.length; i++)
+    {
         expandBtn[i].addEventListener('click', function (e) {
             // console.log('clicked');
             object_id = e.target.id.split('_')[1]
-            for (j = 0; j < flight_object.length; j++) {
-                if (object_id == flight_object[j].uav_uid) {
+            for (j = 0; j < flight_object.length; j++)
+            {
+                if (object_id == flight_object[j].uav_uid)
+                {
                     createModal(flight_object[j])
+                    // pass id or sth from here to record the deny reason for a particular item
+                    openDenyModal(object_id)
                 }
             }
         })
@@ -135,13 +139,18 @@ $(document).ready(function () {
                             </div>
                             <div class="buttons is-end">
                                 <a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/approve" class="common-button is-bg">Approve</a>
-                                <a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/deny" class="common-button is-border cancel-button">Deny</a>
+                                <span  class="common-button is-border cancel-button" id="denyButton"
+                                >Deny</span>
                             </div>
+                        </div>        </div>                        </div>
                         </div>
+                        </div>
+                
                     </div>
                 </div>
             </div>
-        </div>`
+        </div>
+        `
         document.getElementById('flightPopUp').innerHTML = html1
         plotMap(data)
     }
@@ -214,6 +223,36 @@ $(document).ready(function () {
 
         layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
     }
+
 });
 
 $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
+
+
+function openDenyModal(flight_id) {
+    let denyElement = document.getElementById('denyButton')
+    denyElement.addEventListener('click', () => {
+        // console.log("show pop");
+        let smallPopup = document.getElementById('open-modal-deny');
+        smallPopup.classList.add('open');
+        html1 = `
+        <form action="/np/dashboard/deny_perm/`+ flight_id + `" method="POST">
+            <input type="textarea" placeholder="Reason for denial"
+                style="height: 54px; width: 375px; align-self: center;" for="reason"
+                ; name="reason" ;></input>
+            <br>
+            <div class="buttons is-end">
+                <button type="submit" class="common-button is-bg">Submit</button>
+            </div>
+        </form>`
+        // document.getElementById("submit-deny-div").innerHTML = html1
+    })
+}
+
+function closePopup() {
+    let closeDenyPopElement = document.getElementById('denyClose')
+    closeDenyPopElement.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById('denyPopup').innerHTML = '';
+    });
+}

@@ -27,7 +27,8 @@ class FlightPermission(models.Model):
     pilot_id = models.ForeignKey("flightres.Pilots", on_delete=models.CASCADE, null=True, blank=True)
     latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, blank=True)
-    status = models.TextField(choices = STATUS_CHOICES, default='Pending')
+    status = models.CharField(max_length=15, choices = STATUS_CHOICES, default='Pending')
+    rejection_reason = models.TextField(null=True, blank=True)
     location = models.URLField(max_length=200, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
