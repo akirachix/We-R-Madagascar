@@ -6127,8 +6127,9 @@ footer.site-footer {
           .window-popup .popup-container.map-popup .popup-body .popup-content .modal-img img {
             width: 100%;
             height: 100%; }
-  .popup#open-modal-escalated, .popup#open-modal-flight, .popup#open-modal-img, .popup#myModal,
+  .popup#open-modal-escalated, .popup#open-modal-deny, .popup#open-modal-flight, .popup#open-modal-img, .popup#myModal,
   .window-popup#open-modal-escalated,
+  .window-popup#open-modal-deny,
   .window-popup#open-modal-flight,
   .window-popup#open-modal-img,
   .window-popup#myModal {

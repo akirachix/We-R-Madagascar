@@ -67,33 +67,35 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="popup" id="open-modal-escalated">
+                            <div class="popup" id="open-modal-deny">
                                 <div class="popup-container sm-popup map-popup">
                                     <div class="popup-body">
                                         <span class="close-icon"><i class="material-icons">close</i></span>
                                         <div class="popup-body" id="denyPopup">
-                                            <div class="popup-header">
-                                                <h5>Reason for Denial</h5>
-                                            </div>
-                                            <input type="textarea" placeholder="Reason for denial"
-                                                style="height: 54px; width: 375px; align-self: center;"></input>
-                                            <br /> <br />
-                                        </div>
-                                        <div class="buttons is-end" style="height:35px;">
-                                            <span class="common-button is-bg" style="margin-right:3px">Submit</span>
-                                            <!-- <span class="common-button is-border cancel-button"
-                                                id="denyClose">Cancel</span> -->
+                                            <form action="/np/dashboard/deny_perm/{{object.uav_uid}}" method="POST">
+                                                {% csrf_token %}
+                                                <div class="popup-header">
+                                                    <h5>Reason for Denial</h5>
+                                                </div>
+                                                <input type="textarea" placeholder="Reason for denial"
+                                                    style="height: 54px; width: 375px; align-self: center;" for="reason"
+                                                    name="reason"></input>
+                                                <br />
+                                                <div class="buttons is-end" style="height:35px;">
+                                                    <button type="submit" class="common-button is-bg"
+                                                        style="margin-right:3px">Submit</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-        </div>
-        </td>
-        </tr>
-        {% endfor %}
-        </tbody>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
-    </div>
     </div>
 </main>
 
