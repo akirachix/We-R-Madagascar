@@ -41,7 +41,7 @@ def parse_items_content(file_obj, institute, user_id):
                     }
                 )
             except Exception as e:
-                print("address error", str(e))
+                print("Error while creating Address [{}]".format(str(e)), "in row {}".format(row))
             try:
                 manufacturer, _ = Manufacturer.objects.update_or_create(
                     full_name=row[7],
@@ -50,7 +50,7 @@ def parse_items_content(file_obj, institute, user_id):
                     }
                 )
             except Exception as e:
-                print("manufacturer error", str(e))
+                print("Error while creating Manufacturer [{}]".format(str(e)), "in row {}".format(row))
             try:
                 operator, _ = Operator.objects.update_or_create(
                     company_name=row[3],
@@ -63,8 +63,7 @@ def parse_items_content(file_obj, institute, user_id):
                     }
                 )
             except Exception as e:
-                print("operator error", str(e))
-            # print("operator", operator)
+                print("Error while creating Operator [{}]".format(str(e)), "in row {}".format(row))
             try:
                 aircraft = Aircraft.objects.update_or_create(
                     unid=row[2],
@@ -82,6 +81,7 @@ def parse_items_content(file_obj, institute, user_id):
                         'popular_name': row[7] if row[7] != "" else None
                     }
                 )
+                print(aircraft, 'created ================')
             except Exception as e:
-                print("aircraft error", str(e))
+                print("Error while creating Aircraft [{}]".format(str(e)), "in row {}".format(row))
         return True, None
