@@ -9,5 +9,4 @@ class Preprocessor:
 
     def parse(self):
         status, error = parse_sheet(self.file_path, self.user_id, self.content)
-        print("this is user", status, error)
         return status, error
