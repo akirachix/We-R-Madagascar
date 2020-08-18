@@ -478,7 +478,7 @@ class SheetRegister(models.Model):
 
     @property
     def get_absolute_url(self):
-        return reverse("sheet-course-detail", kwargs={"pk": self.pk})
+        return "sheet-course-detail {}".format(self.pk)
 
 
 class CeleryTasks(models.Model):

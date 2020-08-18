@@ -192,12 +192,13 @@ def uploadSheet(request):
             'name': (None, name),
             'upload_sheet': ('./uploads/sheet_uploads/{}'.format(uploaded_file_url),
                              open('./uploads/sheet_uploads/{}'.format(uploaded_file_url), 'rb')),
-            # 'created_by': current_user
+            'created_by': current_user.id
         }
 
         response = requests.post(
             'http://localhost:8000/np/api/v1/sheet-upload/', files=files)
-
+        res_json = response.json()
+        print(response, res_json['message'])
     return redirect('/np/dashboard/operators')
 
 

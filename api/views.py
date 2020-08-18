@@ -140,17 +140,24 @@ class SheetUploadView(ModelViewSet):
             # response_data = uri + str(serializer.data['uav_uid'])
 
             sheet = serializer.data.get('upload_sheet')
+            # name = serializer.data.get('name')
+            # user = serializer.data.get('created_by')
 
             excel_processor = Preprocessor(
-                sheet,
-                "x", "y")
-            excel_processor.parse()
-
-            return Response({
-                'data': serializer.data},
-                status=status.HTTP_200_OK, )
-        return Response({'Message': serializer.errors},
-                        status=status.HTTP_400_BAD_REQUEST, )
+                sheet, "x", "y")
+            data_response = excel_processor.parse()
+            if data_response[0] == 200:
+                response = Response(status=data_response[0], data={'data': serializer.data,
+                                                                   'message': data_response[1]})
+                return response
+            else:
+                response = Response(status=data_response[0], data={'data': serializer.data,
+                                                                   'message': data_response[1]})
+                return response
+        else:
+            response = Response(status=status.HTTP_400_BAD_REQUEST, data={'data': serializer.errors,
+                                                               'message': 'Bad Request'})
+            return response
 
 
 class GeoLocationValidation(APIView):
@@ -166,7 +173,6 @@ class GeoLocationValidation(APIView):
         if valid:
             is_near_sensitive_area, message = is_near_senstive_area(lat, lon)
             valid = not is_near_sensitive_area
-            print(message)
             if valid:
                 return JsonResponse(
                     {'valid': True,
@@ -189,12 +195,12 @@ class OldPermissionIdValidation(APIView):
 
     def post(self, request):
         data = request.data
-        print(data)
         permission_id = data.get('id')
         qs = FlightPermission.objects.filter(pk=permission_id)
         try:
             if qs.exists():
-                pilot_id = FlightPermission.objects.get(pk=permission_id).pilot_id.pk
+                pilot_id = FlightPermission.objects.get(
+                    pk=permission_id).pilot_id.pk
                 return JsonResponse(
                     {'valid': True, 'pilot_id': pilot_id}, status=status.HTTP_200_OK, )
             else:
@@ -212,9 +218,7 @@ class UniqueTeatDataView(APIView):
 
     def post(self, request, format=None):
         data = request.data
-        print(data)
         uin = data.get('uuid')
-        print(uin)
         try:
             if Aircraft.objects.filter(unid=uin).exists():
                 return JsonResponse(
@@ -253,7 +257,8 @@ class PilotDetailAPIView(ModelViewSet):
             return Response(serializer.data, status=200)
         except:
             return Response(
-                data={'Message': "Pilot with ID {} not found. Please add pilot information".format(kwargs['pk'])},
+                data={'Message': "Pilot with ID {} not found. Please add pilot information".format(
+                    kwargs['pk'])},
                 status=status.HTTP_400_BAD_REQUEST)
 
     def create(self, request, **kwargs):
@@ -282,5 +287,6 @@ class GetPilotFromPermissionView(RetrieveModelMixin, GenericViewSet):
             return Response(serializer.data, status=200)
         except:
             return Response(
-                data={'Message': "Pilot with ID {} not found. Please add pilot information".format(kwargs['pk'])},
+                data={'Message': "Pilot with ID {} not found. Please add pilot information".format(
+                    kwargs['pk'])},
                 status=status.HTTP_400_BAD_REQUEST)
