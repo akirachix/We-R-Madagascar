@@ -1,5 +1,5 @@
 function permApproval(uid, status) {
-    console.log(uid, status)
+    // console.log(uid, status)
 }
 
 $(document).ready(function () {
@@ -12,18 +12,14 @@ $(document).ready(function () {
     flight_object = JSON.parse(flight_objects)
 
 
-    for (var i = 0; i < expandBtn.length; i++)
-    {
+    for (var i = 0; i < expandBtn.length; i++) {
         expandBtn[i].addEventListener('click', function (e) {
-            // console.log('clicked');
             object_id = e.target.id.split('_')[1]
-            for (j = 0; j < flight_object.length; j++)
-            {
-                if (object_id == flight_object[j].uav_uid)
-                {
+            for (j = 0; j < flight_object.length; j++) {
+                if (object_id == flight_object[j].uav_uid) {
                     createModal(flight_object[j])
                     // pass id or sth from here to record the deny reason for a particular item
-                    openDenyModal(object_id)
+                    openDenyModal(flight_object[j].uav_uid)
                 }
             }
         })
@@ -236,23 +232,42 @@ function openDenyModal(flight_id) {
         let smallPopup = document.getElementById('open-modal-deny');
         smallPopup.classList.add('open');
         html1 = `
-        <form action="/np/dashboard/deny_perm/`+ flight_id + `" method="POST">
-            <input type="textarea" placeholder="Reason for denial"
+        <div>
+            <input type="textarea" placeholder="Reason for denial" id="reasonInput"
                 style="height: 54px; width: 375px; align-self: center;" for="reason"
-                ; name="reason" ;></input>
+                ; name="reason" ; ></input>
             <br>
             <div class="buttons is-end">
-                <button type="submit" class="common-button is-bg">Submit</button>
+                <button type="submit" class="common-button is-bg" id="denySubmit" ${onclick = () => sendReason(flight_id)}>Submit</button>
             </div>
-        </form>`
-        // document.getElementById("submit-deny-div").innerHTML = html1
+        </div>`
+        document.getElementById("submit-deny-div").innerHTML = html1
     })
+}
+
+function sendReason(flight_id) {
+    let inputValue = document.getElementById('reasonInput').value
+    let url = `/np/dashboard/deny_perm/`+ flight_id +``
+    let data = { value: inputValue };
+
+    fetch(url, {
+        method: "POST",
+        // data: {'getdata': JSON.stringify(data)}, 
+        body: JSON.stringify(data),
+        headers: {
+            'X-CSRFToken': csrftoken
+        }
+    }).then(res => {
+        // console.log("Success", res);
+        // console.log(flight_id, data);
+    });
+
 }
 
 function closePopup() {
     let closeDenyPopElement = document.getElementById('denyClose')
     closeDenyPopElement.addEventListener('click', function (e) {
         e.preventDefault();
-        document.getElementById('denyPopup').innerHTML = '';
+        document.getElementById('submit-deny-div').innerHTML = '';
     });
 }

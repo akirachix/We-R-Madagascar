@@ -62,7 +62,6 @@
                                     <div class="popup-body">
                                         <span class="close-icon"><i class="material-icons">close</i></span>
                                         <div class="popup-body" id="flightPopUp">
-                                            <div id="denyPopup"> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -71,8 +70,8 @@
                                 <div class="popup-container sm-popup map-popup">
                                     <div class="popup-body">
                                         <span class="close-icon"><i class="material-icons">close</i></span>
-                                        <div class="popup-body" id="denyPopup">
-                                            <form action="/np/dashboard/deny_perm/{{object.uav_uid}}" method="POST">
+                                        <div class="popup-body" id="submit-deny-div">
+                                            <!-- <form action="/np/dashboard/deny_perm/{{object.uav_uid}}" method="POST">
                                                 {% csrf_token %}
                                                 <div class="popup-header">
                                                     <h5>Reason for Denial</h5>
@@ -85,7 +84,7 @@
                                                     <button type="submit" class="common-button is-bg"
                                                         style="margin-right:3px">Submit</button>
                                                 </div>
-                                            </form>
+                                            </form> -->
                                         </div>
                                     </div>
                                 </div>

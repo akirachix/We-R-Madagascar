@@ -9,6 +9,7 @@ from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.core import serializers
 import decimal
+import json
 import requests
 from django.contrib.auth import get_user
 import datetime
@@ -97,11 +98,14 @@ def approvePerm(request, pk, action):
 
 @login_required
 def denyPerm(request, pk):
-    selected_perm = get_object_or_404(FlightPermission, uav_uid=pk)
-    selected_perm.status = 'Rejected'
-    selected_perm.rejection_reason = request.POST.get('reason')
-    selected_perm.save()
-    return redirect('/np/dashboard/permission')
+    if request.method == 'POST':
+        data = json.loads(request.body.decode("utf-8"))
+        # print(data['value'], "here")
+        selected_perm = get_object_or_404(FlightPermission, uav_uid=pk)
+        selected_perm.status = 'Rejected'
+        selected_perm.rejection_reason = data['value']
+        selected_perm.save()
+        return redirect('/np/dashboard/permission')
 
 
 def flightReqResponseView(request, pk):
