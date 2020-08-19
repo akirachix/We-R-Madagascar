@@ -58,6 +58,9 @@
     <script src="{% static 'datatable/datatables.min.js' %}"></script>
     <script src="{% static 'js/custom-datatable.js' %}"></script>
     <script src="{% static 'js/drone.js' %}"></script>
+    <script>
+        var csrftoken = '{{ csrf_token }}';
+    </script>
 
     {% block footer_links %}
 
