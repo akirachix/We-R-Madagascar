@@ -6,18 +6,15 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
-from django.core import exceptions
-from django.http import Http404
 from rest_framework import status
+from rest_framework.mixins import RetrieveModelMixin
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
-from rest_framework.mixins import RetrieveModelMixin
 
 from flightres.models import Report, FlightPermission, Pilots
 from flightres.utils import validate_lat_lon, is_near_senstive_area
-
 from registry.models import Aircraft
 from registry.models import SheetRegister
 from registry.utils.preprocessor import Preprocessor
@@ -156,7 +153,7 @@ class SheetUploadView(ModelViewSet):
                 return response
         else:
             response = Response(status=status.HTTP_400_BAD_REQUEST, data={'data': serializer.errors,
-                                                               'message': 'Bad Request'})
+                                                                          'message': 'Bad Request'})
             return response
 
 
@@ -166,6 +163,7 @@ class GeoLocationValidation(APIView):
     def post(self, request):
         data = request.data
         message = "The provided latitude longitude is invalid format"
+
         lat_lon = data.get('lat_lon')
         valid, lat, lon = validate_lat_lon(lat_lon)
         valid, message = validate_dist_to_sensitive_area(lat, lon)
@@ -173,6 +171,7 @@ class GeoLocationValidation(APIView):
         if valid:
             is_near_sensitive_area, message = is_near_senstive_area(lat, lon)
             valid = not is_near_sensitive_area
+            print(message)
             if valid:
                 return JsonResponse(
                     {'valid': True,
