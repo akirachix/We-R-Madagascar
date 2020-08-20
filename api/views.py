@@ -166,7 +166,6 @@ class GeoLocationValidation(APIView):
 
         lat_lon = data.get('lat_lon')
         valid, lat, lon = validate_lat_lon(lat_lon)
-        valid, message = validate_dist_to_sensitive_area(lat, lon)
 
         if valid:
             is_near_sensitive_area, message = is_near_senstive_area(lat, lon)
