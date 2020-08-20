@@ -58,9 +58,18 @@ def dashboardView(request):
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission
-    queryset = FlightPermission.objects.all().order_by('-flight_start_date')
     ordering = 'created_date'
     template_name = 'flightres/flightpermission_list.html'
+
+    # def get_queryset(self, *args, **kwargs) :
+    #     type = self.kwargs['type']
+    #     if type == 'special':
+    #         queryset = FlightPermission.objects.filter(is_special_permission=True).order_by('-flight_start_date')
+    #     elif type == 'general':
+    #         queryset = FlightPermission.objects.filter(is_special_permission=False).order_by('-flight_start_date')
+    #     else:
+    #         queryset = None
+    #     return queryset
 
     def get_context_data(self, *args, **kwargs):
         com = super(FlightPermissionList, self).get_context_data(
@@ -77,7 +86,15 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
         json_data = json.dumps(list(raw_data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
         object_data = []
-        flight_objects = FlightPermission.objects.all().order_by('-flight_start_date')
+        type = self.kwargs['type']
+        if type == 'special':
+            com['title'] = 'SPECIAL FLIGHT'
+            flight_objects = FlightPermission.objects.filter(is_special_permission=True).order_by('-flight_start_date')
+        elif type == 'general':
+            com['title'] = 'FLIGHT'
+            flight_objects = FlightPermission.objects.filter(is_special_permission=False).order_by('-flight_start_date')
+        else:
+            flight_objects = None
         for flight_object in flight_objects:
             due = datetime.date.today() - flight_object.flight_start_date
             due_in = due.days

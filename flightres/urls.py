@@ -6,7 +6,7 @@ from .views import FlightPermissionList, approvePerm, flightReqResponseView, Com
 
 urlpatterns = [
     path('', dashboardView, name='dashboard'),
-    path('permission', FlightPermissionList.as_view(), name="permission"),
+    path('permission/<str:type>', FlightPermissionList.as_view(), name="permission"),
     path('approve_perm/<int:pk>/<str:action>',
          approvePerm, name='approve-perm'),
     path('deny_perm/<int:pk>',

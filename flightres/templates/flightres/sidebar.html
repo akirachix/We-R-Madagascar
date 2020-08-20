@@ -19,7 +19,10 @@
                 </a>
                 <ul class="submenu">
                     <li>
-                        <a href="{% url 'dashboard:permission' %}">Manage Flight Permissions</a>
+                        <a href="{% url 'dashboard:permission' type='general' %}">Manage Flight Permissions</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'dashboard:permission'  type='special' %}">Manage Special Flight Permissions</a>
                     </li>
                 </ul>
             </li>
