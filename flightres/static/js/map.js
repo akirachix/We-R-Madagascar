@@ -262,7 +262,9 @@ function sendReason(flight_id) {
     }).then(res => {
         document.getElementById('submit-deny-div').innerHTML = '';
         let smallPopup = document.getElementById('open-modal-deny');
+        let largePopup = document.getElementById('open-modal');
         smallPopup.classList.remove('open');
+        largePopup.classList.remove('open');
         // console.log("Success", res);
         // console.log(flight_id, data);
     });
