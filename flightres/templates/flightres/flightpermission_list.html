@@ -3,14 +3,14 @@
 
 {% block body %}
 
-<main class="admin-main">
-    <div class="main-card">
-        <div class="card-header">
-            <h1>FLIGHT PERMISSION / MANAGE {{ title }} PERMISSION</h1>
-        </div>
-        <div class="card-body">
-            <table id="admin-datatable" class="admin-datatable ">
-                <thead>
+    <main class="admin-main">
+        <div class="main-card">
+            <div class="card-header">
+                <h1>FLIGHT PERMISSION / MANAGE {{ title }} PERMISSION</h1>
+            </div>
+            <div class="card-body">
+                <table id="admin-datatable" class="admin-datatable ">
+                    <thead>
 
                     <tr>
                         <th class="serial-th">ID</th>
@@ -20,58 +20,62 @@
                         <th>Purpose</th>
                         <th>Flight Location</th>
                         <th>Status</th>
+                        <th>Comments</th>
                         <th class="modal-th"></th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     {% for object, due_in in object_data %}
-                    <tr class="highlight">
-                        <td>{{ object.uav_uid }}</td>
-                        <td>
-                            <time>{{ object.flight_start_date }}</time>
-                        </td>
-                        <td>
-                            <time>{{ object.flight_end_date }}</time>
-                        </td>
+                        <tr class="highlight">
+                            <td>{{ object.uav_uid }}</td>
+                            <td>
+                                <time>{{ object.flight_start_date }}</time>
+                            </td>
+                            <td>
+                                <time>{{ object.flight_end_date }}</time>
+                            </td>
 
-                        {% if due_in < 0 %}
-                        <td>---</td>
-                        {% elif due_in == 0 %}
-                        <td>Today</td>
-                        {% else %}
-                        <td>{{ due_in }} Day(s)</td>
-                        {% endif %}
+                            {% if due_in < 0 %}
+                                <td>---</td>
+                            {% elif due_in == 0 %}
+                                <td>Today</td>
+                            {% else %}
+                                <td>{{ due_in }} Day(s)</td>
+                            {% endif %}
 
 
-                        <td>{{ object.flight_purpose }}</td>
-                        <td>Latitude: {{ object.latitude }} Longitude: {{ object.longitude }}</td>
-                        {% if object.status == 'Approved' %}
-                        <td><span class="status approved">{{ object.status }}</span></td>
-                        {% elif object.status == 'Rejected' %}
-                        <td><span class="status failed">{{ object.status }}</span></td>
-                        {% else %}
-                        <td><span class="status pending">{{ object.status }}</span></td>
-                        {% endif %}
-                        <td class="table-action">
-                            <button data-toggle="modal" data-target="#open-modal" modal-link="open-modal" type="button"
-                                class="btn modal-link">
-                                <i id="expand_{{ object.uav_uid }}" class="material-icons expandData">chevron_right</i>
-                            </button>
-                            <div class="popup" id="open-modal">
-                                <div id="modal-dialog" class="popup-container lg-popup map-popup">
-                                    <div class="popup-body">
-                                        <span class="close-icon"><i class="material-icons">close</i></span>
-                                        <div class="popup-body" id="flightPopUp">
+                            <td>{{ object.flight_purpose }}</td>
+                            <td>Latitude: {{ object.latitude }} Longitude: {{ object.longitude }}</td>
+                            {% if object.status == 'Approved' %}
+                                <td><span class="status approved">{{ object.status }}</span></td>
+                            {% elif object.status == 'Rejected' %}
+                                <td><span class="status failed">{{ object.status }}</span></td>
+                            {% else %}
+                                <td><span class="status pending">{{ object.status }}</span></td>
+                            {% endif %}
+                            <td>{{ object.reply }}</td>
+                            <td class="table-action">
+                                <button data-toggle="modal" data-target="#open-modal" modal-link="open-modal"
+                                        type="button"
+                                        class="btn modal-link">
+                                    <i id="expand_{{ object.uav_uid }}"
+                                       class="material-icons expandData">chevron_right</i>
+                                </button>
+                                <div class="popup" id="open-modal">
+                                    <div id="modal-dialog" class="popup-container lg-popup map-popup">
+                                        <div class="popup-body">
+                                            <span class="close-icon"><i class="material-icons">close</i></span>
+                                            <div class="popup-body" id="flightPopUp">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="popup" id="open-modal-deny">
-                                <div class="popup-container sm-popup map-popup">
-                                    <div class="popup-body">
-                                        <span class="close-icon"><i class="material-icons">close</i></span>
-                                        <div class="popup-body" id="submit-deny-div">
-                                            <!-- <form action="/np/dashboard/deny_perm/{{object.uav_uid}}" method="POST">
+                                <div class="popup" id="open-modal-deny">
+                                    <div class="popup-container sm-popup map-popup">
+                                        <div class="popup-body">
+                                            <span class="close-icon"><i class="material-icons">close</i></span>
+                                            <div class="popup-body" id="submit-deny-div">
+                                                <!-- <form action="/np/dashboard/deny_perm/{{object.uav_uid}}" method="POST">
                                                 {% csrf_token %}
                                                 <div class="popup-header">
                                                     <h5>Reason for Denial</h5>
@@ -85,29 +89,29 @@
                                                         style="margin-right:3px">Submit</button>
                                                 </div>
                                             </form> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
-                    </td>
-                </tr>
-                {% endfor %}
+                        </td>
+                        </tr>
+                    {% endfor %}
             </tbody>
-        </table>
-    </div>
-</main>
+            </table>
+        </div>
+    </main>
 
-<script type="text/javascript">
-    // var lat;
-    // var lon;
-    // {% for object in object_list %}
-    //     window.lat = '{{ object.latitude|safe }}';
-    //     window.lon = '{{ object.longitude|safe }}';
-    // {% endfor %}
-    var flight_objects = '{{ json_data }}'
-</script>
+    <script type="text/javascript">
+        // var lat;
+        // var lon;
+        // {% for object in object_list %}
+            //     window.lat = '{{ object.latitude|safe }}';
+            //     window.lon = '{{ object.longitude|safe }}';
+            // {% endfor %}
+        var flight_objects = '{{ json_data }}'
+    </script>
 
-<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-<script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/map.js' %}"></script>
 {% endblock body %}
