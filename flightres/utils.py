@@ -36,7 +36,7 @@ def is_near_senstive_area(lat, lon):
     nearest_poi_distance = min(distances)
     nearest_poi_name = sensitive_areas[distances.index(nearest_poi_distance)].get('name')
     if nearest_poi_distance < 1:
-        return True, "This is in/near \"No Fly Zone\" {}. Please contact the higher authority for special flight permission".format(
+        return True, "This is in/near \"No Fly Zone\" {}. A special flight permission is required for this flight".format(
             nearest_poi_name)
 
     return False, ""
