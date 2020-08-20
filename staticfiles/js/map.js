@@ -232,16 +232,18 @@ function openDenyModal(flight_id) {
         let smallPopup = document.getElementById('open-modal-deny');
         smallPopup.classList.add('open');
         html1 = `
-        <div>
+            <div class="popup-header">
+                <h5>Reason for Denial</h5>
+            </div>
             <input type="textarea" placeholder="Reason for denial" id="reasonInput"
                 style="height: 54px; width: 375px; align-self: center;" for="reason"
                 ; name="reason" ; ></input>
             <br>
-            <div class="buttons is-end">
-                <button type="submit" class="common-button is-bg" id="denySubmit" ${onclick = () => sendReason(flight_id)}>Submit</button>
-            </div>
-        </div>`
+            <div class="buttons is-end" style="height:35px;">
+                <button onclick="sendReason(${flight_id})" type="submit" style="margin-right:3px" class="common-button is-bg close-icon" id="denySubmit">Submit</button>
+            </div>`
         document.getElementById("submit-deny-div").innerHTML = html1
+        closePopup()
     })
 }
 
@@ -258,6 +260,11 @@ function sendReason(flight_id) {
             'X-CSRFToken': csrftoken
         }
     }).then(res => {
+        document.getElementById('submit-deny-div').innerHTML = '';
+        let smallPopup = document.getElementById('open-modal-deny');
+        let largePopup = document.getElementById('open-modal');
+        smallPopup.classList.remove('open');
+        largePopup.classList.remove('open');
         // console.log("Success", res);
         // console.log(flight_id, data);
     });
