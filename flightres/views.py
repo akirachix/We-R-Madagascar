@@ -111,7 +111,12 @@ def approvePerm(request, pk, action):
     elif action == 'deny':
         selected_perm.status = 'Rejected'
     selected_perm.save()
-    return redirect('/np/dashboard/permission')
+    # prev_url = str(request.META.get('HTTP_REFERER'))
+    # url = prev_url.split("np")[1]
+    if selected_perm.is_special_permission == True:
+        return redirect('/np/dashboard/permission/special')
+    else:
+        return redirect('/np/dashboard/permission/general')
 
 @login_required
 def denyPerm(request, pk):
@@ -122,7 +127,10 @@ def denyPerm(request, pk):
         selected_perm.status = 'Rejected'
         selected_perm.rejection_reason = data['value']
         selected_perm.save()
-        return redirect('/np/dashboard/permission')
+        if selected_perm.is_special_permission == True:
+            return redirect('/np/dashboard/permission/special')
+        else:
+            return redirect('/np/dashboard/permission/general')
 
 
 def flightReqResponseView(request, pk):
