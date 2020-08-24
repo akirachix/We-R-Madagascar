@@ -3,18 +3,18 @@
 
 
 {% block links %}
-<script src="{% static 'js/modal-image.js' %}"></script>
+    <script src="{% static 'js/modal-image.js' %}"></script>
 {% endblock links %}
 
 {% block body %}
-<main class="admin-main">
-    <div class="main-card">
-        <div class="card-header">
-            <h1>CIVILIAN COMPLAINTS / MANAGE CIVILIAN COMPLAINTS</h1>
-        </div>
-        <div class="card-body">
-            <table id="admin-datatable" class="admin-datatable">
-                <thead>
+    <main class="admin-main">
+        <div class="main-card">
+            <div class="card-header">
+                <h1>CIVILIAN COMPLAINTS / MANAGE CIVILIAN COMPLAINTS</h1>
+            </div>
+            <div class="card-body">
+                <table id="admin-datatable" class="admin-datatable">
+                    <thead>
                     <tr>
                         <th class="serial-th">SN</th>
                         <th>Date</th>
@@ -26,12 +26,13 @@
                         <th>Status</th>
                         <th class="modal-th"></th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <div id="myModal" class="popup">
                         <div class="popup-container lg-popup">
                             <div class="modal-body popup-body">
-                                <span class="close-icon" onclick="closeModal()"><i class="material-icons">close</i></span>
+                                <span class="close-icon" onclick="closeModal()"><i
+                                        class="material-icons">close</i></span>
                                 <!-- <a class="close-icon" onclick="closeModal()"><i class="material-icons">close</i></a> -->
                                 <div class="modal-content" id="openFSImage">
                                 </div>
@@ -39,232 +40,248 @@
                         </div>
                     </div>
                     {% for i, j, k in data %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td><time>{{ i.created_at }}</time></td>
-                        <td id="id_uav_uid">ID-{{ i.uav_uid }}</td>
-                        <td>{{ i.category }}</td>
-                        <td><b>{{ i.message }}</b></td>
-                        <td>{{ i.complainer_name }}</td>
-                        <td>{{ i.location }}</td>
-                        <td><span class="status approved">Solved</span></td>
-                        <td>
-                            <a id="show-popup" modal-link="complain{{i.uav_uid}}" class="modal-link"><i
-                                    class="material-icons" data-toggle="modal"
-                                    data-target="#complain{{i.uav_uid}}">chevron_right</i></a>
-                            <div class="popup" tabindex="-1" role="dialog" id="complain{{i.uav_uid}}">
-                                <div class="popup-container lg-popup map-popup">
-                                    <div class="popup-body">
-                                        <span class="close-icon"><i class="material-icons">close</i></span>
-                                        <div class="popup-header">
-                                            <h3>Complaint management for <b>ID {{ i.uav_uid }}</b></h3>
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                <time>{{ i.created_at }}</time>
+                            </td>
+                            <td id="id_uav_uid">ID-{{ i.uav_uid }}</td>
+                            <td>{{ i.category }}</td>
+                            <td><b>{{ i.message }}</b></td>
+                            <td>{{ i.complainer_name }}</td>
+                            <td>{{ i.location }}</td>
+                            <td><span class="status approved">Solved</span></td>
+                            <td>
+                                <a id="show-popup" modal-link="complain{{ i.uav_uid }}" class="modal-link"><i
+                                        class="material-icons" data-toggle="modal"
+                                        data-target="#complain{{ i.uav_uid }}">chevron_right</i></a>
+                                <div class="popup" tabindex="-1" role="dialog" id="complain{{ i.uav_uid }}">
+                                    <div class="popup-container lg-popup map-popup">
+                                        <div class="popup-body">
+                                            <span class="close-icon"><i class="material-icons">close</i></span>
+                                            <div class="popup-header">
+                                                <h3>Complaint management for <b>ID {{ i.uav_uid }}</b></h3>
 
-                                        </div>
-                                        <div class="popup-content">
-                                            <div class="drone-details">
-                                                <div class="row gx-md-3 gx-lg-3">
-                                                    <div class="col-xl-5 col-sm-12 order-2">
-                                                        <div class="info-content col-left">
-                                                            <ul>
-                                                                <li>
-                                                                    <h4>Sender info</h4>
-                                                                    <div class="content-list">
-                                                                        <p><b>Name:</b><span>{{ i.complainer_name }}</span>
-                                                                        </p>
-                                                                        <p><b>Location:</b><span>{{ i.location }}</span>
-                                                                        </p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <h4>Additional info</h4>
-                                                                    <div class="content-list">
-                                                                        <div class="image-content">
-                                                                            <figure>
-                                                                                <button data-toggle="modal"
-                                                                                    data-target="#myModal"
-                                                                                    modal-link="myModal" type="button"
-                                                                                    class="hover-shadow cursor btn modal-link"><img
-                                                                                        id="image_{{i.uav_uid}}"
-                                                                                        class="expandImage"
-                                                                                        src="{{ i.image_url }}"
-                                                                                        alt=""></button>
-                                                                            </figure>
+                                            </div>
+                                            <div class="popup-content">
+                                                <div class="drone-details">
+                                                    <div class="row gx-md-3 gx-lg-3">
+                                                        <div class="col-xl-5 col-sm-12 order-2">
+                                                            <div class="info-content col-left">
+                                                                <ul>
+                                                                    <li>
+                                                                        <h4>Sender info</h4>
+                                                                        <div class="content-list">
+                                                                            <p>
+                                                                                <b>Name:</b><span>{{ i.complainer_name }}</span>
+                                                                            </p>
+                                                                            <p>
+                                                                                <b>Location:</b><span>{{ i.location }}</span>
+                                                                            </p>
                                                                         </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <h4>Flight Permission Nearby</h4>
-                                                                    <div class="permit-list">
-                                                                        {% for perm in j %}
-                                                                        <button data-toggle="modal"
-                                                                            data-target="#open-modal-flight"
-                                                                            modal-link="open-modal-flight" type="button"
-                                                                            class="btn modal-link flightPop"
-                                                                            id="flight_{{perm.uav_uid}}">
-                                                                            Permission Request for ID
-                                                                            {{ perm.uav_uid }}
-                                                                        </button>
-
-                                                                        <div class="popup" id="open-modal-flight">
-                                                                            <div id="modal-dialog"
-                                                                                class="popup-container lg-popup map-popup">
-                                                                                <div class="popup-body">
-                                                                                    <span class="close-icon"><i
-                                                                                            class="material-icons">close</i></span>
-                                                                                    <div class="popup-body"
-                                                                                        id="flightPopUp">
-                                                                                    </div>
-                                                                                </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h4>Additional info</h4>
+                                                                        <div class="content-list">
+                                                                            <div class="image-content">
+                                                                                <figure>
+                                                                                    <button data-toggle="modal"
+                                                                                            data-target="#myModal"
+                                                                                            modal-link="myModal"
+                                                                                            type="button"
+                                                                                            class="hover-shadow cursor btn modal-link">
+                                                                                        <img
+                                                                                                id="image_{{ i.uav_uid }}"
+                                                                                                class="expandImage"
+                                                                                                src="{{ i.image_url }}"
+                                                                                                alt=""></button>
+                                                                                </figure>
                                                                             </div>
                                                                         </div>
-                                                                        {% endfor %}
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h4>Flight Permission Nearby</h4>
+                                                                        <div class="permit-list">
+                                                                            {% for perm in j %}
+                                                                                <button data-toggle="modal"
+                                                                                        data-target="#open-modal-flight"
+                                                                                        modal-link="open-modal-flight"
+                                                                                        type="button"
+                                                                                        class="btn modal-link flightPop"
+                                                                                        id="flight_{{ perm.uav_uid }}">
+                                                                                    Permission Request for ID
+                                                                                    {{ perm.uav_uid }}
+                                                                                </button>
+
+                                                                                <div class="popup"
+                                                                                     id="open-modal-flight">
+                                                                                    <div id="modal-dialog"
+                                                                                         class="popup-container lg-popup map-popup">
+                                                                                        <div class="popup-body">
+                                                                                    <span class="close-icon"><i
+                                                                                            class="material-icons">close</i></span>
+                                                                                            <div class="popup-body"
+                                                                                                 id="flightPopUp">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            {% endfor %}
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xl-7 col-sm-12  order1">
-                                                        <div class="complaint-content col-right">
-                                                            <h3 class="title">COMPLAINT MESSAGE <span><a
+                                                        <div class="col-xl-7 col-sm-12  order1">
+                                                            <div class="complaint-content col-right">
+                                                                <h3 class="title">COMPLAINT MESSAGE <span><a
                                                                         class="common-button is-bg"
                                                                         href="{% url 'dashboard:update-complain' pk=i.uav_uid action='status' %}">Mark
                                                                         as Resolved</a> </span></h3>
-                                                            <div class="info-para">
-                                                                <h6>Complain Category:
-                                                                    <span>{{ i.category }}</span></h6>
-                                                                <span class="time">{{ i.created_at }}</span>
-                                                            </div>
-                                                            <div class="info-block">
-                                                                <p>{{ i.message }}</p>
-                                                            </div>
-                                                            <div class="button-wrap">
-                                                                <button class="common-button is-bg escalate-button"
-                                                                    popup-link="open-modal-escalated">Issue
-                                                                    Escalated</button>
-                                                            </div>
-                                                            <form action="{% url 'dashboard:submit-reply' pk=i.pk %}"
-                                                                method="POST">
-                                                                {% csrf_token %}
-                                                                <textarea class="form-control" id="note" type="text"
-                                                                    name="note">{{ i.note }}</textarea>
-                                                                <div class="textarea-message">
+                                                                <div class="info-para">
+                                                                    <h6>Complain Category:
+                                                                        <span>{{ i.category }}</span></h6>
+                                                                    <span class="time">{{ i.created_at }}</span>
+                                                                </div>
+                                                                <div class="info-block">
+                                                                    <p>{{ i.message }}</p>
+                                                                </div>
+                                                                <div class="button-wrap">
+                                                                    <button class="common-button is-bg escalate-button"
+                                                                            popup-link="open-modal-escalated">Issue
+                                                                        Escalated
+                                                                    </button>
+                                                                </div>
+                                                                <form action="{% url 'dashboard:submit-reply' pk=i.pk %}"
+                                                                      method="POST">
+                                                                    {% csrf_token %}
+                                                                    <textarea class="form-control" id="note" type="text"
+                                                                              placeholder="Write a internal note"
+                                                                              name="note">{{ i.note }}</textarea>
+                                                                    <br/>
+
+                                                                    <div class="textarea-message">
                                                                     <textarea class="form-control" id="reply"
-                                                                        type="text"
-                                                                        name="reply">{{ i.reply }}</textarea>
-                                                                </div>
-                                                                <br>
-                                                                <div class="buttons is-end">
-                                                                    <button type="submit"
-                                                                        class="common-button is-bg">Reply</button>
-                                                                </div>
-                                                            </form>
+                                                                              placeholder="Write a reply back"
+                                                                              type="text"
+                                                                              name="reply">{{ i.reply }}</textarea>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="buttons is-end">
+                                                                        <button type="submit"
+                                                                                class="common-button is-bg">Reply
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
-                                        <div class="popup-footer popup-permission">
+                                            </div>
+                                            <div class="popup-footer popup-permission">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="popup" id="open-modal-escalated">
-                                <div class="popup-container sm-popup map-popup">
-                                    <div class="popup-body">
-                                        <span class="close-icon"><i class="material-icons">close</i></span>
-                                        <div class="popup-header">
-                                            <h3>Escalate Issue</h3>
+                                <div class="popup" id="open-modal-escalated">
+                                    <div class="popup-container sm-popup map-popup">
+                                        <div class="popup-body">
+                                            <span class="close-icon"><i class="material-icons">close</i></span>
+                                            <div class="popup-header">
+                                                <h3>Escalate Issue</h3>
 
-                                        </div>
-                                        <div class="popup-content">
-                                            <div class="drone-details">
-                                                <div class="row">
-                                                    <div class="col-xl-12 col-sm-12">
-                                                        <div class="drone-content col-left">
-                                                            <ul>
-                                                                <li>
-                                                                    <h4>Police Contacts</h4>
-                                                                    {% for auth in k %}
-                                                                    <div class="content-list">
-                                                                        <p><b>{{ auth.name }}</b><span>{{ auth.phone_number }}</span>
-                                                                        </p>
-                                                                    </div>
-                                                                    {% endfor %}
-                                                                    <div class="button-wrap">
-                                                                        <a class="common-button is-bg"
-                                                                            href="{% url 'dashboard:update-complain' pk=i.uav_uid action='escalate' %}">Escalate</a>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
+                                            </div>
+                                            <div class="popup-content">
+                                                <div class="drone-details">
+                                                    <div class="row">
+                                                        <div class="col-xl-12 col-sm-12">
+                                                            <div class="drone-content col-left">
+                                                                <ul>
+                                                                    <li>
+                                                                        <h4>Police Contacts</h4>
+                                                                        {% for auth in k %}
+                                                                            <div class="content-list">
+                                                                                <p>
+                                                                                    <b>{{ auth.name }}</b><span>{{ auth.phone_number }}</span>
+                                                                                </p>
+                                                                            </div>
+                                                                        {% endfor %}
+                                                                        <div class="button-wrap">
+                                                                            <a class="common-button is-bg"
+                                                                               href="{% url 'dashboard:update-complain' pk=i.uav_uid action='escalate' %}">Escalate</a>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+
                                                         </div>
-
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
-                                        <div class="popup-footer popup-permission">
+                                            </div>
+                                            <div class="popup-footer popup-permission">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     {% endfor %}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
 {% endblock body %}
 
 {% block footer_links %}
-<script src="{% static 'js/modal-image.js' %}"></script>
-<script type="text/javascript">
-    var flight_objects = '{{ json_data }}'
-    var image_url_objects = '{{image_json_data}}'
-</script>
-<script>
-    function permApproval(uid, status) {
-        console.log(uid, status)
-    }
-
-    $(document).ready(function () {
-
-        function closePopup() {
-            $('.close-icon').on('click', function (e) {
-                e.preventDefault();
-                $(this).closest('.popup').removeClass('open');
-            });
+    <script src="{% static 'js/modal-image.js' %}"></script>
+    <script type="text/javascript">
+        var flight_objects = '{{ json_data }}'
+        var image_url_objects = '{{image_json_data}}'
+    </script>
+    <script>
+        function permApproval(uid, status) {
+            console.log(uid, status)
         }
-        closePopup();
-        // var lat = document.getElementById('map').getAttribute('value').split(',')[0]
-        // var long = document.getElementById('map').getAttribute('value').split(',')[1]
+
+        $(document).ready(function () {
+
+            function closePopup() {
+                $('.close-icon').on('click', function (e) {
+                    e.preventDefault();
+                    $(this).closest('.popup').removeClass('open');
+                });
+            }
+
+            closePopup();
+            // var lat = document.getElementById('map').getAttribute('value').split(',')[0]
+            // var long = document.getElementById('map').getAttribute('value').split(',')[1]
 
 
-        var expandBtn = document.getElementsByClassName('flightPop')
+            var expandBtn = document.getElementsByClassName('flightPop')
 
-        flight_objects = flight_objects.replace(/&quot;/g, '"').replace(/uav_uuid__operator__company_name/g, 'company_name');
-        flight_object = JSON.parse(flight_objects)
+            flight_objects = flight_objects.replace(/&quot;/g, '"').replace(/uav_uuid__operator__company_name/g, 'company_name');
+            flight_object = JSON.parse(flight_objects)
 
 
-        for (var i = 0; i < expandBtn.length; i++) {
-            expandBtn[i].addEventListener('click', function (e) {
-                // console.log('clicked');
-                object_id = e.target.id.split('_')[1]
-                for (j = 0; j < flight_object.length; j++) {
-                    if (object_id == flight_object[j].uav_uid) {
-                        createModal(flight_object[j])
+            for (var i = 0; i < expandBtn.length; i++) {
+                expandBtn[i].addEventListener('click', function (e) {
+                    // console.log('clicked');
+                    object_id = e.target.id.split('_')[1]
+                    for (j = 0; j < flight_object.length; j++) {
+                        if (object_id == flight_object[j].uav_uid) {
+                            createModal(flight_object[j])
+                        }
                     }
-                }
-            })
-        }
+                })
+            }
 
-        function createModal(data) {
-            var html1 = `
+            function createModal(data) {
+                var html1 = `
                 <div class="popup-header">
-                <h3>Permission Request for <b>ID `+ data.uav_uid + `</b></h3>
+                <h3>Permission Request for <b>ID ` + data.uav_uid + `</b></h3>
                 </div>
                 <div class="popup-content">
                     <div class="drone-details">
@@ -277,15 +294,15 @@
                                             <div class="content-list">
                                                 <p>
                                                     <b>Company Name:</b>
-                                                    <span>`+ data.company_name + `</span>
+                                                    <span>` + data.company_name + `</span>
                                                 </p>
                                                 <p>
                                                     <b>Phone Number:</b>
-                                                    <span>`+ data.uav_uuid__operator__phone_number + `</span>
+                                                    <span>` + data.uav_uuid__operator__phone_number + `</span>
                                                 </p>
                                                 <p>
                                                     <b>Email:</b>
-                                                    <span>`+ data.uav_uuid__operator__email + `</span>
+                                                    <span>` + data.uav_uuid__operator__email + `</span>
                                                 </p>
                                             </div>
                                         </li>
@@ -294,19 +311,19 @@
                                             <h4>Flight info</h4>
                                             <div class="content-list">
                                                 <p><b>Start Date:
-                                                    </b><span>`+ data.flight_start_date + `</span>
+                                                    </b><span>` + data.flight_start_date + `</span>
                                                 </p>
                                                 <p><b>End Date:
-                                                    </b><span>`+ data.flight_end_date + `</span>
+                                                    </b><span>` + data.flight_end_date + `</span>
                                                 </p>
                                                 <p><b> Time:
-                                                    </b><span>`+ data.flight_time + `</span>
+                                                    </b><span>` + data.flight_time + `</span>
                                                 </p>
                                                 <p><b>Purpose:
-                                                    </b><span>`+ data.flight_purpose + `</span>
+                                                    </b><span>` + data.flight_purpose + `</span>
                                                 </p>
                                                 <p><b>Aircraft Name:
-                                                    </b><span>`+ data.uav_uuid__popular_name + `</span>
+                                                    </b><span>` + data.uav_uuid__popular_name + `</span>
                                                 </p>
                                             </div>
                                         </li>
@@ -315,10 +332,10 @@
                                             <h4>Pilot info</h4>
                                             <div class="content-list">
                                                 <p><b>Pilot Name: </b><span>
-                                                    `+ data.pilot_id__name + `
+                                                    ` + data.pilot_id__name + `
                                                     </span>
                                                     <p><b>Pilot Phone Number:
-                                                    </b><span>`+ data.pilot_id__phone_number + `</span>
+                                                    </b><span>` + data.pilot_id__phone_number + `</span>
                                                     </p>
                                             </div>
                                         </li>
@@ -327,7 +344,7 @@
                                             <div class="row g-2">
                                                 <div class="col-md-4">
                                                     <div class="file-upload">
-                                                        <a href="`+ data.pilot_cv_url + `" class="file-link">
+                                                        <a href="` + data.pilot_cv_url + `" class="file-link">
                                                             <div class="file-icon">
                                                                 <i class="material-icons">description</i>
                                                             </div>
@@ -341,7 +358,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="file-upload">
-                                                        <a href="`+ data.flight_plan_url + `" class="file-link">
+                                                        <a href="` + data.flight_plan_url + `" class="file-link">
                                                             <div class="file-icon">
                                                                 <i class="material-icons">description</i>
                                                             </div>
@@ -351,7 +368,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="file-upload">
-                                                        <a href="`+ data.flight_insurance_url + `" class="file-link">
+                                                        <a href="` + data.flight_insurance_url + `" class="file-link">
                                                             <div class="file-icon">
                                                                 <i class="material-icons">description</i>
                                                             </div>
@@ -367,75 +384,75 @@
                             <div class="col-xl-7 col-sm-12">
                                 <div class="map-content col-right">
                                     <div class="tab-content-holder current" id="location">
-                                        <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `"></div>
+                                        <div id="map" class="map" value="` + data.latitude + `, ` + data.longitude + `"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>`
-            document.getElementById('flightPopUp').innerHTML = html1
-            plotMap(data)
-        }
+                document.getElementById('flightPopUp').innerHTML = html1
+                plotMap(data)
+            }
 
-        function plotMap(data) {
-            var map = L.map('map').setView([data.latitude, data.longitude], 8);
-            // var map = L.map('map', {
-            //     // layers: [base],
-            //     center: new L.LatLng(lat, lon),
-            //     zoom: 12,
-            // });
-            var mark = L.marker([data.latitude, data.longitude]).addTo(map);
+            function plotMap(data) {
+                var map = L.map('map').setView([data.latitude, data.longitude], 8);
+                // var map = L.map('map', {
+                //     // layers: [base],
+                //     center: new L.LatLng(lat, lon),
+                //     zoom: 12,
+                // });
+                var mark = L.marker([data.latitude, data.longitude]).addTo(map);
 
-            // console.log(flight_object)
+                // console.log(flight_object)
 
-            var circle = L.circle([data.latitude, data.longitude], {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius: 100
-            }).addTo(map);
+                var circle = L.circle([data.latitude, data.longitude], {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5,
+                    radius: 100
+                }).addTo(map);
 
-            osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            })
+                osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
+                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                })
 
-            googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            }).addTo(map);
-            googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            });
-            googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            });
-            googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            });
-
-
-            var baseLayers = {
-                "OpenStreetMap": osm,
-                "Google Streets": googleStreets,
-                "Google Hybrid": googleHybrid,
-                "Google Satellite": googleSat,
-                "Google Terrain": googleTerrain,
-
-            };
+                googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                }).addTo(map);
+                googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                });
+                googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                });
+                googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                });
 
 
-            customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+                var baseLayers = {
+                    "OpenStreetMap": osm,
+                    "Google Streets": googleStreets,
+                    "Google Hybrid": googleHybrid,
+                    "Google Satellite": googleSat,
+                    "Google Terrain": googleTerrain,
+
+                };
 
 
-            layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
-        }
-    });
+                customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
-    $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
 
-</script>
+                layerswitcher = L.control.layers(baseLayers, {}, {collapsed: true}).addTo(map);
+            }
+        });
+
+        $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
+
+    </script>
 {% endblock footer_links %}
