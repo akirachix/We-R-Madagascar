@@ -207,7 +207,7 @@
                             position: absolute;
                             top: 0;
                         }
-                    }  
+                    }
                     /* Next & previous buttons */
                     .prev,
                     .next {
@@ -225,20 +225,20 @@
                         user-select: none;
                         -webkit-user-select: none;
                     }
-                
+
                     /* Position the "next button" to the right */
                     .next {
                         right: 0;
                         border-radius: 3px 0 0 3px;
                     }
-                
+
                     /* On hover, add a black background color with a little bit see-through */
                     .prev:hover,
                     .next:hover {
                         background-color: rgba($heading-color, .6);
                     }
                 }
-               
+
             }
         }
         &.sm-popup {
@@ -524,7 +524,7 @@
 
                                 }
                             }
-                            
+
                             .info-block{
                                 background-color: $purple-shade;
                                 @include radius(5px);
@@ -612,7 +612,7 @@
                                             margin-bottom: 20px;
                                         }
                                     }
-                                   
+
                                 }
                             }
                             .buttons{
@@ -629,7 +629,7 @@
                                 0%   {opacity: 0;}
                                 100% {opacity: 1;}
                             }
-                            
+
                             @keyframes fadeIn {
                                 0%   {opacity: 0;}
                                 100% {opacity: 1;}
@@ -640,7 +640,7 @@
                             @media #{$breakpoint-desktop}{
                                 height: calc(100% - 18%);
                             }
-                            
+
                             #map{
                                 @include radius(4px);
                                 // min-height: 320px;
@@ -722,7 +722,7 @@
                                                 }
                                             }
                                             p{
-                                                white-space: nowrap; 
+                                                white-space: nowrap;
                                                 overflow: hidden;
                                                 text-overflow: ellipsis;
                                                 width: 100px;
@@ -834,7 +834,7 @@
                                 }
                                 @include flex(0 0 50%);
                                 max-width: 50%;
-                               
+
                                 a {
                                     background-color: transparent;
                                     border: 1px solid $body-color;
@@ -917,13 +917,26 @@
                                             cursor: pointer;
                                             display: block;
                                             @include transition(all .3s ease);
-                                           
+                                          &::before{
+                                                content: '';
+                                                top: 0;
+                                                left: 0;
+                                                right: 0;
+                                                bottom: 0;
+                                                z-index: 111;
+                                                position: absolute;
+                                            }
                                             img{
                                                 max-width: 100%;
                                                 height: 100%;
                                                 @include radius(5px);
                                                 cursor: pointer;
                                             }
+                                            iframe{
+                                                max-width: 100%;
+                                                height: 100%;
+                                            }
+
                                         }
                                         @media #{$breakpoint-lg-desktop}{
                                             width: 70px;
@@ -989,7 +1002,7 @@
                                         font-weight: 600;
                                         font-size: .875rem;
                                         line-height: 1.75rem;
-                                       
+
                                     }
                                     span {
                                         color: $text-color;
@@ -997,7 +1010,7 @@
                                     }
                                     @media #{$breakpoint-lg-desktop}{
                                         font-size: .775rem;
-                                        b{ 
+                                        b{
                                             font-size: .75rem;
                                             line-height: 1.5rem;
                                         }
@@ -1042,6 +1055,7 @@
     &#open-modal-deny,
     &#open-modal-flight,
     &#open-modal-img,
+    &#myModalVideo,
     &#myModal{
         z-index: 1111;
     }

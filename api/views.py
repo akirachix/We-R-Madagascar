@@ -163,29 +163,24 @@ class GeoLocationValidation(APIView):
     def post(self, request):
         data = request.data
         message = "The provided latitude longitude is invalid format"
-
         lat_lon = data.get('lat_lon')
-        valid, lat, lon = validate_lat_lon(lat_lon)
+        is_valid_lat_lon = False
+        is_near_sensitive_area = False
+        print(lat_lon)
 
-        if valid:
+        is_valid_lat_lon, lat, lon = validate_lat_lon(lat_lon)
+
+        if is_valid_lat_lon:
             is_near_sensitive_area, message = is_near_senstive_area(lat, lon)
-            valid = not is_near_sensitive_area
-            print(message)
-            if valid:
-                return JsonResponse(
-                    {'valid': True,
-                     'lat': lat,
-                     'lon': lon
-                     },
-                    status=status.HTTP_200_OK, )
-            else:
-                return JsonResponse(
-                    {'valid': False, 'message': message},
-                    status=status.HTTP_200_OK, )
-        else:
-            return JsonResponse(
-                {'valid': False, 'message': message},
-                status=status.HTTP_200_OK, )
+
+        return JsonResponse(
+            {'is_valid_lat_lon': is_valid_lat_lon,
+             'is_not_near_sensitive_area': is_near_sensitive_area,
+             'lat': lat,
+             'lon': lon,
+             'message': message,
+             },
+            status=status.HTTP_200_OK, )
 
 
 class OldPermissionIdValidation(APIView):
