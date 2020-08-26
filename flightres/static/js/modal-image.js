@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 
   image_urls_unstructured = image_url_objects.replace(/&quot;/g, '"');
@@ -23,8 +22,11 @@ $(document).ready(function () {
   function createModal(data) {
     var html1 = `
     <div class="mySlides" style="display: block;">
-      <img src="`+ data.image_url + `"
-        style="width:100%">
+      <iframe
+        style="width:100%"
+        src="`+ data.image_url + `"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
     </div>
     `
     console.log(html1, "shown");
@@ -36,12 +38,12 @@ $(document).ready(function () {
 function openModal() {
   //   document.getElementById("myModal").style.display = "block";
   console.log("Open Modal Clicked");
-  document.getElementById("myModal").classList.add("open");
+  document.getElementById("myModalVideo").classList.add("open");
 }
 
 function closeModal() {
   //   document.getElementById("myModal").style.display = "none";
-  document.getElementById("myModal").classList.remove("open");
+  document.getElementById("myModalVideo").classList.remove("open");
 }
 
 // var slideIndex = 1;
