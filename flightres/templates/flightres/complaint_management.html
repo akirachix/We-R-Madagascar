@@ -28,13 +28,11 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     <div style="z-index: 1111;" id="myModalVideo" class="popup">
                         <div class="popup-container lg-popup">
                             <div class="modal-body popup-body">
                                 <span class="close-icon" onclick="closeModal()"><i
                                         class="material-icons">close</i></span>
-                                <!-- <a class="close-icon" onclick="closeModal()"><i class="material-icons">close</i></a> -->
                                 <div class="modal-content" id="openFSImage">
                                 </div>
                             </div>
@@ -92,18 +90,15 @@
                                                                     <div class="content-list">
                                                                         <div class="image-content">
                                                                             <figure>
-                                                                                <a data-toggle="modal"
+                                                                                <button data-toggle="modal"
                                                                                     data-target="#myModalVideo"
                                                                                     modal-link="myModalVideo"
                                                                                     type="button"
                                                                                     class="hover-shadow cursor btn modal-link">
-                                                                                    <iframe class="expandImage"
-                                                                                        id="image_{{ i.uav_uid }}"
-                                                                                        style="max-width: 100%;height: 100%;"
-                                                                                        src="{{ i.image_url }}"
-                                                                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                                                                        allowfullscreen></iframe>
-                                                                                </a>
+                                                                                    <img id="image_{{ i.uav_uid }}"
+                                                                                        class="expandImage"
+                                                                                        src="https://picsum.photos/200" alt="">
+                                                                                </button>
                                                                             </figure>
                                                                         </div>
                                                                     </div>

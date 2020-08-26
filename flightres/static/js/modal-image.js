@@ -8,7 +8,7 @@ $(document).ready(function () {
 
   for (var i = 0; i < imageBtn.length; i++) {
     imageBtn[i].addEventListener('click', function (e) {
-      console.log('clicked');
+      // console.log('clicked');
       object_id = e.target.id.split('_')[1]
       for (j = 0; j < image_urls.length; j++) {
         if (object_id == image_urls[j].uav_uid) {
@@ -19,17 +19,23 @@ $(document).ready(function () {
     })
   }
 
+  // <div class="mySlides" style="display: block;">
+  //   <img src="`+ data.image_url + `"
+  //     style="width:100%">
+  // </div>
+
   function createModal(data) {
     var html1 = `
     <div class="mySlides" style="display: block;">
       <iframe
-        style="width:100%"
+        class="modal-content"
+        style="height: calc(200vh - 300px);z-index: 1111;"
         src="`+ data.image_url + `"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
     `
-    console.log(html1, "shown");
+    // console.log(html1, "shown");
     openModal()
     document.getElementById("openFSImage").innerHTML = html1;
   }
@@ -37,7 +43,6 @@ $(document).ready(function () {
 
 function openModal() {
   //   document.getElementById("myModal").style.display = "block";
-  console.log("Open Modal Clicked");
   document.getElementById("myModalVideo").classList.add("open");
 }
 
