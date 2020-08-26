@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 
   image_urls_unstructured = image_url_objects.replace(/&quot;/g, '"');
@@ -9,7 +8,7 @@ $(document).ready(function () {
 
   for (var i = 0; i < imageBtn.length; i++) {
     imageBtn[i].addEventListener('click', function (e) {
-      console.log('clicked');
+      // console.log('clicked');
       object_id = e.target.id.split('_')[1]
       for (j = 0; j < image_urls.length; j++) {
         if (object_id == image_urls[j].uav_uid) {
@@ -20,14 +19,23 @@ $(document).ready(function () {
     })
   }
 
+  // <div class="mySlides" style="display: block;">
+  //   <img src="`+ data.image_url + `"
+  //     style="width:100%">
+  // </div>
+
   function createModal(data) {
     var html1 = `
     <div class="mySlides" style="display: block;">
-      <img src="`+ data.image_url + `"
-        style="width:100%">
+      <iframe
+        class="modal-content"
+        style="height: calc(200vh - 300px);z-index: 1111;"
+        src="`+ data.image_url + `"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
     </div>
     `
-    console.log(html1, "shown");
+    // console.log(html1, "shown");
     openModal()
     document.getElementById("openFSImage").innerHTML = html1;
   }
@@ -35,13 +43,12 @@ $(document).ready(function () {
 
 function openModal() {
   //   document.getElementById("myModal").style.display = "block";
-  console.log("Open Modal Clicked");
-  document.getElementById("myModal").classList.add("open");
+  document.getElementById("myModalVideo").classList.add("open");
 }
 
 function closeModal() {
   //   document.getElementById("myModal").style.display = "none";
-  document.getElementById("myModal").classList.remove("open");
+  document.getElementById("myModalVideo").classList.remove("open");
 }
 
 // var slideIndex = 1;
