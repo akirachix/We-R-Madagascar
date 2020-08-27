@@ -1,0 +1,5592 @@
+[
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 0,
+    "fields": {
+      "name": "\u092c\u0941\u091f\u0935\u0932",
+      "latitude": 27.6924844,
+      "longitude": 83.4679742,
+      "authority_type": "Police",
+      "phone_number": "01-41803556",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 1,
+    "fields": {
+      "name": "Tourist Police Post",
+      "latitude": 28.2117055,
+      "longitude": 83.95726999999998,
+      "authority_type": "Police",
+      "phone_number": "01-45821783",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 2,
+    "fields": {
+      "name": "",
+      "latitude": 27.6847278,
+      "longitude": 85.30105039999998,
+      "authority_type": "Police",
+      "phone_number": "01-47823412",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 3,
+    "fields": {
+      "name": "Balkhu",
+      "latitude": 27.6847585,
+      "longitude": 85.29807409999998,
+      "authority_type": "Police",
+      "phone_number": "01-43589570",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 4,
+    "fields": {
+      "name": "Kalimati",
+      "latitude": 27.6963576,
+      "longitude": 85.29936639999998,
+      "authority_type": "Police",
+      "phone_number": "01-47447034",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 5,
+    "fields": {
+      "name": "Rangers",
+      "latitude": 27.7073176,
+      "longitude": 85.2925744,
+      "authority_type": "Police",
+      "phone_number": "01-49189675",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 6,
+    "fields": {
+      "name": "Imadol Police Station",
+      "latitude": 27.6592311,
+      "longitude": 85.3439525,
+      "authority_type": "Police",
+      "phone_number": "01-41501575",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 7,
+    "fields": {
+      "name": "City Police, Dhangadhi",
+      "latitude": 28.7051109,
+      "longitude": 80.58868409999998,
+      "authority_type": "Police",
+      "phone_number": "01-44779247",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 8,
+    "fields": {
+      "name": "Satdobato Police Station",
+      "latitude": 27.6584715,
+      "longitude": 85.32484739999998,
+      "authority_type": "Police",
+      "phone_number": "01-44122375",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 9,
+    "fields": {
+      "name": "Kamal Pokhari Police Station",
+      "latitude": 27.7102167,
+      "longitude": 85.3255759,
+      "authority_type": "Police",
+      "phone_number": "01-43699946",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 10,
+    "fields": {
+      "name": "Someswor Police",
+      "latitude": 27.434914,
+      "longitude": 84.4170709,
+      "authority_type": "Police",
+      "phone_number": "01-41019395",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 11,
+    "fields": {
+      "name": "Basantapur Police",
+      "latitude": 27.4571557,
+      "longitude": 84.3232579,
+      "authority_type": "Police",
+      "phone_number": "01-47352124",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 12,
+    "fields": {
+      "name": "Tourist Check",
+      "latitude": 28.5524367,
+      "longitude": 84.2589483,
+      "authority_type": "Police",
+      "phone_number": "01-43645255",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 13,
+    "fields": {
+      "name": "",
+      "latitude": 27.6316092,
+      "longitude": 85.51783709999998,
+      "authority_type": "Police",
+      "phone_number": "01-44574315",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 14,
+    "fields": {
+      "name": "mangalbazar police station",
+      "latitude": 27.6725186,
+      "longitude": 85.3251065,
+      "authority_type": "Police",
+      "phone_number": "01-43388805",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 15,
+    "fields": {
+      "name": "balkumari police station",
+      "latitude": 27.6719324,
+      "longitude": 85.3361568,
+      "authority_type": "Police",
+      "phone_number": "01-47072902",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 16,
+    "fields": {
+      "name": "Metropolitan Police Beat, Mandikhatar",
+      "latitude": 27.736285,
+      "longitude": 85.3477888,
+      "authority_type": "Police",
+      "phone_number": "01-44196569",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 17,
+    "fields": {
+      "name": "Durbar Marg Police Station",
+      "latitude": 27.7130123,
+      "longitude": 85.318138,
+      "authority_type": "Police",
+      "phone_number": "01-44027575",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 18,
+    "fields": {
+      "name": "Traffic station",
+      "latitude": 27.694123,
+      "longitude": 85.2821442,
+      "authority_type": "Police",
+      "phone_number": "01-49550900",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 19,
+    "fields": {
+      "name": "Tourist Police",
+      "latitude": 27.6739246,
+      "longitude": 85.3256523,
+      "authority_type": "Police",
+      "phone_number": "01-43615566",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 20,
+    "fields": {
+      "name": "District Police Station",
+      "latitude": 27.6806874,
+      "longitude": 84.4351937,
+      "authority_type": "Police",
+      "phone_number": "01-44978940",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 21,
+    "fields": {
+      "name": "Mahanagariya Prahari Parisar",
+      "latitude": 27.7039529,
+      "longitude": 85.3327052,
+      "authority_type": "Police",
+      "phone_number": "01-45734488",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 22,
+    "fields": {
+      "name": "Community Police Service",
+      "latitude": 27.7268479,
+      "longitude": 85.3351501,
+      "authority_type": "Police",
+      "phone_number": "01-43276971",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 23,
+    "fields": {
+      "name": "Police Office, Kirtipur",
+      "latitude": 27.6777094,
+      "longitude": 85.27503969999998,
+      "authority_type": "Police",
+      "phone_number": "01-48822684",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 24,
+    "fields": {
+      "name": "Metro Police Range - Pulchowk",
+      "latitude": 27.6772242,
+      "longitude": 85.3165788,
+      "authority_type": "Police",
+      "phone_number": "01-49734587",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 25,
+    "fields": {
+      "name": "Mahanagariya Prahari Bit",
+      "latitude": 27.6734631,
+      "longitude": 85.31561449999998,
+      "authority_type": "Police",
+      "phone_number": "01-47349912",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 26,
+    "fields": {
+      "name": "Police",
+      "latitude": 27.6856352,
+      "longitude": 85.3068102,
+      "authority_type": "Police",
+      "phone_number": "01-41853637",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 27,
+    "fields": {
+      "name": "Mangalsen Smriti Brigade",
+      "latitude": 28.1883627,
+      "longitude": 82.54028239999998,
+      "authority_type": "Police",
+      "phone_number": "01-46228977",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 28,
+    "fields": {
+      "name": "Sworgadwari Police Station",
+      "latitude": 28.1220301,
+      "longitude": 82.6733277,
+      "authority_type": "Police",
+      "phone_number": "01-47843205",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 29,
+    "fields": {
+      "name": "Gahana Pokhari Police Bit",
+      "latitude": 27.7166129,
+      "longitude": 85.33267429999998,
+      "authority_type": "Police",
+      "phone_number": "01-49829446",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 30,
+    "fields": {
+      "name": "Boudha Police Branch",
+      "latitude": 27.7202554,
+      "longitude": 85.36008579999998,
+      "authority_type": "Police",
+      "phone_number": "01-46934563",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 31,
+    "fields": {
+      "name": "",
+      "latitude": 27.6735225,
+      "longitude": 85.3761923,
+      "authority_type": "Police",
+      "phone_number": "01-48055037",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 32,
+    "fields": {
+      "name": "Traffic Police",
+      "latitude": 27.6738055,
+      "longitude": 85.3666027,
+      "authority_type": "Police",
+      "phone_number": "01-47100285",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 33,
+    "fields": {
+      "name": "Kapan Police Beat",
+      "latitude": 27.7367724,
+      "longitude": 85.35415159999998,
+      "authority_type": "Police",
+      "phone_number": "01-48806328",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 34,
+    "fields": {
+      "name": "",
+      "latitude": 27.6964061,
+      "longitude": 84.4183649,
+      "authority_type": "Police",
+      "phone_number": "01-41576753",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 35,
+    "fields": {
+      "name": "",
+      "latitude": 27.7200561,
+      "longitude": 85.3258869,
+      "authority_type": "Police",
+      "phone_number": "01-45644215",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 36,
+    "fields": {
+      "name": "",
+      "latitude": 27.5896309,
+      "longitude": 85.48220469999998,
+      "authority_type": "Police",
+      "phone_number": "01-44346205",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 37,
+    "fields": {
+      "name": "Dsp Police Station",
+      "latitude": 26.4629499,
+      "longitude": 87.28237609999998,
+      "authority_type": "Police",
+      "phone_number": "01-48284546",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 38,
+    "fields": {
+      "name": "Old Baneshwar Police Station",
+      "latitude": 27.7014959,
+      "longitude": 85.3403139,
+      "authority_type": "Police",
+      "phone_number": "01-49978186",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 39,
+    "fields": {
+      "name": "District Police office",
+      "latitude": 28.2639958,
+      "longitude": 83.600564,
+      "authority_type": "Police",
+      "phone_number": "01-48035184",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 40,
+    "fields": {
+      "name": "Metropolitan Police Circle",
+      "latitude": 27.7184446,
+      "longitude": 85.3094495,
+      "authority_type": "Police",
+      "phone_number": "01-47360618",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 41,
+    "fields": {
+      "name": "Tilingatar Police Station",
+      "latitude": 27.7380078,
+      "longitude": 85.32558589999998,
+      "authority_type": "Police",
+      "phone_number": "01-42391225",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 42,
+    "fields": {
+      "name": "Mahanagariya Prahari Pahara Gana HQ",
+      "latitude": 27.7359145,
+      "longitude": 85.322846,
+      "authority_type": "Police",
+      "phone_number": "01-44576617",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 43,
+    "fields": {
+      "name": "Golfutar police Bit",
+      "latitude": 27.7474597,
+      "longitude": 85.3483052,
+      "authority_type": "Police",
+      "phone_number": "01-45321438",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 44,
+    "fields": {
+      "name": "Traffic Police",
+      "latitude": 27.7509027,
+      "longitude": 85.8212041,
+      "authority_type": "Police",
+      "phone_number": "01-45053831",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 45,
+    "fields": {
+      "name": "Nepal Police",
+      "latitude": 27.7005014,
+      "longitude": 85.3247576,
+      "authority_type": "Police",
+      "phone_number": "01-48339646",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 46,
+    "fields": {
+      "name": "Andheri Police Station",
+      "latitude": 27.7505242,
+      "longitude": 85.8208274,
+      "authority_type": "Police",
+      "phone_number": "01-42157193",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 47,
+    "fields": {
+      "name": "SOCIAL POLICE SERVICE",
+      "latitude": 27.6860297,
+      "longitude": 85.2822864,
+      "authority_type": "Police",
+      "phone_number": "01-41665806",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 48,
+    "fields": {
+      "name": "Mahadev Basi Polish beat",
+      "latitude": 27.7504348,
+      "longitude": 85.0662255,
+      "authority_type": "Police",
+      "phone_number": "01-48110664",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 49,
+    "fields": {
+      "name": "Tourist Police Sub-Section, Baidam",
+      "latitude": 28.1992872,
+      "longitude": 83.96956509999998,
+      "authority_type": "Police",
+      "phone_number": "01-43946237",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 50,
+    "fields": {
+      "name": "Kalimati Police Station",
+      "latitude": 27.6972867,
+      "longitude": 85.2993512,
+      "authority_type": "Police",
+      "phone_number": "01-45406949",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 51,
+    "fields": {
+      "name": "Police booth",
+      "latitude": 27.692437,
+      "longitude": 85.29775239999998,
+      "authority_type": "Police",
+      "phone_number": "01-46350427",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 52,
+    "fields": {
+      "name": "Nepal Police",
+      "latitude": 27.6788938,
+      "longitude": 85.3492678,
+      "authority_type": "Police",
+      "phone_number": "01-48964385",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 53,
+    "fields": {
+      "name": "Rastriya Suchana Aayog",
+      "latitude": 27.681951,
+      "longitude": 85.3475686,
+      "authority_type": "Police",
+      "phone_number": "01-41347795",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 54,
+    "fields": {
+      "name": "",
+      "latitude": 27.7315852,
+      "longitude": 85.3089566,
+      "authority_type": "Police",
+      "phone_number": "01-48608013",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 55,
+    "fields": {
+      "name": "Sanothimi Police Station",
+      "latitude": 27.6825804,
+      "longitude": 85.3719717,
+      "authority_type": "Police",
+      "phone_number": "01-42384364",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 56,
+    "fields": {
+      "name": "",
+      "latitude": 27.5840669,
+      "longitude": 86.40933789999998,
+      "authority_type": "Police",
+      "phone_number": "01-41997260",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 57,
+    "fields": {
+      "name": "Ranibari Police station",
+      "latitude": 27.7301705,
+      "longitude": 85.3179649,
+      "authority_type": "Police",
+      "phone_number": "01-41866370",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 58,
+    "fields": {
+      "name": "Lokanthali Police",
+      "latitude": 27.6746428,
+      "longitude": 85.3585513,
+      "authority_type": "Police",
+      "phone_number": "01-42378241",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 59,
+    "fields": {
+      "name": "Temporary police Beat",
+      "latitude": 27.7230833,
+      "longitude": 85.30173469999998,
+      "authority_type": "Police",
+      "phone_number": "01-43719122",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 60,
+    "fields": {
+      "name": "",
+      "latitude": 29.2584184,
+      "longitude": 80.6371146,
+      "authority_type": "Police",
+      "phone_number": "01-49939945",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 61,
+    "fields": {
+      "name": "Police station",
+      "latitude": 27.9000873,
+      "longitude": 84.53765919999998,
+      "authority_type": "Police",
+      "phone_number": "01-48949142",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 62,
+    "fields": {
+      "name": "",
+      "latitude": 27.7312473,
+      "longitude": 85.33703629999998,
+      "authority_type": "Police",
+      "phone_number": "01-41696865",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 63,
+    "fields": {
+      "name": "District Traffic Office",
+      "latitude": 26.454406,
+      "longitude": 87.27973509999998,
+      "authority_type": "Police",
+      "phone_number": "01-45733094",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 64,
+    "fields": {
+      "name": "Gaurighat Police Beat",
+      "latitude": 27.7133153,
+      "longitude": 85.3496355,
+      "authority_type": "Police",
+      "phone_number": "01-48352268",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 65,
+    "fields": {
+      "name": "Damak Police Station",
+      "latitude": 26.6602982,
+      "longitude": 87.7002532,
+      "authority_type": "Police",
+      "phone_number": "01-47914995",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 66,
+    "fields": {
+      "name": "",
+      "latitude": 26.4819016,
+      "longitude": 86.8341297,
+      "authority_type": "Police",
+      "phone_number": "01-41220083",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 67,
+    "fields": {
+      "name": "Police checkpost",
+      "latitude": 28.8166105,
+      "longitude": 83.8664761,
+      "authority_type": "Police",
+      "phone_number": "01-43644334",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 68,
+    "fields": {
+      "name": "wada prahari karyalaya siraha road",
+      "latitude": 26.5376059,
+      "longitude": 86.7459048,
+      "authority_type": "Police",
+      "phone_number": "01-45624187",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 69,
+    "fields": {
+      "name": "temporary police post",
+      "latitude": 26.5442164,
+      "longitude": 86.7423945,
+      "authority_type": "Police",
+      "phone_number": "01-43536124",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 70,
+    "fields": {
+      "name": "Police bit",
+      "latitude": 26.543466,
+      "longitude": 86.7473664,
+      "authority_type": "Police",
+      "phone_number": "01-49887724",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 71,
+    "fields": {
+      "name": "police post",
+      "latitude": 26.5291371,
+      "longitude": 86.9223398,
+      "authority_type": "Police",
+      "phone_number": "01-47966622",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 72,
+    "fields": {
+      "name": "District traffic police office",
+      "latitude": 27.2222967,
+      "longitude": 86.7895458,
+      "authority_type": "Police",
+      "phone_number": "01-47326069",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 73,
+    "fields": {
+      "name": "Tourist Police",
+      "latitude": 28.1637681,
+      "longitude": 85.337056,
+      "authority_type": "Police",
+      "phone_number": "01-45549109",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 74,
+    "fields": {
+      "name": "District Police Office",
+      "latitude": 27.2117438,
+      "longitude": 86.7926078,
+      "authority_type": "Police",
+      "phone_number": "01-43104088",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 75,
+    "fields": {
+      "name": "police offic ghoretar",
+      "latitude": 27.0214949,
+      "longitude": 87.1223779,
+      "authority_type": "Police",
+      "phone_number": "01-46776742",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 76,
+    "fields": {
+      "name": "District Police Office",
+      "latitude": 27.6690131,
+      "longitude": 86.0501783,
+      "authority_type": "Police",
+      "phone_number": "01-46814022",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 77,
+    "fields": {
+      "name": "Makwanpur Police Station",
+      "latitude": 27.4319384,
+      "longitude": 85.0278321,
+      "authority_type": "Police",
+      "phone_number": "01-41157905",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 78,
+    "fields": {
+      "name": "",
+      "latitude": 27.7268084,
+      "longitude": 85.34575169999998,
+      "authority_type": "Police",
+      "phone_number": "01-45484631",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 79,
+    "fields": {
+      "name": "Metropolitan Police Post",
+      "latitude": 27.7121975,
+      "longitude": 85.33885879999998,
+      "authority_type": "Police",
+      "phone_number": "01-46512578",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 80,
+    "fields": {
+      "name": "Unified maoist camp previoulsy",
+      "latitude": 26.6642214,
+      "longitude": 87.7269249,
+      "authority_type": "Police",
+      "phone_number": "01-47152444",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 81,
+    "fields": {
+      "name": "District Police Office",
+      "latitude": 28.2278934,
+      "longitude": 84.3785885,
+      "authority_type": "Police",
+      "phone_number": "01-42418167",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 82,
+    "fields": {
+      "name": "District Police Office",
+      "latitude": 28.7043131,
+      "longitude": 80.5799566,
+      "authority_type": "Police",
+      "phone_number": "01-41076960",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 83,
+    "fields": {
+      "name": "",
+      "latitude": 28.7010923,
+      "longitude": 80.5921611,
+      "authority_type": "Police",
+      "phone_number": "01-47219317",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 84,
+    "fields": {
+      "name": "Nagdhunga Checkpost",
+      "latitude": 27.7064432,
+      "longitude": 85.2056663,
+      "authority_type": "Police",
+      "phone_number": "01-43715680",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 85,
+    "fields": {
+      "name": "subh chowk",
+      "latitude": 26.7355998,
+      "longitude": 85.9320816,
+      "authority_type": "Police",
+      "phone_number": "01-46414830",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 86,
+    "fields": {
+      "name": "police",
+      "latitude": 27.1508798,
+      "longitude": 87.244517,
+      "authority_type": "Police",
+      "phone_number": "01-41908782",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 87,
+    "fields": {
+      "name": "",
+      "latitude": 26.6115128,
+      "longitude": 88.1052275,
+      "authority_type": "Police",
+      "phone_number": "01-49014175",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 88,
+    "fields": {
+      "name": "police",
+      "latitude": 27.5241044,
+      "longitude": 85.4775798,
+      "authority_type": "Police",
+      "phone_number": "01-41475384",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 89,
+    "fields": {
+      "name": "District Police Headquarters",
+      "latitude": 26.5685546,
+      "longitude": 88.0738003,
+      "authority_type": "Police",
+      "phone_number": "01-41105643",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 90,
+    "fields": {
+      "name": "INF Kotdadha;Police office (2)",
+      "latitude": 29.5163439,
+      "longitude": 81.8325234,
+      "authority_type": "Police",
+      "phone_number": "01-41247834",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 91,
+    "fields": {
+      "name": "Haripur Chouki",
+      "latitude": 27.7116894,
+      "longitude": 84.48410149999998,
+      "authority_type": "Police",
+      "phone_number": "01-46524601",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 92,
+    "fields": {
+      "name": "Metropolitan Traffic Police",
+      "latitude": 27.6770404,
+      "longitude": 85.27605079999998,
+      "authority_type": "Police",
+      "phone_number": "01-44107708",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 93,
+    "fields": {
+      "name": "District Traffic Office",
+      "latitude": 27.680216,
+      "longitude": 84.43063879999998,
+      "authority_type": "Police",
+      "phone_number": "01-49739392",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 94,
+    "fields": {
+      "name": "district police training center",
+      "latitude": 27.6947448,
+      "longitude": 84.4393659,
+      "authority_type": "Police",
+      "phone_number": "01-44370688",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 95,
+    "fields": {
+      "name": "police station",
+      "latitude": 27.6712321,
+      "longitude": 84.4384065,
+      "authority_type": "Police",
+      "phone_number": "01-43554711",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 96,
+    "fields": {
+      "name": "Manahari Police Station",
+      "latitude": 27.5396632,
+      "longitude": 84.8059241,
+      "authority_type": "Police",
+      "phone_number": "01-49904264",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 97,
+    "fields": {
+      "name": "Police",
+      "latitude": 27.680876,
+      "longitude": 84.5129871,
+      "authority_type": "Police",
+      "phone_number": "01-41954820",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 98,
+    "fields": {
+      "name": "Police Station",
+      "latitude": 27.6785543,
+      "longitude": 85.3412105,
+      "authority_type": "Police",
+      "phone_number": "01-44753264",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 99,
+    "fields": {
+      "name": "police station",
+      "latitude": 27.6760937,
+      "longitude": 85.3379616,
+      "authority_type": "Police",
+      "phone_number": "01-48987092",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 100,
+    "fields": {
+      "name": "Police Station",
+      "latitude": 27.9915981,
+      "longitude": 84.62728149999998,
+      "authority_type": "Police",
+      "phone_number": "01-43549548",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 101,
+    "fields": {
+      "name": "Police checkpost;Check Post",
+      "latitude": 28.7828628,
+      "longitude": 83.7254229,
+      "authority_type": "Police",
+      "phone_number": "01-41140980",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 102,
+    "fields": {
+      "name": "Budhabare Police Station",
+      "latitude": 26.7199292,
+      "longitude": 88.0496146,
+      "authority_type": "Police",
+      "phone_number": "01-48515520",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 103,
+    "fields": {
+      "name": "Traffic Police",
+      "latitude": 26.723844,
+      "longitude": 85.91617619999998,
+      "authority_type": "Police",
+      "phone_number": "01-44134890",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 104,
+    "fields": {
+      "name": "Bhanu Chok",
+      "latitude": 26.7319034,
+      "longitude": 85.9332012,
+      "authority_type": "Police",
+      "phone_number": "01-41412204",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 105,
+    "fields": {
+      "name": "Shiv Chok",
+      "latitude": 26.7295011,
+      "longitude": 85.92929429999998,
+      "authority_type": "Police",
+      "phone_number": "01-48955190",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 106,
+    "fields": {
+      "name": "Mahabir Chok",
+      "latitude": 26.7275403,
+      "longitude": 85.92539019999998,
+      "authority_type": "Police",
+      "phone_number": "01-46191830",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 107,
+    "fields": {
+      "name": "Murli Chok traffic",
+      "latitude": 26.7217553,
+      "longitude": 85.9284397,
+      "authority_type": "Police",
+      "phone_number": "01-47005220",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 108,
+    "fields": {
+      "name": "Police station",
+      "latitude": 28.8371949,
+      "longitude": 83.78708299999998,
+      "authority_type": "Police",
+      "phone_number": "01-43781165",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 109,
+    "fields": {
+      "name": "Check post",
+      "latitude": 28.6021107,
+      "longitude": 83.64315519999998,
+      "authority_type": "Police",
+      "phone_number": "01-41738474",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 110,
+    "fields": {
+      "name": "Check post",
+      "latitude": 28.4979999,
+      "longitude": 83.6543644,
+      "authority_type": "Police",
+      "phone_number": "01-45055984",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 111,
+    "fields": {
+      "name": "Police Check post",
+      "latitude": 27.7033486,
+      "longitude": 84.4156837,
+      "authority_type": "Police",
+      "phone_number": "01-49944653",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 112,
+    "fields": {
+      "name": "Check post",
+      "latitude": 27.584158,
+      "longitude": 83.8712996,
+      "authority_type": "Police",
+      "phone_number": "01-43562817",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 113,
+    "fields": {
+      "name": "Check post",
+      "latitude": 27.6409833,
+      "longitude": 83.5984632,
+      "authority_type": "Police",
+      "phone_number": "01-41197077",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 114,
+    "fields": {
+      "name": "Check post",
+      "latitude": 27.6454109,
+      "longitude": 84.1292308,
+      "authority_type": "Police",
+      "phone_number": "01-45158173",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 115,
+    "fields": {
+      "name": "Jorpati Police Station",
+      "latitude": 27.7213663,
+      "longitude": 85.3726523,
+      "authority_type": "Police",
+      "phone_number": "01-46999278",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 116,
+    "fields": {
+      "name": "Sankhar Police Force",
+      "latitude": 27.8736556,
+      "longitude": 83.9263852,
+      "authority_type": "Police",
+      "phone_number": "01-43320788",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 117,
+    "fields": {
+      "name": "Ward Police Office",
+      "latitude": 28.0595216,
+      "longitude": 81.6318182,
+      "authority_type": "Police",
+      "phone_number": "01-47715599",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 118,
+    "fields": {
+      "name": "District police station",
+      "latitude": 28.9542673,
+      "longitude": 82.89459189999998,
+      "authority_type": "Police",
+      "phone_number": "01-44141623",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 119,
+    "fields": {
+      "name": "Area Police Offive",
+      "latitude": 28.1946605,
+      "longitude": 81.689007,
+      "authority_type": "Police",
+      "phone_number": "01-43760680",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 120,
+    "fields": {
+      "name": "Hatkhola Chowk",
+      "latitude": 26.4601652,
+      "longitude": 87.292585,
+      "authority_type": "Police",
+      "phone_number": "01-43241245",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 121,
+    "fields": {
+      "name": "Mangaltar, Chhap",
+      "latitude": 27.4754016,
+      "longitude": 85.7438403,
+      "authority_type": "Police",
+      "phone_number": "01-41766979",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 122,
+    "fields": {
+      "name": "Armed Police Force, Sanjen Hydropower Security Base, Chilime Rasuwa",
+      "latitude": 28.182031,
+      "longitude": 85.3054808,
+      "authority_type": "Police",
+      "phone_number": "01-47003700",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 123,
+    "fields": {
+      "name": "Ilaka Prahari Karyalaya, Sisuwa",
+      "latitude": 28.1725723,
+      "longitude": 84.0535176,
+      "authority_type": "Police",
+      "phone_number": "01-47709546",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 124,
+    "fields": {
+      "name": "Temporary Police Station, Nadipur",
+      "latitude": 28.2334287,
+      "longitude": 83.99054889999998,
+      "authority_type": "Police",
+      "phone_number": "01-43430711",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 125,
+    "fields": {
+      "name": "bungkot police",
+      "latitude": 27.9635593,
+      "longitude": 84.6757517,
+      "authority_type": "Police",
+      "phone_number": "01-46094364",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 126,
+    "fields": {
+      "name": "",
+      "latitude": 27.6927865,
+      "longitude": 85.4151681,
+      "authority_type": "Police",
+      "phone_number": "01-45627176",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 127,
+    "fields": {
+      "name": "Police station,thimi",
+      "latitude": 27.6821105,
+      "longitude": 85.3914749,
+      "authority_type": "Police",
+      "phone_number": "01-48393514",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 128,
+    "fields": {
+      "name": "Thapathali",
+      "latitude": 27.6890227,
+      "longitude": 85.3204209,
+      "authority_type": "Police",
+      "phone_number": "01-46316585",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 129,
+    "fields": {
+      "name": "Lazimpat Police Office",
+      "latitude": 27.7226711,
+      "longitude": 85.3211019,
+      "authority_type": "Police",
+      "phone_number": "01-46379891",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 130,
+    "fields": {
+      "name": "Nagdhunga \u0928\u093e\u0917\u0922\u0941\u0902\u0917\u093e \u092a\u094d\u0930\u0939\u0930\u0940 \u091a\u0947\u0915 \u092a\u094b\u0937\u094d\u091f",
+      "latitude": 27.6992529,
+      "longitude": 85.2096788,
+      "authority_type": "Police",
+      "phone_number": "01-46471447",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 131,
+    "fields": {
+      "name": "Drivertol police",
+      "latitude": 27.6497435,
+      "longitude": 83.4672907,
+      "authority_type": "Police",
+      "phone_number": "01-48195978",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 132,
+    "fields": {
+      "name": "Fattepur Police station",
+      "latitude": 27.1194952,
+      "longitude": 85.0176385,
+      "authority_type": "Police",
+      "phone_number": "01-41512268",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 133,
+    "fields": {
+      "name": "Chanaute Police",
+      "latitude": 28.1111718,
+      "longitude": 84.6659922,
+      "authority_type": "Police",
+      "phone_number": "01-41860097",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 134,
+    "fields": {
+      "name": "District Police Office, Rukum",
+      "latitude": 28.6292361,
+      "longitude": 82.45278829999998,
+      "authority_type": "Police",
+      "phone_number": "01-47518660",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 135,
+    "fields": {
+      "name": "Bartung",
+      "latitude": 27.8563783,
+      "longitude": 83.5533142,
+      "authority_type": "Police",
+      "phone_number": "01-42029492",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 136,
+    "fields": {
+      "name": "Shanischare Police Station",
+      "latitude": 26.6853034,
+      "longitude": 87.9928089,
+      "authority_type": "Police",
+      "phone_number": "01-45165272",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 137,
+    "fields": {
+      "name": "Mahanagariya Prahari Bit Ward no 4",
+      "latitude": 27.7326164,
+      "longitude": 85.3387306,
+      "authority_type": "Police",
+      "phone_number": "01-47640319",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 138,
+    "fields": {
+      "name": "Aastahai Prahari Bit, Uttar Behadhi-4",
+      "latitude": 28.7112176,
+      "longitude": 80.57806359999998,
+      "authority_type": "Police",
+      "phone_number": "01-48273823",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 139,
+    "fields": {
+      "name": "Armed police force siraha",
+      "latitude": 26.6330561,
+      "longitude": 86.2495244,
+      "authority_type": "Police",
+      "phone_number": "01-45370004",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 140,
+    "fields": {
+      "name": "Armed police Force Gulma Gorkha",
+      "latitude": 27.9848624,
+      "longitude": 84.6398623,
+      "authority_type": "Police",
+      "phone_number": "01-41832939",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 141,
+    "fields": {
+      "name": "",
+      "latitude": 26.853327,
+      "longitude": 85.5590761,
+      "authority_type": "Police",
+      "phone_number": "01-45985037",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 142,
+    "fields": {
+      "name": "",
+      "latitude": 27.6526752,
+      "longitude": 85.30492549999998,
+      "authority_type": "Police",
+      "phone_number": "01-45058861",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 143,
+    "fields": {
+      "name": "",
+      "latitude": 27.9147352,
+      "longitude": 85.1423985,
+      "authority_type": "Police",
+      "phone_number": "01-48619721",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 144,
+    "fields": {
+      "name": "",
+      "latitude": 28.34291,
+      "longitude": 84.40630199999998,
+      "authority_type": "Police",
+      "phone_number": "01-45408937",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 145,
+    "fields": {
+      "name": "ACA Entry Permit Checkpoint",
+      "latitude": 28.6659871,
+      "longitude": 84.0230806,
+      "authority_type": "Police",
+      "phone_number": "01-49251391",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 146,
+    "fields": {
+      "name": "Gaindakot  Police Checkpost",
+      "latitude": 27.7011535,
+      "longitude": 84.4179539,
+      "authority_type": "Police",
+      "phone_number": "01-44809766",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 147,
+    "fields": {
+      "name": "",
+      "latitude": 27.7277061,
+      "longitude": 85.4611297,
+      "authority_type": "Police",
+      "phone_number": "01-45458619",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 148,
+    "fields": {
+      "name": "",
+      "latitude": 28.6914301,
+      "longitude": 83.6178074,
+      "authority_type": "Police",
+      "phone_number": "01-48171802",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 149,
+    "fields": {
+      "name": "",
+      "latitude": 27.6937083,
+      "longitude": 85.31373329999998,
+      "authority_type": "Police",
+      "phone_number": "01-44598985",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 150,
+    "fields": {
+      "name": "",
+      "latitude": 27.5867756,
+      "longitude": 85.5134951,
+      "authority_type": "Police",
+      "phone_number": "01-43697571",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 151,
+    "fields": {
+      "name": "",
+      "latitude": 26.659721,
+      "longitude": 86.2196208,
+      "authority_type": "Police",
+      "phone_number": "01-46529574",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 152,
+    "fields": {
+      "name": "",
+      "latitude": 27.7025278,
+      "longitude": 85.4706391,
+      "authority_type": "Police",
+      "phone_number": "01-42836335",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 153,
+    "fields": {
+      "name": "Samudayak Sewa Kendra, Prithivi Chowk",
+      "latitude": 28.209592,
+      "longitude": 83.98779589999998,
+      "authority_type": "Police",
+      "phone_number": "01-42742253",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 154,
+    "fields": {
+      "name": "Seleghat Police Station",
+      "latitude": 27.3404919,
+      "longitude": 85.9850431,
+      "authority_type": "Police",
+      "phone_number": "01-44022058",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 155,
+    "fields": {
+      "name": "doramba police station",
+      "latitude": 27.5141111,
+      "longitude": 85.9332179,
+      "authority_type": "Police",
+      "phone_number": "01-45841707",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 156,
+    "fields": {
+      "name": "District Police Office Tanahun",
+      "latitude": 27.9760969,
+      "longitude": 84.26584479999998,
+      "authority_type": "Police",
+      "phone_number": "01-49168523",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 157,
+    "fields": {
+      "name": "",
+      "latitude": 27.669628,
+      "longitude": 84.190994,
+      "authority_type": "Police",
+      "phone_number": "01-45008581",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 158,
+    "fields": {
+      "name": "Traffick Police Office",
+      "latitude": 27.6698691,
+      "longitude": 85.4104997,
+      "authority_type": "Police",
+      "phone_number": "01-43355246",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 159,
+    "fields": {
+      "name": "",
+      "latitude": 27.6554616,
+      "longitude": 84.1126321,
+      "authority_type": "Police",
+      "phone_number": "01-42695722",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 160,
+    "fields": {
+      "name": "",
+      "latitude": 27.6766086,
+      "longitude": 85.4341278,
+      "authority_type": "Police",
+      "phone_number": "01-44512169",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 161,
+    "fields": {
+      "name": "Police Post",
+      "latitude": 27.6812781,
+      "longitude": 85.3033803,
+      "authority_type": "Police",
+      "phone_number": "01-48235948",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 162,
+    "fields": {
+      "name": "",
+      "latitude": 27.5141134,
+      "longitude": 85.93323789999998,
+      "authority_type": "Police",
+      "phone_number": "01-46355490",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 163,
+    "fields": {
+      "name": "",
+      "latitude": 27.7045324,
+      "longitude": 84.4373709,
+      "authority_type": "Police",
+      "phone_number": "01-49841687",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 164,
+    "fields": {
+      "name": "",
+      "latitude": 27.9955368,
+      "longitude": 84.6245761,
+      "authority_type": "Police",
+      "phone_number": "01-41810605",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 165,
+    "fields": {
+      "name": "District Police Gorkha",
+      "latitude": 27.9952959,
+      "longitude": 84.6245493,
+      "authority_type": "Police",
+      "phone_number": "01-47897083",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 166,
+    "fields": {
+      "name": "",
+      "latitude": 27.6266845,
+      "longitude": 84.5066224,
+      "authority_type": "Police",
+      "phone_number": "01-45402881",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 167,
+    "fields": {
+      "name": "Police Post",
+      "latitude": 26.6844564,
+      "longitude": 87.09588379999998,
+      "authority_type": "Police",
+      "phone_number": "01-47909697",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 168,
+    "fields": {
+      "name": "",
+      "latitude": 27.6916373,
+      "longitude": 83.469735,
+      "authority_type": "Police",
+      "phone_number": "01-45497329",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 169,
+    "fields": {
+      "name": "",
+      "latitude": 27.5974605,
+      "longitude": 83.63633629999998,
+      "authority_type": "Police",
+      "phone_number": "01-46941619",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 170,
+    "fields": {
+      "name": "",
+      "latitude": 27.0360412,
+      "longitude": 84.8931994,
+      "authority_type": "Police",
+      "phone_number": "01-44253458",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 171,
+    "fields": {
+      "name": "",
+      "latitude": 27.6629615,
+      "longitude": 84.38626069999998,
+      "authority_type": "Police",
+      "phone_number": "01-41180176",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 172,
+    "fields": {
+      "name": "",
+      "latitude": 27.6408847,
+      "longitude": 85.4799727,
+      "authority_type": "Police",
+      "phone_number": "01-49722725",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 173,
+    "fields": {
+      "name": "",
+      "latitude": 27.5073262,
+      "longitude": 83.44158129999998,
+      "authority_type": "Police",
+      "phone_number": "01-46101721",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 174,
+    "fields": {
+      "name": "",
+      "latitude": 27.5079239,
+      "longitude": 83.4513857,
+      "authority_type": "Police",
+      "phone_number": "01-46177386",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 175,
+    "fields": {
+      "name": "",
+      "latitude": 27.630017,
+      "longitude": 85.52402069999998,
+      "authority_type": "Police",
+      "phone_number": "01-48340830",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 176,
+    "fields": {
+      "name": "",
+      "latitude": 27.0086469,
+      "longitude": 85.50462469999998,
+      "authority_type": "Police",
+      "phone_number": "01-44202095",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 177,
+    "fields": {
+      "name": "",
+      "latitude": 27.6897979,
+      "longitude": 84.56318109999998,
+      "authority_type": "Police",
+      "phone_number": "01-43850870",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 178,
+    "fields": {
+      "name": "",
+      "latitude": 27.6317549,
+      "longitude": 85.51523709999998,
+      "authority_type": "Police",
+      "phone_number": "01-46822059",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 179,
+    "fields": {
+      "name": "",
+      "latitude": 27.6735995,
+      "longitude": 85.3797019,
+      "authority_type": "Police",
+      "phone_number": "01-45860434",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 180,
+    "fields": {
+      "name": "",
+      "latitude": 26.8278173,
+      "longitude": 87.1551986,
+      "authority_type": "Police",
+      "phone_number": "01-43337811",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 181,
+    "fields": {
+      "name": "District Police Office, Chitwan",
+      "latitude": 27.6787341,
+      "longitude": 84.43454409999998,
+      "authority_type": "Police",
+      "phone_number": "01-43269212",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 182,
+    "fields": {
+      "name": "",
+      "latitude": 26.6624132,
+      "longitude": 87.2772477,
+      "authority_type": "Police",
+      "phone_number": "01-45820392",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 183,
+    "fields": {
+      "name": "",
+      "latitude": 27.7156242,
+      "longitude": 85.32553849999998,
+      "authority_type": "Police",
+      "phone_number": "01-44357944",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 184,
+    "fields": {
+      "name": "",
+      "latitude": 28.3814121,
+      "longitude": 84.4028481,
+      "authority_type": "Police",
+      "phone_number": "01-46010158",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 185,
+    "fields": {
+      "name": "",
+      "latitude": 27.605247,
+      "longitude": 84.5692137,
+      "authority_type": "Police",
+      "phone_number": "01-48449675",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 186,
+    "fields": {
+      "name": "",
+      "latitude": 28.5507092,
+      "longitude": 84.24349049999998,
+      "authority_type": "Police",
+      "phone_number": "01-43145772",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 187,
+    "fields": {
+      "name": "",
+      "latitude": 27.0066962,
+      "longitude": 84.8732676,
+      "authority_type": "Police",
+      "phone_number": "01-45269269",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 188,
+    "fields": {
+      "name": "",
+      "latitude": 27.5567043,
+      "longitude": 83.7930675,
+      "authority_type": "Police",
+      "phone_number": "01-46748702",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 189,
+    "fields": {
+      "name": "",
+      "latitude": 27.9963876,
+      "longitude": 85.2037129,
+      "authority_type": "Police",
+      "phone_number": "01-45980813",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 190,
+    "fields": {
+      "name": "",
+      "latitude": 27.7285142,
+      "longitude": 85.3462416,
+      "authority_type": "Police",
+      "phone_number": "01-46083680",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 191,
+    "fields": {
+      "name": "",
+      "latitude": 26.5540336,
+      "longitude": 87.9612601,
+      "authority_type": "Police",
+      "phone_number": "01-46360117",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 192,
+    "fields": {
+      "name": "",
+      "latitude": 29.0206815,
+      "longitude": 81.4241846,
+      "authority_type": "Police",
+      "phone_number": "01-41132550",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 193,
+    "fields": {
+      "name": "Lekhnath Community Police Station",
+      "latitude": 28.1697869,
+      "longitude": 84.05530129999998,
+      "authority_type": "Police",
+      "phone_number": "01-45617907",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 194,
+    "fields": {
+      "name": "",
+      "latitude": 28.124954,
+      "longitude": 81.820344,
+      "authority_type": "Police",
+      "phone_number": "01-42661300",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 195,
+    "fields": {
+      "name": "",
+      "latitude": 27.7770541,
+      "longitude": 85.36194829999998,
+      "authority_type": "Police",
+      "phone_number": "01-48587202",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 196,
+    "fields": {
+      "name": "Temporary Police Station, Srijana Chowk",
+      "latitude": 28.2109696,
+      "longitude": 83.98115249999998,
+      "authority_type": "Police",
+      "phone_number": "01-44974724",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 197,
+    "fields": {
+      "name": "Temporary Police Station Ripitar, Sarankot",
+      "latitude": 28.2457824,
+      "longitude": 83.9485398,
+      "authority_type": "Police",
+      "phone_number": "01-46144128",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 198,
+    "fields": {
+      "name": "Temporary Police Station, Bindawasini",
+      "latitude": 28.2373819,
+      "longitude": 83.98524639999998,
+      "authority_type": "Police",
+      "phone_number": "01-46842094",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 199,
+    "fields": {
+      "name": "Police Station, Sarankot",
+      "latitude": 28.2442038,
+      "longitude": 83.9562229,
+      "authority_type": "Police",
+      "phone_number": "01-42933455",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 200,
+    "fields": {
+      "name": "Samudayak Sewa Kendra, Matepani",
+      "latitude": 28.2154829,
+      "longitude": 84.0039371,
+      "authority_type": "Police",
+      "phone_number": "01-47094659",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 201,
+    "fields": {
+      "name": "Temporary Police Station, Baal Sudhar Kendra Saarankot",
+      "latitude": 28.2397828,
+      "longitude": 83.96492309999998,
+      "authority_type": "Police",
+      "phone_number": "01-41040930",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 202,
+    "fields": {
+      "name": "Samudayak Sewa Kendra, Baaidam",
+      "latitude": 28.2145448,
+      "longitude": 83.95655139999998,
+      "authority_type": "Police",
+      "phone_number": "01-43678254",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 203,
+    "fields": {
+      "name": "Tourist Police Information Center",
+      "latitude": 28.2082223,
+      "longitude": 83.95737509999998,
+      "authority_type": "Police",
+      "phone_number": "01-43541739",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 204,
+    "fields": {
+      "name": "Tourist Police Information Center",
+      "latitude": 28.2013072,
+      "longitude": 83.9681975,
+      "authority_type": "Police",
+      "phone_number": "01-48937645",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 205,
+    "fields": {
+      "name": "",
+      "latitude": 26.7180785,
+      "longitude": 85.92999159999998,
+      "authority_type": "Police",
+      "phone_number": "01-48034950",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 206,
+    "fields": {
+      "name": "",
+      "latitude": 26.8118267,
+      "longitude": 86.88233649999998,
+      "authority_type": "Police",
+      "phone_number": "01-46564422",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 207,
+    "fields": {
+      "name": "",
+      "latitude": 28.4573968,
+      "longitude": 83.65642409999998,
+      "authority_type": "Police",
+      "phone_number": "01-41041857",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 208,
+    "fields": {
+      "name": "",
+      "latitude": 27.204993,
+      "longitude": 85.91673199999998,
+      "authority_type": "Police",
+      "phone_number": "01-47657279",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 209,
+    "fields": {
+      "name": "Police Beat",
+      "latitude": 28.2075855,
+      "longitude": 81.34300419999998,
+      "authority_type": "Police",
+      "phone_number": "01-46759190",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 210,
+    "fields": {
+      "name": "",
+      "latitude": 27.795942,
+      "longitude": 85.8960833,
+      "authority_type": "Police",
+      "phone_number": "01-44302376",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 211,
+    "fields": {
+      "name": "",
+      "latitude": 27.7865567,
+      "longitude": 85.8984238,
+      "authority_type": "Police",
+      "phone_number": "01-45452453",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 212,
+    "fields": {
+      "name": "",
+      "latitude": 29.226601,
+      "longitude": 81.9508893,
+      "authority_type": "Police",
+      "phone_number": "01-41335257",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 213,
+    "fields": {
+      "name": "",
+      "latitude": 29.1450124,
+      "longitude": 81.78603309999998,
+      "authority_type": "Police",
+      "phone_number": "01-44345506",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 214,
+    "fields": {
+      "name": "",
+      "latitude": 29.1495949,
+      "longitude": 81.6115881,
+      "authority_type": "Police",
+      "phone_number": "01-42811270",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 215,
+    "fields": {
+      "name": "",
+      "latitude": 29.1570649,
+      "longitude": 81.823915,
+      "authority_type": "Police",
+      "phone_number": "01-48513224",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 216,
+    "fields": {
+      "name": "",
+      "latitude": 28.0798182,
+      "longitude": 81.64097669999998,
+      "authority_type": "Police",
+      "phone_number": "01-47057135",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 217,
+    "fields": {
+      "name": "",
+      "latitude": 28.5980427,
+      "longitude": 83.6421765,
+      "authority_type": "Police",
+      "phone_number": "01-46987912",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 218,
+    "fields": {
+      "name": "Police Beat, Budhibazar",
+      "latitude": 28.1835855,
+      "longitude": 84.03787269999998,
+      "authority_type": "Police",
+      "phone_number": "01-49497485",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 219,
+    "fields": {
+      "name": "",
+      "latitude": 26.7358439,
+      "longitude": 88.0781345,
+      "authority_type": "Police",
+      "phone_number": "01-48389486",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 220,
+    "fields": {
+      "name": "Phidim Police Clock Tower",
+      "latitude": 27.1485975,
+      "longitude": 87.7676522,
+      "authority_type": "Police",
+      "phone_number": "01-42065591",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 221,
+    "fields": {
+      "name": "Police Chauki, Nayapool",
+      "latitude": 28.2974558,
+      "longitude": 83.7673165,
+      "authority_type": "Police",
+      "phone_number": "01-43591856",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 222,
+    "fields": {
+      "name": "",
+      "latitude": 27.0816797,
+      "longitude": 84.75445659999998,
+      "authority_type": "Police",
+      "phone_number": "01-42635418",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 223,
+    "fields": {
+      "name": "",
+      "latitude": 27.7650316,
+      "longitude": 85.2980412,
+      "authority_type": "Police",
+      "phone_number": "01-48726300",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 224,
+    "fields": {
+      "name": "Prahari Chauki , Barakilo",
+      "latitude": 27.972775,
+      "longitude": 84.56897209999998,
+      "authority_type": "Police",
+      "phone_number": "01-44407005",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 225,
+    "fields": {
+      "name": "Prahari Chauki, Majwa Deurali",
+      "latitude": 27.9116979,
+      "longitude": 84.54295469999998,
+      "authority_type": "Police",
+      "phone_number": "01-49640665",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 226,
+    "fields": {
+      "name": "Ward Police Station, Gagangauda",
+      "latitude": 28.1333702,
+      "longitude": 84.08349529999998,
+      "authority_type": "Police",
+      "phone_number": "01-46005038",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 227,
+    "fields": {
+      "name": "CRV(Metro) Police Station",
+      "latitude": 28.1655885,
+      "longitude": 84.0698029,
+      "authority_type": "Police",
+      "phone_number": "01-42195281",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 228,
+    "fields": {
+      "name": "",
+      "latitude": 26.6059573,
+      "longitude": 86.4161778,
+      "authority_type": "Police",
+      "phone_number": "01-41956788",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 229,
+    "fields": {
+      "name": "Police Station, Sundaridanda",
+      "latitude": 28.1656394,
+      "longitude": 84.112588,
+      "authority_type": "Police",
+      "phone_number": "01-45911408",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 230,
+    "fields": {
+      "name": "ACAP Check Post",
+      "latitude": 28.3307205,
+      "longitude": 83.9644433,
+      "authority_type": "Police",
+      "phone_number": "01-48311431",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 231,
+    "fields": {
+      "name": "",
+      "latitude": 27.706321,
+      "longitude": 85.3271617,
+      "authority_type": "Police",
+      "phone_number": "01-46511536",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 232,
+    "fields": {
+      "name": "",
+      "latitude": 27.8705346,
+      "longitude": 85.2736871,
+      "authority_type": "Police",
+      "phone_number": "01-43117036",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 233,
+    "fields": {
+      "name": "",
+      "latitude": 26.660702,
+      "longitude": 87.68457549999998,
+      "authority_type": "Police",
+      "phone_number": "01-43673757",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 234,
+    "fields": {
+      "name": "",
+      "latitude": 28.0935167,
+      "longitude": 84.497826,
+      "authority_type": "Police",
+      "phone_number": "01-49955012",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 235,
+    "fields": {
+      "name": "Samudayik Prahari Chowk",
+      "latitude": 27.7118179,
+      "longitude": 85.3370065,
+      "authority_type": "Police",
+      "phone_number": "01-48870980",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 236,
+    "fields": {
+      "name": "police post",
+      "latitude": 26.5292415,
+      "longitude": 86.9222874,
+      "authority_type": "Police",
+      "phone_number": "01-46219550",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 237,
+    "fields": {
+      "name": "Nepal Police Academy",
+      "latitude": 27.733809,
+      "longitude": 85.3297429,
+      "authority_type": "Police",
+      "phone_number": "01-45650916",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 238,
+    "fields": {
+      "name": "Manicipilty Polica Station Thali",
+      "latitude": 27.7270088,
+      "longitude": 85.4056106,
+      "authority_type": "Police",
+      "phone_number": "01-46974578",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 239,
+    "fields": {
+      "name": "",
+      "latitude": 27.7960238,
+      "longitude": 85.00077659999998,
+      "authority_type": "Police",
+      "phone_number": "01-48700099",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 240,
+    "fields": {
+      "name": "",
+      "latitude": 28.0999364,
+      "longitude": 84.44385509999998,
+      "authority_type": "Police",
+      "phone_number": "01-47953728",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 241,
+    "fields": {
+      "name": "jagati police checking post",
+      "latitude": 27.665954,
+      "longitude": 85.43896259999998,
+      "authority_type": "Police",
+      "phone_number": "01-45402276",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 242,
+    "fields": {
+      "name": "police",
+      "latitude": 27.1453598,
+      "longitude": 87.7655166,
+      "authority_type": "Police",
+      "phone_number": "01-48226643",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 243,
+    "fields": {
+      "name": "Passenger Help Desk",
+      "latitude": 28.2320367,
+      "longitude": 83.9827672,
+      "authority_type": "Police",
+      "phone_number": "01-45977131",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 244,
+    "fields": {
+      "name": "SP office",
+      "latitude": 26.4740151,
+      "longitude": 87.2886129,
+      "authority_type": "Police",
+      "phone_number": "01-46350864",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 245,
+    "fields": {
+      "name": "",
+      "latitude": 26.6029367,
+      "longitude": 87.1443593,
+      "authority_type": "Police",
+      "phone_number": "01-45170028",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 246,
+    "fields": {
+      "name": "",
+      "latitude": 27.4258098,
+      "longitude": 86.1727262,
+      "authority_type": "Police",
+      "phone_number": "01-46647147",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 247,
+    "fields": {
+      "name": "",
+      "latitude": 26.6008124,
+      "longitude": 86.86544809999998,
+      "authority_type": "Police",
+      "phone_number": "01-44897512",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 248,
+    "fields": {
+      "name": "",
+      "latitude": 29.2497781,
+      "longitude": 80.9418332,
+      "authority_type": "Police",
+      "phone_number": "01-43980542",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 249,
+    "fields": {
+      "name": "",
+      "latitude": 27.0690452,
+      "longitude": 87.646147,
+      "authority_type": "Police",
+      "phone_number": "01-49163060",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 250,
+    "fields": {
+      "name": "",
+      "latitude": 28.2034112,
+      "longitude": 81.34510969999998,
+      "authority_type": "Police",
+      "phone_number": "01-41844936",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 251,
+    "fields": {
+      "name": "Police Check Post",
+      "latitude": 27.9105677,
+      "longitude": 84.88404649999998,
+      "authority_type": "Police",
+      "phone_number": "01-49068916",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 252,
+    "fields": {
+      "name": "",
+      "latitude": 27.6999995,
+      "longitude": 85.3309926,
+      "authority_type": "Police",
+      "phone_number": "01-49280951",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 253,
+    "fields": {
+      "name": "Traffic Police",
+      "latitude": 27.6624293,
+      "longitude": 83.0463196,
+      "authority_type": "Police",
+      "phone_number": "01-43187202",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 254,
+    "fields": {
+      "name": "",
+      "latitude": 26.4747932,
+      "longitude": 87.28835739999998,
+      "authority_type": "Police",
+      "phone_number": "01-48585563",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 255,
+    "fields": {
+      "name": "",
+      "latitude": 27.9767499,
+      "longitude": 83.1302654,
+      "authority_type": "Police",
+      "phone_number": "01-45655989",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 256,
+    "fields": {
+      "name": "",
+      "latitude": 27.9698152,
+      "longitude": 83.12659689999998,
+      "authority_type": "Police",
+      "phone_number": "01-41842820",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 257,
+    "fields": {
+      "name": "",
+      "latitude": 26.7430754,
+      "longitude": 85.9216528,
+      "authority_type": "Police",
+      "phone_number": "01-48416258",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 258,
+    "fields": {
+      "name": "",
+      "latitude": 26.7269813,
+      "longitude": 85.9338263,
+      "authority_type": "Police",
+      "phone_number": "01-45593833",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 259,
+    "fields": {
+      "name": "",
+      "latitude": 26.7291272,
+      "longitude": 85.9283693,
+      "authority_type": "Police",
+      "phone_number": "01-49449004",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 260,
+    "fields": {
+      "name": "Police Karalaya",
+      "latitude": 27.8803858,
+      "longitude": 84.8849295,
+      "authority_type": "Police",
+      "phone_number": "01-44357461",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 261,
+    "fields": {
+      "name": "",
+      "latitude": 27.2066941,
+      "longitude": 85.9128932,
+      "authority_type": "Police",
+      "phone_number": "01-41358147",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 262,
+    "fields": {
+      "name": "Mandikhatar",
+      "latitude": 27.7363124,
+      "longitude": 85.34778269999998,
+      "authority_type": "Police",
+      "phone_number": "01-46563377",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 263,
+    "fields": {
+      "name": "",
+      "latitude": 27.7159606,
+      "longitude": 85.3256209,
+      "authority_type": "Police",
+      "phone_number": "01-47118521",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 264,
+    "fields": {
+      "name": "Police Beat",
+      "latitude": 28.1723988,
+      "longitude": 84.05319009999998,
+      "authority_type": "Police",
+      "phone_number": "01-42670137",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 265,
+    "fields": {
+      "name": "Tourist Police",
+      "latitude": 27.5830775,
+      "longitude": 84.4961339,
+      "authority_type": "Police",
+      "phone_number": "01-47994421",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 266,
+    "fields": {
+      "name": "",
+      "latitude": 26.8158677,
+      "longitude": 85.9491752,
+      "authority_type": "Police",
+      "phone_number": "01-45231734",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 267,
+    "fields": {
+      "name": "",
+      "latitude": 26.9906839,
+      "longitude": 85.8921748,
+      "authority_type": "Police",
+      "phone_number": "01-45931751",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 268,
+    "fields": {
+      "name": "Shree Sasastra Prahari Bal Nepal",
+      "latitude": 28.2060016,
+      "longitude": 84.0101224,
+      "authority_type": "Police",
+      "phone_number": "01-43719032",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 269,
+    "fields": {
+      "name": "",
+      "latitude": 26.7277774,
+      "longitude": 85.9273951,
+      "authority_type": "Police",
+      "phone_number": "01-43454487",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 270,
+    "fields": {
+      "name": "Mahanagar Prahare Kendra",
+      "latitude": 27.6967938,
+      "longitude": 85.3036787,
+      "authority_type": "Police",
+      "phone_number": "01-49211274",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 271,
+    "fields": {
+      "name": "Regional Police Office",
+      "latitude": 27.2203618,
+      "longitude": 87.6524287,
+      "authority_type": "Police",
+      "phone_number": "01-41631659",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 272,
+    "fields": {
+      "name": "Police Station KoshHaat",
+      "latitude": 27.3085773,
+      "longitude": 86.3767514,
+      "authority_type": "Police",
+      "phone_number": "01-43388228",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 273,
+    "fields": {
+      "name": "Tourist Police",
+      "latitude": 27.4910966,
+      "longitude": 83.27435869999998,
+      "authority_type": "Police",
+      "phone_number": "01-48163966",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 274,
+    "fields": {
+      "name": "",
+      "latitude": 26.9057528,
+      "longitude": 86.0411704,
+      "authority_type": "Police",
+      "phone_number": "01-41914904",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 275,
+    "fields": {
+      "name": "",
+      "latitude": 26.8605647,
+      "longitude": 85.9623698,
+      "authority_type": "Police",
+      "phone_number": "01-46295562",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 276,
+    "fields": {
+      "name": "",
+      "latitude": 27.4640775,
+      "longitude": 83.88048589999998,
+      "authority_type": "Police",
+      "phone_number": "01-45355562",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 277,
+    "fields": {
+      "name": "",
+      "latitude": 27.729903,
+      "longitude": 84.81184899999998,
+      "authority_type": "Police",
+      "phone_number": "01-46610651",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 278,
+    "fields": {
+      "name": "",
+      "latitude": 26.8847555,
+      "longitude": 86.1543853,
+      "authority_type": "Police",
+      "phone_number": "01-46964908",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 279,
+    "fields": {
+      "name": "",
+      "latitude": 27.6927646,
+      "longitude": 85.37486199999998,
+      "authority_type": "Police",
+      "phone_number": "01-47767497",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 280,
+    "fields": {
+      "name": "Elaka Prahari Karyalaya Jamunaha Banke",
+      "latitude": 28.0211252,
+      "longitude": 81.60255069999998,
+      "authority_type": "Police",
+      "phone_number": "01-46714498",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 281,
+    "fields": {
+      "name": "Police Bit",
+      "latitude": 28.0598623,
+      "longitude": 81.61493989999998,
+      "authority_type": "Police",
+      "phone_number": "01-44297979",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 282,
+    "fields": {
+      "name": "Police Bit",
+      "latitude": 28.0670291,
+      "longitude": 81.6261113,
+      "authority_type": "Police",
+      "phone_number": "01-47800444",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 283,
+    "fields": {
+      "name": "Police Bit",
+      "latitude": 28.0629842,
+      "longitude": 81.62428939999998,
+      "authority_type": "Police",
+      "phone_number": "01-49465120",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 284,
+    "fields": {
+      "name": "Police Bit",
+      "latitude": 28.074173,
+      "longitude": 81.63622049999998,
+      "authority_type": "Police",
+      "phone_number": "01-46981348",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 285,
+    "fields": {
+      "name": "Police Bit",
+      "latitude": 28.0590468,
+      "longitude": 81.64235809999998,
+      "authority_type": "Police",
+      "phone_number": "01-41025409",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 286,
+    "fields": {
+      "name": "Police Bit",
+      "latitude": 28.071575,
+      "longitude": 81.63173589999998,
+      "authority_type": "Police",
+      "phone_number": "01-47019817",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 287,
+    "fields": {
+      "name": "",
+      "latitude": 28.5780621,
+      "longitude": 81.52529319999998,
+      "authority_type": "Police",
+      "phone_number": "01-45638065",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 288,
+    "fields": {
+      "name": "",
+      "latitude": 29.3210878,
+      "longitude": 81.2666159,
+      "authority_type": "Police",
+      "phone_number": "01-43469785",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 289,
+    "fields": {
+      "name": "Police Bit",
+      "latitude": 28.0607901,
+      "longitude": 81.6197209,
+      "authority_type": "Police",
+      "phone_number": "01-41616275",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 290,
+    "fields": {
+      "name": "",
+      "latitude": 26.6858785,
+      "longitude": 86.0073756,
+      "authority_type": "Police",
+      "phone_number": "01-49732820",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 291,
+    "fields": {
+      "name": "",
+      "latitude": 26.7031937,
+      "longitude": 85.9930626,
+      "authority_type": "Police",
+      "phone_number": "01-42578511",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 292,
+    "fields": {
+      "name": "",
+      "latitude": 26.6874958,
+      "longitude": 86.0674498,
+      "authority_type": "Police",
+      "phone_number": "01-45061561",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 293,
+    "fields": {
+      "name": "Sainik Ilaka Police Office",
+      "latitude": 28.0602765,
+      "longitude": 81.64670119999998,
+      "authority_type": "Police",
+      "phone_number": "01-44862791",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 294,
+    "fields": {
+      "name": "Bhadaharwa Police Station",
+      "latitude": 26.813751,
+      "longitude": 85.320346,
+      "authority_type": "Police",
+      "phone_number": "01-44745873",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 295,
+    "fields": {
+      "name": "Prahari Bit",
+      "latitude": 28.0796457,
+      "longitude": 81.6282865,
+      "authority_type": "Police",
+      "phone_number": "01-42149888",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 296,
+    "fields": {
+      "name": "Police Bit",
+      "latitude": 28.0526855,
+      "longitude": 81.6204424,
+      "authority_type": "Police",
+      "phone_number": "01-43580988",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 297,
+    "fields": {
+      "name": "karagar security guard banke",
+      "latitude": 28.053972,
+      "longitude": 81.61826979999998,
+      "authority_type": "Police",
+      "phone_number": "01-44748114",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 298,
+    "fields": {
+      "name": "shree Sasastra prahari base camp",
+      "latitude": 28.0516994,
+      "longitude": 81.62383699999998,
+      "authority_type": "Police",
+      "phone_number": "01-46372994",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 299,
+    "fields": {
+      "name": "",
+      "latitude": 27.4018716,
+      "longitude": 86.5497241,
+      "authority_type": "Police",
+      "phone_number": "01-44994484",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 300,
+    "fields": {
+      "name": "",
+      "latitude": 26.6420241,
+      "longitude": 85.9276684,
+      "authority_type": "Police",
+      "phone_number": "01-42989327",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 301,
+    "fields": {
+      "name": "police bit",
+      "latitude": 28.0576421,
+      "longitude": 81.6233942,
+      "authority_type": "Police",
+      "phone_number": "01-44700184",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 302,
+    "fields": {
+      "name": "Police Beat, Gagangaunda",
+      "latitude": 28.1327604,
+      "longitude": 84.08272239999998,
+      "authority_type": "Police",
+      "phone_number": "01-47345479",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 303,
+    "fields": {
+      "name": "Community Police Service Center, Kalika",
+      "latitude": 28.2142412,
+      "longitude": 84.074808,
+      "authority_type": "Police",
+      "phone_number": "01-47411261",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 304,
+    "fields": {
+      "name": "",
+      "latitude": 26.5516611,
+      "longitude": 87.9591144,
+      "authority_type": "Police",
+      "phone_number": "01-49291688",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 305,
+    "fields": {
+      "name": "Traffic Police Office",
+      "latitude": 28.2089021,
+      "longitude": 83.9863447,
+      "authority_type": "Police",
+      "phone_number": "01-41404873",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 306,
+    "fields": {
+      "name": "",
+      "latitude": 27.4439696,
+      "longitude": 85.8094684,
+      "authority_type": "Police",
+      "phone_number": "01-46535908",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 307,
+    "fields": {
+      "name": "",
+      "latitude": 27.1038054,
+      "longitude": 85.9646019,
+      "authority_type": "Police",
+      "phone_number": "01-45927084",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 308,
+    "fields": {
+      "name": "",
+      "latitude": 27.2047229,
+      "longitude": 85.91549449999998,
+      "authority_type": "Police",
+      "phone_number": "01-41381037",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 309,
+    "fields": {
+      "name": "",
+      "latitude": 27.3355267,
+      "longitude": 85.9903693,
+      "authority_type": "Police",
+      "phone_number": "01-48863566",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 310,
+    "fields": {
+      "name": "Ilaka Prahari Karyalaya Hansapur",
+      "latitude": 28.175892,
+      "longitude": 84.14426729999998,
+      "authority_type": "Police",
+      "phone_number": "01-46050013",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 311,
+    "fields": {
+      "name": "Nepal Border Police Controls",
+      "latitude": 28.2778715,
+      "longitude": 85.3779372,
+      "authority_type": "Police",
+      "phone_number": "01-48013962",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 312,
+    "fields": {
+      "name": "",
+      "latitude": 26.5173448,
+      "longitude": 87.3270536,
+      "authority_type": "Police",
+      "phone_number": "01-46614593",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 313,
+    "fields": {
+      "name": "",
+      "latitude": 28.215338,
+      "longitude": 85.509389,
+      "authority_type": "Police",
+      "phone_number": "01-45978529",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 314,
+    "fields": {
+      "name": "",
+      "latitude": 27.5019124,
+      "longitude": 85.2992267,
+      "authority_type": "Police",
+      "phone_number": "01-43904145",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 315,
+    "fields": {
+      "name": "District Police Office",
+      "latitude": 28.1098036,
+      "longitude": 85.29885199999998,
+      "authority_type": "Police",
+      "phone_number": "01-42365042",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 316,
+    "fields": {
+      "name": "Ward City Police Office",
+      "latitude": 27.4203475,
+      "longitude": 85.03900059999998,
+      "authority_type": "Police",
+      "phone_number": "01-49224095",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 317,
+    "fields": {
+      "name": "Picket-6",
+      "latitude": 27.4167391,
+      "longitude": 85.0281705,
+      "authority_type": "Police",
+      "phone_number": "01-41412863",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 318,
+    "fields": {
+      "name": "",
+      "latitude": 26.7967637,
+      "longitude": 86.09016029999998,
+      "authority_type": "Police",
+      "phone_number": "01-47735336",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 319,
+    "fields": {
+      "name": "",
+      "latitude": 26.8126259,
+      "longitude": 87.27422509999998,
+      "authority_type": "Police",
+      "phone_number": "01-44400449",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 320,
+    "fields": {
+      "name": "Jogikuti Police station",
+      "latitude": 27.6677429,
+      "longitude": 83.4649752,
+      "authority_type": "Police",
+      "phone_number": "01-44648703",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 321,
+    "fields": {
+      "name": "",
+      "latitude": 27.3811728,
+      "longitude": 86.05427659999998,
+      "authority_type": "Police",
+      "phone_number": "01-46810369",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 322,
+    "fields": {
+      "name": "",
+      "latitude": 27.3817431,
+      "longitude": 86.0617361,
+      "authority_type": "Police",
+      "phone_number": "01-49228047",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 323,
+    "fields": {
+      "name": "\u0908\u0932\u093e\u0915\u093e \u092a\u094d\u0930\u0939\u0930\u0940 \u0915\u093e\u0930\u094d\u092f\u093e\u0932\u092f , \u092d\u091c\u0928\u0940",
+      "latitude": 28.4919706,
+      "longitude": 80.9665485,
+      "authority_type": "Police",
+      "phone_number": "01-48526669",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 324,
+    "fields": {
+      "name": "",
+      "latitude": 26.9568736,
+      "longitude": 84.9666703,
+      "authority_type": "Police",
+      "phone_number": "01-48607256",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 325,
+    "fields": {
+      "name": "Siwai Police Chauki",
+      "latitude": 26.761753,
+      "longitude": 86.8788409,
+      "authority_type": "Police",
+      "phone_number": "01-44119146",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 326,
+    "fields": {
+      "name": "",
+      "latitude": 27.4770747,
+      "longitude": 83.4699209,
+      "authority_type": "Police",
+      "phone_number": "01-49040160",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 327,
+    "fields": {
+      "name": "Jaspur Police Post",
+      "latitude": 28.0612076,
+      "longitude": 82.2677955,
+      "authority_type": "Police",
+      "phone_number": "01-41866961",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 328,
+    "fields": {
+      "name": "Police Station",
+      "latitude": 27.6991403,
+      "longitude": 85.3513667,
+      "authority_type": "Police",
+      "phone_number": "01-41894698",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 329,
+    "fields": {
+      "name": "",
+      "latitude": 28.0081016,
+      "longitude": 81.6423145,
+      "authority_type": "Police",
+      "phone_number": "01-41034650",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 330,
+    "fields": {
+      "name": "",
+      "latitude": 26.966538,
+      "longitude": 87.7887492,
+      "authority_type": "Police",
+      "phone_number": "01-46994410",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 331,
+    "fields": {
+      "name": "",
+      "latitude": 27.5061841,
+      "longitude": 86.5846209,
+      "authority_type": "Police",
+      "phone_number": "01-49016463",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 332,
+    "fields": {
+      "name": "Sub Police Station, Tokha",
+      "latitude": 27.7562498,
+      "longitude": 85.3273557,
+      "authority_type": "Police",
+      "phone_number": "01-43791099",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 333,
+    "fields": {
+      "name": "Gulfagad-Shreenagar Police Station",
+      "latitude": 29.6547593,
+      "longitude": 81.88159,
+      "authority_type": "Police",
+      "phone_number": "01-46251610",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 334,
+    "fields": {
+      "name": "Dhursanchar Marga Police Station",
+      "latitude": 29.9722796,
+      "longitude": 81.8211745,
+      "authority_type": "Police",
+      "phone_number": "01-42563213",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 335,
+    "fields": {
+      "name": "Phedikhola police station",
+      "latitude": 28.1545776,
+      "longitude": 83.8838604,
+      "authority_type": "Police",
+      "phone_number": "01-46147016",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 336,
+    "fields": {
+      "name": "Ilaka Prahari Karyalaya",
+      "latitude": 29.047357,
+      "longitude": 80.60498599999998,
+      "authority_type": "Police",
+      "phone_number": "01-49232508",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 337,
+    "fields": {
+      "name": "",
+      "latitude": 27.5841252,
+      "longitude": 84.2533839,
+      "authority_type": "Police",
+      "phone_number": "01-43576410",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 338,
+    "fields": {
+      "name": "Lapsibot Police Station",
+      "latitude": 28.3177355,
+      "longitude": 83.74439049999998,
+      "authority_type": "Police",
+      "phone_number": "01-43707288",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 339,
+    "fields": {
+      "name": "",
+      "latitude": 27.6901074,
+      "longitude": 85.28407869999998,
+      "authority_type": "Police",
+      "phone_number": "01-42930871",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 340,
+    "fields": {
+      "name": "Saamudayik Sewa Kendra Police station",
+      "latitude": 28.2574235,
+      "longitude": 83.7194869,
+      "authority_type": "Police",
+      "phone_number": "01-49165194",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 341,
+    "fields": {
+      "name": "Police bit mid Baneshwar",
+      "latitude": 27.695491,
+      "longitude": 85.33749919999998,
+      "authority_type": "Police",
+      "phone_number": "01-41089934",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 342,
+    "fields": {
+      "name": "",
+      "latitude": 28.2317366,
+      "longitude": 82.3524727,
+      "authority_type": "Police",
+      "phone_number": "01-49689140",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 343,
+    "fields": {
+      "name": "Laukahi Police Station",
+      "latitude": 26.6003123,
+      "longitude": 87.06561709999998,
+      "authority_type": "Police",
+      "phone_number": "01-48509929",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 344,
+    "fields": {
+      "name": "",
+      "latitude": 28.5522994,
+      "longitude": 84.2594961,
+      "authority_type": "Police",
+      "phone_number": "01-48105756",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 345,
+    "fields": {
+      "name": "",
+      "latitude": 28.6429644,
+      "longitude": 81.2814252,
+      "authority_type": "Police",
+      "phone_number": "01-44492636",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 346,
+    "fields": {
+      "name": "Tatopani Police Station",
+      "latitude": 29.2446403,
+      "longitude": 82.1064327,
+      "authority_type": "Police",
+      "phone_number": "01-45106314",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 347,
+    "fields": {
+      "name": "Traffic Police Post",
+      "latitude": 29.2268094,
+      "longitude": 81.9511131,
+      "authority_type": "Police",
+      "phone_number": "01-41224472",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 348,
+    "fields": {
+      "name": "Namagadh Police Station",
+      "latitude": 29.1968439,
+      "longitude": 81.9093318,
+      "authority_type": "Police",
+      "phone_number": "01-46920283",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 349,
+    "fields": {
+      "name": "Kudari Police Station",
+      "latitude": 29.2271154,
+      "longitude": 82.0085493,
+      "authority_type": "Police",
+      "phone_number": "01-45306513",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 350,
+    "fields": {
+      "name": "Patrasi Police Station",
+      "latitude": 29.302563,
+      "longitude": 82.28502,
+      "authority_type": "Police",
+      "phone_number": "01-43201361",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 351,
+    "fields": {
+      "name": "Sinja Police Station",
+      "latitude": 29.3264887,
+      "longitude": 81.9841713,
+      "authority_type": "Police",
+      "phone_number": "01-47603037",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 352,
+    "fields": {
+      "name": "Chautha police post",
+      "latitude": 29.4314053,
+      "longitude": 82.107149,
+      "authority_type": "Police",
+      "phone_number": "01-41227849",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 353,
+    "fields": {
+      "name": "Gothijula police post",
+      "latitude": 29.4128152,
+      "longitude": 82.003764,
+      "authority_type": "Police",
+      "phone_number": "01-44441090",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 354,
+    "fields": {
+      "name": "",
+      "latitude": 27.6322224,
+      "longitude": 85.4974195,
+      "authority_type": "Police",
+      "phone_number": "01-44073413",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 355,
+    "fields": {
+      "name": "",
+      "latitude": 27.9747652,
+      "longitude": 85.1856149,
+      "authority_type": "Police",
+      "phone_number": "01-44128951",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 356,
+    "fields": {
+      "name": "Ilaka Police Station, Kapilakot",
+      "latitude": 27.2633644,
+      "longitude": 85.728724,
+      "authority_type": "Police",
+      "phone_number": "01-44045706",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 357,
+    "fields": {
+      "name": "",
+      "latitude": 27.6488176,
+      "longitude": 82.8693676,
+      "authority_type": "Police",
+      "phone_number": "01-42308645",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 358,
+    "fields": {
+      "name": "",
+      "latitude": 26.6628006,
+      "longitude": 85.82187949999998,
+      "authority_type": "Police",
+      "phone_number": "01-42206962",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 359,
+    "fields": {
+      "name": "",
+      "latitude": 28.0098353,
+      "longitude": 82.0929576,
+      "authority_type": "Police",
+      "phone_number": "01-48683434",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 360,
+    "fields": {
+      "name": "",
+      "latitude": 29.5172769,
+      "longitude": 81.99780869999998,
+      "authority_type": "Police",
+      "phone_number": "01-46324325",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 361,
+    "fields": {
+      "name": "",
+      "latitude": 29.5220029,
+      "longitude": 81.9295172,
+      "authority_type": "Police",
+      "phone_number": "01-43310622",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 362,
+    "fields": {
+      "name": "Police Bit",
+      "latitude": 29.6067316,
+      "longitude": 81.7704999,
+      "authority_type": "Police",
+      "phone_number": "01-44333002",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 363,
+    "fields": {
+      "name": "",
+      "latitude": 29.5228534,
+      "longitude": 82.14060589999998,
+      "authority_type": "Police",
+      "phone_number": "01-46362516",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 364,
+    "fields": {
+      "name": "",
+      "latitude": 28.2260278,
+      "longitude": 82.3527569,
+      "authority_type": "Police",
+      "phone_number": "01-43539083",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 365,
+    "fields": {
+      "name": "",
+      "latitude": 28.2969396,
+      "longitude": 82.2566587,
+      "authority_type": "Police",
+      "phone_number": "01-41082597",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 366,
+    "fields": {
+      "name": "",
+      "latitude": 27.263891,
+      "longitude": 85.7291043,
+      "authority_type": "Police",
+      "phone_number": "01-45981103",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 367,
+    "fields": {
+      "name": "",
+      "latitude": 29.5390853,
+      "longitude": 82.08034399999998,
+      "authority_type": "Police",
+      "phone_number": "01-41945990",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 368,
+    "fields": {
+      "name": "Buddhanilkantha Police Station",
+      "latitude": 27.7769981,
+      "longitude": 85.36199879999998,
+      "authority_type": "Police",
+      "phone_number": "01-41266059",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 369,
+    "fields": {
+      "name": "Humla Police Station",
+      "latitude": 29.9686951,
+      "longitude": 81.8213037,
+      "authority_type": "Police",
+      "phone_number": "01-42312959",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 370,
+    "fields": {
+      "name": "",
+      "latitude": 28.678001,
+      "longitude": 80.3595554,
+      "authority_type": "Police",
+      "phone_number": "01-41107926",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 371,
+    "fields": {
+      "name": "",
+      "latitude": 26.6059032,
+      "longitude": 86.4161619,
+      "authority_type": "Police",
+      "phone_number": "01-45405755",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 372,
+    "fields": {
+      "name": "",
+      "latitude": 27.6498719,
+      "longitude": 82.8592675,
+      "authority_type": "Police",
+      "phone_number": "01-45546788",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 373,
+    "fields": {
+      "name": "",
+      "latitude": 26.8744362,
+      "longitude": 85.21439909999998,
+      "authority_type": "Police",
+      "phone_number": "01-44289448",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 374,
+    "fields": {
+      "name": "",
+      "latitude": 27.6365025,
+      "longitude": 86.22885479999998,
+      "authority_type": "Police",
+      "phone_number": "01-44891383",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 375,
+    "fields": {
+      "name": "",
+      "latitude": 27.6358598,
+      "longitude": 86.23163549999998,
+      "authority_type": "Police",
+      "phone_number": "01-48620206",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 376,
+    "fields": {
+      "name": "",
+      "latitude": 27.8139969,
+      "longitude": 85.3178614,
+      "authority_type": "Police",
+      "phone_number": "01-49380454",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 377,
+    "fields": {
+      "name": "",
+      "latitude": 28.1133491,
+      "longitude": 85.2828441,
+      "authority_type": "Police",
+      "phone_number": "01-48160363",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 378,
+    "fields": {
+      "name": "Mahuwari Police Station",
+      "latitude": 27.6196474,
+      "longitude": 83.5030868,
+      "authority_type": "Police",
+      "phone_number": "01-48352662",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 379,
+    "fields": {
+      "name": "",
+      "latitude": 27.7147595,
+      "longitude": 85.3282748,
+      "authority_type": "Police",
+      "phone_number": "01-44732989",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 380,
+    "fields": {
+      "name": "",
+      "latitude": 29.274595,
+      "longitude": 82.18058399999998,
+      "authority_type": "Police",
+      "phone_number": "01-44098212",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 381,
+    "fields": {
+      "name": "Sarkena Police Station",
+      "latitude": 28.6208904,
+      "longitude": 82.2744636,
+      "authority_type": "Police",
+      "phone_number": "01-42780019",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 382,
+    "fields": {
+      "name": "Raghechaur Police Station",
+      "latitude": 28.571768,
+      "longitude": 82.1998793,
+      "authority_type": "Police",
+      "phone_number": "01-41446396",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 383,
+    "fields": {
+      "name": "",
+      "latitude": 28.4949282,
+      "longitude": 82.2523377,
+      "authority_type": "Police",
+      "phone_number": "01-42892425",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 384,
+    "fields": {
+      "name": "Simli Police Station",
+      "latitude": 28.657621,
+      "longitude": 82.3521903,
+      "authority_type": "Police",
+      "phone_number": "01-49872739",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 385,
+    "fields": {
+      "name": "Armed Police Force Bhajani",
+      "latitude": 28.5025967,
+      "longitude": 80.9671381,
+      "authority_type": "Police",
+      "phone_number": "01-46826985",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 386,
+    "fields": {
+      "name": "Ganjauhawa Prahari Chauki",
+      "latitude": 28.5472175,
+      "longitude": 80.92119649999998,
+      "authority_type": "Police",
+      "phone_number": "01-46477765",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 387,
+    "fields": {
+      "name": "Sunahaphata Prahari Chauki",
+      "latitude": 28.4631478,
+      "longitude": 81.0288718,
+      "authority_type": "Police",
+      "phone_number": "01-41128673",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 388,
+    "fields": {
+      "name": "Sima Prahari Chauki Lalbojhi",
+      "latitude": 28.4589576,
+      "longitude": 80.9540865,
+      "authority_type": "Police",
+      "phone_number": "01-42210389",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 389,
+    "fields": {
+      "name": "Chaurjahari ilaka",
+      "latitude": 28.6404537,
+      "longitude": 82.20121949999998,
+      "authority_type": "Police",
+      "phone_number": "01-47932034",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 390,
+    "fields": {
+      "name": "Traffick Police Post",
+      "latitude": 27.6698403,
+      "longitude": 85.41051129999998,
+      "authority_type": "Police",
+      "phone_number": "01-46338353",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 391,
+    "fields": {
+      "name": "Todke Prahari chauki",
+      "latitude": 27.9722425,
+      "longitude": 84.92227819999998,
+      "authority_type": "Police",
+      "phone_number": "01-47883119",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 392,
+    "fields": {
+      "name": "",
+      "latitude": 28.0438912,
+      "longitude": 84.8108132,
+      "authority_type": "Police",
+      "phone_number": "01-48832912",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 393,
+    "fields": {
+      "name": "Marpak Prahari Chauki",
+      "latitude": 28.0094253,
+      "longitude": 84.95319709999998,
+      "authority_type": "Police",
+      "phone_number": "01-45469624",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 394,
+    "fields": {
+      "name": "",
+      "latitude": 27.7561743,
+      "longitude": 85.8456754,
+      "authority_type": "Police",
+      "phone_number": "01-49255812",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 395,
+    "fields": {
+      "name": "Traffic Police Durbar Marg",
+      "latitude": 27.713044,
+      "longitude": 85.3179788,
+      "authority_type": "Police",
+      "phone_number": "01-42242804",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 396,
+    "fields": {
+      "name": "Police Check Post",
+      "latitude": 28.398972,
+      "longitude": 83.7007825,
+      "authority_type": "Police",
+      "phone_number": "01-44140778",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 397,
+    "fields": {
+      "name": "Bhadaure Police Office",
+      "latitude": 28.2815789,
+      "longitude": 83.8639842,
+      "authority_type": "Police",
+      "phone_number": "01-44411630",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 398,
+    "fields": {
+      "name": "",
+      "latitude": 28.3047683,
+      "longitude": 83.8282228,
+      "authority_type": "Police",
+      "phone_number": "01-45887487",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 399,
+    "fields": {
+      "name": "Chhorepatan police Station",
+      "latitude": 28.1903407,
+      "longitude": 83.9569494,
+      "authority_type": "Police",
+      "phone_number": "01-42656151",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 400,
+    "fields": {
+      "name": "",
+      "latitude": 28.1839959,
+      "longitude": 81.4830008,
+      "authority_type": "Police",
+      "phone_number": "01-46282709",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 401,
+    "fields": {
+      "name": "Aasthai Police Station",
+      "latitude": 28.2964716,
+      "longitude": 83.7678659,
+      "authority_type": "Police",
+      "phone_number": "01-41020154",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 402,
+    "fields": {
+      "name": "bajura police post",
+      "latitude": 29.3758937,
+      "longitude": 81.3338457,
+      "authority_type": "Police",
+      "phone_number": "01-45244028",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 403,
+    "fields": {
+      "name": "temporary police post",
+      "latitude": 29.3646154,
+      "longitude": 81.34460269999998,
+      "authority_type": "Police",
+      "phone_number": "01-49143320",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 404,
+    "fields": {
+      "name": "",
+      "latitude": 27.7392645,
+      "longitude": 85.3096029,
+      "authority_type": "Police",
+      "phone_number": "01-41537632",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 405,
+    "fields": {
+      "name": "Yari Police Post",
+      "latitude": 30.1130097,
+      "longitude": 81.4341181,
+      "authority_type": "Police",
+      "phone_number": "01-42924386",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 406,
+    "fields": {
+      "name": "Border Police Office",
+      "latitude": 30.0695605,
+      "longitude": 81.5397763,
+      "authority_type": "Police",
+      "phone_number": "01-42058069",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 407,
+    "fields": {
+      "name": "Police Bit",
+      "latitude": 30.0603245,
+      "longitude": 81.6219257,
+      "authority_type": "Police",
+      "phone_number": "01-44022348",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 408,
+    "fields": {
+      "name": "Border Police Station, Halji",
+      "latitude": 30.2339276,
+      "longitude": 81.5520796,
+      "authority_type": "Police",
+      "phone_number": "01-41637781",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 409,
+    "fields": {
+      "name": "Hilsa Border Police Station",
+      "latitude": 30.152292,
+      "longitude": 81.3344558,
+      "authority_type": "Police",
+      "phone_number": "01-46469292",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 410,
+    "fields": {
+      "name": "Police Post",
+      "latitude": 29.6605541,
+      "longitude": 81.864152,
+      "authority_type": "Police",
+      "phone_number": "01-44320866",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 411,
+    "fields": {
+      "name": "Tanjakot Police Bit",
+      "latitude": 29.6386107,
+      "longitude": 81.7591405,
+      "authority_type": "Police",
+      "phone_number": "01-47642186",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 412,
+    "fields": {
+      "name": "Maila Kuwadi Humla Police Post",
+      "latitude": 29.6070027,
+      "longitude": 81.7708178,
+      "authority_type": "Police",
+      "phone_number": "01-42549314",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 413,
+    "fields": {
+      "name": "Mimi Darma Police Station",
+      "latitude": 29.730444,
+      "longitude": 82.07226319999998,
+      "authority_type": "Police",
+      "phone_number": "01-49108926",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 414,
+    "fields": {
+      "name": "Melchham Police Station",
+      "latitude": 29.7492926,
+      "longitude": 82.0643996,
+      "authority_type": "Police",
+      "phone_number": "01-48362930",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 415,
+    "fields": {
+      "name": "Dharapori Police Post",
+      "latitude": 30.0032382,
+      "longitude": 81.768782,
+      "authority_type": "Police",
+      "phone_number": "01-49822451",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 416,
+    "fields": {
+      "name": "Yanchu Police station",
+      "latitude": 29.9405427,
+      "longitude": 81.8539267,
+      "authority_type": "Police",
+      "phone_number": "01-41522587",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 417,
+    "fields": {
+      "name": "Ward Police Station, Bagar",
+      "latitude": 28.2429621,
+      "longitude": 83.98602599999998,
+      "authority_type": "Police",
+      "phone_number": "01-47819776",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 418,
+    "fields": {
+      "name": "Area Police office Chitlang",
+      "latitude": 27.6602915,
+      "longitude": 85.1807785,
+      "authority_type": "Police",
+      "phone_number": "01-41305242",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 419,
+    "fields": {
+      "name": "Traffic Prahari Karyalaya",
+      "latitude": 26.5463097,
+      "longitude": 86.74780989999998,
+      "authority_type": "Police",
+      "phone_number": "01-42100657",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 420,
+    "fields": {
+      "name": "Armed Police Force",
+      "latitude": 29.968604,
+      "longitude": 81.8221807,
+      "authority_type": "Police",
+      "phone_number": "01-43549340",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 421,
+    "fields": {
+      "name": "",
+      "latitude": 28.439208,
+      "longitude": 81.8527062,
+      "authority_type": "Police",
+      "phone_number": "01-41624499",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 422,
+    "fields": {
+      "name": "",
+      "latitude": 27.2055659,
+      "longitude": 87.4670021,
+      "authority_type": "Police",
+      "phone_number": "01-48452807",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 423,
+    "fields": {
+      "name": "",
+      "latitude": 26.7686629,
+      "longitude": 85.38001649999998,
+      "authority_type": "Police",
+      "phone_number": "01-45745023",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 424,
+    "fields": {
+      "name": "",
+      "latitude": 26.7686769,
+      "longitude": 85.38001,
+      "authority_type": "Police",
+      "phone_number": "01-47471602",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 425,
+    "fields": {
+      "name": "Armed police force Post",
+      "latitude": 28.3040315,
+      "longitude": 81.4361511,
+      "authority_type": "Police",
+      "phone_number": "01-45652575",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 426,
+    "fields": {
+      "name": "",
+      "latitude": 28.3132804,
+      "longitude": 81.435052,
+      "authority_type": "Police",
+      "phone_number": "01-43784307",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 427,
+    "fields": {
+      "name": "",
+      "latitude": 27.6074815,
+      "longitude": 85.32409199999998,
+      "authority_type": "Police",
+      "phone_number": "01-48924956",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 428,
+    "fields": {
+      "name": "Sasastra Prahari Bal, pipara",
+      "latitude": 27.6890286,
+      "longitude": 83.2075255,
+      "authority_type": "Police",
+      "phone_number": "01-47784308",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  },
+  {
+    "model": "flightres.LocalAuthorities",
+    "pk": 429,
+    "fields": {
+      "name": "police station, pipara",
+      "latitude": 27.6886224,
+      "longitude": 83.2014927,
+      "authority_type": "Police",
+      "phone_number": "01-43883063",
+      "created_at": "2018-09-04T13:20:30+01:00",
+      "updated_at": "2018-09-04T13:20:30+01:00"
+    }
+  }
+]
