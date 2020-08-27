@@ -97,7 +97,8 @@
                                                                                     class="hover-shadow cursor btn modal-link">
                                                                                     <img id="image_{{ i.uav_uid }}"
                                                                                         class="expandImage"
-                                                                                        src="https://picsum.photos/200" alt="">
+                                                                                        src="https://picsum.photos/200"
+                                                                                        alt="">
                                                                                 </button>
                                                                             </figure>
                                                                         </div>
@@ -136,10 +137,17 @@
                                                     </div>
                                                     <div class="col-xl-7 col-sm-12  order1">
                                                         <div class="complaint-content col-right">
-                                                            <h3 class="title">COMPLAINT MESSAGE <span><a
-                                                                        class="common-button is-bg"
-                                                                        href="{% url 'dashboard:update-complain' pk=i.uav_uid action='status' %}">Mark
-                                                                        as Resolved</a> </span></h3>
+                                                            <h3 class="title">COMPLAINT MESSAGE <span>
+                                                                    {% if i.status == 'Resolved' %}
+                                                                    <a class="common-button is-bg"
+                                                                        href="{% url 'dashboard:update-complain' pk=i.uav_uid action='status' status=i.status %}">Mark
+                                                                        as Unresolved</a>
+                                                                    {% else %}
+                                                                    <a class="common-button is-bg"
+                                                                        href="{% url 'dashboard:update-complain' pk=i.uav_uid action='status' status=i.status%}">Mark
+                                                                        as Resolved</a>
+                                                                    {% endif %}
+                                                                </span></h3>
                                                             <div class="info-para">
                                                                 <h6>Complain Category:
                                                                     <span>{{ i.category }}</span></h6>
@@ -149,10 +157,17 @@
                                                                 <p>{{ i.message }}</p>
                                                             </div>
                                                             <div class="button-wrap">
+                                                                {% if i.is_escalated %}
+                                                                <button class="common-button is-bg escalate-button"
+                                                                    popup-link="open-modal-escalated">
+                                                                    De-Escalate Issue
+                                                                </button>
+                                                                {% else %}
                                                                 <button class="common-button is-bg escalate-button"
                                                                     popup-link="open-modal-escalated">
                                                                     Escalate Issue
                                                                 </button>
+                                                                {% endif %}
                                                             </div>
                                                             <form action="{% url 'dashboard:submit-reply' pk=i.pk %}"
                                                                 method="POST">
@@ -191,7 +206,6 @@
                                         <span class="close-icon"><i class="material-icons">close</i></span>
                                         <div class="popup-header">
                                             <h3>Escalate Issue</h3>
-
                                         </div>
                                         <div class="popup-content">
                                             <div class="drone-details">
@@ -209,8 +223,14 @@
                                                                     </div>
                                                                     {% endfor %}
                                                                     <div class="button-wrap">
+                                                                        {% if i.is_escalated %}
                                                                         <a class="common-button is-bg"
-                                                                            href="{% url 'dashboard:update-complain' pk=i.uav_uid action='escalate' %}">Escalate</a>
+                                                                            href="{% url 'dashboard:update-complain' pk=i.uav_uid action='escalate' status='true' %}">De-Escalate</a>
+                                                                        {% else %}
+                                                                        <a class="common-button is-bg"
+                                                                            href="{% url 'dashboard:update-complain' pk=i.uav_uid action='escalate' status='false' %}">Escalate</a>
+                                                                        {% endif %}
+
                                                                     </div>
                                                                 </li>
                                                             </ul>
