@@ -144,12 +144,18 @@ def flightReqResponseView(request, pk):
 
 
 @login_required
-def updateComplain(request, pk, action):
+def updateComplain(request, pk, action, status):
     selected_complain = get_object_or_404(Report, uav_uid=pk)
     if action == 'status':
-        selected_complain.status = 'Resolved'
+        if status == "Pending":
+            selected_complain.status = 'Resolved'
+        elif status == "Resolved":
+            selected_complain.status = 'Pending'
     elif action == 'escalate':
-        selected_complain.is_escalated = True
+        if status == 'true':
+            selected_complain.is_escalated = False
+        elif status == 'false':
+            selected_complain.is_escalated = True
     selected_complain.save()
     return redirect('/np/dashboard/complain')
 

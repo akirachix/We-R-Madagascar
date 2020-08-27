@@ -15,7 +15,7 @@ urlpatterns = [
     path('request_response/<int:pk>',
          flightReqResponseView, name='request-response'),
     path('complain', ComplainListView.as_view(), name='complain-list'),
-    path('update_complain/<int:pk>/<str:action>',
+    path('update_complain/<int:pk>/<str:action>/<str:status>',
          updateComplain, name='update-complain'),
     path('submit_reply/<int:pk>', submitReply, name='submit-reply'),
     path('about', AboutPageView.as_view(), name='about'),
