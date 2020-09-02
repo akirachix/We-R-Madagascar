@@ -182,8 +182,6 @@
                     background-color: #fefefe;
                     margin: auto;
                     padding: 0;
-                    width: 90%;
-                    max-width: 1200px;
                     margin-top: 4px;
                     @media #{$breakpoint-lg-desktop}{
                         max-width: 800px;
@@ -192,14 +190,9 @@
                         max-width: 600px;
                     }
                     .mySlides {
-                        width: 406px;
-                        height: 406px;
-                        display: block !important;
+                        display: none;
+                        width: 100%;
                         /* Number text (1/3 etc) */
-                        img{
-                            width: 100%;
-                            height: 100%;
-                        }
                         .numbertext {
                             color: $bg-color;
                             font-size: 12px;
@@ -207,7 +200,17 @@
                             position: absolute;
                             top: 0;
                         }
-                    }
+                        img{
+                            @include cover(center);
+                            max-height: calc(100vh - 120px);
+                        }
+                        iframe{
+                            width: 100%;
+                            height: calc(100vh - 200px);
+                            position: relative;
+                           
+                        }
+                    }  
                     /* Next & previous buttons */
                     .prev,
                     .next {
@@ -225,20 +228,20 @@
                         user-select: none;
                         -webkit-user-select: none;
                     }
-
+                
                     /* Position the "next button" to the right */
                     .next {
                         right: 0;
                         border-radius: 3px 0 0 3px;
                     }
-
+                
                     /* On hover, add a black background color with a little bit see-through */
                     .prev:hover,
                     .next:hover {
                         background-color: rgba($heading-color, .6);
                     }
                 }
-
+               
             }
         }
         &.sm-popup {
@@ -524,7 +527,7 @@
 
                                 }
                             }
-
+                            
                             .info-block{
                                 background-color: $purple-shade;
                                 @include radius(5px);
@@ -612,7 +615,7 @@
                                             margin-bottom: 20px;
                                         }
                                     }
-
+                                   
                                 }
                             }
                             .buttons{
@@ -629,7 +632,7 @@
                                 0%   {opacity: 0;}
                                 100% {opacity: 1;}
                             }
-
+                            
                             @keyframes fadeIn {
                                 0%   {opacity: 0;}
                                 100% {opacity: 1;}
@@ -640,7 +643,7 @@
                             @media #{$breakpoint-desktop}{
                                 height: calc(100% - 18%);
                             }
-
+                            
                             #map{
                                 @include radius(4px);
                                 // min-height: 320px;
@@ -722,7 +725,7 @@
                                                 }
                                             }
                                             p{
-                                                white-space: nowrap;
+                                                white-space: nowrap; 
                                                 overflow: hidden;
                                                 text-overflow: ellipsis;
                                                 width: 100px;
@@ -834,7 +837,7 @@
                                 }
                                 @include flex(0 0 50%);
                                 max-width: 50%;
-
+                               
                                 a {
                                     background-color: transparent;
                                     border: 1px solid $body-color;
@@ -917,7 +920,8 @@
                                             cursor: pointer;
                                             display: block;
                                             @include transition(all .3s ease);
-                                          &::before{
+                                            position: relative;
+                                            &::before{
                                                 content: '';
                                                 top: 0;
                                                 left: 0;
@@ -936,7 +940,6 @@
                                                 max-width: 100%;
                                                 height: 100%;
                                             }
-
                                         }
                                         @media #{$breakpoint-lg-desktop}{
                                             width: 70px;
@@ -944,13 +947,6 @@
                                             &:not(:last-child){
                                                 margin-right: 7px;
                                             }
-                                        }
-                                        @media #{$breakpoint-desktop}{
-                                            &:not(:last-child){
-                                                margin-right: 6px;
-                                            }
-                                            width: 55px;
-                                            height: 55px;
                                         }
                                     }
                                 }
@@ -1002,7 +998,7 @@
                                         font-weight: 600;
                                         font-size: .875rem;
                                         line-height: 1.75rem;
-
+                                       
                                     }
                                     span {
                                         color: $text-color;
@@ -1010,7 +1006,7 @@
                                     }
                                     @media #{$breakpoint-lg-desktop}{
                                         font-size: .775rem;
-                                        b{
+                                        b{ 
                                             font-size: .75rem;
                                             line-height: 1.5rem;
                                         }
@@ -1051,11 +1047,76 @@
             }
         }
     }
+    // .image-container{
+    //     padding: 2vh;
+    //     width: 100%;
+    //     height: 100%;
+    //     @include flex_hr_center;
+    //     position: relative;
+    //     .close-icon{
+    //         position: absolute;
+    //         top: 2rem;
+    //         right: 2rem;
+    //     }
+    //     .modal-content{
+
+    //         max-width: 600px;
+    //         position: relative;
+    //         background: transparent;
+    //         border: 0;
+    //         @media #{$breakpoint-lg-desktop}{
+    //             max-width: 500px;
+    //         }
+    //         @media #{$breakpoint-desktop}{
+    //             max-width: 400px;
+    //         }
+    //         @media #{$breakpoint-md}{
+    //             max-width: 300px;
+    //         }
+    //         .mySlides{
+    //             .numbertext{
+    //                 color: $white-color;
+    //                 font-weight: 500;
+    //             }
+    //             img{
+    //                 border: 1px solid $white-color;
+    //             }
+    //             iframe{
+    //                 border: 1px solid $white-color;
+    //                 width: 100%;
+    //                 height: calc(100vh - 50vh);
+    //             }
+    //         }
+    //         .prev,
+    //         .next{
+    //             position: absolute;
+    //             top: 50%;
+    //             @include display-flex(flex);
+    //             @include align-items-center;
+    //             line-height: 0;
+    //             width: 30px;
+    //             height: 60px;
+    //             @include flex_hr_center;
+    //             background: rgba($heading-color, .3);
+    //             color: $white-color;
+    //             @include transition(all .4s ease);
+    //             &:hover{
+    //                 background: rgba($secondary-color, .6);
+    //                 color: $white-color;
+    //                 cursor: pointer;
+    //             }
+    //         }
+    //         .prev{
+    //             left: 0%;
+    //         }
+    //         .next{
+    //             right: 0%;
+    //         }
+    //     }
+    // }
     &#open-modal-escalated,
-    &#open-modal-deny,
     &#open-modal-flight,
     &#open-modal-img,
-    &#myModalVideo,
     &#myModal{
         z-index: 1111;
     }

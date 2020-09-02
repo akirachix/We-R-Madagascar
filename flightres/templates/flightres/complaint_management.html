@@ -3,10 +3,21 @@
 
 
 {% block links %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/popup-image.css' %}">
 <script src="{% static 'js/modal-image.js' %}"></script>
 {% endblock links %}
 
 {% block body %}
+<div style="z-index: 1111; " id="myModalVideo" class="popup">
+    <div class="image-container">
+        <!-- <div class="modal-body popup-body"> -->
+            <span class="close-icon" onclick="closeModal()"><i
+                    class="material-icons">close</i></span>
+            <div class="modal-content" id="openFSImage">
+            </div>
+        <!-- </div> -->
+    </div>
+</div>
 <main class="admin-main">
     <div class="main-card">
         <div class="card-header">
@@ -15,10 +26,9 @@
         <div class="card-body">
             <table id="admin-datatable" class="admin-datatable">
                 <thead>
-                    <tr>
-                        <th class="serial-th">SN</th>
+                    <tr>   
+                        <th>ID</th>
                         <th>Date</th>
-                        <th>Complaints ID</th>
                         <th>Complaint Category</th>
                         <th>Message</th>
                         <th>Sender Name</th>
@@ -29,23 +39,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <div style="z-index: 1111; " id="myModalVideo" class="popup">
-                        <div class="popup-container lg-popup">
-                            <div class="modal-body popup-body">
-                                <span class="close-icon" onclick="closeModal()"><i
-                                        class="material-icons">close</i></span>
-                                <div class="modal-content" id="openFSImage">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     {% for i, j, k in data %}
                     <tr>
-                        <td>{{ forloop.counter }}</td>
+                        <td id="id_uav_uid">{{ i.uav_uid }}</td>
                         <td>
                             <time>{{ i.created_at }}</time>
                         </td>
-                        <td id="id_uav_uid">ID-{{ i.uav_uid }}</td>
                         <td>{{ i.category }}</td>
                         <td><b>{{ i.message }}</b></td>
                         <td>{{ i.complainer_name }}</td>
@@ -106,7 +105,7 @@
                                                                                     class="hover-shadow cursor btn modal-link">
                                                                                     <img id="image_{{ i.uav_uid }}"
                                                                                         class="expandImage"
-                                                                                        src="https://picsum.photos/200"
+                                                                                        src="https://winaero.com/blog/wp-content/uploads/2019/11/Photos-new-icon.png"
                                                                                         alt="">
                                                                                 </button>
                                                                             </figure>
