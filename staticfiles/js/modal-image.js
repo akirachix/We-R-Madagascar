@@ -29,7 +29,7 @@ $(document).ready(function () {
     <div class="mySlides" style="display: block;">
       <iframe
         class="modal-content"
-        style="height: calc(200vh - 300px);z-index: 1111;"
+        style="z-index: 1111;"
         src="`+ data.image_url + `"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
