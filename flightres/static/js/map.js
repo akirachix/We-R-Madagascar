@@ -72,6 +72,9 @@ $(document).ready(function () {
                                         <p><b>Aircraft Name:
                                             </b><span>`+ data.uav_uuid__popular_name + `</span>
                                         </p>
+                                        <p><b>Unique ID:
+                                            </b><span>`+ data.uav_uuid + `</span>
+                                        </p>
                                     </div>
                                 </li>
                                 <br>
