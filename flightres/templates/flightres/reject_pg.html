@@ -52,6 +52,8 @@
                         <h1>Thanks for your request.</h1>
                         <figure class="result"><img src="{% static 'img/rejected.svg' %}" alt="rejected"></figure>
                         <p>Your permission request has been rejected.</p>
+                        <br>
+                        <p><b>Rejection Reason: </b>{{object.rejection_reason}}</p>
                     </div>
                 </div>
             </div>
