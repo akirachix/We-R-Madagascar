@@ -54,7 +54,7 @@ class FlightRegistryView(ModelViewSet):
         Instantiates and returns the list of permissions that this view requires.
         """
         if self.action in ['update', 'partial_update', 'list', 'retrieve']:
-            permission_classes = [IsAuthenticated]
+            permission_classes = [AllowAny]
         else:
             permission_classes = [AllowAny]
         return [permission() for permission in permission_classes]
