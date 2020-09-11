@@ -227,7 +227,7 @@ class UniqueTeatDataView(APIView):
 
 
 class PilotDetailAPIView(ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = Pilots.objects.all()
     serializer_class = PilotsSerializer
 
@@ -268,7 +268,7 @@ class PilotDetailAPIView(ModelViewSet):
 
 
 class GetPilotFromPermissionView(RetrieveModelMixin, GenericViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = FlightPermission.objects.all()
     serializer_class = PilotFromFlightSerializer
 
