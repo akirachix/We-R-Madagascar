@@ -200,7 +200,7 @@ class OldPermissionIdValidation(APIView):
                 return JsonResponse(
                     {'valid': False},
                     status=status.HTTP_200_OK, )
-        except ValueError:
+        except Exception:
             return JsonResponse(
                 {'valid': False},
                 status=status.HTTP_200_OK, )
