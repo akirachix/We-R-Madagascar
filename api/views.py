@@ -190,7 +190,8 @@ class OldPermissionIdValidation(APIView):
         data = request.data
         permission_id = data.get('id')
         qs = FlightPermission.objects.filter(pk=permission_id)
-        
+        print(qs)
+        print(permission_id)
         try:
             if qs.exists():
                 pilot_id = FlightPermission.objects.get(
