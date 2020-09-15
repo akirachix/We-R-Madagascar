@@ -188,11 +188,12 @@ class OldPermissionIdValidation(APIView):
 
     def post(self, request):
         data = request.data
-        permission_id = data.get('id')
-        qs = FlightPermission.objects.filter(pk=permission_id)
-        print(qs)
-        print(permission_id)
         try:
+            permission_id = data.get('id')
+            qs = FlightPermission.objects.filter(pk=permission_id)
+            print(qs)
+            print(permission_id)
+    
             if qs.exists():
                 pilot_id = FlightPermission.objects.get(
                     pk=permission_id).pilot_id.pk
@@ -202,7 +203,7 @@ class OldPermissionIdValidation(APIView):
                 return JsonResponse(
                     {'valid': False,'error':'Id not found'},
                     status=status.HTTP_200_OK, )
-        except Exception:
+        except ValueError:
             return JsonResponse(
                 {'valid': False,'error':'exception'},
                 status=status.HTTP_200_OK, )
