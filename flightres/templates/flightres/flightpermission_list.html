@@ -36,11 +36,13 @@
                             </td>
 
                             {% if due_in < 0 %}
-                                <td>---</td>
+                                <td>Overdue</td>
                             {% elif due_in == 0 %}
                                 <td>Today</td>
+                            {% elif due_in == 1 %}
+                                <td>{{ due_in }} Day</td>
                             {% else %}
-                                <td>{{ due_in }} Day(s)</td>
+                                <td>{{ due_in }} Days </td>
                             {% endif %}
 
 

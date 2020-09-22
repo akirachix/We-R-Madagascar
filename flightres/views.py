@@ -96,7 +96,7 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
         else:
             flight_objects = None
         for flight_object in flight_objects:
-            due = datetime.date.today() - flight_object.flight_start_date
+            due = flight_object.flight_start_date - datetime.date.today()
             due_in = due.days
             object_data.append([flight_object, due_in])
         com['object_data'] = object_data
