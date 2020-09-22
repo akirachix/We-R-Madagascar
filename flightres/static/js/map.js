@@ -83,9 +83,12 @@ $(document).ready(function () {
                                     <div class="content-list">
                                         <p><b>Pilot Name: </b><span>
                                             `+ data.pilot_id__name + `
-                                            </span>
+                                            </span></p>
                                             <p><b>Pilot Phone Number:
                                             </b><span>`+ data.pilot_id__phone_number + `</span>
+                                            </p>
+                                            <p><b>Pilot Company:
+                                            </b><span>`+ data.pilot_id__company + `</span>
                                             </p>
                                     </div>
                                 </li>
@@ -94,7 +97,7 @@ $(document).ready(function () {
                                     <div class="row g-2">
                                         <div class="col-md-4">
                                             <div class="file-upload">
-                                                <a href="`+ data.pilot_cv_url + `" class="file-link">
+                                                <a href="`+ data.pilot_id__cv_url + `" class="file-link">
                                                     <div class="file-icon">
                                                         <i class="material-icons">description</i>
                                                     </div>

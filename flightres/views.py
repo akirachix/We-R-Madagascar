@@ -75,26 +75,29 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
         com = super(FlightPermissionList, self).get_context_data(
             *args, **kwargs)
         raw_data = FlightPermission.objects.values('uav_uid', 'uav_uuid', 'uav_uuid__operator__company_name',
-                                               'uav_uuid__operator__phone_number',
-                                               'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date',
-                                               'flight_time', 'flight_purpose',
-                                               'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name',
-                                               'pilot_id__phone_number',
-                                               'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
-                                               'location', 'status'
-                                               )
+                                                   'uav_uuid__operator__phone_number',
+                                                   'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date',
+                                                   'flight_time', 'flight_purpose',
+                                                   'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name',
+                                                   'pilot_id__phone_number', 'pilot_id__company',
+                                                   'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
+                                                   'location', 'status'
+                                                   ).order_by('-uav_uid')
         json_data = json.dumps(list(raw_data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
         object_data = []
         type = self.kwargs['type']
         if type == 'special':
             com['title'] = 'SPECIAL FLIGHT'
-            flight_objects = FlightPermission.objects.filter(is_special_permission=True).order_by('-flight_start_date')
+            flight_objects = FlightPermission.objects.filter(
+                is_special_permission=True).order_by('-uav_uid')
         elif type == 'general':
             com['title'] = 'FLIGHT'
-            flight_objects = FlightPermission.objects.filter(is_special_permission=False).order_by('-flight_start_date')
+            flight_objects = FlightPermission.objects.filter(
+                is_special_permission=False).order_by('-uav_uid')
         else:
-            flight_objects = None
+            flight_objects = FlightPermission.objects.filter(
+                is_special_permission=False).order_by('-uav_uid')
         for flight_object in flight_objects:
             due = flight_object.flight_start_date - datetime.date.today()
             due_in = due.days
@@ -117,6 +120,7 @@ def approvePerm(request, pk, action):
         return redirect('/np/dashboard/permission/special')
     else:
         return redirect('/np/dashboard/permission/general')
+
 
 @login_required
 def denyPerm(request, pk):
@@ -172,12 +176,12 @@ def submitReply(request, pk):
 class ComplainListView(LoginRequiredMixin, ListView):
     template_name = 'flightres/complaint_management.html'
     model = Report
-    ordering = 'uav_uid'
+    ordering = '-uav_uid'
 
     def get_context_data(self, *args, **kwargs):
         com = super(ComplainListView, self).get_context_data(
             *args, **kwargs)
-        complains = Report.objects.all()
+        complains = Report.objects.all().order_by('-uav_uid')
         data = []
         for complain in complains:
             nearby = None
@@ -201,9 +205,9 @@ class ComplainListView(LoginRequiredMixin, ListView):
         com['data'] = data
         flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid', 'uav_uuid__operator__phone_number',
                                                          'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
-                                                         'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number',
+                                                         'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number', 'pilot_id__company',
                                                          'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
-                                                         )
+                                                         ).order_by('-uav_uid')
         image_urls = Report.objects.values('uav_uid', 'image_url')
         image_json_data = json.dumps(list(image_urls), cls=DjangoJSONEncoder)
         json_data = json.dumps(list(flight_objects), cls=DjangoJSONEncoder)
@@ -248,16 +252,18 @@ class GuidelinesPageView(TemplateView):
 
 class OperdatorDatabaseView(LoginRequiredMixin, ListView):
     template_name = 'flightres/operators_db.html'
-    queryset = Aircraft.objects.all()
+    queryset = Aircraft.objects.all().order_by('-unid')
+
 
 def view_404(request, exception):
-	'''
-	This if for custom 404 template
-	'''
-	return render(request, 'flightres/404.html')
+    '''
+    This if for custom 404 template
+    '''
+    return render(request, 'flightres/404.html')
+
 
 def view_500(request):
-	'''
-	This if for custom 500 template
-	'''
-	return render(request, 'flightres/404.html')
+    '''
+    This if for custom 500 template
+    '''
+    return render(request, 'flightres/404.html')
