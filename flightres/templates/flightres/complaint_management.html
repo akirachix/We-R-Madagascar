@@ -24,6 +24,9 @@
             <h1>CIVILIAN COMPLAINTS / MANAGE CIVILIAN COMPLAINTS</h1>
         </div>
         <div class="card-body">
+            <!-- {% for i, j, k in data %}
+            <p>{{i.uav_uid }}</p>
+            {% endfor %} -->
             <table id="admin-datatable" class="admin-datatable">
                 <thead>
                     <tr>   
@@ -41,7 +44,7 @@
                 <tbody>
                     {% for i, j, k in data %}
                     <tr>
-                        <td id="id_uav_uid">{{ i.uav_uid }}</td>
+                        <td>{{ i.uav_uid }}</td>
                         <td>
                             <time>{{ i.created_at }}</time>
                         </td>
@@ -373,6 +376,9 @@
                                                     <p><b>Pilot Phone Number:
                                                     </b><span>` + data.pilot_id__phone_number + `</span>
                                                     </p>
+                                                    <p><b>Pilot Company:
+                                                    </b><span>`+ data.pilot_id__company + `</span>
+                                                    </p>
                                             </div>
                                         </li>
                                         <li>
@@ -380,7 +386,7 @@
                                             <div class="row g-2">
                                                 <div class="col-md-4">
                                                     <div class="file-upload">
-                                                        <a href="` + data.pilot_cv_url + `" class="file-link">
+                                                        <a href="` + data.pilot_id__cv_url + `" class="file-link">
                                                             <div class="file-icon">
                                                                 <i class="material-icons">description</i>
                                                             </div>
