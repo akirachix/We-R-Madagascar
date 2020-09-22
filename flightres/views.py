@@ -58,7 +58,7 @@ def dashboardView(request):
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission
-    ordering = 'created_date'
+    ordering = 'uav_uid'
     template_name = 'flightres/flightpermission_list.html'
 
     # def get_queryset(self, *args, **kwargs) :
@@ -172,6 +172,7 @@ def submitReply(request, pk):
 class ComplainListView(LoginRequiredMixin, ListView):
     template_name = 'flightres/complaint_management.html'
     model = Report
+    ordering = 'uav_uid'
 
     def get_context_data(self, *args, **kwargs):
         com = super(ComplainListView, self).get_context_data(
