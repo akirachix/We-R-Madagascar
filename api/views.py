@@ -131,12 +131,14 @@ class SheetUploadView(ModelViewSet):
 
     def create(self, request):
         serializer = SheetRegisterSerializer(data=request.data)
+        print(request.data)
         if serializer.is_valid():
             serializer.save()
             uri = "http://127.0.0.1:8000/np/api/v1/flightres/"
             # response_data = uri + str(serializer.data['uav_uid'])
 
             sheet = serializer.data.get('upload_sheet')
+            print(sheet)
             # name = serializer.data.get('name')
             # user = serializer.data.get('created_by')
 

@@ -47,7 +47,7 @@
                         </td>
                         <td>{{ i.category }}</td>
                         <td><b>{{ i.message }}</b></td>
-                        <td>{{ i.complainer_name }}</td>
+                        <td>{{ i.complainer_name|default:"--" }}</td>
                         <td>{{ i.location }}</td>
                         <td>
                             {% if i.status == "Pending" %}
@@ -86,7 +86,7 @@
                                                                     <h4>Sender info</h4>
                                                                     <div class="content-list">
                                                                         <p>
-                                                                            <b>Name:</b><span>{{ i.complainer_name }}</span>
+                                                                            <b>Name:</b><span>{{ i.complainer_name|default:"--" }}</span>
                                                                         </p>
                                                                         <p>
                                                                             <b>Location:</b><span>{{ i.location }}</span>
@@ -186,13 +186,13 @@
                                                                 {% csrf_token %}
                                                                 <textarea class="form-control" id="note" type="text"
                                                                     placeholder="Write a internal note"
-                                                                    name="note">{{ i.note }}</textarea>
+                                                                    name="note">{{ i.note|default_if_none:"" }}</textarea>
                                                                 <br />
 
                                                                 <div class="textarea-message">
                                                                     <textarea class="form-control" id="reply"
                                                                         placeholder="Write a reply back" type="text"
-                                                                        name="reply">{{ i.reply }}</textarea>
+                                                                        name="reply">{{ i.reply|default_if_none:"" }}</textarea>
                                                                 </div>
                                                                 <br>
                                                                 <div class="buttons is-end">

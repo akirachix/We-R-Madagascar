@@ -27,7 +27,7 @@ from six.moves.urllib import request
 SECRET_KEY = '0o=aajzmkgwtb=in$6mn))k)krkf^_4o^@**xdj@z@2v@ro_e+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -166,7 +166,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
