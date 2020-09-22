@@ -271,6 +271,8 @@ function sendReason(flight_id) {
         let largePopup = document.getElementById('open-modal');
         smallPopup.classList.remove('open');
         largePopup.classList.remove('open');
+        location.reload();
+        return false;
         // console.log("Success", res);
         // console.log(flight_id, data);
     });

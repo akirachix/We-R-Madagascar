@@ -132,9 +132,9 @@ def denyPerm(request, pk):
         selected_perm.rejection_reason = data['value']
         selected_perm.save()
         if selected_perm.is_special_permission == True:
-            return redirect('/np/dashboard/permission/special')
+            return redirect('/np/dashboard')
         else:
-            return redirect('/np/dashboard/permission/general')
+            return redirect('/np/dashboard')
 
 
 def flightReqResponseView(request, pk):
