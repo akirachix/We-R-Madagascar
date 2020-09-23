@@ -9,7 +9,7 @@ class Twilio:
     client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
     def send_report_reply(self,receiver,reply,category,complain):
-        message = """'{}'\n\nA reply for the report,You had reported on the category '{}' stating '{}'
+        message = """'{}'\nA reply for the report, you had reported on the category '{}' stating '{}'
         """.format(reply,category,complain)
 
         self.send_message(receiver,message)
