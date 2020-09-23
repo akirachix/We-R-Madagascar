@@ -60,6 +60,7 @@ class FlightRegistryView(ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def create(self, request, **kwargs):
+        print(request.data)
         serializer = FlightRegistrySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
