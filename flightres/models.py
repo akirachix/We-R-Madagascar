@@ -89,7 +89,7 @@ class Report(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         if self.old_reply != self.reply:
-            self.twilio.send_message(self.complainer_number, self.reply)
+            self.twilio.send_report_reply(self.complainer_number, self.reply,self.category,self.message)
 
         geo_reponse = reverseGeocode(self.location)
         if geo_reponse == "Inavalid Address":
