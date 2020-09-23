@@ -67,7 +67,7 @@ class FlightRegistryView(ModelViewSet):
             uri = "http://127.0.0.1:8000/np/api/v1/flightres/"
             response_data = uri + str(serializer.data['uav_uid'])
             data = {'url': 'https://droneregistry.naxa.com.np/np/dashboard/request_response/' + str(
-                serializer.data['uav_uid'])}
+                serializer.data['uav_uid'],'id':str(serializer.data['uav_uid']))}
             return JsonResponse(data, status=status.HTTP_200_OK)
 
         return Response({'Message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
