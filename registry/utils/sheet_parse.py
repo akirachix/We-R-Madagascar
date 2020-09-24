@@ -20,8 +20,10 @@ def get_clean_data_frame(file_obj, sheet_name):
 
 def parse_items_content(file_obj, institute, user_id):
     df = get_clean_data_frame(file_obj, 'sheet')
+    print(df)
     clean_df = df[df["UIN"].notnull()].iloc[:, 0:80]
     na_to_zero_df = clean_df.fillna(0)
+    print(na_to_zero_df)
     data = na_to_zero_df.values.tolist()
 
     # Manufacturer.objects.all().delete()
