@@ -140,8 +140,11 @@
                                         enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form-group">
-                                            <label for="name">Name:</label>
-                                            <input class="form-control" type="text" id="name" name="name">
+                                            <label for="name">Category:</label>
+                                            <select class="form-control" name="name" id="name" >
+                                                <option value="b">B</option>
+                                            </select>
+
                                         </div>
                                         <div class="form-group">
                                             <label for="fileUpload">Upload your file</label>

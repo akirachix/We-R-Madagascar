@@ -77,7 +77,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="graph-item">
-                                        <div id="line-chart"></div>
+                                        <div id="line-chart1"></div>
+                                        <div id="line-chart2"></div>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +95,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="graph-item">
-                                        <div id="pie-chart"></div>
+                                        <div id="pie-chart1"></div>
+                                        <div id="pie-chart2"></div>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +114,7 @@
         series: [{% for i in pie_data %}{{ i.0}}, {{i.1}}{% if not forloop.last %}, {% endif %}{% endfor %}],
         colors: ['#FCBA15', '#3346D1'],
         chart: {
-            width: '100%',
+            height: '280',
             type: 'donut',
         },
         labels: ['Solved', 'Pending'],
@@ -129,7 +131,7 @@
          }] */
     };
 
-    var chart = new ApexCharts(document.querySelector("#pie-chart"), options);
+    var chart = new ApexCharts(document.querySelector("#pie-chart1"), options);
     chart.render();
 
     // line-chart
@@ -181,7 +183,7 @@
         }
     };
 
-    var chart = new ApexCharts(document.querySelector("#line-chart"), options);
+    var chart = new ApexCharts(document.querySelector("#line-chart1"), options);
     chart.render();
 
 </script>

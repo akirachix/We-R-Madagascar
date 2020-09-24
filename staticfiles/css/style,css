@@ -4955,7 +4955,7 @@ footer.site-footer {
 
 .popup,
 .window-popup {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
   top: 0;
   left: 0;

@@ -47,6 +47,7 @@ function openModal() {
 }
 
 function closeModal() {
+  document.getElementById("openFSImage").innerHTML = '';
   //   document.getElementById("myModal").style.display = "none";
   document.getElementById("myModalVideo").classList.remove("open");
 }

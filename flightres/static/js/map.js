@@ -158,7 +158,7 @@ $(document).ready(function () {
     }
 
     function plotMap(data) {
-        var map = L.map('map').setView([data.latitude, data.longitude], 8);
+        var map = L.map('map').setView([data.latitude, data.longitude], 15);
         // var map = L.map('map', {
         //     // layers: [base],
         //     center: new L.LatLng(lat, lon),
