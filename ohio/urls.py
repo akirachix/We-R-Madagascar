@@ -54,8 +54,8 @@ from rest_framework_simplejwt import views as jwt_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homeView, name='home'),
-    path('login/', LoginView.as_view()),
-    path('logout/', LogoutView.as_view()),
+    path('accounts/login/', LoginView.as_view()),
+    path('accounts/logout/', LogoutView.as_view(), name='logout'),
     path('api/v1/', registryviews.APIView.as_view()),
     path('api/v1/operators', registryviews.OperatorList.as_view()),
     path('api/v1/operators/<uuid:pk>', registryviews.OperatorDetail.as_view()),
@@ -73,14 +73,13 @@ urlpatterns = [
     path('api/v1/user/', include('authentication.urls')),
     path('np/api/v1/', include('api.urls')),
     path('np/dashboard/', include(('flightres.urls', 'flightres'), namespace='dashboard')),
-    url(r'^assets/(?P<path>.*)$', serve,{'document_root':settings.STATIC_ROOT}),
+    url(r'^assets/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     # url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     # url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^api-token-auth/', obtain_auth_token),
 ]
 
 if settings.DEBUG:
-	urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns = format_suffix_patterns(urlpatterns)

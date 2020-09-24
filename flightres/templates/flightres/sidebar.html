@@ -78,6 +78,18 @@
             {#                    </li>#}
             {#                </ul>#}
             {#            </li>#}
+            <li class="is-submenu">
+                <a href="javascript:void(0);" class="menu-title">
+                    <i class="material-icons">equalizer</i>
+                    <span>User</span>
+                </a>
+                <ul class="submenu">
+                    <li>
+                        <a href="{% url 'logout' %}?next=/"> Logout</a>
+                        <a href="{% url 'dashboard:changepassword' %}">Change Password</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </aside>

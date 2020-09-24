@@ -2,6 +2,7 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import auth,User
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,6 +14,9 @@ import json
 import requests
 from django.contrib.auth import get_user
 import datetime
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 
 from .models import FlightPermission, Report, LocalAuthorities
 from registry.models import Aircraft, Operator
@@ -20,6 +24,23 @@ from registry.models import Aircraft, Operator
 
 def homeView(request):
     return render(request, 'flightres/home.html')
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('/accounts/login')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'flightres/changepassword.html', {
+        'form': form
+    })
 
 
 @login_required
@@ -53,6 +74,7 @@ def dashboardView(request):
         barchart_data.append([total_requests, approved_requests])
     return render(request, 'flightres/dashboard.html',
                   {'top_data': top_row_data, 'bar_data': barchart_data, 'pie_data': pie_data})
+
 
 
 class FlightPermissionList(LoginRequiredMixin, ListView):
