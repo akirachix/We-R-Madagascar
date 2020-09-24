@@ -99,7 +99,7 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
         raw_data = FlightPermission.objects.values('uav_uid', 'uav_uuid', 'uav_uuid__operator__company_name',
                                                    'uav_uuid__operator__phone_number',
                                                    'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date',
-                                                   'flight_time', 'flight_purpose',
+                                                   'flight_time', 'flight_purpose', 'rejection_reason',
                                                    'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name',
                                                    'pilot_id__phone_number', 'pilot_id__company',
                                                    'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
@@ -226,7 +226,7 @@ class ComplainListView(LoginRequiredMixin, ListView):
             data.append([complain, nearby, nearby_auth])
         com['data'] = data
         flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid', 'uav_uuid__operator__phone_number',
-                                                         'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
+                                                         'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose', 'rejection_reason',
                                                          'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number', 'pilot_id__company',
                                                          'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
                                                          ).order_by('-uav_uid')
