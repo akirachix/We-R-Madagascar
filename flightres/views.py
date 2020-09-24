@@ -2,6 +2,7 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import auth,User
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,6 +14,9 @@ import json
 import requests
 from django.contrib.auth import get_user
 import datetime
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 
 from .models import FlightPermission, Report, LocalAuthorities
 from registry.models import Aircraft, Operator
@@ -20,6 +24,23 @@ from registry.models import Aircraft, Operator
 
 def homeView(request):
     return render(request, 'flightres/home.html')
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('/accounts/login')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'flightres/changepassword.html', {
+        'form': form
+    })
 
 
 @login_required
@@ -55,6 +76,7 @@ def dashboardView(request):
                   {'top_data': top_row_data, 'bar_data': barchart_data, 'pie_data': pie_data})
 
 
+
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission
@@ -77,7 +99,7 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
         raw_data = FlightPermission.objects.values('uav_uid', 'uav_uuid', 'uav_uuid__operator__company_name',
                                                    'uav_uuid__operator__phone_number',
                                                    'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date',
-                                                   'flight_time', 'flight_purpose',
+                                                   'flight_time', 'flight_purpose', 'rejection_reason',
                                                    'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name',
                                                    'pilot_id__phone_number', 'pilot_id__company',
                                                    'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
@@ -204,7 +226,7 @@ class ComplainListView(LoginRequiredMixin, ListView):
             data.append([complain, nearby, nearby_auth])
         com['data'] = data
         flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid', 'uav_uuid__operator__phone_number',
-                                                         'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose',
+                                                         'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose', 'rejection_reason',
                                                          'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number', 'pilot_id__company',
                                                          'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
                                                          ).order_by('-uav_uid')

@@ -19,7 +19,7 @@ $(document).ready(function () {
                 if (object_id == flight_object[j].uav_uid) {
                     createModal(flight_object[j])
                     // pass id or sth from here to record the deny reason for a particular item
-                    openDenyModal(flight_object[j].uav_uid)
+                    openDenyModal(flight_object[j].uav_uid, flight_object[j].rejection_reason)
                 }
             }
         })
@@ -97,7 +97,7 @@ $(document).ready(function () {
                                     <div class="row g-2">
                                         <div class="col-md-4">
                                             <div class="file-upload">
-                                                <a href="`+ data.pilot_id__cv_url + `" class="file-link">
+                                                <a href="`+ data.pilot_id__cv_url + `" target="_blank" class="file-link">
                                                     <div class="file-icon">
                                                         <i class="material-icons">description</i>
                                                     </div>
@@ -111,7 +111,7 @@ $(document).ready(function () {
                                         </div>
                                         <div class="col-md-4">
                                             <div class="file-upload">
-                                                <a href="`+ data.flight_plan_url + `" class="file-link">
+                                                <a href="`+ data.flight_plan_url + `" target="_blank" class="file-link">
                                                     <div class="file-icon">
                                                         <i class="material-icons">description</i>
                                                     </div>
@@ -121,7 +121,7 @@ $(document).ready(function () {
                                         </div>
                                         <div class="col-md-4">
                                             <div class="file-upload">
-                                                <a href="`+ data.flight_insurance_url + `" class="file-link">
+                                                <a href="`+ data.flight_insurance_url + `" target="_blank" class="file-link">
                                                     <div class="file-icon">
                                                         <i class="material-icons">description</i>
                                                     </div>
@@ -158,7 +158,7 @@ $(document).ready(function () {
     }
 
     function plotMap(data) {
-        var map = L.map('map').setView([data.latitude, data.longitude], 8);
+        var map = L.map('map').setView([data.latitude, data.longitude], 15);
         // var map = L.map('map', {
         //     // layers: [base],
         //     center: new L.LatLng(lat, lon),
@@ -231,7 +231,7 @@ $(document).ready(function () {
 $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
 
 
-function openDenyModal(flight_id) {
+function openDenyModal(flight_id, rejection_reason) {
     let denyElement = document.getElementById('denyButton')
     denyElement.addEventListener('click', () => {
         // console.log("show pop");
@@ -241,7 +241,7 @@ function openDenyModal(flight_id) {
             <div class="popup-header">
                 <h5>Reason for Denial</h5>
             </div>
-            <input type="textarea" placeholder="Reason for denial" id="reasonInput"
+            <input value="${rejection_reason}" type="textarea" placeholder="Reason for rejection" id="reasonInput"
                 style="height: 54px; width: 375px; align-self: center;" for="reason"
                 ; name="reason" ; ></input>
             <br>

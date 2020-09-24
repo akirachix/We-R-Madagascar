@@ -15,8 +15,8 @@
 }
 
 .image-container .modal-content{
-    max-width: 600px;
-    width: 100%;
+    max-width: 1800px;
+    width: 1800px;
     position: relative;
     display: flex;
     align-items: center;

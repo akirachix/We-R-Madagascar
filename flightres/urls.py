@@ -1,5 +1,5 @@
 from django.urls import path
-
+from . import views
 # importing views from views..py
 from .views import FlightPermissionList, approvePerm, flightReqResponseView, ComplainListView, dashboardView, \
         updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView, uploadSheet, denyPerm
@@ -21,4 +21,5 @@ urlpatterns = [
     path('about', AboutPageView.as_view(), name='about'),
     path('guidelines', GuidelinesPageView.as_view(), name='guidelines'),
     path('operators', OperdatorDatabaseView.as_view(), name='operators'),
+    path('changepassword/', views.change_password, name='changepassword'),
 ]
