@@ -44,7 +44,11 @@
         <div class="container">
             <div class="wrap-container">
                 <ul>
-                    <li><a href="/login">Login</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="/np/dashboard">Dasboard</a></li>
+                    {% else %}
+                    <li><a href="/np/dashboard">Login</a></li>
+                    {% endif %}
                     <!-- <li class=form-group>
                         <select class="form-control" name="lang" id="lang">
                             <option value="Eng">Eng</option>
@@ -59,7 +63,7 @@
     <div class="container">
         <div class="wrap-container">
             <div class="header-in">
-                <a href="home.html" class="logo">
+                <a href="{% url 'home' %}" class="logo">
                     <img src="{% static 'img/logo-blue.png' %}"/>
                 </a>
                 <div class="menu-wrap">
