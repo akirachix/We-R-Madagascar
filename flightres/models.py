@@ -75,7 +75,7 @@ class Report(models.Model):
     note = models.TextField(blank=True, null=True, unique=False)
     image_url = models.URLField(max_length=200, null=True, blank=True)
     status = models.CharField(choices=STATUS_CHOICE, max_length=15, default='Pending')
-    reply = models.TextField(blank=True, null=True, unique=False,default=')
+    reply = models.TextField(blank=True, null=True, unique=False)
     category = models.TextField(default='', blank=True, null=True)
     is_escalated = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
