@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    restart: always
+    container_name: drone-reg-prod
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/usr/src/app/
+    command: sh entrypoint-prod.sh
+    networks:
+      - d-network
+networks:
+  d-network:
+    external: false
