@@ -44,3 +44,9 @@ python manage.py runserver
 
 ### 8. Launch browser 
 Launch browser to http://localhost:8000/api/v1/ to launch the API Explorer
+
+### Running with Docker compose
+If you have docker-compose installed you may clone this repository and run:
+```
+docker-compose up
+```
