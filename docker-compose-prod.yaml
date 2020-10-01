@@ -10,8 +10,6 @@ services:
     volumes:
       - ./:/usr/src/app/
     command: sh entrypoint-prod.sh
-    env_file:
-      - env.txt
     networks:
       - d-network
 networks:
