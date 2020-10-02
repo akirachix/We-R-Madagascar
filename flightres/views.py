@@ -21,7 +21,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 
 from .models import FlightPermission, Report, LocalAuthorities
-from registry.models import Aircraft, Operator
+from registry.models import Aircraft, Operator , Manufacturer,Address
 
 
 def homeView(request):
@@ -257,7 +257,7 @@ class ComplainListView(LoginRequiredMixin, ListView):
         # print(data)
         return com
 
-
+'''
 @login_required
 def uploadSheet(request):
     if request.method == 'POST' and request.FILES['sheet']:
@@ -281,6 +281,7 @@ def uploadSheet(request):
         res_json = response.json()
         # print(response, res_json['message'])
     return redirect('/np/dashboard/operators')
+    '''
 
 @login_required()
 def bulkupload(request):
@@ -298,9 +299,17 @@ def bulkupload(request):
         uploaded_file = request.FILES['sheet']
 
         if uploaded_file.name.endswith('.csv'):
-            df = pd.read_csv(uploaded_file).fillna('')
+            try:
+                df = pd.read_csv(uploaded_file).fillna('')
+            except UnboundLocalError as error:
+                messages.WARNING(request,'Invalid File Uploaded')
+                return redirect('/np/dashboard/operators', messages)
         elif uploaded_file.name.endswith(('.xls', 'xlsx')):
-            df = pd.read_excel(uploaded_file).fillna('')
+            try:
+                df = pd.read_excel(uploaded_file).fillna('')
+            except UnboundLocalError as error:
+                messages.WARNING(request,'Invalid File Uploaded')
+                return redirect('/np/dashboard/operators', messages)
         else:
             messages.error(request, "Please upload a .csv or .xls file")
 
@@ -326,7 +335,7 @@ def bulkupload(request):
                 popular_name = None if df['UAV Manufacturer'][row] == '' else df['UAV Manufacturer'][row]
                 registration_mark = None if df['Serial No.'][row] == '' else df['Serial No.'][row]
                 begin_date = 0 if df['Manufacture Date'][row] == '' else df['Manufacture Date'][row]
-                # category = None if df['Drone Type'][row] == '' else df['Drone Type'][row]
+                #category = None if df['Drone Type'][row] == '' else df['Drone Type'][row]
                 mass = None if df['Weight'][row] == '' else df['Weight'][row]
                 operator = Operator.objects.update_or_create(
                     address=address,
@@ -345,7 +354,7 @@ def bulkupload(request):
                     color=color,
                     unid=unid,
                     popular_name=popular_name,
-                    # category=category,
+                    #category=category,
                     mass=mass,
                     registration_mark=registration_mark,
                     begin_date=begin_date

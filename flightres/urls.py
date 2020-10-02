@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 # importing views from views..py
 from .views import FlightPermissionList, approvePerm, flightReqResponseView, ComplainListView, dashboardView, \
-    updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView, uploadSheet, denyPerm, \
+    updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView,  denyPerm, \
     assignPerm,bulkupload
 
 urlpatterns = [
