@@ -46,8 +46,7 @@
                 </thead>
                 <tbody>
                     {% for object in object_list %}
-                    <tr modal-link="opt{{object.id}}" class="modal-link" 
-                    data-toggle="modal" data-target="#opt{{object.id}}">
+                    <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ object.certification_number }}</td>
                         <td>{{ object.unid }}</td>
@@ -70,8 +69,6 @@
                         <td>{{ object.remarks }}</td>
                         <td><a modal-link="opt{{object.id}}" class="modal-link"><i class="material-icons"
                                     data-toggle="modal" data-target="#opt{{object.id}}">chevron_right</i></a>
-                                    </td>
-                                    </tr>
                             <div class="popup" tabindex="-1" role="dialog" id="opt{{object.id}}">
                                 <div class="popup-container lg-popup map-popup">
                                     <div class="popup-body">
@@ -124,6 +121,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>

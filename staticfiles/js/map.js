@@ -6,17 +6,14 @@ $(document).ready(function () {
     // var lat = document.getElementById('map').getAttribute('value').split(',')[0]
     // var long = document.getElementById('map').getAttribute('value').split(',')[1
 
-    var expandBtn = document.getElementsByClassName('expandData');
+    var expandBtn = document.getElementsByClassName('expandData')
 
     flight_objects = flight_objects.replace(/&quot;/g, '"').replace(/uav_uuid__operator__company_name/g, 'company_name');
     flight_object = JSON.parse(flight_objects)
 
     for (var i = 0; i < expandBtn.length; i++) {
         expandBtn[i].addEventListener('click', function (e) {
-            // console.log(e.target.closest('.highlight'),'e');
-            const closestPopupElement = e.target.closest('.highlight');
-            e.stopPropagation();
-            object_id = closestPopupElement.id.split('_')[1]
+            object_id = e.target.id.split('_')[1]
             for (j = 0; j < flight_object.length; j++) {
                 if (object_id == flight_object[j].uav_uid) {
                     createModal(flight_object[j])
@@ -165,7 +162,7 @@ $(document).ready(function () {
     }
 
     function plotMap(data) {
-        var map = L.map('map').setView([data.latitude, data.longitude], 15);
+        var map = L.map('map').setView([data.latitude, data.longitude], 8);
         // var map = L.map('map', {
         //     // layers: [base],
         //     center: new L.LatLng(lat, lon),
