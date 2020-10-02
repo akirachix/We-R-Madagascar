@@ -121,6 +121,8 @@
             //     window.lon = '{{ object.longitude|safe }}';
             // {% endfor %}
         var flight_objects = '{{ json_data }}'
+        var current_user = '{{ current_user }}'
+        var current_email = '{{current_user_email}}'
     </script>
 
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>

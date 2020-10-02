@@ -52,9 +52,11 @@ def dashboardView(request):
     complaint_num = Report.objects.all().count()
     solved_complaints = Report.objects.filter(status='Resolved').count()
     pending_complaints = Report.objects.filter(status='Pending').count()
-    top_row_data.append([drone_op_num, drone_num, complaint_num,
-                         solved_complaints, pending_complaints])
-
+    approved_requests_num = FlightPermission.objects.filter(status="Approved").count()
+    pending_requests_num = FlightPermission.objects.filter(status="Pending").count()
+    rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
+    top_row_data.append([drone_op_num, drone_num, approved_requests_num,
+                         pending_requests_num, rejected_requests_num])
     # data for pie chart
     pie_data = []
     pie_data.append([solved_complaints, pending_complaints])
@@ -103,17 +105,19 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
                                                    'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name',
                                                    'pilot_id__phone_number', 'pilot_id__company',
                                                    'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
-                                                   'location', 'status'
+                                                   'location', 'status','assigned_to__username','assigned_to__email'
                                                    ).order_by('-uav_uid')
         json_data = json.dumps(list(raw_data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
+        com['current_user'] = self.request.user.username
+        com['current_user_email'] = self.request.user.email
         object_data = []
-        type = self.kwargs['type']
-        if type == 'special':
+        perm_type = self.kwargs['type']
+        if perm_type == 'special':
             com['title'] = 'SPECIAL FLIGHT'
             flight_objects = FlightPermission.objects.filter(
                 is_special_permission=True).order_by('-uav_uid')
-        elif type == 'general':
+        elif perm_type == 'general':
             com['title'] = 'FLIGHT'
             flight_objects = FlightPermission.objects.filter(
                 is_special_permission=False).order_by('-uav_uid')
@@ -154,9 +158,22 @@ def denyPerm(request, pk):
         selected_perm.rejection_reason = data['value']
         selected_perm.save()
         if selected_perm.is_special_permission == True:
-            return redirect('/np/dashboard')
+            return redirect('/np/dashboard/permission/special')
         else:
-            return redirect('/np/dashboard')
+            return redirect('/np/dashboard/permission/general')
+
+@login_required
+def assignPerm(request, pk, action):
+    selected_perm = get_object_or_404(FlightPermission, uav_uid=pk)
+    if action == 'assign':
+        selected_perm.assigned_to = request.user
+    elif action == 'unassign':
+        selected_perm.assigned_to = None
+    selected_perm.save()
+    if selected_perm.is_special_permission == True:
+        return redirect('/np/dashboard/permission/special')
+    else:
+        return redirect('/np/dashboard/permission/general')
 
 
 def flightReqResponseView(request, pk):
@@ -210,10 +227,10 @@ class ComplainListView(LoginRequiredMixin, ListView):
             nearby_auth = None
             this_lat = complain.latitude
             this_lon = complain.longitude
-            lower_lat = this_lat - decimal.Decimal(0.090)
-            upper_lat = this_lat + decimal.Decimal(0.090)
-            lower_lon = this_lon - decimal.Decimal(0.090)
-            upper_lon = this_lon + decimal.Decimal(0.090)
+            lower_lat = this_lat - decimal.Decimal(0.180)
+            upper_lat = this_lat + decimal.Decimal(0.180)
+            lower_lon = this_lon - decimal.Decimal(0.180)
+            upper_lon = this_lon + decimal.Decimal(0.180)
             # print(lower_lat, upper_lat, lower_lon, upper_lon)
             nearby = FlightPermission.objects.filter(latitude__lte=upper_lat,
                                                      latitude__gte=lower_lat,
@@ -228,7 +245,7 @@ class ComplainListView(LoginRequiredMixin, ListView):
         flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid', 'uav_uuid__operator__phone_number',
                                                          'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose', 'rejection_reason',
                                                          'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number', 'pilot_id__company',
-                                                         'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status'
+                                                         'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status','assigned_to'
                                                          ).order_by('-uav_uid')
         image_urls = Report.objects.values('uav_uid', 'image_url')
         image_json_data = json.dumps(list(image_urls), cls=DjangoJSONEncoder)
@@ -260,7 +277,7 @@ def uploadSheet(request):
         response = requests.post(
             'http://localhost:8000/np/api/v1/sheet-upload/', files=files)
         res_json = response.json()
-        print(response, res_json['message'])
+        # print(response, res_json['message'])
     return redirect('/np/dashboard/operators')
 
 

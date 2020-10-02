@@ -62,3 +62,4 @@ webencodings==0.5.1
 whitenoise==5.1.0
 xlrd==1.2.0
 python-decouple==3.1
+uWSGI==2.0.19.1

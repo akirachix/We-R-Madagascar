@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib import admin
 import uuid
+from django.contrib.auth.models import User
 
 from api.twilio import Twilio
 
 from registry.models import Aircraft
 from flightres.utils import reverseGeocode
+from ohio import settings
 
 
 class FlightPermission(models.Model):
@@ -24,14 +26,21 @@ class FlightPermission(models.Model):
     flight_time = models.CharField(max_length=300, null=True, blank=True)
     flight_purpose = models.CharField(max_length=200, null=True, blank=True)
     flight_plan_url = models.URLField(max_length=200, null=True, blank=True)
-    flight_insurance_url = models.URLField(max_length=200, null=True, blank=True)
+    flight_insurance_url = models.URLField(
+        max_length=200, null=True, blank=True)
     company_name = models.CharField(max_length=200, null=True, blank=True)
-    pilot_id = models.ForeignKey("flightres.Pilots", on_delete=models.CASCADE, null=True, blank=True)
-    latitude = models.DecimalField(max_digits=20, decimal_places=10, null=True, blank=True)
-    longitude = models.DecimalField(max_digits=20, decimal_places=10, null=True, blank=True)
-    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='Pending')
+    pilot_id = models.ForeignKey(
+        "flightres.Pilots", on_delete=models.CASCADE, null=True, blank=True)
+    latitude = models.DecimalField(
+        max_digits=20, decimal_places=10, null=True, blank=True)
+    longitude = models.DecimalField(
+        max_digits=20, decimal_places=10, null=True, blank=True)
+    status = models.CharField(
+        max_length=15, choices=STATUS_CHOICES, default='Pending')
     rejection_reason = models.TextField(null=True, blank=True)
     location = models.URLField(max_length=200, null=True, blank=True)
+    assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True,
+                                    db_index=True, on_delete=models.SET_NULL, related_name="assigned_to")
     created_date = models.DateTimeField(auto_now_add=True)
     is_special_permission = models.BooleanField(default=False)
 
@@ -50,7 +59,8 @@ class FlightPermission(models.Model):
         if self.old_status != self.status:
             uri = "np/dashboard/request_response/"
             response_data = uri + str(self.uav_uid)
-            message = "Your flight plan has been approved. You can find more details at {}".format(response_data)
+            message = "Your flight plan has been approved. You can find more details at {}".format(
+                response_data)
             # self.twilio.send_message(self.pilot_phone_number, message)
 
         super().save(force_insert, force_update, using)
@@ -68,13 +78,16 @@ class Report(models.Model):
     uav_uid = models.AutoField(primary_key=True)
     message = models.TextField(null=False, default='')
     location = models.CharField(max_length=100)
-    latitude = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
-    longitude = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True)
+    latitude = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True)
+    longitude = models.DecimalField(
+        max_digits=20, decimal_places=10, blank=True, null=True)
     complainer_name = models.CharField(max_length=50, null=True, blank=True)
     complainer_number = models.CharField(max_length=30, blank=True, null=True)
     note = models.TextField(blank=True, null=True, unique=False)
     image_url = models.URLField(max_length=200, null=True, blank=True)
-    status = models.CharField(choices=STATUS_CHOICE, max_length=15, default='Pending')
+    status = models.CharField(choices=STATUS_CHOICE,
+                              max_length=15, default='Pending')
     reply = models.TextField(blank=True, null=True, unique=False)
     category = models.TextField(default='', blank=True, null=True)
     is_escalated = models.BooleanField(default=False)
@@ -89,7 +102,8 @@ class Report(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         if self.old_reply != self.reply:
-            self.twilio.send_report_reply(self.complainer_number, self.reply,self.category,self.message)
+            self.twilio.send_report_reply(
+                self.complainer_number, self.reply, self.category, self.message)
 
         geo_reponse = reverseGeocode(self.location)
         if geo_reponse == "Inavalid Address":
@@ -128,9 +142,12 @@ class LocalAuthorities(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
-    latitude = models.DecimalField(max_digits=20, decimal_places=10, null=True, blank=True)
-    longitude = models.DecimalField(max_digits=20, decimal_places=10, null=True, blank=True)
-    authority_type = models.CharField(max_length=50, choices=AUTHORITY_TYPES, null=True, blank=True)
+    latitude = models.DecimalField(
+        max_digits=20, decimal_places=10, null=True, blank=True)
+    longitude = models.DecimalField(
+        max_digits=20, decimal_places=10, null=True, blank=True)
+    authority_type = models.CharField(
+        max_length=50, choices=AUTHORITY_TYPES, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
