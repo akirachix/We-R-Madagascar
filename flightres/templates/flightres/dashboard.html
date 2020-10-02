@@ -11,7 +11,7 @@
 <main class="admin-main">
     <div class="main-card">
         <div class="dashboard-title">
-            <h1>Welcome to <span>CAAN Nepal Drone Registry</span></h1>
+            <h1>Welcome to <span>Nepal Drone Portal</span></h1>
         </div>
         <div class="drone-info">
             <div class="row row-wrap g-xl-3 g-lg-2 gy-md-2 gy-sm-2 gy-2">
@@ -31,7 +31,7 @@
                             <h4>{{ top_data.0.1 }}</h4>
                             <span class="span-light"><i class="material-icons">local_airport</i></span>
                         </div>
-                        <span class="count-label">Registered Drone</span>
+                        <span class="count-label">Registered Drones</span>
                     </div>
                 </div>
 
@@ -71,14 +71,14 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 column">
                     <div class="main-card">
                         <div class="card-header">
-                            <h1>Flight Requets <a href="#/"><i class="material-icons">more_vert</i></a></h1>
+                            <h1>Monthly Flight Requests <a href="#/"><i class="material-icons">more_vert</i></a></h1>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="graph-item">
                                         <div id="line-chart1"></div>
-                                        <div id="line-chart2"></div>
+<!--                                        <div id="line-chart2"></div>-->
                                     </div>
                                 </div>
                             </div>
@@ -89,14 +89,14 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 column">
                     <div class="main-card">
                         <div class="card-header">
-                            <h1>Complaints details<a href="#/"><i class="material-icons">more_vert</i></a></h1>
+                            <h1>All Complaints Status<a href="#/"><i class="material-icons">more_vert</i></a></h1>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="graph-item">
                                         <div id="pie-chart1"></div>
-                                        <div id="pie-chart2"></div>
+<!--                                        <div id="pie-chart2"></div>-->
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
     //pie-chart
     var options = {
         series: [{% for i in pie_data %}{{ i.0}}, {{i.1}}{% if not forloop.last %}, {% endif %}{% endfor %}],
-        colors: ['#FCBA15', '#3346D1'],
+        colors: ['#24DB15', '#FCBA15'],
         chart: {
             height: '280',
             type: 'donut',

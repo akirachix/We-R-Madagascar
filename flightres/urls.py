@@ -2,8 +2,8 @@ from django.urls import path
 from . import views
 # importing views from views..py
 from .views import FlightPermissionList, approvePerm, flightReqResponseView, ComplainListView, dashboardView, \
-    updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView, uploadSheet, denyPerm, \
-    assignPerm
+    updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView,  denyPerm, \
+    assignPerm,bulkupload
 
 urlpatterns = [
     path('', dashboardView, name='dashboard'),
@@ -14,7 +14,7 @@ urlpatterns = [
          denyPerm, name='deny-perm'),
     path('assign_perm/<int:pk>/<str:action>',
          assignPerm, name='assign-perm'),
-    path('upload_sheet', uploadSheet, name="upload-sheet"),
+    #path('upload_sheet', uploadSheet, name="upload-sheet"),
     path('request_response/<int:pk>',
          flightReqResponseView, name='request-response'),
     path('complain', ComplainListView.as_view(), name='complain-list'),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('guidelines', GuidelinesPageView.as_view(), name='guidelines'),
     path('operators', OperdatorDatabaseView.as_view(), name='operators'),
     path('changepassword/', views.change_password, name='changepassword'),
+    path('upload_sheet-new', bulkupload, name="upload-sheet-new")
 ]

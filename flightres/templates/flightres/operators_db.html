@@ -12,6 +12,11 @@
         <div class="card-header">
             <h1>Operators Database</h1>
         </div>
+        {% for messages in messages %}
+        <div class="alert alert-danger">
+            <strong>{{ messages }}</strong>
+        </div>
+        {% endfor %}
         <div class="card-body">
             <button class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal" class="modal-link"
                     data-toggle="modal" data-target="#upload-sheet-modal">Upload
@@ -136,9 +141,28 @@
                         <div class="row gx-md-3 gx-lg-3">
                             <div class="col-xl-12 col-sm-12">
                                 <div class="drone-content col-left col-operators">
-                                    <form action="{% url 'dashboard:upload-sheet' %}" method="POST"
+                                    <form action="{% url 'dashboard:upload-sheet-new' %}" method="POST"
                                         enctype="multipart/form-data">
-                                        {% csrf_token %}
+                                                {% csrf_token %}
+                                                {% if form.errors %}
+                                                {% for field in form %}
+                                                {% for error in field.errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                                                </div>
+                                                {% endfor %}
+                                                {% for messages in messages %}
+                                                <div class="success">
+                                                    <strong>{{ messages }}</strong>
+                                                </div>
+                                                {% endfor %}
+                                                {% endfor %}
+                                                {% for error in form.non_field_errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ error|escape }}</strong>
+                                                </div>
+                                                {% endfor %}
+                                                {% endif %}
                                         <div class="form-group">
                                             <label for="name">Category:</label>
                                             <select class="form-control" name="name" id="name" >
