@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 # importing views from views..py
 from .views import FlightPermissionList, approvePerm, flightReqResponseView, ComplainListView, dashboardView, \
-        updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView, uploadSheet, denyPerm
+    updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView, uploadSheet, denyPerm, \
+    assignPerm
 
 urlpatterns = [
     path('', dashboardView, name='dashboard'),
@@ -11,6 +12,8 @@ urlpatterns = [
          approvePerm, name='approve-perm'),
     path('deny_perm/<int:pk>',
          denyPerm, name='deny-perm'),
+    path('assign_perm/<int:pk>/<str:action>',
+         assignPerm, name='assign-perm'),
     path('upload_sheet', uploadSheet, name="upload-sheet"),
     path('request_response/<int:pk>',
          flightReqResponseView, name='request-response'),

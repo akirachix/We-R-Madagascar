@@ -11,7 +11,6 @@ $(document).ready(function () {
     flight_objects = flight_objects.replace(/&quot;/g, '"').replace(/uav_uuid__operator__company_name/g, 'company_name');
     flight_object = JSON.parse(flight_objects)
 
-
     for (var i = 0; i < expandBtn.length; i++) {
         expandBtn[i].addEventListener('click', function (e) {
             object_id = e.target.id.split('_')[1]
@@ -26,9 +25,15 @@ $(document).ready(function () {
     }
 
     function createModal(data) {
+        let assign_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/assign_perm/` + data.uav_uid + `/unassign" class="common-button is-bg" style="display: inline-block;margin-left:10px;">Unassign Self</a>`:``
+        let approve_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/approve" class="common-button is-bg">Approve</a>`:`<a class="common-button is-bg is-disable">Approve</a>`
+        let deny_button = current_email===data.assigned_to__email?`<span  class="common-button is-border cancel-button" id="denyButton">Deny</span>`:`<span  class="common-button is-border cancel-button is-disable">Deny</span>`
+        let assignee = data.assigned_to__username===null?`<a href="/np/dashboard/assign_perm/` + data.uav_uid + `/assign" class="common-button is-bg">Assign Self</a>`:`<p style="display: inline-block;">Assigned to <b> ${data.assigned_to__username}</b></p>`;
         var html1 = `
         <div class="popup-header">
             <h3>Permission Request for <b>ID `+ data.uav_uid + `</b></h3>
+            ${assignee}
+            ${assign_button}
         </div>
         <div class="popup-content">
             <div class="drone-details">
@@ -140,9 +145,8 @@ $(document).ready(function () {
                                 <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `"></div>
                             </div>
                             <div class="buttons is-end">
-                                <a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/approve" class="common-button is-bg">Approve</a>
-                                <span  class="common-button is-border cancel-button" id="denyButton"
-                                >Deny</span>
+                                ${approve_button}
+                                ${deny_button}
                             </div>
                         </div>        </div>                        </div>
                         </div>

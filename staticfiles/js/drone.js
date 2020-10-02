@@ -351,7 +351,7 @@
   }]
   };
 
-  var chart = new ApexCharts(document.querySelector("#pie-chart"), options);
+  var chart = new ApexCharts(document.querySelector("#pie-chart2"), options);
   chart.render();
 
 // line-chart
@@ -403,8 +403,8 @@ xaxis: {
 }
 };
 
-var chart = new ApexCharts(document.querySelector("#line-chart"), options);
-chart.render();
+// var chart = new ApexCharts(document.querySelector("#line-chart"), options);
+// chart.render();
 
 	// Tabs
 	(function ($) {
