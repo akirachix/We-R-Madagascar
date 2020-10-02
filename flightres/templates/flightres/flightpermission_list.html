@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
                     {% for object, due_in in object_data %}
-                        <tr id="expand_{{ object.uav_uid }}" data-toggle="modal" data-target="#open-modal" modal-link="open-modal" class="highlight modal-link expandData">
+                        <tr class="highlight">
                             <td>{{ object.uav_uid }}</td>
                             <td>
                                 <time>{{ object.flight_start_date }}</time>
@@ -57,13 +57,12 @@
                             {% endif %}
                             <td>{{ object.rejection_reason|default:"--" }}</td>
                             <td class="table-action">
-                                <button id="expand_{{ object.uav_uid }}" data-toggle="modal" data-target="#open-modal" modal-link="open-modal"
+                                <button data-toggle="modal" data-target="#open-modal" modal-link="open-modal"
                                         type="button"
-                                        class="btn modal-link expandData">
-                                    <i class="material-icons">chevron_right</i>
+                                        class="btn modal-link">
+                                    <i id="expand_{{ object.uav_uid }}"
+                                       class="material-icons expandData">chevron_right</i>
                                 </button>
-                            </td>
-                        </tr>
                                 <div class="popup" id="open-modal">
                                     <div id="modal-dialog" class="popup-container lg-popup map-popup">
                                         <div class="popup-body">
@@ -97,7 +96,8 @@
                                     </div>
                                 </div>
                         </div>
-                        
+                        </td>
+                        </tr>
                     {% endfor %}
             </tbody>
             </table>
