@@ -10,6 +10,8 @@ from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.core import serializers
 import decimal
+import pandas as pd
+from django.core.exceptions import ObjectDoesNotExist
 import json
 import requests
 from django.contrib.auth import get_user
@@ -19,7 +21,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 
 from .models import FlightPermission, Report, LocalAuthorities
-from registry.models import Aircraft, Operator
+from registry.models import Aircraft, Operator , Manufacturer,Address
 
 
 def homeView(request):
@@ -255,7 +257,7 @@ class ComplainListView(LoginRequiredMixin, ListView):
         # print(data)
         return com
 
-
+'''
 @login_required
 def uploadSheet(request):
     if request.method == 'POST' and request.FILES['sheet']:
@@ -279,6 +281,93 @@ def uploadSheet(request):
         res_json = response.json()
         # print(response, res_json['message'])
     return redirect('/np/dashboard/operators')
+    '''
+
+@login_required()
+def bulkupload(request):
+    template = 'operators_db.html'
+
+    # prompt = {
+    #     'order': '''1. Please upload a .csv or .xls file \n
+    #                 2. Order of the file columns should be Province, District, Municipality, Partner, Branch, No. of Tablets'''
+    # }
+
+    if request.method == "GET":
+        return render(request, template)
+
+    if request.method == 'POST':
+        uploaded_file = request.FILES['sheet']
+
+        if uploaded_file.name.endswith('.csv'):
+            try:
+                df = pd.read_csv(uploaded_file).fillna('')
+            except UnboundLocalError as error:
+                messages.WARNING(request,'Invalid File Uploaded')
+                return redirect('/np/dashboard/operators', messages)
+        elif uploaded_file.name.endswith(('.xls', 'xlsx')):
+            try:
+                df = pd.read_excel(uploaded_file).fillna('')
+            except UnboundLocalError as error:
+                messages.WARNING(request,'Invalid File Uploaded')
+                return redirect('/np/dashboard/operators', messages)
+        else:
+            messages.error(request, "Please upload a .csv or .xls file")
+
+        upper_range = len(df)
+
+        success_count = 0
+        for row in range(0, upper_range):
+            try:
+                manufacturer = Manufacturer.objects.get(
+                    full_name=df['UAV Manufacturer'][row])
+                address = Address.objects.get(
+                    address_line_1=df['Address'][row])
+                company_name = None if df['Owner'][row] == '' else df['Owner'][row]
+                phone_number = None if df['Contact'][row] == '' else df['Contact'][row]
+                email = None if df['Email'][row] == '' else df['Email'][row]
+                certification_number = 0 if df['Certificate No'][row] == '' else df['Certificate No'][row]
+                renewal_date = 0 if df['Renewal Date'][row] == '' else df['Renewal Date'][row]
+                validity = 0 if df['Validity'][row] == '' else df['Validity'][row]
+                remarks = None if df['Remarks'][row] == '' else df['Remarks'][row]
+                initial_issued_date = 0 if df['Initial Issued Date'][row] == '' else df['Initial Issued Date'][row]
+                color = None if df['Color'][row] == '' else df['Color'][row]
+                unid = None if df['UIN'][row] == '' else df['UIN'][row]
+                popular_name = None if df['UAV Manufacturer'][row] == '' else df['UAV Manufacturer'][row]
+                registration_mark = None if df['Serial No.'][row] == '' else df['Serial No.'][row]
+                begin_date = 0 if df['Manufacture Date'][row] == '' else df['Manufacture Date'][row]
+                #category = None if df['Drone Type'][row] == '' else df['Drone Type'][row]
+                mass = None if df['Weight'][row] == '' else df['Weight'][row]
+                operator = Operator.objects.update_or_create(
+                    address=address,
+                    company_name=company_name,
+                    phone_number=phone_number,
+                    email=email,
+                )
+                aircraft = Aircraft.objects.update_or_create(
+                    manufacturer=manufacturer,
+                    operator=Operator.objects.get(address=address),
+                    certification_number=certification_number,
+                    renewal_date=renewal_date,
+                    validity=validity,
+                    remarks=remarks,
+                    initial_issued_date=initial_issued_date,
+                    color=color,
+                    unid=unid,
+                    popular_name=popular_name,
+                    #category=category,
+                    mass=mass,
+                    registration_mark=registration_mark,
+                    begin_date=begin_date
+
+                )
+                success_count += 1
+            except ObjectDoesNotExist as e:
+                messages.add_message(request, messages.WARNING, str(
+                    e) + " for row " + str(row))
+                continue
+        messages.add_message(request, messages.SUCCESS, str(
+            success_count) + " Sheet Uploaded ")
+        return redirect('/np/dashboard/operators', messages)
 
 
 class AboutPageView(TemplateView):

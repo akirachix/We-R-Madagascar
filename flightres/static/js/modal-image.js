@@ -1,22 +1,21 @@
 $(document).ready(function () {
-
   image_urls_unstructured = image_url_objects.replace(/&quot;/g, '"');
-  image_urls = JSON.parse(image_urls_unstructured)
+  image_urls = JSON.parse(image_urls_unstructured);
 
-  var imageBtn = document.getElementsByClassName('expandImage')
+  var imageBtn = document.getElementsByClassName("expandImage");
   // console.log(imageBtn);
 
   for (var i = 0; i < imageBtn.length; i++) {
-    imageBtn[i].addEventListener('click', function (e) {
+    imageBtn[i].addEventListener("click", function (e) {
       // console.log('clicked');
-      object_id = e.target.id.split('_')[1]
+      object_id = e.target.id.split("_")[1];
       for (j = 0; j < image_urls.length; j++) {
         if (object_id == image_urls[j].uav_uid) {
-          createModal(image_urls[j])
+          createModal(image_urls[j]);
           // console.log(object_id, image_urls[j].uav_uid);
         }
       }
-    })
+    });
   }
 
   // <div class="mySlides" style="display: block;">
@@ -25,18 +24,51 @@ $(document).ready(function () {
   // </div>
 
   function createModal(data) {
-    var html1 = `
+    console.log(data);
+    var html1 =
+      data.image_url.includes(".png") || data.image_url.includes(".jpg")
+        ? `
     <div class="mySlides" style="display: block;">
-      <iframe
+    <img src="` +
+          data.image_url +
+          `">
+    </img
+    </div> `
+        : `
+    <div class="mySlides" style="display: block;">
+    <iframe
         class="modal-content"
         style="z-index: 1111;"
-        src="`+ data.image_url + `"
+        src="` +
+          data.image_url +
+          `"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
-    `
+    `;
+    // var html1 =
+    //   data.image_url.includes(".png") || data.image_url.includes(".jpg")
+    //     ? `
+    // <div class="mySlides" style="display: block;">
+    // <img src="` +
+    //       data.image_url +
+    //       `">
+    // </img
+    // </div> `
+    //     : `
+    // <div class="mySlides" style="display: block;">
+    // <iframe
+    //     class="modal-content"
+    //     style="z-index: 1111;"
+    //     src="` +
+    //       data.image_url +
+    //       `"
+    //     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    //     allowfullscreen></iframe>
+    // </div>
+    // `;
     // console.log(html1, "shown");
-    openModal()
+    openModal();
     document.getElementById("openFSImage").innerHTML = html1;
   }
 });
@@ -47,7 +79,7 @@ function openModal() {
 }
 
 function closeModal() {
-  document.getElementById("openFSImage").innerHTML = '';
+  document.getElementById("openFSImage").innerHTML = "";
   //   document.getElementById("myModal").style.display = "none";
   document.getElementById("myModalVideo").classList.remove("open");
 }
