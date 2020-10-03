@@ -57,7 +57,7 @@
                         </td>
                         <td>{{ object.operator.phone_number }}</td>
                         <td>{{ object.operator.email }}</td>
-                        <td>{{ object.manufacturer.full_name }} | {{ object.model }}</td>
+                        <td>{{ object.manufacturer.full_name }}</td>
                         <td>{{ object.registration_mark }}</td>
                         <td>{{ object.begin_date.date }}</td>
                         <td>{{ object.category }}</td>
@@ -66,7 +66,7 @@
                         <td>{{ object.initial_issued_date.date }}</td>
                         <td>{{ object.renewal_date.date }}</td>
                         <td>{{ object.validity }}</td>
-                        <td>{{ object.remarks }}</td>
+                        <td>{{ object.remarks|truncatewords:"3" }}</td>
                         <td><a modal-link="opt{{object.id}}" class="modal-link"><i class="material-icons"
                                     data-toggle="modal" data-target="#opt{{object.id}}">chevron_right</i></a>
                             <div class="popup" tabindex="-1" role="dialog" id="opt{{object.id}}">
@@ -172,7 +172,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="fileUpload">Upload your file</label>
-                                            <input class="form-control" type="file" name="sheet" id="sheet">
+                                            <input class="form-control" type="file" accept=".xls,.xlsx,.csv" name="sheet" id="sheet">
                                         </div>
                                         <br>
                                         <div class="buttons is-end">

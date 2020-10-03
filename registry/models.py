@@ -103,9 +103,9 @@ class Address(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     address_line_1 = models.CharField(max_length=140)
-    address_line_2 = models.CharField(max_length=140)
-    address_line_3 = models.CharField(max_length=140)
-    postcode = models.CharField(_("post code"), max_length=10, default="0")
+    address_line_2 = models.CharField(max_length=140,blank=True,null=True)
+    address_line_3 = models.CharField(max_length=140,blank=True,null=True)
+    postcode = models.CharField(_("post code"), max_length=10, default="0",blank=True,null=True)
     city = models.CharField(max_length=140, blank=True, null=True)
     country = models.CharField(max_length=2, choices=COUNTRY_CHOICES_ISO3166, default='NA')
     created_at = models.DateTimeField(auto_now_add=True)
