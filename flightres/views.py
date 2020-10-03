@@ -2,7 +2,7 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import auth,User
+from django.contrib.auth.models import auth, User
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -21,7 +21,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 
 from .models import FlightPermission, Report, LocalAuthorities
-from registry.models import Aircraft, Operator , Manufacturer,Address
+from registry.models import Aircraft, Operator, Manufacturer, Address
 
 
 def homeView(request):
@@ -80,7 +80,6 @@ def dashboardView(request):
                   {'top_data': top_row_data, 'bar_data': barchart_data, 'pie_data': pie_data})
 
 
-
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission
@@ -107,7 +106,7 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
                                                    'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name',
                                                    'pilot_id__phone_number', 'pilot_id__company',
                                                    'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
-                                                   'location', 'status','assigned_to__username','assigned_to__email'
+                                                   'location', 'status', 'assigned_to__username', 'assigned_to__email'
                                                    ).order_by('-uav_uid')
         json_data = json.dumps(list(raw_data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
@@ -163,6 +162,7 @@ def denyPerm(request, pk):
             return redirect('/np/dashboard/permission/special')
         else:
             return redirect('/np/dashboard/permission/general')
+
 
 @login_required
 def assignPerm(request, pk, action):
@@ -244,10 +244,16 @@ class ComplainListView(LoginRequiredMixin, ListView):
                                                           longitude__gte=lower_lon)[:4]
             data.append([complain, nearby, nearby_auth])
         com['data'] = data
-        flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid', 'uav_uuid__operator__phone_number',
-                                                         'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date', 'flight_time', 'flight_purpose', 'rejection_reason',
-                                                         'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name', 'pilot_id__phone_number', 'pilot_id__company',
-                                                         'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url', 'location', 'status','assigned_to'
+        flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid',
+                                                         'uav_uuid__operator__phone_number',
+                                                         'uav_uuid__operator__email', 'flight_start_date',
+                                                         'flight_end_date', 'flight_time', 'flight_purpose',
+                                                         'rejection_reason',
+                                                         'uav_uuid__popular_name', 'flight_insurance_url',
+                                                         'pilot_id__name', 'pilot_id__phone_number',
+                                                         'pilot_id__company',
+                                                         'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
+                                                         'location', 'status', 'assigned_to'
                                                          ).order_by('-uav_uid')
         image_urls = Report.objects.values('uav_uid', 'image_url')
         image_json_data = json.dumps(list(image_urls), cls=DjangoJSONEncoder)
@@ -256,6 +262,7 @@ class ComplainListView(LoginRequiredMixin, ListView):
         com['image_json_data'] = image_json_data
         # print(data)
         return com
+
 
 '''
 @login_required
@@ -283,6 +290,7 @@ def uploadSheet(request):
     return redirect('/np/dashboard/operators')
     '''
 
+
 @login_required()
 def bulkupload(request):
     template = 'operators_db.html'
@@ -302,13 +310,19 @@ def bulkupload(request):
             try:
                 df = pd.read_csv(uploaded_file).fillna('')
             except UnboundLocalError as error:
-                messages.WARNING(request,'Invalid File Uploaded')
+                messages.WARNING(request, 'Invalid File Uploaded')
+                return redirect('/np/dashboard/operators', messages)
+            except Exception as exception:
+                messages.WARNING(request, 'Invalid File Uploaded')
                 return redirect('/np/dashboard/operators', messages)
         elif uploaded_file.name.endswith(('.xls', 'xlsx')):
             try:
                 df = pd.read_excel(uploaded_file).fillna('')
             except UnboundLocalError as error:
-                messages.WARNING(request,'Invalid File Uploaded')
+                messages.WARNING(request, 'Invalid File Uploaded')
+                return redirect('/np/dashboard/operators', messages)
+            except Exception as exception:
+                messages.WARNING(request, 'Invalid File Uploaded')
                 return redirect('/np/dashboard/operators', messages)
         else:
             messages.error(request, "Please upload a .csv or .xls file")
@@ -318,10 +332,9 @@ def bulkupload(request):
         success_count = 0
         for row in range(0, upper_range):
             try:
-                manufacturer = Manufacturer.objects.get(
-                    full_name=df['UAV Manufacturer'][row])
-                address = Address.objects.get(
-                    address_line_1=df['Address'][row])
+                manufacturer = None if df['UAV Manufacturer & Model'][row] == '' else df['UAV Manufacturer & Model'][
+                    row]
+                address = None if df['Address'][row] == '' else df['Address'][row]
                 company_name = None if df['Owner'][row] == '' else df['Owner'][row]
                 phone_number = None if df['Contact'][row] == '' else df['Contact'][row]
                 email = None if df['Email'][row] == '' else df['Email'][row]
@@ -332,20 +345,28 @@ def bulkupload(request):
                 initial_issued_date = 0 if df['Initial Issued Date'][row] == '' else df['Initial Issued Date'][row]
                 color = None if df['Color'][row] == '' else df['Color'][row]
                 unid = None if df['UIN'][row] == '' else df['UIN'][row]
-                popular_name = None if df['UAV Manufacturer'][row] == '' else df['UAV Manufacturer'][row]
+                popular_name = None if df['UAV Manufacturer & Model'][row] == '' else df['UAV Manufacturer & Model'][
+                    row]
                 registration_mark = None if df['Serial No.'][row] == '' else df['Serial No.'][row]
-                begin_date = 0 if df['Manufacture Date'][row] == '' else df['Manufacture Date'][row]
-                #category = None if df['Drone Type'][row] == '' else df['Drone Type'][row]
-                mass = None if df['Weight'][row] == '' else df['Weight'][row]
+                begin_date = 0 if df['Date of Manufacture'][row] == '' else df['Date of Manufacture'][row]
+                category = None if df['Drone Type'][row] == '' else df['Drone Type'][row]
+                mass = None if df['Weight ( in Kg)'][row] == '' else df['Weight ( in Kg)'][row]
+                addressdata = Address.objects.update_or_create(
+                    address_line_1=address,
+                )
+                manufacturerdata = Manufacturer.objects.update_or_create(
+                    address=Address.objects.get(address_line_1=address),
+                    full_name=manufacturer
+                )
                 operator = Operator.objects.update_or_create(
-                    address=address,
+                    address=Address.objects.get(address_line_1=address),
                     company_name=company_name,
                     phone_number=phone_number,
                     email=email,
                 )
                 aircraft = Aircraft.objects.update_or_create(
-                    manufacturer=manufacturer,
-                    operator=Operator.objects.get(address=address),
+                    manufacturer=Manufacturer.objects.get(address=Address.objects.get(address_line_1=address)),
+                    operator=Operator.objects.get(address=Address.objects.get(address_line_1=address)),
                     certification_number=certification_number,
                     renewal_date=renewal_date,
                     validity=validity,
@@ -354,7 +375,7 @@ def bulkupload(request):
                     color=color,
                     unid=unid,
                     popular_name=popular_name,
-                    #category=category,
+                    category=category,
                     mass=mass,
                     registration_mark=registration_mark,
                     begin_date=begin_date
@@ -364,6 +385,10 @@ def bulkupload(request):
             except ObjectDoesNotExist as e:
                 messages.add_message(request, messages.WARNING, str(
                     e) + " for row " + str(row))
+                continue
+            except KeyError as e:
+                messages.add_message(request, messages.WARNING, str(
+                    e) + "Field is wrong")
                 continue
         messages.add_message(request, messages.SUCCESS, str(
             success_count) + " Sheet Uploaded ")
