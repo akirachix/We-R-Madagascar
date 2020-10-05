@@ -1,6 +1,6 @@
 {% extends 'flightres/base.html' %}
 {% load static %}
-
+{% load app_filter %}
 {% block links %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/custom-charts.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/apexcharts.css' %}">
@@ -41,6 +41,9 @@
                         <th>Renewal Date</th>
                         <th>Validity</th>
                         <th>Remarks</th>
+                        <th>Total approved flights</th>
+                        <th>Total pending flights</th>
+                        <th>Total rejected flights</th>
                         <th class="modal-th"></th>
                     </tr>
                 </thead>
@@ -67,6 +70,9 @@
                         <td>{{ object.renewal_date.date }}</td>
                         <td>{{ object.validity }}</td>
                         <td>{{ object.remarks|truncatewords:"3" }}</td>
+                        <td>{{ test|approve:object.unid }}</td>
+                        <td>{{ test|pending:object.unid }}</td>
+                        <td>{{ test|rejected:object.unid }}</td>
                         <td><a modal-link="opt{{object.id}}" class="modal-link"><i class="material-icons"
                                     data-toggle="modal" data-target="#opt{{object.id}}">chevron_right</i></a>
                             <div class="popup" tabindex="-1" role="dialog" id="opt{{object.id}}">

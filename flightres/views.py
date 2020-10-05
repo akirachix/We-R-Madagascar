@@ -80,21 +80,17 @@ def dashboardView(request):
                   {'top_data': top_row_data, 'bar_data': barchart_data, 'pie_data': pie_data})
 
 
+class FlightView(LoginRequiredMixin, ListView):
+    model = FlightPermission
+    ordering = 'uav_uid'
+    template_name = 'flightres/allflight.html'
+
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission
     ordering = 'uav_uid'
     template_name = 'flightres/flightpermission_list.html'
 
-    # def get_queryset(self, *args, **kwargs) :
-    #     type = self.kwargs['type']
-    #     if type == 'special':
-    #         queryset = FlightPermission.objects.filter(is_special_permission=True).order_by('-flight_start_date')
-    #     elif type == 'general':
-    #         queryset = FlightPermission.objects.filter(is_special_permission=False).order_by('-flight_start_date')
-    #     else:
-    #         queryset = None
-    #     return queryset
 
     def get_context_data(self, *args, **kwargs):
         com = super(FlightPermissionList, self).get_context_data(
@@ -102,12 +98,21 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
         raw_data = FlightPermission.objects.values('uav_uid', 'uav_uuid', 'uav_uuid__operator__company_name',
                                                    'uav_uuid__operator__phone_number',
                                                    'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date',
-                                                   'flight_time', 'flight_purpose', 'rejection_reason',
+                                                   'flight_time', 'flight_purpose', 'rejection_reason','altitude',
                                                    'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name',
                                                    'pilot_id__phone_number', 'pilot_id__company',
                                                    'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
                                                    'location', 'status', 'assigned_to__username', 'assigned_to__email'
                                                    ).order_by('-uav_uid')
+        raw_data1 = FlightPermission.objects.all()
+        for data1 in raw_data1:
+            for data2 in raw_data1:
+                if data1.flight_end_date != data2.flight_end_date:
+                    print("no match")
+                elif data1.flight_start_date != data2.flight_start_date:
+                    print("no match")
+                else:
+                    print("match")
         json_data = json.dumps(list(raw_data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
         com['current_user'] = self.request.user.username
@@ -406,6 +411,14 @@ class GuidelinesPageView(TemplateView):
 class OperdatorDatabaseView(LoginRequiredMixin, ListView):
     template_name = 'flightres/operators_db.html'
     queryset = Aircraft.objects.all().order_by('-unid')
+
+    def get_context_data(self, **kwargs):
+        data = super(OperdatorDatabaseView, self).get_context_data(**kwargs)
+        countdata = int(1)
+        data['test'] = FlightPermission.objects.order_by('uav_uuid')
+        data['countdata'] = countdata
+
+        return data
 
 
 def view_404(request, exception):

@@ -1,0 +1,51 @@
+{% extends 'flightres/base.html' %}
+{% load static %}
+{% block links %}
+<style>
+    #mapid { height: 790px; }
+</style>
+{% endblock links %}
+
+{% block body %}
+<main class="admin-main">
+    <div class="main-card">
+     <div id="mapid"></div>
+    </div>
+</main>
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+<script>
+
+    var datalat = [{% for x in object_list %}{{x.latitude}},{% endfor %}];
+    var datalong = [{% for x in object_list %}{{x.longitude}},{% endfor %}];
+    var dataaltitude = [{% for x in object_list %}'{{x.altitude}}',{% endfor %}];
+    var mymap = L.map('mapid').setView([datalat[0], datalong[0]], 8);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'your.mapbox.access.token'
+}).addTo(mymap);
+    var mark = [];
+    var cir = [];
+    for(i=0;i<datalat.length;i++) {
+        customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th></tr><tr><td>'+ datalat[i] +'</td><td>'+ datalong[i] +'</td><td>'+ dataaltitude[i] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+
+        mark[i] = L.marker([datalat[i], datalong[i]]).addTo(mymap);
+        cir = L.circle([datalat[i], datalong[i]], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(mymap)
+        mark[i].bindPopup(customPopup);
+    }
+
+   // popup = marker.bindPopup("Lat:28.209499,Long:83.959518").openPopup();
+</script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+{% endblock body %}

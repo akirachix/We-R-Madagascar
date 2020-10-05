@@ -14,9 +14,20 @@ $(document).ready(function () {
     for (var i = 0; i < expandBtn.length; i++) {
         expandBtn[i].addEventListener('click', function (e) {
             object_id = e.target.id.split('_')[1]
-            for (j = 0; j < flight_object.length; j++) {
+            for (var j = 0; j < flight_object.length; j++) {
                 if (object_id == flight_object[j].uav_uid) {
-                    createModal(flight_object[j])
+                    var lat = [];
+                    var long = [];
+                    var alti = [];
+
+                    for(var k=0; k < flight_object.length; k++) {
+                        if(flight_object[k].flight_start_date > flight_object[j].flight_start_date && flight_object[k].flight_start_date < flight_object[j].flight_end_date) {
+                            lat.push(flight_object[k].latitude);
+                            long.push(flight_object[k].longitude);
+                            alti.push(flight_object[k].altitude);
+                        };
+                    };
+                    createModal(flight_object[j], lat, long, alti)
                     // pass id or sth from here to record the deny reason for a particular item
                     openDenyModal(flight_object[j].uav_uid, flight_object[j].rejection_reason)
                 }
@@ -24,14 +35,14 @@ $(document).ready(function () {
         })
     }
 
-    function createModal(data) {
+    function createModal(data, lat, long, alti) {
         let assign_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/assign_perm/` + data.uav_uid + `/unassign" class="common-button is-bg" style="display: inline-block;margin-left:10px;">Unassign Self</a>`:``
         let approve_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/approve" class="common-button is-bg">Approve</a>`:`<a class="common-button is-bg is-disable">Approve</a>`
         let deny_button = current_email===data.assigned_to__email?`<span  class="common-button is-border cancel-button" id="denyButton">Deny</span>`:`<span  class="common-button is-border cancel-button is-disable">Deny</span>`
         let assignee = data.assigned_to__username===null?`<a href="/np/dashboard/assign_perm/` + data.uav_uid + `/assign" class="common-button is-bg">Assign Self</a>`:`<p style="display: inline-block;">Assigned to <b> ${data.assigned_to__username}</b></p>`;
         var html1 = `
         <div class="popup-header">
-            <h3>Permission Request for <b>ID `+ data.uav_uid + `</b></h3>
+            <h3>Permission Request for <b>UIN `+ data.uav_uuid + `</b></h3>
             ${assignee}
             ${assign_button}
         </div>
@@ -62,6 +73,9 @@ $(document).ready(function () {
                                 <li>
                                     <h4>Flight info</h4>
                                     <div class="content-list">
+                                        <p><b>Altitude:
+                                            </b><span>`+ data.altitude + `</span>
+                                        </p>
                                         <p><b>Start Date:
                                             </b><span>`+ data.flight_start_date + `</span>
                                         </p>
@@ -97,6 +111,7 @@ $(document).ready(function () {
                                             </p>
                                     </div>
                                 </li>
+                                <br>
                                 <li>
                                     <h4>Documentation</h4>
                                     <div class="row g-2">
@@ -142,7 +157,7 @@ $(document).ready(function () {
                     <div class="col-xl-7 col-sm-12">
                         <div class="map-content col-right">
                             <div class="tab-content-holder current" id="location">
-                                <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `"></div>
+                                <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `" ></div>
                             </div>
                             <div class="buttons is-end">
                                 ${approve_button}
@@ -151,27 +166,64 @@ $(document).ready(function () {
                         </div>        </div>                        </div>
                         </div>
                         </div>
-                
+
                     </div>
                 </div>
             </div>
         </div>
         `
         document.getElementById('flightPopUp').innerHTML = html1
-        plotMap(data)
+        plotMap(data, lat, long, alti)
     }
 
-    function plotMap(data) {
+    function plotMap(data, lat, long, alti) {
+        var greenIcon = L.icon({
+            iconUrl: 'https://www.flaticon.com/svg/static/icons/svg/2945/2945641.svg',
+
+
+            iconSize:     [30, 50], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [15, 44], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        var mainIcon = L.icon({
+            iconUrl: 'https://file.io/6rVETxzWgbQo',
+
+
+            iconSize:     [38, 95], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
         var map = L.map('map').setView([data.latitude, data.longitude], 8);
         // var map = L.map('map', {
         //     // layers: [base],
         //     center: new L.LatLng(lat, lon),
         //     zoom: 12,
         // });
-        var mark = L.marker([data.latitude, data.longitude]).addTo(map);
+
+        customPopup1 = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th></tr><tr><td>'+ parseFloat(data.latitude).toFixed(5) +'</td><td>'+ parseFloat(data.longitude).toFixed(5) +'</td><td>7777</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+
+        var mar = [];
+        var cir = [];
 
         // console.log(flight_object)
+        for(i=0;i<lat.length;i+=2){
+            customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th></tr><tr><td>'+ parseFloat(lat[i]).toFixed(5) +'</td><td>'+ parseFloat(long[i]).toFixed(5) +'</td><td>'+ alti[i] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
+            mar[i] = L.marker([lat[i], long[i]],{icon:greenIcon}).addTo(map);
+            cir[i] = L.circle([lat[i], long[i]], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 100
+            }).addTo(map);
+            mar[i].bindPopup(customPopup);
+        }
+        var mark = L.marker([data.latitude, data.longitude]).addTo(map);
+        mark.bindPopup(customPopup1);
         var circle = L.circle([data.latitude, data.longitude], {
             color: 'red',
             fillColor: '#f03',
@@ -209,9 +261,6 @@ $(document).ready(function () {
             "Google Terrain": googleTerrain,
 
         };
-
-
-        customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
         // var Kritipur = L.circle([lat, lon], {
         //     color: '#047c41',
@@ -264,7 +313,7 @@ function sendReason(flight_id) {
 
     fetch(url, {
         method: "POST",
-        // data: {'getdata': JSON.stringify(data)}, 
+        // data: {'getdata': JSON.stringify(data)},
         body: JSON.stringify(data),
         headers: {
             'X-CSRFToken': csrftoken

@@ -35,6 +35,7 @@ class FlightPermission(models.Model):
         max_digits=20, decimal_places=10, null=True, blank=True)
     longitude = models.DecimalField(
         max_digits=20, decimal_places=10, null=True, blank=True)
+    altitude = models.CharField(max_length=200,blank=True,null=True)
     status = models.CharField(
         max_length=15, choices=STATUS_CHOICES, default='Pending')
     rejection_reason = models.TextField(null=True, blank=True)
