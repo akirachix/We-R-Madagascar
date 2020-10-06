@@ -19,15 +19,16 @@ $(document).ready(function () {
                     var lat = [];
                     var long = [];
                     var alti = [];
-
+                    var status1 = [];
                     for(var k=0; k < flight_object.length; k++) {
                         if(flight_object[k].flight_start_date > flight_object[j].flight_start_date && flight_object[k].flight_start_date < flight_object[j].flight_end_date) {
                             lat.push(flight_object[k].latitude);
                             long.push(flight_object[k].longitude);
                             alti.push(flight_object[k].altitude);
+                            status1.push(flight_object[k].status);
                         };
                     };
-                    createModal(flight_object[j], lat, long, alti)
+                    createModal(flight_object[j], flight_object[j].status, lat, long, alti, status1)
                     // pass id or sth from here to record the deny reason for a particular item
                     openDenyModal(flight_object[j].uav_uid, flight_object[j].rejection_reason)
                 }
@@ -35,14 +36,17 @@ $(document).ready(function () {
         })
     }
 
-    function createModal(data, lat, long, alti) {
-        let assign_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/assign_perm/` + data.uav_uid + `/unassign" class="common-button is-bg" style="display: inline-block;margin-left:10px;">Unassign Self</a>`:``
+    function createModal(data, das, lat, long,alti, status1) {
+        console.log(data);
+        console.log(lat,'lat');
+        console.log(long,'long');
+        let assign_button = current_email===data.assigned_to__email?`<button   class="common-button is-bg unassign-btn" style="display: inline-block;margin-left:10px;">Unassign Self</button>`:``
         let approve_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/approve" class="common-button is-bg">Approve</a>`:`<a class="common-button is-bg is-disable">Approve</a>`
         let deny_button = current_email===data.assigned_to__email?`<span  class="common-button is-border cancel-button" id="denyButton">Deny</span>`:`<span  class="common-button is-border cancel-button is-disable">Deny</span>`
-        let assignee = data.assigned_to__username===null?`<a href="/np/dashboard/assign_perm/` + data.uav_uid + `/assign" class="common-button is-bg">Assign Self</a>`:`<p style="display: inline-block;">Assigned to <b> ${data.assigned_to__username}</b></p>`;
+        let assignee = data.assigned_to__username===null?`<button class="common-button is-bg assign-btn">Assign Self</button>`:`<p style="display: inline-block;">Assigned to <b> ${data.assigned_to__username}</b></p>`;
         var html1 = `
         <div class="popup-header">
-            <h3>Permission Request for <b>UIN `+ data.uav_uuid + `</b></h3>
+            <h3>Permission Request for <b>ID `+ data.uav_uid + `</b></h3>
             ${assignee}
             ${assign_button}
         </div>
@@ -173,17 +177,51 @@ $(document).ready(function () {
         </div>
         `
         document.getElementById('flightPopUp').innerHTML = html1
-        plotMap(data, lat, long, alti)
+        var btnAssignElement = document.querySelectorAll('.assign-btn');
+        var btnUnassignElement = document.querySelectorAll('.unassign-btn');
+        // console.log(btnElement,'btn')
+        btnAssignElement.forEach(el=>{
+            // console.log(el,'el');
+
+            el.addEventListener('click',function(){
+                $.ajax({url: `/np/dashboard/assign_perm/${data.uav_uid}/assign` , success: function(result){
+                    // $("#div1").html(result);
+                    // console.log(result,'result');
+                    // closePopup();
+                    data.assigned_to__email = result.assigned_to__email
+                    data.assigned_to__username = result.assigned_to__username
+                    createModal(data, das, lat, long,alti, status1);
+                }});
+                // console.log('assign clicked');
+            })
+        })
+        btnUnassignElement.forEach(el=>{
+            // console.log(el,'el');
+
+            el.addEventListener('click',function(){
+                $.ajax({url: `/np/dashboard/assign_perm/${data.uav_uid}/unassign` , success: function(result){
+                    // $("#div1").html(result);
+                    // console.log(result,'result');
+                    // closePopup();
+                    // console.log(data,lat,long,alti);
+                    data.assigned_to__email = result.assigned_to__email
+                    data.assigned_to__username = result.assigned_to__username
+                    createModal(data, das, lat, long,alti, status1);
+                }});
+                // console.log('unassign clicked');
+            })
+        })
+        plotMap(data, das, lat, long,alti, status1)
     }
 
-    function plotMap(data, lat, long, alti) {
+    function plotMap(data, das, lat, long,alti, status1) {
         var greenIcon = L.icon({
             iconUrl: 'https://www.flaticon.com/svg/static/icons/svg/2945/2945641.svg',
 
 
-            iconSize:     [30, 50], // size of the icon
+            iconSize:     [38, 50], // size of the icon
             shadowSize:   [50, 64], // size of the shadow
-            iconAnchor:   [15, 44], // point of the icon which will correspond to marker's location
+            iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
             shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
@@ -197,39 +235,82 @@ $(document).ready(function () {
             shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
-        var map = L.map('map').setView([data.latitude, data.longitude], 8);
+        var map = L.map('map').setView([data.latitude, data.longitude,data.altitude], 8);
         // var map = L.map('map', {
         //     // layers: [base],
         //     center: new L.LatLng(lat, lon),
         //     zoom: 12,
         // });
-
-        customPopup1 = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th></tr><tr><td>'+ parseFloat(data.latitude).toFixed(5) +'</td><td>'+ parseFloat(data.longitude).toFixed(5) +'</td><td>7777</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+        var a = parseFloat(data.latitude);
+        var b = parseFloat(data.longitude);
+        customPopup1 = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ a.toFixed(4) +'</td><td>'+ b.toFixed(4) +'</td><td>'+ data.altitude +'</td><td>'+ data.status +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
         var mar = [];
         var cir = [];
 
         // console.log(flight_object)
-        for(i=0;i<lat.length;i+=2){
-            customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th></tr><tr><td>'+ parseFloat(lat[i]).toFixed(5) +'</td><td>'+ parseFloat(long[i]).toFixed(5) +'</td><td>'+ alti[i] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+        for(i=0;i<lat.length;i++){
+            var c = parseFloat(lat[i]);
+            var d = parseFloat(long[i]);
+            customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th></tr><tr><td>'+ c.toFixed(4) +'</td><td>'+ d.toFixed(4) +'</td><td>'+ alti[i] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
-            mar[i] = L.marker([lat[i], long[i]],{icon:greenIcon}).addTo(map);
-            cir[i] = L.circle([lat[i], long[i]], {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius: 100
-            }).addTo(map);
+            mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon}).addTo(map);
+            if(status1[i] == 'Approved') {
+                cir[i] = L.circle([lat[i], long[i]], {
+                    color: 'green',
+                    fillColor: 'green',
+                    fillOpacity: 0.5,
+                    radius: 1000
+                }).addTo(map);
+
+            } else if(status1[i] == 'Pending') {
+                cir[i] = L.circle([lat[i], long[i]], {
+                    color: 'orange',
+                    fillColor: 'orange',
+                    fillOpacity: 0.5,
+                    radius: 1000
+                }).addTo(map);
+
+            } else if(status1[i] == 'Rejected') {
+                cir[i] = L.circle([lat[i], long[i]], {
+                    color: 'red',
+                    fillColor: 'red',
+                    fillOpacity: 0.5,
+                    radius: 1000
+                }).addTo(map);
+
+            };
+
             mar[i].bindPopup(customPopup);
         }
         var mark = L.marker([data.latitude, data.longitude]).addTo(map);
         mark.bindPopup(customPopup1);
-        var circle = L.circle([data.latitude, data.longitude], {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: 100
-        }).addTo(map);
+
+        if(das == 'Approved') {
+            var circle = L.circle([data.latitude, data.longitude], {
+                color: 'green',
+                fillColor: 'green',
+                fillOpacity: 0.5,
+                radius: 1000
+            }).addTo(map);
+
+        } else if(das == 'Pending') {
+            var circle = L.circle([data.latitude, data.longitude], {
+                color: 'orange',
+                fillColor: 'orange',
+                fillOpacity: 0.5,
+                radius: 1000
+            }).addTo(map);
+
+        } else {
+            var circle = L.circle([data.latitude, data.longitude], {
+                color: 'red',
+                fillColor: 'red',
+                fillOpacity: 0.5,
+                radius: 1000
+            }).addTo(map);
+
+        };
 
         osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

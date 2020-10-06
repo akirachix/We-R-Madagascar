@@ -16,6 +16,7 @@ import json
 import requests
 from django.contrib.auth import get_user
 import datetime
+from datetime import date
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
@@ -80,10 +81,54 @@ def dashboardView(request):
                   {'top_data': top_row_data, 'bar_data': barchart_data, 'pie_data': pie_data})
 
 
-class FlightView(LoginRequiredMixin, ListView):
-    model = FlightPermission
-    ordering = 'uav_uid'
-    template_name = 'flightres/allflight.html'
+class FlightView(LoginRequiredMixin, TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        object_list = FlightPermission.objects.all()
+        context = {
+            "object_list": object_list
+
+        }
+        return render(request, 'flightres/allflight.html', context)
+
+    def post(self, request, *args, **kwargs):
+        start_date = request.POST['flight_start_date']
+        end_date = request.POST['flight_end_date']
+        data3 = []
+        datasuccess = []
+        counts = 0
+        object_list = FlightPermission.objects.all()
+        for data in object_list:
+            if data.flight_start_date >= datetime.datetime.strptime(start_date,
+                                                                    '%Y-%m-%d').date() and data.flight_end_date <= datetime.datetime.strptime(
+                end_date, '%Y-%m-%d').date():
+                data3.append(data)
+                counts += 1
+
+                datasuccess.append(counts)
+
+        if datasuccess is not None:
+            if len(datasuccess) > 1:
+                msg = str(len(datasuccess)) + ' Flights were found'
+            else:
+                msg = str(len(datasuccess)) + ' Flight was found'
+
+            messages.success(request, msg)
+
+            context = {
+                "object_list": object_list,
+                "data3": data3
+
+            }
+        else:
+            messages.error(request, 'No matched Found')
+            context = {
+                "object_list": object_list
+
+            }
+
+        return render(request, 'flightres/allflight.html', context)
+
 
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
@@ -91,28 +136,18 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
     ordering = 'uav_uid'
     template_name = 'flightres/flightpermission_list.html'
 
-
     def get_context_data(self, *args, **kwargs):
         com = super(FlightPermissionList, self).get_context_data(
             *args, **kwargs)
         raw_data = FlightPermission.objects.values('uav_uid', 'uav_uuid', 'uav_uuid__operator__company_name',
                                                    'uav_uuid__operator__phone_number',
                                                    'uav_uuid__operator__email', 'flight_start_date', 'flight_end_date',
-                                                   'flight_time', 'flight_purpose', 'rejection_reason','altitude',
+                                                   'flight_time', 'flight_purpose', 'rejection_reason', 'altitude',
                                                    'uav_uuid__popular_name', 'flight_insurance_url', 'pilot_id__name',
                                                    'pilot_id__phone_number', 'pilot_id__company',
                                                    'pilot_id__cv_url', 'latitude', 'longitude', 'flight_plan_url',
                                                    'location', 'status', 'assigned_to__username', 'assigned_to__email'
                                                    ).order_by('-uav_uid')
-        raw_data1 = FlightPermission.objects.all()
-        for data1 in raw_data1:
-            for data2 in raw_data1:
-                if data1.flight_end_date != data2.flight_end_date:
-                    print("no match")
-                elif data1.flight_start_date != data2.flight_start_date:
-                    print("no match")
-                else:
-                    print("match")
         json_data = json.dumps(list(raw_data), cls=DjangoJSONEncoder)
         com['json_data'] = json_data
         com['current_user'] = self.request.user.username
@@ -178,9 +213,34 @@ def assignPerm(request, pk, action):
         selected_perm.assigned_to = None
     selected_perm.save()
     if selected_perm.is_special_permission == True:
-        return redirect('/np/dashboard/permission/special')
+        if action == 'assign':
+            resp1 = {
+                'result': request.user.username,
+                'assigned_to__email': selected_perm.assigned_to.email,
+                'assigned_to__username': selected_perm.assigned_to.username,
+                'latitude': selected_perm.latitude,
+                'longitude': selected_perm.longitude
+            }
+            return JsonResponse(resp1)
+        elif action == 'unassign':
+            resp2 = {
+                'result': None,
+                'assigned_to__email': None,
+                'assigned_to__username': None,
+                'latitude': selected_perm.latitude,
+                'longitude': selected_perm.longitude
+            }
+            return JsonResponse(resp2)
+        else:
+            resp4 = {
+                'result': 'Invalid Url'
+            }
+            return JsonResponse(resp4)
     else:
-        return redirect('/np/dashboard/permission/general')
+        resp3 = {
+            'result': 'You are not a Special Persion'
+        }
+        return JsonResponse(resp3)
 
 
 def flightReqResponseView(request, pk):
