@@ -213,15 +213,34 @@ def assignPerm(request, pk, action):
         selected_perm.assigned_to = None
     selected_perm.save()
     if selected_perm.is_special_permission == True:
-        resp1 = {
-            'result': request.user
-        }
-        return JsonResponse(resp1)
+        if action == 'assign':
+            resp1 = {
+                'result': request.user.username,
+                'assigned_to__email': selected_perm.assigned_to.email,
+                'assigned_to__username': selected_perm.assigned_to.username,
+                'latitude': selected_perm.latitude,
+                'longitude': selected_perm.longitude
+            }
+            return JsonResponse(resp1)
+        elif action == 'unassign':
+            resp2 = {
+                'result': None,
+                'assigned_to__email': None,
+                'assigned_to__username': None,
+                'latitude': selected_perm.latitude,
+                'longitude': selected_perm.longitude
+            }
+            return JsonResponse(resp2)
+        else:
+            resp4 = {
+                'result': 'Invalid Url'
+            }
+            return JsonResponse(resp4)
     else:
-        resp2 = {
-            'result': None
+        resp3 = {
+            'result': 'You are not a Special Persion'
         }
-        return JsonResponse(resp2)
+        return JsonResponse(resp3)
 
 
 def flightReqResponseView(request, pk):

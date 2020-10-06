@@ -82,7 +82,7 @@
         customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th></tr><tr><td>'+ parseFloat(dataset[i][0]).toFixed(4) +'</td><td>'+ parseFloat(dataset[i][2]).toFixed(4) +'</td><td>'+ dataset[i][3] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
         mark[i] = L.marker([dataset[i][0], dataset[i][2]]).addTo(mymap);
-        if(dataset[i][1] = 'Approved') {
+        if(dataset[i][1] == 'Approved') {
             cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
                 color: 'green',
                 fillColor: 'green',
@@ -90,15 +90,15 @@
                 radius: 500
             }).addTo(mymap);
 
-        } else if(dataset[i][1] = 'Pending') {
+        } else if(dataset[i][1] == 'Pending') {
             cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
-                color: 'yellow',
-                fillColor: 'yellow',
+                color: 'orange',
+                fillColor: 'orange',
                 fillOpacity: 0.5,
                 radius: 500
             }).addTo(mymap);
 
-        } else if(dataset[i][1] = 'Rejected') {
+        } else if(dataset[i][1] == 'Rejected') {
             cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
                 color: 'red',
                 fillColor: 'red',
