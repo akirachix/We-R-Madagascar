@@ -212,7 +212,7 @@ def assignPerm(request, pk, action):
     elif action == 'unassign':
         selected_perm.assigned_to = None
     selected_perm.save()
-    if selected_perm.is_special_permission == True:
+    if selected_perm:
         if action == 'assign':
             resp1 = {
                 'result': request.user.username,
@@ -236,11 +236,6 @@ def assignPerm(request, pk, action):
                 'result': 'Invalid Url'
             }
             return JsonResponse(resp4)
-    else:
-        resp3 = {
-            'result': 'You are not a Special Persion'
-        }
-        return JsonResponse(resp3)
 
 
 def flightReqResponseView(request, pk):
