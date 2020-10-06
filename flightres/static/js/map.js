@@ -36,7 +36,7 @@ $(document).ready(function () {
     }
 
     function createModal(data, lat, long, alti) {
-        let assign_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/assign_perm/` + data.uav_uid + `/unassign" class="common-button is-bg" style="display: inline-block;margin-left:10px;">Unassign Self</a>`:``
+        let assign_button = current_email===data.assigned_to__email?`<button   class="common-button is-bg assign-btn" style="display: inline-block;margin-left:10px;">Unassign Self</button>`:``
         let approve_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/approve" class="common-button is-bg">Approve</a>`:`<a class="common-button is-bg is-disable">Approve</a>`
         let deny_button = current_email===data.assigned_to__email?`<span  class="common-button is-border cancel-button" id="denyButton">Deny</span>`:`<span  class="common-button is-border cancel-button is-disable">Deny</span>`
         let assignee = data.assigned_to__username===null?`<a href="/np/dashboard/assign_perm/` + data.uav_uid + `/assign" class="common-button is-bg">Assign Self</a>`:`<p style="display: inline-block;">Assigned to <b> ${data.assigned_to__username}</b></p>`;
@@ -173,6 +173,20 @@ $(document).ready(function () {
         </div>
         `
         document.getElementById('flightPopUp').innerHTML = html1
+        var btnElement = document.querySelectorAll('.assign-btn');
+        console.log(btnElement,'btn')
+        btnElement.forEach(el=>{
+            console.log(el,'el');
+
+            el.addEventListener('click',function(){
+                $.ajax({url: `/np/dashboard/assign_perm/${data.uav_uid}/unassign` , success: function(result){
+                    // $("#div1").html(result);
+                    console.log(result,'result');
+                    createModal(data, lat, long, alti);
+                }});
+                console.log('clicked');
+            })
+        })
         plotMap(data, lat, long, alti)
     }
 

@@ -9,7 +9,45 @@
 {% block body %}
 <main class="admin-main">
     <div class="main-card">
-     <div id="mapid"></div>
+        <div class="container">
+            {% for messages in messages %}
+                <div class="alert alert-danger">
+                    <strong>{{ messages }}</strong>
+                </div>
+            {% endfor %}
+            <form method="post" action="{% url 'dashboard:flightview' %}">
+                {% csrf_token %}
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-3">
+                      <input placeholder="Start Date Format-(YY/MM/DD)" type="date" name="flight_start_date"  class="form-control" required>
+                    </div>
+                    <div   class="col-md-3">
+                      <input placeholder="End Date Format-(YY/MM/DD)" type="date" name="flight_end_date"  class="form-control" required>
+                    </div>
+                    <div class="col">
+                        <button style="height" type="submit" class="btn btn-primary mb-2">Submit</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="container" style="padding-top:20px;">
+            <div id="mapid"></div>
+        </div>
     </div>
 </main>
  <!-- Make sure you put this AFTER Leaflet's CSS -->
@@ -18,32 +56,88 @@
    crossorigin=""></script>
 <script>
 
-    var datalat = [{% for x in object_list %}{{x.latitude}},{% endfor %}];
-    var datalong = [{% for x in object_list %}{{x.longitude}},{% endfor %}];
-    var dataaltitude = [{% for x in object_list %}'{{x.altitude}}',{% endfor %}];
-    var mymap = L.map('mapid').setView([datalat[0], datalong[0]], 8);
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
+
+    var dataset = [{% if data3 %}{% for x in data3 %}
+                [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}'],
+                {% endfor %}{% else %}{% for x in object_list %}
+                [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}'],
+                {% endfor %}{% endif %}];
+
+
+
+    var mymap = L.map('mapid').setView([dataset[0][0], dataset[0][2]], 8);
+
+    osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
     accessToken: 'your.mapbox.access.token'
-}).addTo(mymap);
+    }).addTo(mymap);
     var mark = [];
     var cir = [];
-    for(i=0;i<datalat.length;i++) {
-        customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th></tr><tr><td>'+ datalat[i] +'</td><td>'+ datalong[i] +'</td><td>'+ dataaltitude[i] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
-        mark[i] = L.marker([datalat[i], datalong[i]]).addTo(mymap);
-        cir = L.circle([datalat[i], datalong[i]], {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: 500
-        }).addTo(mymap)
+    for(i=0;i<dataset.length;i++) {
+        customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th></tr><tr><td>'+ parseFloat(dataset[i][0]).toFixed(4) +'</td><td>'+ parseFloat(dataset[i][2]).toFixed(4) +'</td><td>'+ dataset[i][3] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+
+        mark[i] = L.marker([dataset[i][0], dataset[i][2]]).addTo(mymap);
+        if(dataset[i][1] = 'Approved') {
+            cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
+                color: 'green',
+                fillColor: 'green',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        } else if(dataset[i][1] = 'Pending') {
+            cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
+                color: 'yellow',
+                fillColor: 'yellow',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        } else if(dataset[i][1] = 'Rejected') {
+            cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
+                color: 'red',
+                fillColor: 'red',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        };
+
         mark[i].bindPopup(customPopup);
     }
+    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(mymap);
+    googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+    googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+    googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+
+
+    var baseLayers = {
+            "OpenStreetMap": osm,
+            "Google Streets": googleStreets,
+            "Google Hybrid": googleHybrid,
+            "Google Satellite": googleSat,
+            "Google Terrain": googleTerrain,
+
+        };
+
+    layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(mymap);
 
    // popup = marker.bindPopup("Lat:28.209499,Long:83.959518").openPopup();
 </script>
