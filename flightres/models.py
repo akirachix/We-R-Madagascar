@@ -63,7 +63,8 @@ class FlightPermission(models.Model):
             response_data = uri + str(self.uav_uid)
             message = "Your flight permission request has a update. Open this link to find out more {}".format(
                 response_data)
-            self.twilio.send_message(self.pilot_phone_number, message)
+
+            self.twilio.send_message(self.pilot_id__phone_number, message)
 
         super().save(force_insert, force_update, using)
 
