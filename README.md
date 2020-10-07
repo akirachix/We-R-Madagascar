@@ -1,4 +1,4 @@
-## Drone Registry 
+## Nepal Drone Portal
 
 
 ## Setting up a development environment
