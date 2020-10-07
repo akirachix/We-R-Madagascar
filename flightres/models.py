@@ -58,11 +58,12 @@ class FlightPermission(models.Model):
             except Aircraft.DoesNotExist:
                 pass
         if self.old_status != self.status:
-            uri = "np/dashboard/request_response/"
+
+            uri = "https://droneregistry.naxa.com.np/np/dashboard/request_response/"
             response_data = uri + str(self.uav_uid)
-            message = "Your flight plan has been approved. You can find more details at {}".format(
+            message = "Your flight permission request has a update. Open this link to find out more {}".format(
                 response_data)
-            # self.twilio.send_message(self.pilot_phone_number, message)
+            self.twilio.send_message(self.pilot_phone_number, message)
 
         super().save(force_insert, force_update, using)
 
