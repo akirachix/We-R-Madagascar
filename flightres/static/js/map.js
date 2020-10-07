@@ -18,6 +18,7 @@ $(document).ready(function () {
                 if (object_id == flight_object[j].uav_uid) {
                     var lat = [];
                     var long = [];
+                    var id = [];
                     var alti = [];
                     var status1 = [];
                     for(var k=0; k < flight_object.length; k++) {
@@ -26,24 +27,27 @@ $(document).ready(function () {
                             long.push(flight_object[k].longitude);
                             alti.push(flight_object[k].altitude);
                             status1.push(flight_object[k].status);
+                            id.push(flight_object[k].uav_uid);
                         }
                         else if(flight_object[k].flight_end_date > flight_object[j].flight_end_date && flight_object[j].flight_end_date > flight_object[k].flight_start_date){
                             lat.push(flight_object[k].latitude);
                             long.push(flight_object[k].longitude);
                             alti.push(flight_object[k].altitude);
                             status1.push(flight_object[k].status);
+                            id.push(flight_object[k].uav_uid);
                         }
                         else if(flight_object[k].flight_start_date > flight_object[j].flight_start_date && flight_object[k].flight_end_date < flight_object[j].flight_end_date){
                             lat.push(flight_object[k].latitude);
                             long.push(flight_object[k].longitude);
                             alti.push(flight_object[k].altitude);
                             status1.push(flight_object[k].status);
+                            id.push(flight_object[k].uav_uid);
                         }
                         else {
                             console.log("error");
                         };
                     };
-                    createModal(flight_object[j], flight_object[j].status, lat, long, alti, status1)
+                    createModal(flight_object[j], flight_object[j].status, lat, long, alti, status1,id)
                     // pass id or sth from here to record the deny reason for a particular item
                     openDenyModal(flight_object[j].uav_uid, flight_object[j].rejection_reason)
                 }
@@ -51,7 +55,7 @@ $(document).ready(function () {
         })
     }
 
-    function createModal(data, das, lat, long,alti, status1) {
+    function createModal(data, das, lat, long,alti, status1,id) {
         console.log(data);
         console.log(lat,'lat');
         console.log(long,'long');
@@ -205,7 +209,7 @@ $(document).ready(function () {
                     // closePopup();
                     data.assigned_to__email = result.assigned_to__email
                     data.assigned_to__username = result.assigned_to__username
-                    createModal(data, das, lat, long,alti, status1);
+                    createModal(data, das, lat, long,alti, status1,id);
                 }});
                 // console.log('assign clicked');
             })
@@ -221,15 +225,15 @@ $(document).ready(function () {
                     // console.log(data,lat,long,alti);
                     data.assigned_to__email = result.assigned_to__email
                     data.assigned_to__username = result.assigned_to__username
-                    createModal(data, das, lat, long,alti, status1);
+                    createModal(data, das, lat, long,alti, status1,id);
                 }});
                 // console.log('unassign clicked');
             })
         })
-        plotMap(data, das, lat, long,alti, status1)
+        plotMap(data, das, lat, long,alti, status1,id)
     }
 
-    function plotMap(data, das, lat, long,alti, status1) {
+    function plotMap(data, das, lat, long,alti, status1,id) {
         var greenIcon = L.icon({
             iconUrl: 'https://www.flaticon.com/svg/static/icons/svg/2945/2945641.svg',
 
@@ -258,7 +262,7 @@ $(document).ready(function () {
         // });
         var a = parseFloat(data.latitude);
         var b = parseFloat(data.longitude);
-        customPopup1 = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ a.toFixed(4) +'</td><td>'+ b.toFixed(4) +'</td><td>'+ data.altitude +'</td><td>'+ data.status +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+        customPopup1 = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ data.uav_uid +'</td><td>'+ data.altitude +'</td><td>'+ data.status +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
         var mar = [];
         var cir = [];
@@ -267,7 +271,7 @@ $(document).ready(function () {
         for(i=0;i<lat.length;i++){
             var c = parseFloat(lat[i]);
             var d = parseFloat(long[i]);
-            customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ c.toFixed(4) +'</td><td>'+ d.toFixed(4) +'</td><td>'+ alti[i] +'</td><td>'+ status1[i] +'</td></tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+            customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ id[i] +'</td><td>'+ alti[i] +'</td><td>'+ status1[i] +'</td></tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
             mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon}).addTo(map);
             if(status1[i] == 'Approved') {
