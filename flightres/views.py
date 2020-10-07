@@ -99,9 +99,12 @@ class FlightView(LoginRequiredMixin, TemplateView):
         counts = 0
         object_list = FlightPermission.objects.all()
         for data in object_list:
-            if data.flight_start_date >= datetime.datetime.strptime(start_date,
-                                                                    '%Y-%m-%d').date() and data.flight_end_date <= datetime.datetime.strptime(
-                end_date, '%Y-%m-%d').date():
+            if data.flight_start_date <= datetime.datetime.strptime(start_date,
+                                                                    '%Y-%m-%d').date() <= data.flight_end_date or data.flight_end_date >= datetime.datetime.strptime(
+                end_date, '%Y-%m-%d').date() >= data.flight_start_date or (
+                    data.flight_start_date >= datetime.datetime.strptime(start_date,
+                                                                         '%Y-%m-%d').date() and data.flight_end_date <= datetime.datetime.strptime(
+                end_date, '%Y-%m-%d').date()):
                 data3.append(data)
                 counts += 1
 

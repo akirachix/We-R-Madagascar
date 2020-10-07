@@ -21,11 +21,26 @@ $(document).ready(function () {
                     var alti = [];
                     var status1 = [];
                     for(var k=0; k < flight_object.length; k++) {
-                        if(flight_object[k].flight_start_date > flight_object[j].flight_start_date && flight_object[k].flight_start_date < flight_object[j].flight_end_date) {
+                        if( flight_object[k].flight_start_date < flight_object[j].flight_start_date && flight_object[j].flight_start_date < flight_object[k].flight_end_date) {
                             lat.push(flight_object[k].latitude);
                             long.push(flight_object[k].longitude);
                             alti.push(flight_object[k].altitude);
                             status1.push(flight_object[k].status);
+                        }
+                        else if(flight_object[k].flight_end_date > flight_object[j].flight_end_date && flight_object[j].flight_end_date > flight_object[k].flight_start_date){
+                            lat.push(flight_object[k].latitude);
+                            long.push(flight_object[k].longitude);
+                            alti.push(flight_object[k].altitude);
+                            status1.push(flight_object[k].status);
+                        }
+                        else if(flight_object[k].flight_start_date > flight_object[j].flight_start_date && flight_object[k].flight_end_date < flight_object[j].flight_end_date){
+                            lat.push(flight_object[k].latitude);
+                            long.push(flight_object[k].longitude);
+                            alti.push(flight_object[k].altitude);
+                            status1.push(flight_object[k].status);
+                        }
+                        else {
+                            console.log("error");
                         };
                     };
                     createModal(flight_object[j], flight_object[j].status, lat, long, alti, status1)
@@ -252,7 +267,7 @@ $(document).ready(function () {
         for(i=0;i<lat.length;i++){
             var c = parseFloat(lat[i]);
             var d = parseFloat(long[i]);
-            customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th></tr><tr><td>'+ c.toFixed(4) +'</td><td>'+ d.toFixed(4) +'</td><td>'+ alti[i] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+            customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ c.toFixed(4) +'</td><td>'+ d.toFixed(4) +'</td><td>'+ alti[i] +'</td><td>'+ status1[i] +'</td></tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
             mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon}).addTo(map);
             if(status1[i] == 'Approved') {
