@@ -58,9 +58,9 @@
 
 
     var dataset = [{% if data3 %}{% for x in data3 %}
-                [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}'],
+                [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}',{{ x.uav_uid }}],
                 {% endfor %}{% else %}{% for x in object_list %}
-                [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}'],
+                [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}',{{ x.uav_uid }}],
                 {% endfor %}{% endif %}];
 
 
@@ -79,7 +79,7 @@
     var cir = [];
 
     for(i=0;i<dataset.length;i++) {
-        customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>Latitude</th><th>Longitude</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ parseFloat(dataset[i][0]).toFixed(4) +'</td><td>'+ parseFloat(dataset[i][2]).toFixed(4) +'</td><td>'+ dataset[i][3] +'</td><td>'+ dataset[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+        customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ dataset[i][4] +'</td><td>'+ dataset[i][3] +'</td><td>'+ dataset[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
         mark[i] = L.marker([dataset[i][0], dataset[i][2]]).addTo(mymap);
         if(dataset[i][1] == 'Approved') {
