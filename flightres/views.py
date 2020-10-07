@@ -113,8 +113,11 @@ class FlightView(LoginRequiredMixin, TemplateView):
         if datasuccess is not None:
             if len(datasuccess) > 1:
                 msg = str(len(datasuccess)) + ' Flights were found'
-            else:
+            elif len(datasuccess) == 1:
                 msg = str(len(datasuccess)) + ' Flight was found'
+            else:
+                object_list = ""
+                msg = 'No Flight Found'
 
             messages.success(request, msg)
 
