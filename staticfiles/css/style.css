@@ -9617,4 +9617,9 @@ h3.section-title {
   .guideline-popup.open .guideline-popup-content {
     display: block; }
 
+.drone-admin-wrapper main .main-card .card-body .dataTables_wrapper .dataTables_filter {
+    right: 350px !important;
+
+    }
+
 /*# sourceMappingURL=style.css.map */
