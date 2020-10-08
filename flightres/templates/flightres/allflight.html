@@ -38,8 +38,9 @@
                     <div   class="col-md-3">
                       <input placeholder="End Date Format-(YY/MM/DD)" type="date" name="flight_end_date"  class="form-control" required>
                     </div>
-                    <div class="col">
+                    <div class="col-md-3">
                         <button style="height" type="submit" class="btn btn-primary mb-2">Submit</button>
+                       <a style="height" class="btn btn-danger mb-2" style="color:#E8E8FE;" href="/np/dashboard/allflights">Reset</a>
                     </div>
                 </div>
 
@@ -136,7 +137,26 @@
             "Google Terrain": googleTerrain,
 
         };
+        var legend = L.control({position: 'bottomleft'});
+        legend.onAdd = function (map) {
 
+        var div = L.DomUtil.create('div', 'info legend');
+        labels = ['<strong>Categories</strong>'],
+        categories = ['Approved','Pending','Rejected'];
+        color=['Green','orange','Red'];
+
+        for (var i = 0; i < categories.length; i++) {
+
+                div.innerHTML += 
+                labels.push(
+                    '<i class="circle" style="opacity: 0.5;background:' + color[i] + '"></i> ' +
+                (categories[i] ? categories[i] : '+'));
+
+            }
+            div.innerHTML = labels.join('<br>');
+        return div;
+        };
+        legend.addTo(mymap);
     layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(mymap);
 
    // popup = marker.bindPopup("Lat:28.209499,Long:83.959518").openPopup();

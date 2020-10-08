@@ -35,7 +35,7 @@ class FlightPermission(models.Model):
         max_digits=20, decimal_places=10, null=True, blank=True)
     longitude = models.DecimalField(
         max_digits=20, decimal_places=10, null=True, blank=True)
-    altitude = models.CharField(max_length=200,blank=True,null=True)
+    altitude = models.CharField(max_length=200, blank=True, null=True)
     status = models.CharField(
         max_length=15, choices=STATUS_CHOICES, default='Pending')
     rejection_reason = models.TextField(null=True, blank=True)
@@ -63,8 +63,10 @@ class FlightPermission(models.Model):
             response_data = uri + str(self.uav_uid)
             message = "Your flight permission request has a update. Open this link to find out more {}".format(
                 response_data)
-
-            self.twilio.send_message(self.pilot_id__phone_number, message)
+            try:
+                self.twilio.send_message(self.pilot_id.phone_number, message)
+            except:
+                print("error")
 
         super().save(force_insert, force_update, using)
 

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth, User
 from django.shortcuts import get_object_or_404, redirect, reverse
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
@@ -23,6 +23,10 @@ from django.contrib import messages
 
 from .models import FlightPermission, Report, LocalAuthorities
 from registry.models import Aircraft, Operator, Manufacturer, Address
+from django.contrib.messages.views import SuccessMessageMixin
+from .form import AircraftForm
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 def homeView(request):
@@ -113,8 +117,11 @@ class FlightView(LoginRequiredMixin, TemplateView):
         if datasuccess is not None:
             if len(datasuccess) > 1:
                 msg = str(len(datasuccess)) + ' Flights were found'
-            else:
+            elif len(datasuccess) == 1:
                 msg = str(len(datasuccess)) + ' Flight was found'
+            else:
+                object_list = ""
+                msg = 'No Flight Found'
 
             messages.success(request, msg)
 
@@ -473,9 +480,30 @@ class OperdatorDatabaseView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         data = super(OperdatorDatabaseView, self).get_context_data(**kwargs)
         countdata = int(1)
+        mandata = Manufacturer.objects.order_by('full_name')
+        opedata = Operator.objects.order_by('company_name')
         data['test'] = FlightPermission.objects.order_by('uav_uuid')
         data['countdata'] = countdata
+        data['mandata'] = mandata
+        data['opedata'] = opedata
 
+        return data
+
+
+class DataUploadView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    model = Aircraft
+    print("bhaena")
+    template_name = 'flightres/operators_db.html'
+    form_class = AircraftForm
+    success_url = '/np/dashboard/operators'
+    success_message = ' Data created'
+
+    def get_context_data(self, **kwargs):
+        data = super(DataUploadView, self).get_context_data(**kwargs)
+        mandata = Manufacturer.objects.order_by('full_name')
+        opedata = Operator.objects.order_by('company_name')
+        data['mandata'] = mandata
+        data['opedata'] = opedata
         return data
 
 
