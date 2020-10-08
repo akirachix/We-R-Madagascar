@@ -32,10 +32,15 @@
                     <li>
                         <a href="{% url 'dashboard:permission'  type='special' %}">Manage Special Flight Permissions</a>
                     </li>
-                    <li>
-                        <a href="{% url 'dashboard:flightview' %}">All Flights</a>
-                    </li>
+                    
                 </ul>
+            </li>
+            <li class="is-submenu">
+                <a href="{% url 'dashboard:flightview' %}">
+                    <i class="material-icons">location_on</i>
+                    <span>All Flights Map</span>
+                </a>
+
             </li>
             <li class="is-submenu">
                 <a href="javascript:void(0);" class="menu-title">
