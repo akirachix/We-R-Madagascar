@@ -377,6 +377,28 @@ $(document).ready(function () {
         //   myMap.panTo([2, 22]);
 
         layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
+
+        
+        var legend = L.control({position: 'bottomleft'});
+        legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend');
+        labels = ['<strong>Categories</strong>'],
+        categories = ['Approved','Pending','Rejected'];
+        color=['Green','orange','Red'];
+
+        for (var i = 0; i < categories.length; i++) {
+
+                div.innerHTML += 
+                labels.push(
+                    '<i class="circle" style="opacity: 0.5;background:' + color[i] + '"></i> ' +
+                (categories[i] ? categories[i] : '+'));
+
+            }
+            div.innerHTML = labels.join('<br>');
+        return div;
+        };
+        legend.addTo(map);
     }
 
 });
