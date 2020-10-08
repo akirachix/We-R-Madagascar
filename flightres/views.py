@@ -24,7 +24,7 @@ from django.contrib import messages
 from .models import FlightPermission, Report, LocalAuthorities
 from registry.models import Aircraft, Operator, Manufacturer, Address
 from django.contrib.messages.views import SuccessMessageMixin
-from .form import AircraftForm
+from .form import AircraftForm,OperatorForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
@@ -492,7 +492,6 @@ class OperdatorDatabaseView(LoginRequiredMixin, ListView):
 
 class DataUploadView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Aircraft
-    print("bhaena")
     template_name = 'flightres/operators_db.html'
     form_class = AircraftForm
     success_url = '/np/dashboard/operators'
@@ -505,6 +504,14 @@ class DataUploadView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         data['mandata'] = mandata
         data['opedata'] = opedata
         return data
+
+class OperatorAddView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
+    model = Operator
+    template_name = 'flightres/operators_db.html'
+    form_class = OperatorForm
+    success_url = '/np/dashboard/operators'
+    success_message = ' Owner Added'
+
 
 
 def view_404(request, exception):

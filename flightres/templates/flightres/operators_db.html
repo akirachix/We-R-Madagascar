@@ -18,10 +18,10 @@
         </div>
         {% endfor %}
         <div class="card-body">
-            <button style="right: 176px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal1" class="modal-link"
+            <button style="right: 676px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal1" class="modal-link"
                     data-toggle="modal" data-target="#upload-sheet-modal1">Add
                     Data</a></button>
-            <button class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal" class="modal-link"
+            <button style="right: 500px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal" class="modal-link"
                     data-toggle="modal" data-target="#upload-sheet-modal">Upload
                     Sheet</a></button>
             <table id="admin-datatable" class="admin-datatable operators-tables">
@@ -232,13 +232,12 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for=" company_name">Owner</label>
+                                            <label for=" company_name">Owner <a modal-link="upload-sheet-modal2" class="modal-link" data-toggle="modal" data-target="#upload-sheet-modal2"><i class="material-icons">control_point</i></a></label>
                                             <select class="form-control" name=" operator" id=" company_name" required>
                                                 {% for data in opedata %}
                                                     <option value="{{data.id}}" selected>{{ data.company_name }}</option>
                                                 {% endfor %}
                                             </select>
-
                                         </div>
                                             </div>
                                             <div class="col-md-6">
@@ -358,6 +357,69 @@
                                             <div class="form-group">
                                             <label for="name">Remarks</label>
                                                 <textarea  class="form-control" name="remarks" required></textarea>
+                                        </div>
+                                        <br>
+                                        <div class="buttons is-end">
+                                            <button type="submit" class="common-button is-bg">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="popup" tabindex="-1" role="dialog" id="upload-sheet-modal2">
+        <div class="popup-container lg-popup map-popup">
+            <div class="popup-body">
+                <span class="close-icon"><i class="material-icons">close</i></span>
+                <div class="popup-header">
+                    <h3><b>Upload Data Sheet</b></h3>
+
+                </div>
+                <div class="popup-content">
+                    <div class="drone-details">
+                        <div class="row gx-md-3 gx-lg-3">
+                            <div class="col-xl-12 col-sm-12">
+                                <div class="drone-content col-left col-operators">
+                                    <form action="{% url 'dashboard:add-operator' %}" method="POST"
+                                        enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                {% if form.errors %}
+                                                {% for field in form %}
+                                                {% for error in field.errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                                                </div>
+                                                {% endfor %}
+                                                {% for messages in messages %}
+                                                <div class="success">
+                                                    <strong>{{ messages }}</strong>
+                                                </div>
+                                                {% endfor %}
+                                                {% endfor %}
+                                                {% for error in form.non_field_errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ error|escape }}</strong>
+                                                </div>
+                                                {% endfor %}
+                                                {% endif %}
+                                        <div class="form-group">
+                                            <label for="name">Company Name</label>
+                                            <input type="text" class="form-control" name="company_name" required>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Email</label>
+                                            <input type="email" class="form-control" name="email" required>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Phone Number</label>
+                                            <input type="text" class="form-control" name="phone_number" required>
+
                                         </div>
                                         <br>
                                         <div class="buttons is-end">
