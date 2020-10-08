@@ -18,10 +18,13 @@
         </div>
         {% endfor %}
         <div class="card-body">
+            <button style="right: 176px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal1" class="modal-link"
+                    data-toggle="modal" data-target="#upload-sheet-modal1">Add
+                    Data</a></button>
             <button class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal" class="modal-link"
                     data-toggle="modal" data-target="#upload-sheet-modal">Upload
                     Sheet</a></button>
-            <table id="admin-datatable" class="admin-datatable">
+            <table id="admin-datatable" class="admin-datatable operators-tables">
                 <thead>
                     <tr>
                         <th class="serial-th">S.N.</th>
@@ -137,7 +140,7 @@
             <div class="popup-body">
                 <span class="close-icon"><i class="material-icons">close</i></span>
                 <div class="popup-header">
-                    <h3><b>Upload Data Sheets</b></h3>
+                    <h3><b>Upload Data Sheet</b></h3>
 
                 </div>
                 <div class="popup-content">
@@ -177,6 +180,184 @@
                                         <div class="form-group">
                                             <label for="fileUpload">Upload your file</label>
                                             <input class="form-control" type="file" accept=".xls,.xlsx,.csv" name="sheet" id="sheet">
+                                        </div>
+                                        <br>
+                                        <div class="buttons is-end">
+                                            <button type="submit" class="common-button is-bg">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="popup" tabindex="-1" role="dialog" id="upload-sheet-modal1">
+        <div class="popup-container lg-popup map-popup">
+            <div class="popup-body">
+                <span class="close-icon"><i class="material-icons">close</i></span>
+                <div class="popup-header">
+                    <h3><b>Upload Data</b></h3>
+
+                </div>
+                <div class="popup-content">
+                    <div class="drone-details">
+                        <div class="row gx-md-3 gx-lg-3">
+                            <div class="col-xl-12 col-sm-12">
+                                <div class="drone-content col-left col-operators">
+                                    <form action="{% url 'dashboard:upload-data' %}" method="POST"
+                                        enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                {% if form.errors %}
+                                                {% for field in form %}
+                                                {% for error in field.errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                                                </div>
+                                                {% endfor %}
+                                                {% for messages in messages %}
+                                                <div class="success">
+                                                    <strong>{{ messages }}</strong>
+                                                </div>
+                                                {% endfor %}
+                                                {% endfor %}
+                                                {% for error in form.non_field_errors %}
+                                                <div class="alert alert-danger">
+                                                    <strong>{{ error|escape }}</strong>
+                                                </div>
+                                                {% endfor %}
+                                                {% endif %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for=" company_name">Owner</label>
+                                            <select class="form-control" name=" operator" id=" company_name" required>
+                                                {% for data in opedata %}
+                                                    <option value="{{data.id}}" selected>{{ data.company_name }}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                        </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="manufacturer">UAV Manufacture and Model</label>
+                                            <select class="form-control" name="manufacturer" id="manufacturer" required>
+                                                {% for data in mandata %}
+                                                    <option value="{{data.id}}" selected>{{data.full_name}}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Certificate No.</label>
+                                            <input type="text" class="form-control" name="certification_number" required>
+
+                                        </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Unique Identification No.</label>
+                                            <input type="number" class="form-control" name="unid" required>
+                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Address</label>
+                                            <input type="text" class="form-control" name="address" required>
+
+                                        </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Contact</label>
+                                            <input type="text" class="form-control" name="phone_number" required>
+                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Email</label>
+                                            <input type="email" class="form-control" name="email" required>
+
+                                        </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Serial No</label>
+                                            <input type="text" class="form-control" name="registration_mark" required>
+                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Date Of Manufacture</label>
+                                            <input type="date" class="form-control" name="begin_date" required>
+
+                                            </div>
+                                            </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="category">RPA/DRONE TYPE</label>
+                                                    <select class="form-control" name="category" id="category" required >
+                                                        <option value="Other" >Other</option>
+                                                        <option value="FIXED WING" >FIXED WING</option>
+                                                        <option value="ROTORCRAFT" >ROTORCRAFT</option>
+                                                        <option value="LIGHTER-THAN-AIR" >LIGHTER-THAN-AIR</option>
+                                                        <option value="HYBRID LIFT" >HYBRID LIFT</option>
+                                                        <option value="MULTI-COPTER" >MULTI-COPTER</option>
+                                                    </select>
+
+                                                </div>
+                                                </div>
+                                            </div>
+                                        <div class="form-group">
+                                            <label for="name">Weight</label>
+                                            <input type="float" class="form-control" name="mass" required>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Colour</label>
+                                            <input type="text" class="form-control" name="color" required>
+
+                                        </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Initial Issued Date</label>
+                                            <input type="date" class="form-control" name="initial_issued_date" required>
+                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Renewal Date</label>
+                                            <input type="date" class="form-control" name="renewal_date" required>
+
+                                        </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Validity</label>
+                                            <input type="number" class="form-control" name="validity" required>
+                                        </div>
+                                            </div>
+                                        </div>
+                                            <div class="form-group">
+                                            <label for="name">Remarks</label>
+                                                <textarea  class="form-control" name="remarks" required></textarea>
                                         </div>
                                         <br>
                                         <div class="buttons is-end">

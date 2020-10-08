@@ -122,17 +122,17 @@ LOGIN_REDIRECT_URL = '/np/dashboard'
 #     }
 # }
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'droneregistry.sqlite3'),
     }
 }
+
+
+
 '''
-
-
-
 
 DATABASES = {
     'default': {
@@ -145,7 +145,7 @@ DATABASES = {
     }
 }
 
-
+'''
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
