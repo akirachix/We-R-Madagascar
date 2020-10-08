@@ -1,4 +1,5 @@
 version: 2.1
+
 ### Define these in circleci project settings or in context.
 # GIT_USER                    ## User used to access git repository & package.
 # GIT_TOKEN                   ## Token from github. see: https://github.com/settings/tokens
@@ -71,15 +72,18 @@ jobs:
       - image: debian:buster # Using Debian base image for deployment.
     steps:
       - run:
-          name: Install & Configure SSH
+          name: Install OpenSSH
           command: apt update && apt install -y ssh
       - add_ssh_keys:
           fingerprints:
             - "e9:7e:ec:c8:f8:7a:59:3f:17:bb:7a:83:45:bb:9e:1c" #Defiined in SSH-Vars in circleci/project-settings/ssh
       - run:
-          name:  Deploy
+          name:  Deploy to Server
           command: |
             ssh -o "StrictHostKeyChecking=no" $SSH_USER@$SERVER_139 sh $PROJECT_ROOT_DIR/deploy.sh $GIT_USER $GIT_TOKEN $CIRCLE_PROJECT_USERNAME $CIRCLE_PROJECT_REPONAME $PROJECT_ROOT_DIR master
+      - run:
+          name: Install CURL
+          command: apt update && apt install -y curl
       - slack/notify:   # Used to push notification to Slack channel. Needs more of these. 
           color: '#42e2f4'
           message: $CIRCLE_PROJECT_REPONAME Deployment Successful on $SERVER_139
@@ -103,7 +107,6 @@ workflows:
           context: global
           requires:
             - test
-            - build
           filters:
             branches:
               only:
