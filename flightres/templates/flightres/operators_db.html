@@ -10,7 +10,7 @@
 <main class="admin-main">
     <div class="main-card">
         <div class="card-header">
-            <h1>Operators Database</h1>
+            <h1>Registered Drones</h1>
         </div>
         {% for messages in messages %}
         <div class="alert alert-danger">
@@ -19,11 +19,11 @@
         {% endfor %}
         <div class="card-body">
             <button style="right: 676px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal1" class="modal-link"
-                    data-toggle="modal" data-target="#upload-sheet-modal1">Add
-                    Data</a></button>
+                    data-toggle="modal" data-target="#upload-sheet-modal1">Register Drones
+                    </a></button>
             <button style="right: 500px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal" class="modal-link"
-                    data-toggle="modal" data-target="#upload-sheet-modal">Upload
-                    Sheet</a></button>
+                    data-toggle="modal" data-target="#upload-sheet-modal">Bulk Register Drones
+                    </a></button>
             <table id="admin-datatable" class="admin-datatable operators-tables">
                 <thead>
                     <tr>
