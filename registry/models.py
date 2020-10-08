@@ -242,17 +242,17 @@ class Operator(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)  #
     expiration = models.DateTimeField(
         default=datetime.combine(date.today() + relativedelta(months=+24), datetime.min.time()).replace(
-            tzinfo=timezone.utc))
-    operator_type = models.IntegerField(choices=OPTYPE_CHOICES, default=0)
-    address = models.ForeignKey(Address, models.CASCADE)
-    operational_authorizations = models.ManyToManyField(Authorization, related_name='operational_authorizations')
-    authorized_activities = models.ManyToManyField(Activity, related_name='authorized_activities')
+            tzinfo=timezone.utc), blank=True, null=True)
+    operator_type = models.IntegerField(choices=OPTYPE_CHOICES, default=0, blank=True, null=True)
+    address = models.ForeignKey(Address, models.CASCADE, blank=True, null=True)
+    operational_authorizations = models.ManyToManyField(Authorization, related_name='operational_authorizations', blank=True, null=True)
+    authorized_activities = models.ManyToManyField(Activity, related_name='authorized_activities', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     vat_number = models.CharField(max_length=25, blank=True, null=True)
     insurance_number = models.CharField(max_length=25, blank=True, null=True)
     company_number = models.CharField(max_length=25, blank=True, null=True)
-    country = models.CharField(max_length=2, choices=COUNTRY_CHOICES_ISO3166, default='NA')
+    country = models.CharField(max_length=2, choices=COUNTRY_CHOICES_ISO3166, default='NA', blank=True, null=True)
 
     def __unicode__(self):
         return self.company_name
