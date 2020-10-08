@@ -5,6 +5,7 @@
 {% block links %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/popup-image.css' %}">
 <script src="{% static 'js/modal-image.js' %}"></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 {% endblock links %}
 
 {% block body %}
@@ -117,7 +118,10 @@
                                                                 </li>
                                                                 <li>
                                                                     <h4>Flight Permission Nearby</h4>
-                                                                    <div class="permit-list">
+                                                                    <div id="map" data-latitude={{i.latitude}} data-longitude={{i.longitude}} style="width: 100%;
+                                                                    height: 300px;"/>
+
+                                                                    <!-- <div class="permit-list">
                                                                         {% for perm in j %}
                                                                         <button data-toggle="modal"
                                                                             data-target="#open-modal-flight"
@@ -141,7 +145,7 @@
                                                                             </div>
                                                                         </div>
                                                                         {% endfor %}
-                                                                    </div>
+                                                                    </div> -->
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -293,6 +297,7 @@
 
 {% block footer_links %}
 <script src="{% static 'js/modal-image.js' %}"></script>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 <script type="text/javascript">
     var flight_objects = '{{ json_data }}'
     var image_url_objects = '{{image_json_data}}'
@@ -303,7 +308,49 @@
     }
 
     $(document).ready(function () {
+        const mapElement = document.querySelector('#map');
+        const dataLatitude = mapElement.dataset.latitude
+        const dataLongitude = mapElement.dataset.longitude
+        // console.log(map.dataset.latitude);
+        // console.log(map.dataset.latitude);
+        var mymap = L.map('map',{
+            fullscreenControl: {
+                pseudoFullscreen: false // if true, fullscreen to page width and height
+                }}).setView([dataLatitude,dataLongitude], 8);
 
+        osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'your.mapbox.access.token'
+        }).addTo(mymap);
+        const customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+
+        var mark = L.marker([dataLatitude, dataLongitude]).addTo(mymap);
+        osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            })
+
+            googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            }).addTo(map);
+            googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+            googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+            googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+
+            
         function closePopup() {
             $('.close-icon').on('click', function (e) {
                 e.preventDefault();
@@ -320,7 +367,7 @@
 
         flight_objects = flight_objects.replace(/&quot;/g, '"').replace(/uav_uuid__operator__company_name/g, 'company_name');
         flight_object = JSON.parse(flight_objects)
-
+        console.log(flight_object);
 
         for (var i = 0; i < expandBtn.length; i++) {
             expandBtn[i].addEventListener('click', function (e) {

@@ -8690,7 +8690,8 @@ aside.admin-sidebar {
     .about-logo {
       margin-bottom: 100px; } }
   .about-logo .row-logo .col-logo:first-child img {
-    max-width: 100px; }
+    max-width: 130px;
+  }
     @media only screen and (max-width: 1560px) {
       .about-logo .row-logo .col-logo:first-child img {
         max-width: 80px; } }
