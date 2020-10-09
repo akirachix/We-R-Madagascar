@@ -8691,13 +8691,13 @@ aside.admin-sidebar {
       margin-bottom: 100px; } }
   .about-logo .row-logo .col-logo:first-child img {
     max-width: 130px;
-  }
+    }
     @media only screen and (max-width: 1560px) {
       .about-logo .row-logo .col-logo:first-child img {
-        max-width: 80px; } }
+        max-width: 130px; } }
     @media only screen and (max-width: 1440px) {
       .about-logo .row-logo .col-logo:first-child img {
-        max-width: 60px; } }
+        max-width: 130px; } }
   .about-logo .row-logo .col-logo:nth-child(2) img {
     max-width: 110px; }
     @media only screen and (max-width: 1560px) {
