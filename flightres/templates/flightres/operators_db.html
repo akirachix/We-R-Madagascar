@@ -10,7 +10,7 @@
 <main class="admin-main">
     <div class="main-card">
         <div class="card-header">
-            <h1>Operators Database</h1>
+            <h1>Drone Registry Database</h1>
         </div>
         {% for messages in messages %}
         <div class="alert alert-danger">
@@ -18,12 +18,12 @@
         </div>
         {% endfor %}
         <div class="card-body">
-            <button style="right: 676px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal1" class="modal-link"
-                    data-toggle="modal" data-target="#upload-sheet-modal1">Add
-                    Data</a></button>
+            <button style="right: 700px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal1" class="modal-link"
+                    data-toggle="modal" data-target="#upload-sheet-modal1">Register a New Drone
+                    </a></button>
             <button style="right: 500px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal" class="modal-link"
-                    data-toggle="modal" data-target="#upload-sheet-modal">Upload
-                    Sheet</a></button>
+                    data-toggle="modal" data-target="#upload-sheet-modal">Bulk Register Drones
+                    </a></button>
             <table id="admin-datatable" class="admin-datatable operators-tables">
                 <thead>
                     <tr>
@@ -376,7 +376,7 @@
             <div class="popup-body">
                 <span class="close-icon"><i class="material-icons">close</i></span>
                 <div class="popup-header">
-                    <h3><b>Upload Data Sheet</b></h3>
+                    <h3><b>Add Owner</b></h3>
 
                 </div>
                 <div class="popup-content">
