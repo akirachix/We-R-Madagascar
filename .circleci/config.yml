@@ -47,6 +47,10 @@ jobs:
             python3 manage.py collectstatic --noinput
             python manage.py makemigrations --merge --noinput
             python manage.py migrate
+      - slack/status:
+          fail_only: true
+          only_for_branches: master, production
+          webhook: $SLACK_WEBHOOK      
   build:
     docker:
       - image: debian:buster # primary container for the build job
