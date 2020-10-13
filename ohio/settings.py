@@ -144,10 +144,6 @@ DATABASES = {
     }
 }
 '''
-<<<<<<< HEAD
-=======
-
->>>>>>> 6273b1e21393c8cdc2598b1604bc5bd80ba3fb4f
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
