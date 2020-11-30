@@ -3,7 +3,7 @@ from . import views
 # importing views from views..py
 from .views import FlightPermissionList, approvePerm, flightReqResponseView, ComplainListView, dashboardView, \
     updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView, denyPerm, \
-    assignPerm, bulkupload, FlightView , DataUploadView ,OperatorAddView
+    assignPerm, bulkupload, FlightView , DataUploadView ,OperatorAddView , DataEditView
 
 urlpatterns = [
     path('', dashboardView, name='dashboard'),
@@ -28,6 +28,7 @@ urlpatterns = [
     path('changepassword/', views.change_password, name='changepassword'),
     path('upload_sheet-new', bulkupload, name="upload-sheet-new"),
     path('upload_data', DataUploadView.as_view(), name="upload-data"),
+    path('edit_data/<uuid:pk>', DataEditView.as_view(), name="data-edit"),
     path('add_operator', OperatorAddView.as_view(), name="add-operator")
 
 ]
