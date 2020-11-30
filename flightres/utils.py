@@ -10,7 +10,8 @@ def reverseGeocode(query):
         data = {
             'key': geo_token,
             'q': query,
-            'format': 'json'
+            'format': 'json',
+            'countrycodes': 'np',
         }
 
         response = requests.get(url, params=data)
