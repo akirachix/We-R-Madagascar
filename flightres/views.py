@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth, User
 from django.shortcuts import get_object_or_404, redirect, reverse
-from django.views.generic import ListView, DetailView, TemplateView, CreateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
@@ -25,8 +25,8 @@ from .models import FlightPermission, Report, LocalAuthorities
 from registry.models import Aircraft, Operator, Manufacturer, Address
 from django.contrib.messages.views import SuccessMessageMixin
 from .form import AircraftForm,OperatorForm
-from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.urls import reverse, reverse_lazy
 
 
 def homeView(request):
@@ -504,6 +504,26 @@ class DataUploadView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         data['mandata'] = mandata
         data['opedata'] = opedata
         return data
+
+class DataEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+    model = Aircraft
+    template_name = 'flightres/operators_db.html'
+    form_class = AircraftForm
+    success_url = '/np/dashboard/operators'
+    success_message = 'Aircraft data edited'
+
+
+    def get_context_data(self, **kwargs):
+        data = super(DataEditView, self).get_context_data(**kwargs)
+        mandata = Manufacturer.objects.order_by('full_name')
+        print(self.kwargs['pk'])
+        opedata = Operator.objects.order_by('company_name')
+        data['mandata'] = mandata
+        data['opedata'] = opedata
+
+        return data
+
+
 
 class OperatorAddView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Operator
