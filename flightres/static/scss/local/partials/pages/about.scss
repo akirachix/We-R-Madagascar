@@ -179,55 +179,16 @@
     }
     .row-logo{
         .col-logo{
-            &:first-child{
+            .image-logo{
                 img{
-                    max-width: 130px;
-                    margin-right: 18px;
-                    @media #{$breakpoint-lg-desktop}{
-                        max-width: 80px;
+                    &:not(:last-child){
+                        margin-right: 30px;
                     }
                     @media #{$breakpoint-desktop}{
-                        max-width: 60px;
+                        max-width: 100px;
                     }
-                }
-            }
-            &:nth-child(2){
-                img{
-                    max-width: 110px;
-                    @media #{$breakpoint-lg-desktop}{
-                        max-width: 90px;
-                    }
-                    @media #{$breakpoint-desktop}{
-                        max-width: 70px;
-                    }
-                }
-            }
-            &:last-child{
-                img{
-                    &:first-child{
-                        max-width: 250px;
-                        margin-right: 20px;
-                        @media #{$breakpoint-lg-desktop}{
-                            max-width: 230px;
-                            margin-right: 15px;
-                        }
-                        @media #{$breakpoint-desktop}{
-                            max-width: 180px;
-                            margin-right: 10px;
-                        }
-                    }
-                    &:last-child{
-                        max-width: 150px;
-                        @media #{$breakpoint-lg-desktop}{
-                            max-width: 130px;
-                        }
-                        @media #{$breakpoint-desktop}{
-                            max-width: 100px;
-                        }
-                        @media #{$breakpoint-xs}{
-                            margin-top: 30px;
-                        }
-                       
+                    @media #{$breakpoint-xs}{
+                        margin-bottom: 20px;
                     }
                 }
             }
