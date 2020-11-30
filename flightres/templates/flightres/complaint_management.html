@@ -44,7 +44,9 @@
                 </thead>
                 <tbody>
                     {% for i, j, k in data %}
-                    <tr>
+                    <tr id="show-popup"
+                    modal-link="complain{{ i.uav_uid }}"
+                    class="modal-link">
                         <td>{{ i.uav_uid }}</td>
                         <td>
                             <time>{{ i.created_at }}</time>
@@ -69,10 +71,12 @@
                         </td>
 
                         <td>
-                            <a id="show-popup" modal-link="complain{{ i.uav_uid }}" class="modal-link"><i
+                            <a id="show-popup" modal-link="complain{{ i.uav_uid }}" 
+                            class="modal-link"><i
                                     class="material-icons" data-toggle="modal"
                                     data-target="#complain{{ i.uav_uid }}">chevron_right</i></a>
-                            <div class="popup" tabindex="-1" role="dialog" id="complain{{ i.uav_uid }}">
+                            <div class="popup" tabindex="-1" role="dialog" 
+                            id="complain{{ i.uav_uid }}">
                                 <div class="popup-container lg-popup map-popup">
                                     <div class="popup-body">
                                         <span class="close-icon"><i class="material-icons">close</i></span>
@@ -310,7 +314,18 @@
     $(document).ready(function () {
         const mapElement = document.querySelector('#map');
         const dataLatitude = mapElement.dataset.latitude
-        const dataLongitude = mapElement.dataset.longitude
+        const dataLongitude = mapElement.dataset.longitude;
+        function closePopup() {
+            // alert('closePopupFun');
+            $('.close-icon').on('click', function (e) {
+                // e.preventDefault();
+                e.stopPropagation();
+                console.log($(this));
+                $(this).closest('.popup').removeClass('open');
+            });
+        }
+
+        closePopup();
         // console.log(map.dataset.latitude);
         // console.log(map.dataset.latitude);
         var mymap = L.map('map',{
@@ -351,14 +366,7 @@
             });
 
             
-        function closePopup() {
-            $('.close-icon').on('click', function (e) {
-                e.preventDefault();
-                $(this).closest('.popup').removeClass('open');
-            });
-        }
-
-        closePopup();
+        
         // var lat = document.getElementById('map').getAttribute('value').split(',')[0]
         // var long = document.getElementById('map').getAttribute('value').split(',')[1]
 
