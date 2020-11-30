@@ -63,6 +63,16 @@ $(document).ready(function () {
         let approve_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/approve" class="common-button is-bg">Approve</a>`:`<a class="common-button is-bg is-disable">Approve</a>`
         let deny_button = current_email===data.assigned_to__email?`<span  class="common-button is-border cancel-button" id="denyButton">Deny</span>`:`<span  class="common-button is-border cancel-button is-disable">Deny</span>`
         let assignee = data.assigned_to__username===null?`<button class="common-button is-bg assign-btn">Assign Self</button>`:`<p style="display: inline-block;">Assigned to <b> ${data.assigned_to__username}</b></p>`;
+        let drone_insurance = data.flight_insurance_url===null?``:`<div class="col-md-4">
+                                                                        <div class="file-upload">
+                                                                            <a href="`+ data.flight_insurance_url + `" target="_blank" class="file-link">
+                                                                                <div class="file-icon">
+                                                                                    <i class="material-icons">description</i>
+                                                                                </div>
+                                                                                <p>Drone Insurance</p>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>`
         var html1 = `
         <div class="popup-header">
             <h3>Permission Request for <b>ID `+ data.uav_uid + `</b></h3>
@@ -162,16 +172,7 @@ $(document).ready(function () {
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="file-upload">
-                                                <a href="`+ data.flight_insurance_url + `" target="_blank" class="file-link">
-                                                    <div class="file-icon">
-                                                        <i class="material-icons">description</i>
-                                                    </div>
-                                                    <p>Drone Insurance</p>
-                                                </a>
-                                            </div>
-                                        </div>
+                                        ${drone_insurance}
                                     </div>
                                 </li>
                             </ul>
