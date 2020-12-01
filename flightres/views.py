@@ -24,7 +24,7 @@ from django.contrib import messages
 from .models import FlightPermission, Report, LocalAuthorities
 from registry.models import Aircraft, Operator, Manufacturer, Address
 from django.contrib.messages.views import SuccessMessageMixin
-from .form import AircraftForm,OperatorForm
+from .form import AircraftForm, OperatorForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 
@@ -435,8 +435,8 @@ def bulkupload(request):
                     email=email,
                 )
                 aircraft = Aircraft.objects.update_or_create(
-                    manufacturer=Manufacturer.objects.get(address=Address.objects.get(address_line_1=address)),
-                    operator=Operator.objects.get(address=Address.objects.get(address_line_1=address)),
+                    manufacturer=Manufacturer.objects.get(id=manufacturerdata.id),
+                    operator=Operator.objects.get(id=operator.id),
                     certification_number=certification_number,
                     renewal_date=renewal_date,
                     validity=validity,
@@ -490,39 +490,123 @@ class OperdatorDatabaseView(LoginRequiredMixin, ListView):
         return data
 
 
-class DataUploadView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    model = Aircraft
-    template_name = 'flightres/operators_db.html'
-    form_class = AircraftForm
-    success_url = '/np/dashboard/operators'
-    success_message = ' Data created'
+def dronedataupload(request):
+    if request.method == 'POST':
+        addressdata = Address.objects.update_or_create(
+            address_line_1=request.POST['address']
+        )
+        manufacturerdata = Manufacturer.objects.create(
+            address=Address.objects.get(address_line_1=request.POST['address']),
+            full_name=request.POST['full_name']
+        )
+        operator = Operator.objects.create(
+            address=Address.objects.get(address_line_1=request.POST['address']),
+            company_name=request.POST['company_name'],
+            phone_number=request.POST['phone_number'],
+            email=request.POST['email'],
+        )
+        aircraft = Aircraft.objects.update_or_create(
+            manufacturer=Manufacturer.objects.get(id=manufacturerdata.id),
+            operator=Operator.objects.get(id=operator.id),
+            certification_number=request.POST['certification_number'],
+            renewal_date=request.POST['renewal_date'],
+            validity=request.POST['validity'],
+            remarks=request.POST['remarks'],
+            initial_issued_date=request.POST['initial_issued_date'],
+            color=request.POST['color'],
+            unid=request.POST['unid'],
+            category=request.POST['category'],
+            mass=request.POST['mass'],
+            registration_mark=request.POST['registration_mark'],
+            begin_date=request.POST['begin_date']
 
-    def get_context_data(self, **kwargs):
-        data = super(DataUploadView, self).get_context_data(**kwargs)
+        )
         mandata = Manufacturer.objects.order_by('full_name')
         opedata = Operator.objects.order_by('company_name')
-        data['mandata'] = mandata
-        data['opedata'] = opedata
-        return data
+        queryset = Aircraft.objects.all().order_by('-unid')
+        test = FlightPermission.objects.order_by('uav_uuid')
+        context = {
+            'metadata': mandata,
+            'opedata': opedata,
+            'object_list': queryset,
+            'test': test
 
-class DataEditView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    model = Aircraft
-    template_name = 'flightres/operators_db.html'
-    form_class = AircraftForm
-    success_url = '/np/dashboard/operators'
-    success_message = 'Aircraft data edited'
-
-
-    def get_context_data(self, **kwargs):
-        data = super(DataEditView, self).get_context_data(**kwargs)
+        }
+        messages.add_message(request, messages.SUCCESS, " Drone Profile Created ")
+        return render(request, 'flightres/operators_db.html', context)
+    else:
         mandata = Manufacturer.objects.order_by('full_name')
-        print(self.kwargs['pk'])
         opedata = Operator.objects.order_by('company_name')
-        data['mandata'] = mandata
-        data['opedata'] = opedata
+        queryset = Aircraft.objects.all().order_by('-unid')
+        test = FlightPermission.objects.order_by('uav_uuid')
+        context = {
+            'metadata': mandata,
+            'opedata': opedata,
+            'object_list': queryset,
+            'test': test
 
-        return data
+        }
+        return render(request, 'flightres/operators_db.html', context)
 
+
+def dronedataupdate(request, pk):
+    if request.method == 'POST':
+        test1 = Aircraft.objects.get(id=pk)
+        foraircraft = Aircraft.objects.filter(id=pk)
+        test2 = Manufacturer.objects.get(id=test1.manufacturer.id)
+        test4 = Operator.objects.get(id=test1.operator.id)
+
+        test3 = Address.objects.get(id=test2.address.id)
+        test3.address_line_1 = request.POST['address']
+        test3.save()
+        test2.full_name = request.POST['full_name']
+        manufacturerdata = test2.save()
+        test4.company_name = request.POST['company_name']
+        test4.phone_number = request.POST['phone_number']
+        test4.email = request.POST['email']
+        operator = test4.save()
+        aircraft = foraircraft.update(
+            manufacturer=Manufacturer.objects.get(id=test2.id),
+            operator=Operator.objects.get(id=test4.id),
+            certification_number=request.POST['certification_number'],
+            renewal_date=request.POST['renewal_date'],
+            validity=request.POST['validity'],
+            remarks=request.POST['remarks'],
+            initial_issued_date=request.POST['initial_issued_date'],
+            color=request.POST['color'],
+            unid=request.POST['unid'],
+            category=request.POST['category'],
+            mass=request.POST['mass'],
+            registration_mark=request.POST['registration_mark'],
+            begin_date=request.POST['begin_date']
+
+        )
+        mandata = Manufacturer.objects.order_by('full_name')
+        opedata = Operator.objects.order_by('company_name')
+        queryset = Aircraft.objects.all().order_by('-unid')
+        test = FlightPermission.objects.order_by('uav_uuid')
+        context = {
+            'metadata': mandata,
+            'opedata': opedata,
+            'object_list': queryset,
+            'test': test
+
+        }
+        messages.add_message(request, messages.SUCCESS, " Drone Profile Updated ")
+        return render(request, 'flightres/operators_db.html', context)
+    else:
+        mandata = Manufacturer.objects.order_by('full_name')
+        opedata = Operator.objects.order_by('company_name')
+        queryset = Aircraft.objects.all().order_by('-unid')
+        test = FlightPermission.objects.order_by('uav_uuid')
+        context = {
+            'metadata': mandata,
+            'opedata': opedata,
+            'object_list': queryset,
+            'test': test
+
+        }
+        return render(request, 'flightres/operators_db.html', context)
 
 
 class OperatorAddView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -531,7 +615,6 @@ class OperatorAddView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     form_class = OperatorForm
     success_url = '/np/dashboard/operators'
     success_message = ' Owner Added'
-
 
 
 def view_404(request, exception):
