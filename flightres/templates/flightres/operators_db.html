@@ -18,7 +18,27 @@
         </div>
         {% endfor %}
         <div class="card-body">
-            <form method="post" enctype="multipart/form-data">{% csrf_token %}<button type="button" class="common-button is-bg link-btn" style="background-color:whitesmoke;margin-left:20px"><a style="color:#7d7d7d" href="{% static '/samplefiles/samplefile.csv' %}" download="samplefile.csv">View Template</a></button></form>
+            {% if form.errors %}
+            {% for field in form %}
+            {% for error in field.errors %}
+            <div class="alert alert-danger">
+            <strong>{{ field.name|title }} {{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            {% for messages in messages %}
+            <div class="success">
+                <strong>{{ messages }}</strong>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            <button type="button" class="common-button is-bg link-btn" style="background-color:whitesmoke;margin-left:20px"><a style="color:#7d7d7d" href="{% static '/samplefiles/samplefile.csv' %}" download="samplefile.csv">View Template</a></button></form>
             <button style="right: 700px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal1" class="modal-link"
                     data-toggle="modal" data-target="#upload-sheet-modal1">Register a New Drone
                     </a></button>
@@ -57,8 +77,6 @@
                         <td>{{ object.certification_number }}</td>
                         <td><b>{{ object.operator.company_name }}</b></td>
                         <td>{{ object.operator.address.address_line_1 }}
-                            ,{{ object.operator.address.city }}
-                            ,{{ object.operator.address.country }}
                         </td>
                         <td>{{ object.operator.phone_number }}</td>
                         <td>{{ object.operator.email }}</td>
@@ -92,44 +110,18 @@
                                                         <div class="drone-content col-left col-operators">
                                                             <form action="/np/dashboard/edit_data/{{object.id}}"  method="POST" enctype="multipart/form-data">
                                                                 {% csrf_token %}
-                                                                {% if form.errors %}
-                                                                {% for field in form %}
-                                                                {% for error in field.errors %}
-                                                                <div class="alert alert-danger">
-                                                                    <strong>{{ field.name|title }} {{ error|escape }}</strong>
-                                                                </div>
-                                                                {% endfor %}
-                                                                {% for messages in messages %}
-                                                                <div class="success">
-                                                                    <strong>{{ messages }}</strong>
-                                                                </div>
-                                                                {% endfor %}
-                                                                {% endfor %}
-                                                                {% for error in form.non_field_errors %}
-                                                                <div class="alert alert-danger">
-                                                                    <strong>{{ error|escape }}</strong>
-                                                                </div>
-                                                                {% endfor %}
-                                                                {% endif %}
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for=" company_name">Owner <a modal-link="upload-sheet-modal2" class="modal-link" data-toggle="modal" data-target="#upload-sheet-modal2"><i class="material-icons">control_point</i></a></label>
-                                                            <select class="form-control" name=" operator" id=" company_name" required>
-                                                                {% for data in opedata %}
-                                                                    <option value="{{data.id}}" selected>{{ data.company_name }}</option>
-                                                                {% endfor %}
-                                                            </select>
+                                                            <label for="name">Owner</label>
+                                                            <input type="text" value="{{ object.operator.company_name }}" class="form-control" name="company_name" required>
+
                                                         </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="manufacturer">UAV Manufacture and Model</label>
-                                                            <select class="form-control" name="manufacturer" id="manufacturer" required>
-                                                                {% for data in mandata %}
-                                                                    <option value="{{data.id}}" selected>{{data.full_name}}</option>
-                                                                {% endfor %}
-                                                            </select>
+                                                            <label for="name">UAV Manufacturer & Model</label>
+                                                            <input type="text" value="{{ object.manufacturer.full_name }}" class="form-control" name="full_name" required>
 
                                                         </div>
                                                             </div>
@@ -183,7 +175,7 @@
                                                             <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="name">Date Of Manufacture</label>
-                                                            <input type="text" value="{{ object.begin_date.date }}" class="form-control" name="begin_date" placeholder="MM/DD/YYYY" required>
+                                                            <input type="date" value="{{ object.begin_date.date|date:'Y-m-d'  }}" class="form-control" name="begin_date" placeholder="MM/DD/YYYY" required>
 
                                                             </div>
                                                             </div>
@@ -203,8 +195,8 @@
                                                                 </div>
                                                             </div>
                                                         <div class="form-group">
-                                                            <label for="name">Weight</label>
-                                                            <input type="float" value="{{ object.mass }}" class="form-control" name="mass" required>
+                                                            <label for="name">Weight(In Kg)</label>
+                                                            <input type="float" value="{{ object.mass }}" placeholder="Please Don't Enter String!" class="form-control" name="mass" required>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-6">
@@ -217,7 +209,7 @@
                                                             <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="name">Initial Issued Date</label>
-                                                            <input type="text" value="{{ object.initial_issued_date.date }}" class="form-control" placeholder="MM/DD/YYYY" name="initial_issued_date" required>
+                                                            <input type="date" value="{{ object.initial_issued_date.date|date:'Y-m-d' }}" class="form-control" placeholder="MM/DD/YYYY" name="initial_issued_date" required>
                                                         </div>
                                                             </div>
                                                         </div>
@@ -225,7 +217,7 @@
                                                             <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="name">Renewal Date</label>
-                                                            <input type="text" value="{{ object.renewal_date.date }}" class="form-control" placeholder="MM/DD/YYYY" name="renewal_date" required>
+                                                            <input type="date" value="{{ object.renewal_date.date|date:'Y-m-d' }}" class="form-control" placeholder="MM/DD/YYYY" name="renewal_date" required>
 
                                                         </div>
                                                             </div>
@@ -285,25 +277,6 @@
                                     <form action="{% url 'dashboard:upload-sheet-new' %}" method="POST"
                                         enctype="multipart/form-data">
                                                 {% csrf_token %}
-                                                {% if form.errors %}
-                                                {% for field in form %}
-                                                {% for error in field.errors %}
-                                                <div class="alert alert-danger">
-                                                    <strong>{{ field.name|title }} {{ error|escape }}</strong>
-                                                </div>
-                                                {% endfor %}
-                                                {% for messages in messages %}
-                                                <div class="success">
-                                                    <strong>{{ messages }}</strong>
-                                                </div>
-                                                {% endfor %}
-                                                {% endfor %}
-                                                {% for error in form.non_field_errors %}
-                                                <div class="alert alert-danger">
-                                                    <strong>{{ error|escape }}</strong>
-                                                </div>
-                                                {% endfor %}
-                                                {% endif %}
                                         <div class="form-group">
                                             <label for="name">Category:</label>
                                             <select class="form-control" name="name" id="name" >
@@ -363,29 +336,22 @@
                                                 </div>
                                                 {% endfor %}
                                                 {% endif %}
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for=" company_name">Owner <a modal-link="upload-sheet-modal2" class="modal-link" data-toggle="modal" data-target="#upload-sheet-modal2"><i class="material-icons">control_point</i></a></label>
-                                            <select class="form-control" name=" operator" id=" company_name" required>
-                                                {% for data in opedata %}
-                                                    <option value="{{data.id}}" selected>{{ data.company_name }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="manufacturer">UAV Manufacture and Model</label>
-                                            <select class="form-control" name="manufacturer" id="manufacturer" required>
-                                                {% for data in mandata %}
-                                                    <option value="{{data.id}}" selected>{{data.full_name}}</option>
-                                                {% endfor %}
-                                            </select>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="name">Owner</label>
+                                                            <input type="text" value="{{ object.operator.company_name }}" class="form-control" name="company_name" required>
 
-                                        </div>
-                                            </div>
-                                        </div>
+                                                        </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="name">UAV Manufacturer & Model</label>
+                                                            <input type="text" value="{{ object.manufacturer.full_name }}" class="form-control" name="full_name" required>
+
+                                                        </div>
+                                                            </div>
+                                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                         <div class="form-group">
@@ -455,8 +421,8 @@
                                                 </div>
                                             </div>
                                         <div class="form-group">
-                                            <label for="name">Weight</label>
-                                            <input type="float" class="form-control" name="mass" required>
+                                            <label for="name">Weight(In Kg)</label>
+                                            <input type="float" placeholder="Please Don't Enter String!" class="form-control" name="mass" required>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
