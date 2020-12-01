@@ -424,11 +424,11 @@ def bulkupload(request):
                 addressdata = Address.objects.update_or_create(
                     address_line_1=address,
                 )
-                manufacturerdata = Manufacturer.objects.update_or_create(
+                manufacturerdata, created_manufacturer = Manufacturer.objects.update_or_create(
                     address=Address.objects.get(address_line_1=address),
                     full_name=manufacturer
                 )
-                operator = Operator.objects.update_or_create(
+                operator, created_operator = Operator.objects.update_or_create(
                     address=Address.objects.get(address_line_1=address),
                     company_name=company_name,
                     phone_number=phone_number,
