@@ -93,7 +93,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
             "object_list": object_list
 
         }
-        return render(request, 'flightres/map.html', context)
+        return render(request, 'flightres/allflight.html', context)
 
     def post(self, request, *args, **kwargs):
         start_date = request.POST['flight_start_date']
@@ -137,7 +137,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
 
             }
 
-        return render(request, 'flightres/map.html', context)
+        return render(request, 'flightres/allflight.html', context)
 
 
 class FlightPermissionList(LoginRequiredMixin, ListView):

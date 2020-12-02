@@ -1,10 +1,10 @@
 [class*=common-button] {
     -webkit-font-smoothing: antialiased;
     font-size: 0.875rem;
-    font-weight: 400;
+    font-weight: 600;
     text-decoration: none;
     text-transform: capitalize;
-    padding: .25rem 1rem;
+    padding: .425rem 1rem;
     display: -webkit-inline-box;
     display: inline-flex;
     position: relative;
@@ -15,7 +15,6 @@
     box-sizing: border-box;
     min-width: 150px;
     min-height: 40px;
-    height: 40px;
     border: none;
     outline: none;
     line-height: inherit;
@@ -33,17 +32,17 @@
         outline: none !important;
     }
     @media #{$breakpoint-lg-desktop}{
+        padding: .325rem 1rem;
         font-size: .75rem;
         min-width: 130px;
         min-height: 35px;
-        height: 35px;
         @include radius(4px);
     }
     @media #{$breakpoint-desktop}{
         padding: .25rem 1rem;
+        font-size: .625rem;
         min-width: 100px;
-        min-height: 30px;
-        height: 30px;
+        min-height: 28px;
         border: .5px solid $body-color;
     }
     &:disabled {
@@ -74,8 +73,8 @@
   
     &.is-bg {
         color: $white-color;
-        background-color: $primary-color;
-        border-color: $primary-color;
+        background-color: $secondary-color;
+        border-color: $secondary-color;
   
         &:disabled {
             color: $body-color;
@@ -86,8 +85,8 @@
         }
   
         &:hover {
-            background-color: $primary-light;
-            border-color:  $primary-light;
+            background-color: $primary-dark;
+            border-color: $primary-dark;
             color:$white-color;
         }
   
@@ -114,9 +113,6 @@
         width: 100%;
     }
   
-    &.is-auto{
-        min-width: auto;
-    }
     &.is-clear {
         background-color: transparent;
         border-width: 0;
@@ -125,6 +121,7 @@
         @include justify-content-start;
         @include align-items-center;
         color: $primary-color;
+        font-size: .9375rem;
 
         i {
             margin-left: .5rem;
@@ -192,9 +189,6 @@
         &:not(:last-child) {
             margin-right: .6125rem;
         }
-    }
-    &.is-flex{
-        @include display-flex(flex);
     }
   
     &.is-center {

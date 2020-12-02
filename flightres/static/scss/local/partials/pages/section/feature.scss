@@ -1,0 +1,57 @@
+.feature-section{
+    .feature-box{
+        text-align: center;
+        background-color: $primary-light-1;
+        padding:1rem;
+        @include radius(5px);
+        margin-top: 2rem;
+        
+        .box-in{
+            figure{
+                width:150px;
+                height: 150px;
+                @include display-flex(flex);
+                @include justify-content-center;
+                @include align-items-center;
+                @include flex-direction-column(column);
+                background-color: $white-color;
+                @include radius(100%);
+                margin:-80px auto 0  auto;
+                @media #{$breakpoint-ls}{
+                    width:100px;
+                    height: 100px;
+                    padding:.6125rem;
+                    margin-top:-50px;
+                    
+                }
+            }
+            .feature-body{
+                padding-top:2rem;
+                h5{
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    color:$primary-color;
+                }
+                p{
+                    font-weight: 500;
+                    color:$body-color;
+                    margin:1rem 0;
+                    font-size: .875rem;
+                    @include trim(3);
+                }
+                button{
+                    padding:0;
+                    min-height: initial;
+                    font-size: 1rem;
+                }
+            }
+            button{
+                margin:0 auto;
+            }
+        }
+        @media #{$breakpoint-ls}{
+            margin-top:3rem;
+        }
+        
+    }
+}
