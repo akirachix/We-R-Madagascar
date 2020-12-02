@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Drone Registry Nepal">
+    <meta property="og:image" content="preview.html">
+    <meta property="og:site_name" content="Drone Registry Nepal">
+    <meta property="og:title" content="Drone Registry Nepal">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://naxa.com.np">
+
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Drone Registry Nepal">
+    <meta name="twitter:creator" content="@Drone Registry Nepal">
+    <meta name="twitter:title" content="Drone Registry Nepal">
+    <meta name="twitter:description" content="Drone Registry Nepal">
+    <meta name="twitter:image" content="preview.html">
+
+    <!--title-->
+    <title>Drone Registry Nepal</title>
+
+    <!-- faveicon start   -->
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
+
+    <!-- stylesheet start -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/font-humanitarian.css">
+    <link rel="stylesheet" type="text/css" href="css/humanitarian-webfont.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="datatable/datatables.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body class="">
+    <div class="body-container">
+        <div class="drone-admin-wrapper">
+            <aside class="admin-sidebar">
+                <header class="admin-aside-header">
+                    <a href="home.html"><img src="img/admin-logo.png" alt="Drone logo" /></a>
+                    <a href="#" class="toggle-sidebar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </header>
+                <div class="admin-aside-body">
+                    <ul class="admin-aside-menu">
+                        <li class="is-submenu">
+                            <a href="javascript:void(0);" class="menu-title">
+                                <i class="material-icons">border_all</i>
+                                <span>Permission Management</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="permission_management.html">Manage permissions</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="is-submenu">
+                            <a href="javascript:void(0);" class="menu-title">
+                                <i class="material-icons">group</i>
+                                <span>Operators Database</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="operators_db.html">Management</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="is-submenu">
+                            <a href="javascript:void(0);" class="menu-title">
+                                <i class="material-icons">airplanemode_active</i>
+                                <span>Drone Database</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="drone_db.html">Manage drone datasets</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="is-submenu">
+                            <a href="javascript:void(0);" class="menu-title">
+                                <i class="material-icons">equalizer</i>
+                                <span>Complaints </span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="complaint_management.html">Manage complaints</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="is-submenu">
+                            <a href="javascript:void(0);" class="menu-title">
+                                <i class="material-icons">settings</i>
+                                <span>Page Management</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="javascript:void(0);">Management</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+            <main class="admin-main pd-0">
+                <header class="site-header map-header">
+                        <div class="header-in">
+                            <div class="left is-flex">
+                                <div class="form-group inline-group mb-0">
+                                    <input class="form-control" type="date"/>
+                                    <input class="form-control" type="date"/>
+                                </div>
+                                <div class="buttons is-flex">
+                                    <button class="common-button is-bg is-auto">Apply</button>
+                                    <button class="common-button is-clear is-auto">Reset</button>
+                                </div>
+                            </div>
+                            <div class="right is-flex">
+                                <div class="custom-select-wrap">
+                                    <label>Flight Status</label>
+                                    <div class="custom-select">
+                                        <p class="selected-item">
+                                            <span>All</span>
+                                        </p>
+                                        <ul class="select-list">
+                                            <li><span>Approved</span></li>
+                                            <li><span>Pending</span></li>
+                                            <li><span>Rejected</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="custom-select-wrap">
+                                    <label>Complaint Status</label>
+                                    <div class="custom-select">
+                                        <p class="selected-item selected">
+                                            <span>Pending</span>
+                                        </p>
+                                        <ul class="select-list">
+                                            <li><span>All</span></li>
+                                            <li><span>Approved</span></li>
+                                            <li><span>Rejected</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </header>
+                <section class="map-section">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.0637245432217!2d85.32483371548216!3d27.715318681747714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb190e4e3dfaeb%3A0xcbadb01fa8d00b71!2sNaxal%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1606727970060!5m2!1sen!2snp" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    <div class="legend-body">
+                        <span class="title">Categories</span>
+                        <ul class="legend">
+                            <li class="legend-item">
+                                <a href="#/">
+                                    <span class="circle approved"></span>
+                                    <span class="label">Approved</span>
+                                </a>
+                            </li>
+                            <li class="legend-item">
+                                <a href="#/">
+                                    <span class="circle pending"></span>
+                                    <span class="label">Pending</span>
+                                </a>
+                            </li>
+                            <li class="legend-item">
+                                <a href="#/">
+                                    <span class="circle rejected"></span>
+                                    <span class="label">Rejected</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+            
+        </div>
+    </div>
+
+
+
+    <!-- Jquery Core Js -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="js/map.js"></script>
+    <script src="datatable/datatables.min.js"></script>
+    <script src="js/custom-datatable.js"></script>
+    <script src="js/drone.js"></script>
+
+</body>
+
+</html>

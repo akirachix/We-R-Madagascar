@@ -4,7 +4,7 @@ input,textarea {
     &.form-control {
         display: block;
         width: 100%;
-        min-height: calc(2em + .75rem + 2px);
+        min-height: calc(2em + .65rem + 1px);
         padding: .375rem .75rem;
         font-size: .875rem;
         font-weight: 400;
@@ -12,7 +12,7 @@ input,textarea {
         background-color: $white-color;
         background-clip: padding-box;
         border: 1px solid $border-color;
-        @include radius(10px);
+        @include radius(5px);
         @include input-placeholder {
             color: $body-color;
             font-size: .775rem;
@@ -24,6 +24,11 @@ input,textarea {
             outline: none;
             -webkit-outline: none;
             border-color:$primary-light;
+        }
+        @media #{$breakpoint-desktop}{
+            min-height: calc(2em + .5rem + 0px);
+            padding: .275rem .75rem;
+            font-size: .75rem;
         }
     }
 
@@ -58,6 +63,9 @@ input,textarea {
 }
 .form-group{
     margin-bottom: 1rem;
+    &.mb-0{
+        margin-bottom: 0l
+    }
     label{
         font-weight: 600;
         text-transform: capitalize;
