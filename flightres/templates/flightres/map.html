@@ -1,117 +1,13 @@
-<!doctype html>
-<html lang="en">
+{% extends 'flightres/base.html' %}
+{% load static %}
+{% block links %}
+<style>
+    #mapid { height: 790px; }
+</style>
+{% endblock links %}
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- SOCIAL MEDIA META -->
-    <meta property="og:description" content="Drone Registry Nepal">
-    <meta property="og:image" content="preview.html">
-    <meta property="og:site_name" content="Drone Registry Nepal">
-    <meta property="og:title" content="Drone Registry Nepal">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="http://naxa.com.np">
-
-    <!-- TWITTER META -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@Drone Registry Nepal">
-    <meta name="twitter:creator" content="@Drone Registry Nepal">
-    <meta name="twitter:title" content="Drone Registry Nepal">
-    <meta name="twitter:description" content="Drone Registry Nepal">
-    <meta name="twitter:image" content="preview.html">
-
-    <!--title-->
-    <title>Drone Registry Nepal</title>
-
-    <!-- faveicon start   -->
-    <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
-
-    <!-- stylesheet start -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/font-humanitarian.css">
-    <link rel="stylesheet" type="text/css" href="css/humanitarian-webfont.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="datatable/datatables.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-
-<body class="">
-    <div class="body-container">
-        <div class="drone-admin-wrapper">
-            <aside class="admin-sidebar">
-                <header class="admin-aside-header">
-                    <a href="home.html"><img src="img/admin-logo.png" alt="Drone logo" /></a>
-                    <a href="#" class="toggle-sidebar">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </a>
-                </header>
-                <div class="admin-aside-body">
-                    <ul class="admin-aside-menu">
-                        <li class="is-submenu">
-                            <a href="javascript:void(0);" class="menu-title">
-                                <i class="material-icons">border_all</i>
-                                <span>Permission Management</span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="permission_management.html">Manage permissions</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="is-submenu">
-                            <a href="javascript:void(0);" class="menu-title">
-                                <i class="material-icons">group</i>
-                                <span>Operators Database</span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="operators_db.html">Management</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="is-submenu">
-                            <a href="javascript:void(0);" class="menu-title">
-                                <i class="material-icons">airplanemode_active</i>
-                                <span>Drone Database</span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="drone_db.html">Manage drone datasets</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="is-submenu">
-                            <a href="javascript:void(0);" class="menu-title">
-                                <i class="material-icons">equalizer</i>
-                                <span>Complaints </span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="complaint_management.html">Manage complaints</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="is-submenu">
-                            <a href="javascript:void(0);" class="menu-title">
-                                <i class="material-icons">settings</i>
-                                <span>Page Management</span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="javascript:void(0);">Management</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
-            <main class="admin-main pd-0">
+{% block body %}
+<main class="admin-main pd-0">
                 <header class="site-header map-header">
                         <div class="header-in">
                             <div class="left is-flex">
@@ -182,20 +78,9 @@
                     </div>
                 </section>
             </main>
-            
+
         </div>
     </div>
-
-
-
-    <!-- Jquery Core Js -->
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-    <script src="js/map.js"></script>
-    <script src="datatable/datatables.min.js"></script>
-    <script src="js/custom-datatable.js"></script>
-    <script src="js/drone.js"></script>
-
-</body>
-
-</html>
+{% endblock body %}
+{% block footer_links %}
+{% endblock footer_links %}

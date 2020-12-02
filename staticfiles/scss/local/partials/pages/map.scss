@@ -1,0 +1,90 @@
+.map-section{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    iframe{
+        width: 100%;
+        height: 100%;
+    }
+    .legend-body{
+        background: $white-color;
+        min-width: 220px;
+        max-width: 220px;
+        position: absolute;
+        left: 20px;
+        bottom: 2rem;
+        padding: 14px  20px;
+        @include radius(5px);
+        border: 1px solid $border-color;
+        @include box-shadow(0 5px 15px rgba($black-color, .16));
+        @media #{$breakpoint-lg-desktop}{
+            min-width: 180px;
+            max-width: 180px;
+        }
+        @media #{$breakpoint-desktop}{
+            padding: 10px 15px;
+        }
+        span.title{
+            font-weight: 600;
+            font-size: 13px;
+            @media #{$breakpoint-lg-desktop}{
+                font-size: 12px;
+            }
+            @media #{$breakpoint-desktop}{
+                font-size: 10px;
+            }
+        }
+        ul.legend{
+            padding-top: 8px;
+            li{
+                &:not(:last-child){
+                    padding-bottom: 5px;
+                }
+                a{
+                    @include display-flex(flex);
+                    @include align-items-center;
+                    @include transition(all .4s ease);
+                    span.circle{
+                        width: 12px;
+                        height: 12px;
+                        @include radius(50%);
+                        &.pending{
+                            @include box-shadow(0 0 1px 6px rgba($orange-color, .2));
+                            background-color: $orange-color;
+                        }
+                        &.rejected{
+                            @include box-shadow(0 0 1px 6px rgba($red-color, .2));
+                            background-color: $red-color;
+                        }
+                        &.approved{
+                            @include box-shadow(0 0 1px 6px rgba($green-color, .2));
+                           background-color:  $green-color;
+                        }
+                        @media #{$breakpoint-lg-desktop}{
+                            width: 10px;
+                            height: 10px;
+                            &.pending{
+                                @include box-shadow(0 0 1px 4px rgba($orange-color, .2));
+                            }
+                            &.rejected{
+                                @include box-shadow(0 0 1px 4px rgba($red-color, .2));
+                            }
+                            &.approved{
+                                @include box-shadow(0 0 1px 4px rgba($green-color, .2));
+                            }
+                        }
+                    }
+                    span.label{
+                        padding-left: 20px;
+                        color: $heading-color;
+                    }
+                    &:hover{
+                        span.circle{
+                            @include transformScale(1.1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
