@@ -98,46 +98,106 @@ class FlightView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         start_date = request.POST['flight_start_date']
         end_date = request.POST['flight_end_date']
+        
+        
+        flt_status = [
+            request.POST.get('flt_approved', None),
+            request.POST.get('flt_pending', None),
+            request.POST.get('flt_rejected', None)
+        ]
+        comp_status = [
+            request.POST.get('comp_pending', None),
+            request.POST.get('comp_resolved', None)
+        ]
         data3 = []
         datasuccess = []
         counts = 0
+        
+        data_rep = []
+        data_rep_success = []
+        rep_count = 0
+        
+        report_data = Report.objects.all()
         object_list = FlightPermission.objects.all()
         for data in object_list:
-            if data.flight_start_date <= datetime.datetime.strptime(start_date,
-                                                                    '%Y-%m-%d').date() <= data.flight_end_date or data.flight_end_date >= datetime.datetime.strptime(
-                end_date, '%Y-%m-%d').date() >= data.flight_start_date or (
-                    data.flight_start_date >= datetime.datetime.strptime(start_date,
-                                                                         '%Y-%m-%d').date() and data.flight_end_date <= datetime.datetime.strptime(
-                end_date, '%Y-%m-%d').date()):
-                data3.append(data)
-                counts += 1
+            if start_date or end_date != '' :
+                if data.flight_start_date <= datetime.datetime.strptime(start_date,
+                                                                        '%Y-%m-%d').date() <= data.flight_end_date or data.flight_end_date >= datetime.datetime.strptime(
+                    end_date, '%Y-%m-%d').date() >= data.flight_start_date or (
+                        data.flight_start_date >= datetime.datetime.strptime(start_date,
+                                                                            '%Y-%m-%d').date() and data.flight_end_date <= datetime.datetime.strptime(
+                    end_date, '%Y-%m-%d').date()):
+                    #print(report_data)
+                    if flt_status[0] == flt_status[1] == flt_status[2] == None:                      
+                        data3.append(data)
+                        counts += 1
+                        datasuccess.append(counts)
+                    else:
+                        for x in flt_status:
+                            
+                            if x is not None:
+                                if data.status == x:
+                                    data3.append(data)
+                                    counts += 1
+                                    datasuccess.append(counts)
+            else:
+                if flt_status[0] or flt_status[1] or flt_status[2] is not None:
+                    for x in flt_status:
+                        if x is not None:
+                            if data.status == x:
+                                data3.append(data)
+                                counts += 1
+                                datasuccess.append(counts)
+                
+        if comp_status[0] or comp_status[1] is not None:
+            for dat in report_data:
+                for x in comp_status:
+                    if dat.status == x:
+                        data_rep.append(dat)
+                        rep_count += 1
+                        data_rep_success.append(rep_count)
 
-                datasuccess.append(counts)
 
-        if datasuccess is not None:
-            if len(datasuccess) > 1:
-                msg = str(len(datasuccess)) + ' Flights were found'
-            elif len(datasuccess) == 1:
-                msg = str(len(datasuccess)) + ' Flight was found'
+        if datasuccess is not None or data_rep_success is not None:
+            if (len(datasuccess) + len(data_rep_success)) > 1:
+                msg = str(len(datasuccess) + len(data_rep_success)) + ' Flights were found'
+            elif (len(datasuccess) + len(data_rep_success)) == 1:
+                msg = str(len(datasuccess) + len(data_rep_success)) + ' Flight was found'
             else:
                 object_list = ""
                 msg = 'No Flight Found'
 
             messages.success(request, msg)
+            
 
             context = {
-                "object_list": object_list,
-                "data3": data3
+                'flight_start_date': start_date,
+                'flight_end_date': end_date,
+                'flight_approved': False if flt_status[0] is None else True,
+                'flight_pending': False if flt_status[1] is None else True,
+                'flight_rejected': False if flt_status[2] is None else True,
+                'complaint_pending': False if comp_status[0] is None else True,
+                'complaint_resolved': False if comp_status[1] is None else True,
+                "data3": '' if not data3 else data3,
+                'data_rep': '' if not data_rep else data_rep
 
             }
+            
         else:
             messages.error(request, 'No matched Found')
             context = {
+                'flight_start_date': start_date,
+                'flight_end_date': end_date,
+                'flight_approved': False if flt_status[0] is None else True,
+                'flight_pending': False if flt_status[1] is None else True,
+                'flight_rejected': False if flt_status[2] is None else True,
+                'complaint_pending': False if comp_status[0] is None else True,
+                'complaint_resolved': False if comp_status[1] is None else True,
                 "object_list": object_list
 
             }
 
-        return render(request, 'flightres/allflight.html', context)
+        return render(request, 'flightres/map.html', context)
 
 
 class FlightPermissionList(LoginRequiredMixin, ListView):
