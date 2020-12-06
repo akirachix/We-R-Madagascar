@@ -2,76 +2,119 @@
 {% load static %}
 {% block links %}
 <style>
-    #mapid { height: 790px; }
+    #mapid {
+        
+        height: inherit;
+        width: 100%; }
 </style>
 {% endblock links %}
 
 {% block body %}
+
+    {% for message in messages %}
+    <script>
+        alert('{{message}}');
+    </script>>
+    {% endfor %}
+
+
 <main class="admin-main pd-0">
-                <header class="site-header map-header">
+    <form id='myform' method="post" action="{% url 'dashboard:flightview' %}">
+        {% csrf_token %}
+                <header class="site-header map-header" style='z-index:9090;'>
                         <div class="header-in">
+                            
+                                
                             <div class="left is-flex">
                                 <div class="form-group inline-group mb-0">
-                                    <input class="form-control" type="date"/>
-                                    <input class="form-control" type="date"/>
+                                    <input placeholder="Start Date Format-(YY/MM/DD)" value='{% if flight_start_date %}{{flight_start_date}}{% endif %}' type="date" name="flight_start_date"  class="form-control date" >
+                                    <input placeholder="End Date Format-(YY/MM/DD)" value='{% if flight_end_date %}{{flight_end_date}}{% endif %}' type="date" name="flight_end_date"  class="form-control date" >
                                 </div>
                                 <div class="buttons is-flex">
-                                    <button class="common-button is-bg is-auto">Apply</button>
-                                    <button class="common-button is-clear is-auto">Reset</button>
+                                    <button class="common-button is-bg is-auto" type='submit'>Apply</button>
+                                    
+                                    <a class="common-button is-clear is-auto" id='reset' href="javascript:void();">Reset</a>
                                 </div>
                             </div>
                             <div class="right is-flex">
+                                
                                 <div class="custom-select-wrap">
                                     <label>Flight Status</label>
-                                    <div class="custom-select">
-                                        <p class="selected-item">
-                                            <span>All</span>
+                                    <div id='flt_dropdown' class="custom-select">
+                                        <p class="selected-item selected">
+                                            <span id='flt_select'>{% if flight_approved or flight_pending or flight_rejected %} View Selection{% else %}Select One{% endif %}</span>
                                         </p>
                                         <ul class="select-list">
-                                            <li><span>Approved</span></li>
-                                            <li><span>Pending</span></li>
-                                            <li><span>Rejected</span></li>
-                                        </ul>
+                                            <li class='stat' value='Approved'><span >Approved</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if flight_approved %}Approved{%endif%}' class='stat_in' id='flt_approved' name='flt_approved' type='checkbox' {% if flight_approved %}checked{%endif%}></span></li>
+                                            <li class='stat' value='Pending'><span>Pending</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if flight_pending %}Pending{%endif%}' class='stat_in' id='flt_pending' name='flt_pending' type='checkbox' {% if flight_pending %}checked{%endif%}></span></li>
+                                            <li class='stat' value='Rejected'><span>Rejected</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if flight_rejected %}Rejected{%endif%}' class='stat_in' id='flt_rejected' name='flt_rejected' type='checkbox' {% if flight_rejected %}checked{%endif%}></span></li>   
+                                        </ul>    
                                     </div>
                                 </div>
-
                                 <div class="custom-select-wrap">
                                     <label>Complaint Status</label>
-                                    <div class="custom-select">
+                                    <div id='comp_dropdown' class="custom-select">
                                         <p class="selected-item selected">
-                                            <span>Pending</span>
+                                            <span id='comp_select'>{% if complaint_pending or complaint_resolved %}View Selection{% else %}Select One{% endif %}</span>
                                         </p>
+                                        
                                         <ul class="select-list">
-                                            <li><span>All</span></li>
-                                            <li><span>Approved</span></li>
-                                            <li><span>Rejected</span></li>
+                                            
+                                            <li class='comp_stat' value='Pending'><span>Pending</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if complaint_pending %}Pending{%endif%}' class='comp_stat_in' id='comp_pending' name='comp_pending' type='checkbox' {% if complaint_pending %}checked{%endif%}></span></li>
+                                            <li class='comp_stat' value='Resolved'><span>Resolved</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if complaint_resolved %}Resolved{%endif%}' class='comp_stat_in' id='comp_resolved' name='comp_resolved' type='checkbox' {% if complaint_resolved %}checked{%endif%}></span></li>
                                         </ul>
                                     </div>
                                 </div>
+                               
+                                
                             </div>
+                            
                         </div>
                 </header>
-                <section class="map-section">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.0637245432217!2d85.32483371548216!3d27.715318681747714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb190e4e3dfaeb%3A0xcbadb01fa8d00b71!2sNaxal%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1606727970060!5m2!1sen!2snp" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                    <div class="legend-body">
+                </form>
+                
+                <section class="map-section" style='position:relative;'>
+                    
+                    <div id="mapid"></div>
+                    
+                    <div class="legend-body" style='z-index:9090;'>
                         <span class="title">Categories</span>
                         <ul class="legend">
+                            
                             <li class="legend-item">
-                                <a href="#/">
+                                <a href="javascript:void()">
                                     <span class="circle approved"></span>
                                     <span class="label">Approved</span>
+                                    
+
                                 </a>
                             </li>
                             <li class="legend-item">
-                                <a href="#/">
+                                <a href="javascript:void()">
                                     <span class="circle pending"></span>
                                     <span class="label">Pending</span>
                                 </a>
                             </li>
                             <li class="legend-item">
-                                <a href="#/">
+                                <a href="javascript:void()">
                                     <span class="circle rejected"></span>
                                     <span class="label">Rejected</span>
+                                </a>
+                            </li>
+                            <li class="legend-item">
+                                <a href="javascript:void()">
+                                    <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png" style='height:23px;width:15px;'>
+                                    <span class="label">Flight Status</span>
+                                    
+
+                                </a>
+                            </li>
+                            <li class="legend-item">
+                                <a href="javascript:void()">
+                                    <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png" style='height:22px;width:14px;'>
+                                    <span class="label">Complaint Status</span>
+                                    
+
                                 </a>
                             </li>
                         </ul>
@@ -81,6 +124,283 @@
 
         </div>
     </div>
+    
 {% endblock body %}
 {% block footer_links %}
+<script>
+    var defa = [27.71, 85.32]
+
+    var dataset = [{% if data3 %}{% for x in data3 %}
+                [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}',{{ x.uav_uid }}],
+                {% endfor %}{% else %}{% for x in object_list %}
+                [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}',{{ x.uav_uid }}],
+                {% endfor %}{% endif %}];
+
+    var dataset_comp = [{% if data_rep %}{% for x in data_rep %}
+                        [{{x.latitude}}, '{{x.status}}', {{x.longitude}}, {{x.uav_uid}}],
+                        {% endfor %}{% endif %}];
+
+    var mymap = L.map('mapid', {zoomControl: false}).setView({% if not data3 %}{% if data_rep %}[dataset_comp[0][0], dataset_comp[0][2]], 8{% else %}[defa[0], defa[1]], 7{% endif %}{% else %}[dataset[0][0], dataset[0][2]], 8{% endif %});
+    L.control.zoom({
+        position: 'bottomright'
+    }).addTo(mymap);
+
+
+    osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'your.mapbox.access.token'
+    }).addTo(mymap);
+    var mark = [];
+    var cir = [];
+    var mark1 = [];
+    var cir1 = [];
+    var compIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+    var fltIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+    for(i=0;i<dataset.length;i++) {
+        customPopup = '<div class="bind-popup" style="margin-right:auto;margin-left:14%;"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ dataset[i][4] +'</td><td>'+ dataset[i][3] +'</td><td>'+ dataset[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+
+        mark[i] = L.marker([dataset[i][0], dataset[i][2]], {icon:fltIcon}).addTo(mymap);
+        if(dataset[i][1] == 'Approved') {
+            cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
+                color: 'green',
+                fillColor: 'green',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        } else if(dataset[i][1] == 'Pending') {
+            cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
+                color: 'orange',
+                fillColor: 'orange',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        } else if(dataset[i][1] == 'Rejected') {
+            cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
+                color: 'red',
+                fillColor: 'red',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        };
+
+        mark[i].bindPopup(customPopup);
+    }
+    for(i=0;i<dataset_comp.length;i++) {
+        customPopup1 = '<div class="bind-popup" style="margin-right:auto;margin-left:25%;"> <div class="bind-header"> <table style="width:100%"><tr><th style="padding-right:10px;">ID</th><th style="padding-left:10px;">Status</th></tr><tr><td style="padding-right:10px;">'+ dataset_comp[i][3] +'</td><td style="padding-left:10px;">'+ dataset_comp[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+
+        mark1[i] = L.marker([dataset_comp[i][0], dataset_comp[i][2]], {icon:compIcon}).addTo(mymap);
+        if(dataset_comp[i][1] == 'Pending') {
+            cir1[i] = L.circle([dataset_comp[i][0], dataset_comp[i][2]], {
+                color: 'orange',
+                fillColor: 'orange',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        } else if(dataset_comp[i][1] == 'Resolved') {
+            cir1[i] = L.circle([dataset_comp[i][0], dataset_comp[i][2]], {
+                color: 'Green',
+                fillColor: 'Green',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        };
+        
+        mark1[i].bindPopup(customPopup1);
+    }
+    if(cir.length + cir1.length >1) {
+
+        var group = new L.featureGroup(cir.concat(cir1));
+
+        mymap.fitBounds(group.getBounds(), {padding:[50, 50]});
+    }
+    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(mymap);
+    googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+    googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+    googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+
+
+    var baseLayers = {
+            "OpenStreetMap": osm,
+            "Google Streets": googleStreets,
+            "Google Hybrid": googleHybrid,
+            "Google Satellite": googleSat,
+            "Google Terrain": googleTerrain,
+
+        };
+        /* var legend = L.control({position: 'bottomleft'});
+        legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend');
+        labels = ['<strong>Categories</strong>'],
+        categories = ['Approved','Pending','Rejected'];
+        color=['Green','orange','Red'];
+
+        for (var i = 0; i < categories.length; i++) {
+
+                div.innerHTML += 
+                labels.push(
+                    '<i class="circle" style="opacity: 0.5;background:' + color[i] + '"></i> ' +
+                (categories[i] ? categories[i] : '+'));
+
+            }
+            div.innerHTML = labels.join('<br>');
+        return div;
+        };
+        legend.addTo(mymap); */
+    layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true,
+    position: 'bottomright' }).addTo(mymap);
+
+   // popup = marker.bindPopup("Lat:28.209499,Long:83.959518").openPopup();
+</script>
+<script>
+    $(function() {
+        $(".stat").on("click",function(e) {
+            e.preventDefault();
+            if ($(this).hasClass('stat')) {
+                var sta = $(this).attr('value'); 
+            }else {
+                var sta = $(this).attr('id'); 
+            }
+            
+            switch (sta) {
+                case 'Approved':
+                case 'flt_approved':
+                    if ($('#flt_approved').prop('checked') == true) {
+                        $('#flt_approved').prop('checked', false);
+                        $('#flt_approved').attr('value', '');
+                    }else{
+                        $('#flt_approved').prop('checked', true);   
+                        $('#flt_approved').attr('value', 'Approved');
+                    }
+                    break;
+                case 'Pending':
+                case 'flt_pending':
+                    if ($('#flt_pending').prop('checked') == true) {
+                        $('#flt_pending').prop('checked', false);
+                        $('#flt_pending').attr('value', '');
+                    }else{
+                        $('#flt_pending').prop('checked', true);       
+                        $('#flt_pending').attr('value', 'Pending');       
+                    }
+                    break;
+                case 'Rejected':
+                case 'flt_rejected':
+                    if ($('#flt_rejected').prop('checked') == true) {
+                        $('#flt_rejected').prop('checked', false);
+                        $('#flt_rejected').attr('value', '');
+                    }else{
+                        $('#flt_rejected').prop('checked', true);       
+                        $('#flt_rejected').attr('value', 'Rejected');       
+                    }
+                    break;
+                    
+            }
+            if (sta != ''){
+                if ($('#flt_approved').prop('checked') == false && $('#flt_pending').prop('checked') == false && $('#flt_rejected').prop('checked') == false ) {
+                    document.getElementById('flt_select').innerHTML = 'Select One';
+                } else {
+                    document.getElementById('flt_select').innerHTML = 'View Selection';
+                } 
+            }; 
+        });
+    });
+</script>
+<script>
+    $(function() {
+        $(".comp_stat").on("click",function(e) {
+            e.preventDefault();
+            if ($(this).hasClass('comp_stat')) {
+                var sta1 = $(this).attr('value');
+            } else {
+                var sta1 = $(this).attr('id');
+            }
+            switch(sta1) {
+                case 'Pending':
+                case 'comp_pending':
+                    if ($('#comp_pending').prop('checked') == true) {
+                        $('#comp_pending').prop('checked', false);
+                        $('#comp_pending').attr('value', '');
+                    }else{
+                        $('#comp_pending').prop('checked', true);   
+                        $('#comp_pending').attr('value', 'Pending');
+
+                    }
+                    break;
+                case 'Resolved':
+                case 'comp_resolved':
+                    if ($('#comp_resolved').prop('checked') == true) {
+                        $('#comp_resolved').prop('checked', false);
+                        $('#comp_resolved').attr('value', '');
+                    }else{
+                        $('#comp_resolved').prop('checked', true);   
+                        $('#comp_resolved').attr('value', 'Resolved');
+
+                    }
+                    break;
+            }
+            if (sta1 != ''){
+                if ($('#comp_pending').prop('checked') == false && $('#comp_resolved').prop('checked') == false ) {
+                    document.getElementById('comp_select').innerHTML = 'Select One';
+                } else {
+                    document.getElementById('comp_select').innerHTML = 'View Selection';
+                } 
+                
+            };
+            
+        });
+    });
+</script>
+<script>
+    $(function() {
+        $('#reset').on('click', function(e){
+            e.preventDefault();
+            $('#myform').trigger('reset');
+            $("#flt_approved").prop('checked', false);
+            $("#flt_pending").prop('checked', false);
+            $("#flt_rejected").prop('checked', false);
+            $("#comp_pending").prop('checked', false);
+            $("#comp_resolved").prop('checked', false);
+            $('.date').attr('value', '')
+            
+            document.getElementById('flt_select').innerHTML = 'Select One';
+            document.getElementById('comp_select').innerHTML = 'Select One';
+        })
+    })
+</script>
+
 {% endblock footer_links %}
