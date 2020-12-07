@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth, User
 from django.shortcuts import get_object_or_404, redirect, reverse
-from django.views.generic import ListView, DetailView, TemplateView, CreateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
@@ -24,9 +24,9 @@ from django.contrib import messages
 from .models import FlightPermission, Report, LocalAuthorities
 from registry.models import Aircraft, Operator, Manufacturer, Address
 from django.contrib.messages.views import SuccessMessageMixin
-from .form import AircraftForm,OperatorForm
-from django.urls import reverse
+from .form import AircraftForm, OperatorForm
 from django.http import HttpResponseRedirect
+from django.urls import reverse, reverse_lazy
 
 
 def homeView(request):
@@ -93,51 +93,111 @@ class FlightView(LoginRequiredMixin, TemplateView):
             "object_list": object_list
 
         }
-        return render(request, 'flightres/allflight.html', context)
+        return render(request, 'flightres/map.html', context)
 
     def post(self, request, *args, **kwargs):
         start_date = request.POST['flight_start_date']
         end_date = request.POST['flight_end_date']
+        
+        
+        flt_status = [
+            request.POST.get('flt_approved', None),
+            request.POST.get('flt_pending', None),
+            request.POST.get('flt_rejected', None)
+        ]
+        comp_status = [
+            request.POST.get('comp_pending', None),
+            request.POST.get('comp_resolved', None)
+        ]
         data3 = []
         datasuccess = []
         counts = 0
+        
+        data_rep = []
+        data_rep_success = []
+        rep_count = 0
+        
+        report_data = Report.objects.all()
         object_list = FlightPermission.objects.all()
         for data in object_list:
-            if data.flight_start_date <= datetime.datetime.strptime(start_date,
-                                                                    '%Y-%m-%d').date() <= data.flight_end_date or data.flight_end_date >= datetime.datetime.strptime(
-                end_date, '%Y-%m-%d').date() >= data.flight_start_date or (
-                    data.flight_start_date >= datetime.datetime.strptime(start_date,
-                                                                         '%Y-%m-%d').date() and data.flight_end_date <= datetime.datetime.strptime(
-                end_date, '%Y-%m-%d').date()):
-                data3.append(data)
-                counts += 1
+            if start_date or end_date != '' :
+                if data.flight_start_date <= datetime.datetime.strptime(start_date,
+                                                                        '%Y-%m-%d').date() <= data.flight_end_date or data.flight_end_date >= datetime.datetime.strptime(
+                    end_date, '%Y-%m-%d').date() >= data.flight_start_date or (
+                        data.flight_start_date >= datetime.datetime.strptime(start_date,
+                                                                            '%Y-%m-%d').date() and data.flight_end_date <= datetime.datetime.strptime(
+                    end_date, '%Y-%m-%d').date()):
+                    #print(report_data)
+                    if flt_status[0] == flt_status[1] == flt_status[2] == None:                      
+                        data3.append(data)
+                        counts += 1
+                        datasuccess.append(counts)
+                    else:
+                        for x in flt_status:
+                            
+                            if x is not None:
+                                if data.status == x:
+                                    data3.append(data)
+                                    counts += 1
+                                    datasuccess.append(counts)
+            else:
+                if flt_status[0] or flt_status[1] or flt_status[2] is not None:
+                    for x in flt_status:
+                        if x is not None:
+                            if data.status == x:
+                                data3.append(data)
+                                counts += 1
+                                datasuccess.append(counts)
+                
+        if comp_status[0] or comp_status[1] is not None:
+            for dat in report_data:
+                for x in comp_status:
+                    if dat.status == x:
+                        data_rep.append(dat)
+                        rep_count += 1
+                        data_rep_success.append(rep_count)
 
-                datasuccess.append(counts)
 
-        if datasuccess is not None:
-            if len(datasuccess) > 1:
-                msg = str(len(datasuccess)) + ' Flights were found'
-            elif len(datasuccess) == 1:
-                msg = str(len(datasuccess)) + ' Flight was found'
+        if datasuccess is not None or data_rep_success is not None:
+            if (len(datasuccess) + len(data_rep_success)) > 1:
+                msg = str(len(datasuccess) + len(data_rep_success)) + ' Flights were found'
+            elif (len(datasuccess) + len(data_rep_success)) == 1:
+                msg = str(len(datasuccess) + len(data_rep_success)) + ' Flight was found'
             else:
                 object_list = ""
                 msg = 'No Flight Found'
 
             messages.success(request, msg)
+            
 
             context = {
-                "object_list": object_list,
-                "data3": data3
+                'flight_start_date': start_date,
+                'flight_end_date': end_date,
+                'flight_approved': False if flt_status[0] is None else True,
+                'flight_pending': False if flt_status[1] is None else True,
+                'flight_rejected': False if flt_status[2] is None else True,
+                'complaint_pending': False if comp_status[0] is None else True,
+                'complaint_resolved': False if comp_status[1] is None else True,
+                "data3": '' if not data3 else data3,
+                'data_rep': '' if not data_rep else data_rep
 
             }
+            
         else:
             messages.error(request, 'No matched Found')
             context = {
+                'flight_start_date': start_date,
+                'flight_end_date': end_date,
+                'flight_approved': False if flt_status[0] is None else True,
+                'flight_pending': False if flt_status[1] is None else True,
+                'flight_rejected': False if flt_status[2] is None else True,
+                'complaint_pending': False if comp_status[0] is None else True,
+                'complaint_resolved': False if comp_status[1] is None else True,
                 "object_list": object_list
 
             }
 
-        return render(request, 'flightres/allflight.html', context)
+        return render(request, 'flightres/map.html', context)
 
 
 class FlightPermissionList(LoginRequiredMixin, ListView):
@@ -312,8 +372,10 @@ class ComplainListView(LoginRequiredMixin, ListView):
                                                           latitude__gte=lower_lat,
                                                           longitude__lte=upper_lon,
                                                           longitude__gte=lower_lon)[:4]
+            
             data.append([complain, nearby, nearby_auth])
         com['data'] = data
+        
         flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid',
                                                          'uav_uuid__operator__phone_number',
                                                          'uav_uuid__operator__email', 'flight_start_date',
@@ -424,19 +486,19 @@ def bulkupload(request):
                 addressdata = Address.objects.update_or_create(
                     address_line_1=address,
                 )
-                manufacturerdata = Manufacturer.objects.update_or_create(
+                manufacturerdata, created_manufacturer = Manufacturer.objects.update_or_create(
                     address=Address.objects.get(address_line_1=address),
                     full_name=manufacturer
                 )
-                operator = Operator.objects.update_or_create(
+                operator, created_operator = Operator.objects.update_or_create(
                     address=Address.objects.get(address_line_1=address),
                     company_name=company_name,
                     phone_number=phone_number,
                     email=email,
                 )
                 aircraft = Aircraft.objects.update_or_create(
-                    manufacturer=Manufacturer.objects.get(address=Address.objects.get(address_line_1=address)),
-                    operator=Operator.objects.get(address=Address.objects.get(address_line_1=address)),
+                    manufacturer=Manufacturer.objects.get(id=manufacturerdata.id),
+                    operator=Operator.objects.get(id=operator.id),
                     certification_number=certification_number,
                     renewal_date=renewal_date,
                     validity=validity,
@@ -490,20 +552,124 @@ class OperdatorDatabaseView(LoginRequiredMixin, ListView):
         return data
 
 
-class DataUploadView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    model = Aircraft
-    template_name = 'flightres/operators_db.html'
-    form_class = AircraftForm
-    success_url = '/np/dashboard/operators'
-    success_message = ' Data created'
+def dronedataupload(request):
+    if request.method == 'POST':
+        addressdata = Address.objects.update_or_create(
+            address_line_1=request.POST['address']
+        )
+        manufacturerdata = Manufacturer.objects.create(
+            address=Address.objects.get(address_line_1=request.POST['address']),
+            full_name=request.POST['full_name']
+        )
+        operator = Operator.objects.create(
+            address=Address.objects.get(address_line_1=request.POST['address']),
+            company_name=request.POST['company_name'],
+            phone_number=request.POST['phone_number'],
+            email=request.POST['email'],
+        )
+        aircraft = Aircraft.objects.update_or_create(
+            manufacturer=Manufacturer.objects.get(id=manufacturerdata.id),
+            operator=Operator.objects.get(id=operator.id),
+            certification_number=request.POST['certification_number'],
+            renewal_date=request.POST['renewal_date'],
+            validity=request.POST['validity'],
+            remarks=request.POST['remarks'],
+            initial_issued_date=request.POST['initial_issued_date'],
+            color=request.POST['color'],
+            unid=request.POST['unid'],
+            category=request.POST['category'],
+            mass=request.POST['mass'],
+            registration_mark=request.POST['registration_mark'],
+            begin_date=request.POST['begin_date']
 
-    def get_context_data(self, **kwargs):
-        data = super(DataUploadView, self).get_context_data(**kwargs)
+        )
         mandata = Manufacturer.objects.order_by('full_name')
         opedata = Operator.objects.order_by('company_name')
-        data['mandata'] = mandata
-        data['opedata'] = opedata
-        return data
+        queryset = Aircraft.objects.all().order_by('-unid')
+        test = FlightPermission.objects.order_by('uav_uuid')
+        context = {
+            'metadata': mandata,
+            'opedata': opedata,
+            'object_list': queryset,
+            'test': test
+
+        }
+        messages.add_message(request, messages.SUCCESS, " Drone Profile Created ")
+        return render(request, 'flightres/operators_db.html', context)
+    else:
+        mandata = Manufacturer.objects.order_by('full_name')
+        opedata = Operator.objects.order_by('company_name')
+        queryset = Aircraft.objects.all().order_by('-unid')
+        test = FlightPermission.objects.order_by('uav_uuid')
+        context = {
+            'metadata': mandata,
+            'opedata': opedata,
+            'object_list': queryset,
+            'test': test
+
+        }
+        return render(request, 'flightres/operators_db.html', context)
+
+
+def dronedataupdate(request, pk):
+    if request.method == 'POST':
+        test1 = Aircraft.objects.get(id=pk)
+        foraircraft = Aircraft.objects.filter(id=pk)
+        test2 = Manufacturer.objects.get(id=test1.manufacturer.id)
+        test4 = Operator.objects.get(id=test1.operator.id)
+
+        test3 = Address.objects.get(id=test2.address.id)
+        test3.address_line_1 = request.POST['address']
+        test3.save()
+        test2.full_name = request.POST['full_name']
+        manufacturerdata = test2.save()
+        test4.company_name = request.POST['company_name']
+        test4.phone_number = request.POST['phone_number']
+        test4.email = request.POST['email']
+        operator = test4.save()
+        aircraft = foraircraft.update(
+            manufacturer=Manufacturer.objects.get(id=test2.id),
+            operator=Operator.objects.get(id=test4.id),
+            certification_number=request.POST['certification_number'],
+            renewal_date=request.POST['renewal_date'],
+            validity=request.POST['validity'],
+            remarks=request.POST['remarks'],
+            initial_issued_date=request.POST['initial_issued_date'],
+            color=request.POST['color'],
+            unid=request.POST['unid'],
+            category=request.POST['category'],
+            mass=request.POST['mass'],
+            registration_mark=request.POST['registration_mark'],
+            begin_date=request.POST['begin_date']
+
+        )
+        mandata = Manufacturer.objects.order_by('full_name')
+        opedata = Operator.objects.order_by('company_name')
+        queryset = Aircraft.objects.all().order_by('-unid')
+        test = FlightPermission.objects.order_by('uav_uuid')
+        context = {
+            'metadata': mandata,
+            'opedata': opedata,
+            'object_list': queryset,
+            'test': test
+
+        }
+        messages.add_message(request, messages.SUCCESS, " Drone Profile Updated ")
+        return render(request, 'flightres/operators_db.html', context)
+    else:
+        mandata = Manufacturer.objects.order_by('full_name')
+        opedata = Operator.objects.order_by('company_name')
+        queryset = Aircraft.objects.all().order_by('-unid')
+        test = FlightPermission.objects.order_by('uav_uuid')
+        context = {
+            'metadata': mandata,
+            'opedata': opedata,
+            'object_list': queryset,
+            'test': test
+
+        }
+        return render(request, 'flightres/operators_db.html', context)
+
 
 class OperatorAddView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Operator
@@ -511,7 +677,6 @@ class OperatorAddView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     form_class = OperatorForm
     success_url = '/np/dashboard/operators'
     success_message = ' Owner Added'
-
 
 
 def view_404(request, exception):
