@@ -13,7 +13,11 @@ $(document).ready(function () {
 
     for (var i = 0; i < expandBtn.length; i++) {
         expandBtn[i].addEventListener('click', function (e) {
-            object_id = e.target.id.split('_')[1]
+            // object_id = e.target.id.split('_')[1];
+            const closestPopupElement = e.target.closest('.highlight');
+            e.stopPropagation();
+            object_id = closestPopupElement.id.split('_')[1];
+            console.log(object_id,'objectId');
             for (var j = 0; j < flight_object.length; j++) {
                 if (object_id == flight_object[j].uav_uid) {
                     var lat = [];
@@ -255,7 +259,7 @@ $(document).ready(function () {
             shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
-        var map = L.map('map').setView([data.latitude, data.longitude,data.altitude], 8);
+        var map = L.map('map',{maxZoom:19}).setView([data.latitude, data.longitude,data.altitude], 8);
         // var map = L.map('map', {
         //     // layers: [base],
         //     center: new L.LatLng(lat, lon),
@@ -269,12 +273,15 @@ $(document).ready(function () {
         var cir = [];
 
         // console.log(flight_object)
+        var markers = L.markerClusterGroup();
         for(i=0;i<lat.length;i++){
             var c = parseFloat(lat[i]);
             var d = parseFloat(long[i]);
             customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ id[i] +'</td><td>'+ alti[i] +'</td><td>'+ status1[i] +'</td></tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
-            mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon}).addTo(map);
+            // mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon}).addTo(map);
+            mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon})
+            markers.addLayer(mar[i]);
             if(status1[i] == 'Approved') {
                 cir[i] = L.circle([lat[i], long[i]], {
                     color: 'green',
@@ -304,6 +311,9 @@ $(document).ready(function () {
             mar[i].bindPopup(customPopup);
         }
         var mark = L.marker([data.latitude, data.longitude]).addTo(map);
+        markers.addLayer(mark);
+        map.addLayer(markers);
+
         mark.bindPopup(customPopup1);
 
         if(das == 'Approved') {

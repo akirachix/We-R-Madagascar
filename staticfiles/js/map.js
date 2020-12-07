@@ -13,7 +13,8 @@ $(document).ready(function () {
 
     for (var i = 0; i < expandBtn.length; i++) {
         expandBtn[i].addEventListener('click', function (e) {
-            object_id = e.target.id.split('_')[1]
+            object_id = e.target.id.split('_')[1];
+            console.log(object_id,'objectId');
             for (var j = 0; j < flight_object.length; j++) {
                 if (object_id == flight_object[j].uav_uid) {
                     var lat = [];
