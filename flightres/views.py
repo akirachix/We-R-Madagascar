@@ -372,8 +372,10 @@ class ComplainListView(LoginRequiredMixin, ListView):
                                                           latitude__gte=lower_lat,
                                                           longitude__lte=upper_lon,
                                                           longitude__gte=lower_lon)[:4]
+            
             data.append([complain, nearby, nearby_auth])
         com['data'] = data
+        
         flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid',
                                                          'uav_uuid__operator__phone_number',
                                                          'uav_uuid__operator__email', 'flight_start_date',
