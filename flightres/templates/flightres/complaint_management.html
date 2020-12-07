@@ -44,9 +44,7 @@
                 </thead>
                 <tbody>
                     {% for i, j, k in data %}
-                    <tr id="show-popup"
-                    modal-link="complain{{ i.uav_uid }}"
-                    class="modal-link">
+                    <tr>
                         <td>{{ i.uav_uid }}</td>
                         <td>
                             <time>{{ i.created_at }}</time>
@@ -71,12 +69,10 @@
                         </td>
 
                         <td>
-                            <a id="show-popup" modal-link="complain{{ i.uav_uid }}" 
-                            class="modal-link"><i
-                                    class="material-icons" data-toggle="modal"
-                                    data-target="#complain{{ i.uav_uid }}">chevron_right</i></a>
-                            <div class="popup" tabindex="-1" role="dialog" 
-                            id="complain{{ i.uav_uid }}">
+                            <a id="show-popup" modal-link="complain{{ i.uav_uid }}" class="modal-link"><i
+                                    class="material-icons mapTrigger" data-toggle="modal"
+                                    data-target="#complain{{ i.uav_uid }}" value='{{i.uav_uid}}'>chevron_right</i></a>
+                            <div class="popup" tabindex="-1" role="dialog" id="complain{{ i.uav_uid }}">
                                 <div class="popup-container lg-popup map-popup">
                                     <div class="popup-body">
                                         <span class="close-icon"><i class="material-icons">close</i></span>
@@ -120,10 +116,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </li>
-                                                                <li>
+                                                                <li >
                                                                     <h4></h4>
-                                                                    <div id="map" data-latitude={{i.latitude}} data-longitude={{i.longitude}} style="width: 100%;
-                                                                    height: 300px;"/>
+                                                                    <div id="map{{i.uav_uid}}" class='mapadd' data-latitude={{i.latitude}} data-longitude={{i.longitude}} style="width: 100%;height: 300px;"></div>
 
                                                                     <!-- <div class="permit-list">
                                                                         {% for perm in j %}
@@ -258,6 +253,7 @@
                           <ul>
                             <li>
                               <h4>Police Contacts</h4>
+                              {% if k %}
                               {% for auth in k %}
                               <div class="content-list">
                                 <p>
@@ -266,6 +262,15 @@
                                 </p>
                               </div>
                               {% endfor %}
+                              {% else %}
+                              <div class="content-list">
+                                <p>
+                                  No Data Found.
+                                </p>
+                              </div>
+                              {% endif %}
+                              
+
                               <div class="button-wrap">
                                 {% if i.is_escalated %}
                                 <a
@@ -305,72 +310,105 @@
 <script type="text/javascript">
     var flight_objects = '{{ json_data }}'
     var image_url_objects = '{{image_json_data}}'
+    var nearby = '{{nearby_flt}}';
+    var nearby_auth = '{{nearby_auth_flt}}'
+    
 </script>
 <script>
     function permApproval(uid, status) {
         console.log(uid, status)
     }
+    
+    $(function () {
+        $('.mapTrigger').on('click', function(e) {
+            e.preventDefault(e);
+            var mapId = $(this).attr('value');
+            var container = L.DomUtil.get('map'+mapId);
+            if(container != null){
+                container._leaflet_id = null;
+            };
+            nearby = nearby.replace(/&quot;/g, '"')
+            nearby_flight = JSON.parse(nearby)
+            nearby_auth = nearby_auth.replace(/&quot;/g, '"')
+            nearby_auth_flight = JSON.parse(nearby_auth)
+            const mapElement = document.querySelector('#map'+mapId);
+            const dataLatitude = mapElement.dataset.latitude;
+            const dataLongitude = mapElement.dataset.longitude;
+            // console.log(map.dataset.latitude);
+            // console.log(map.dataset.latitude);
+            var mymap = L.map('map'+mapId,{
+                fullscreenControl: {
+                    pseudoFullscreen: false // if true, fullscreen to page width and height
+                    }}).setView([dataLatitude,dataLongitude], 8);
 
-    $(document).ready(function () {
-        const mapElement = document.querySelector('#map');
-        const dataLatitude = mapElement.dataset.latitude
-        const dataLongitude = mapElement.dataset.longitude;
-        function closePopup() {
-            // alert('closePopupFun');
-            $('.close-icon').on('click', function (e) {
-                // e.preventDefault();
-                e.stopPropagation();
-                console.log($(this));
-                $(this).closest('.popup').removeClass('open');
+            osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'your.mapbox.access.token'
+            }).addTo(mymap);
+            const customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+            var mark_nearby = []
+            var mark_nearby_auth = []
+            var nearbyIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
             });
-        }
+            var mark = L.marker([dataLatitude, dataLongitude]).addTo(mymap);
+            for (var i=0;i<nearby_flight.length;i++) {
+                if (String(nearby_flight[i][0]) == mapId) {
+                    mark_nearby = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])], {icon:nearbyIcon}).addTo(mymap);
+                }
+            }
+            for (var i=0;i<nearby_auth_flight.length;i++) {
+                if (String(nearby_auth_flight[i][0]) == mapId) {
+                    mark_nearby_auth = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyIcon}).addTo(mymap);
+                }
+            }
+            osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
+                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                })
 
-        closePopup();
-        // console.log(map.dataset.latitude);
-        // console.log(map.dataset.latitude);
-        var mymap = L.map('map',{
-            fullscreenControl: {
-                pseudoFullscreen: false // if true, fullscreen to page width and height
-                }}).setView([dataLatitude,dataLongitude], 8);
+                googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                }).addTo(mymap);
+                googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                });
+                googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                });
+                googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                });
 
-        osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'your.mapbox.access.token'
-        }).addTo(mymap);
-        const customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+                
+            function closePopup() {
+                $('.close-icon').on('click', function (e) {
+                    e.preventDefault();
+                    $(this).closest('.popup').removeClass('open');
+                });
+            }
 
-        var mark = L.marker([dataLatitude, dataLongitude]).addTo(mymap);
-        osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            })
-
-            googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            }).addTo(map);
-            googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            });
-            googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            });
-            googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
-                maxZoom: 20,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            });
+            closePopup();
+                // var lat = document.getElementById('map').getAttribute('value').split(',')[0]
+                // var long = document.getElementById('map').getAttribute('value').split(',')[1]
 
             
-        
-        // var lat = document.getElementById('map').getAttribute('value').split(',')[0]
-        // var long = document.getElementById('map').getAttribute('value').split(',')[1]
-
-
+            
+        });
+    });
+    $(document).ready(function () {
         var expandBtn = document.getElementsByClassName('flightPop')
 
         flight_objects = flight_objects.replace(/&quot;/g, '"').replace(/uav_uuid__operator__company_name/g, 'company_name');
@@ -519,6 +557,7 @@
             //     center: new L.LatLng(lat, lon),
             //     zoom: 12,
             // });
+            
             var mark = L.marker([data.latitude, data.longitude]).addTo(map);
 
             // console.log(flight_object)
@@ -568,7 +607,6 @@
             layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
         }
     });
-
     $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
 
 </script>
