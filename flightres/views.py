@@ -354,6 +354,8 @@ class ComplainListView(LoginRequiredMixin, ListView):
             *args, **kwargs)
         complains = Report.objects.all().order_by('-uav_uid')
         data = []
+        nearby_flight = []
+        nearby_auth_flight = []
         for complain in complains:
             nearby = None
             nearby_auth = None
@@ -374,8 +376,14 @@ class ComplainListView(LoginRequiredMixin, ListView):
                                                           longitude__gte=lower_lon)[:4]
             
             data.append([complain, nearby, nearby_auth])
+            for x in nearby:
+                nearby_flight.append([complain.uav_uid, x.latitude, x.longitude])
+            for x in nearby_auth:
+                nearby_auth_flight.append([complain.uav_uid, x.latitude, x.longitude])
         com['data'] = data
-        
+        com['nearby_flt'] = json.dumps(list(nearby_flight), cls=DjangoJSONEncoder)
+        com['nearby_auth_flt'] = json.dumps(list(nearby_auth_flight), cls=DjangoJSONEncoder)
+
         flight_objects = FlightPermission.objects.values('uav_uid', 'uav_uuid__operator__company_name', 'uav_uuid',
                                                          'uav_uuid__operator__phone_number',
                                                          'uav_uuid__operator__email', 'flight_start_date',
