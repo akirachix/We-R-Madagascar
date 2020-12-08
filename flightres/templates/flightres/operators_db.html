@@ -22,7 +22,7 @@
             {% for field in form %}
             {% for error in field.errors %}
             <div class="alert alert-danger">
-            <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                <strong>{{ field.name|title }} {{ error|escape }}</strong>
             </div>
             {% endfor %}
             {% for messages in messages %}
@@ -38,13 +38,16 @@
             {% endfor %}
             {% endif %}
             <form method="post" enctype="multipart/form-data">{% csrf_token %}
-            <button type="button" class="common-button is-bg link-btn" style="background-color:whitesmoke;margin-left:20px"><a style="color:#7d7d7d" href="{% static '/samplefiles/samplefile.csv' %}" download="samplefile.csv">View Template</a></button></form>
-            <button style="right: 700px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal1" class="modal-link"
-                    data-toggle="modal" data-target="#upload-sheet-modal1">Register a New Drone
-                    </a></button>
-            <button style="right: 500px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal" class="modal-link"
-                    data-toggle="modal" data-target="#upload-sheet-modal">Bulk Register Drones
-                    </a></button>
+                <button type="button" class="common-button is-bg link-btn"
+                    style="background-color:whitesmoke;margin-left:20px"><a style="color:#7d7d7d"
+                        href="{% static '/samplefiles/samplefile.csv' %}" download="samplefile.csv">View
+                        Template</a></button></form>
+            <button style="right: 700px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal1"
+                    class="modal-link" data-toggle="modal" data-target="#upload-sheet-modal1">Register a New Drone
+                </a></button>
+            <button style="right: 500px;" class="common-button is-bg link-btn"><a modal-link="upload-sheet-modal"
+                    class="modal-link" data-toggle="modal" data-target="#upload-sheet-modal">Bulk Register Drones
+                </a></button>
             <table id="admin-datatable" class="admin-datatable operators-tables">
                 <thead>
                     <tr>
@@ -72,7 +75,8 @@
                 </thead>
                 <tbody>
                     {% for object in object_list %}
-                    <tr>
+                    <tr modal-link="opt{{object.id}}" class="modal-link" data-toggle="modal"
+                        data-target="#opt{{object.id}}">
                         <td>{{ object.unid }}</td>
                         <td>{{ object.certification_number }}</td>
                         <td><b>{{ object.operator.company_name }}</b></td>
@@ -95,10 +99,13 @@
                         <td>{{ test|rejected:object.unid }}</td>
                         <td><a modal-link="opt{{object.id}}" class="modal-link"><i class="material-icons"
                                     data-toggle="modal" data-target="#opt{{object.id}}">chevron_right</i></a>
+                                    </td>
+                                    </tr>
+
                             <div class="popup" tabindex="-1" role="dialog" id="opt{{object.id}}">
                                 <div class="popup-container lg-popup map-popup">
                                     <div class="popup-body">
-                                        <span class="close-icon"><i class="material-icons">close</i></span>
+                                        <span class="closeit close-icon"><i class="material-icons">close</i></span>
                                         <div class="popup-header">
                                             <h3>Operators Database for <b>Aircraft {{ object.popular_name }}</b></h3>
 
@@ -108,139 +115,193 @@
                                                 <div class="row gx-md-3 gx-lg-3">
                                                     <div class="col-xl-12 col-sm-12">
                                                         <div class="drone-content col-left col-operators">
-                                                            <form action="/np/dashboard/edit_data/{{object.id}}"  method="POST" enctype="multipart/form-data">
+                                                            <form action="/np/dashboard/edit_data/{{object.id}}"
+                                                                method="POST" enctype="multipart/form-data">
                                                                 {% csrf_token %}
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Owner</label>
-                                                            <input type="text" value="{{ object.operator.company_name }}" class="form-control" name="company_name" required>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Owner</label>
+                                                                            <input type="text"
+                                                                                value="{{ object.operator.company_name }}"
+                                                                                class="form-control" name="company_name"
+                                                                                required>
 
-                                                        </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">UAV Manufacturer & Model</label>
-                                                            <input type="text" value="{{ object.manufacturer.full_name }}" class="form-control" name="full_name" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">UAV Manufacturer &
+                                                                                Model</label>
+                                                                            <input type="text"
+                                                                                value="{{ object.manufacturer.full_name }}"
+                                                                                class="form-control" name="full_name"
+                                                                                required>
 
-                                                        </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Certificate No.</label>
-                                                            <input type="text" value="{{object.certification_number}}" class="form-control" name="certification_number" required>
-
-                                                        </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Unique Identification No.</label>
-                                                            <input type="number" value="{{object.unid}}" class="form-control" name="unid" required>
-                                                        </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Address</label>
-                                                            <input type="text" value="{{ object.operator.address.address_line_1 }}" class="form-control" name="address" required>
-
-                                                        </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Contact</label>
-                                                            <input type="text" value="{{ object.operator.phone_number }}" class="form-control" name="phone_number" required>
-                                                        </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Email</label>
-                                                            <input type="email" value="{{ object.operator.email }}" class="form-control" name="email" required>
-
-                                                        </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Serial No</label>
-                                                            <input type="text" value="{{ object.registration_mark }}" class="form-control" name="registration_mark" required>
-                                                        </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Date Of Manufacture</label>
-                                                            <input type="date" value="{{ object.begin_date.date|date:'Y-m-d'  }}" class="form-control" name="begin_date" placeholder="MM/DD/YYYY" required>
-
-                                                            </div>
-                                                            </div>
-                                                                <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="category">RPA/DRONE TYPE</label>
-                                                                    <select class="form-control" name="category" id="category" required >
-                                                                        <option value="Other" >Other</option>
-                                                                        <option value="FIXED WING" >FIXED WING</option>
-                                                                        <option value="ROTORCRAFT" >ROTORCRAFT</option>
-                                                                        <option value="LIGHTER-THAN-AIR" >LIGHTER-THAN-AIR</option>
-                                                                        <option value="HYBRID LIFT" >HYBRID LIFT</option>
-                                                                        <option value="MULTI-COPTER" >MULTI-COPTER</option>
-                                                                    </select>
-
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Certificate No.</label>
+                                                                            <input type="text"
+                                                                                value="{{object.certification_number}}"
+                                                                                class="form-control"
+                                                                                name="certification_number" required>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Unique Identification
+                                                                                No.</label>
+                                                                            <input type="number" value="{{object.unid}}"
+                                                                                class="form-control" name="unid"
+                                                                                required>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        <div class="form-group">
-                                                            <label for="name">Weight(In Kg)</label>
-                                                            <input type="float" value="{{ object.mass }}" placeholder="Please Don't Enter String!" class="form-control" name="mass" required>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Colour</label>
-                                                            <input type="text" value="{{ object.color }}" class="form-control" name="color" required>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Address</label>
+                                                                            <input type="text"
+                                                                                value="{{ object.operator.address.address_line_1 }}"
+                                                                                class="form-control" name="address"
+                                                                                required>
 
-                                                        </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Initial Issued Date</label>
-                                                            <input type="date" value="{{ object.initial_issued_date.date|date:'Y-m-d' }}" class="form-control" placeholder="MM/DD/YYYY" name="initial_issued_date" required>
-                                                        </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Renewal Date</label>
-                                                            <input type="date" value="{{ object.renewal_date.date|date:'Y-m-d' }}" class="form-control" placeholder="MM/DD/YYYY" name="renewal_date" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Contact</label>
+                                                                            <input type="text"
+                                                                                value="{{ object.operator.phone_number }}"
+                                                                                class="form-control" name="phone_number"
+                                                                                required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Email</label>
+                                                                            <input type="email"
+                                                                                value="{{ object.operator.email }}"
+                                                                                class="form-control" name="email"
+                                                                                required>
 
-                                                        </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Validity</label>
-                                                            <input type="number" class="form-control" value="{{ object.validity }}" name="validity" required>
-                                                        </div>
-                                                            </div>
-                                                        </div>
-                                                            <div class="form-group">
-                                                            <label for="name">Remarks</label>
-                                                                <textarea  class="form-control"  name="remarks" required>{{ object.remarks}}</textarea>
-                                                        </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Serial No</label>
+                                                                            <input type="text"
+                                                                                value="{{ object.registration_mark }}"
+                                                                                class="form-control"
+                                                                                name="registration_mark" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Date Of
+                                                                                Manufacture</label>
+                                                                            <input type="date"
+                                                                                value="{{ object.begin_date.date|date:'Y-m-d'  }}"
+                                                                                class="form-control" name="begin_date"
+                                                                                placeholder="MM/DD/YYYY" required>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="category">RPA/DRONE TYPE</label>
+                                                                            <select class="form-control" name="category"
+                                                                                id="category" required>
+                                                                                <option value="Other">Other</option>
+                                                                                <option value="FIXED WING">FIXED WING
+                                                                                </option>
+                                                                                <option value="ROTORCRAFT">ROTORCRAFT
+                                                                                </option>
+                                                                                <option value="LIGHTER-THAN-AIR">
+                                                                                    LIGHTER-THAN-AIR</option>
+                                                                                <option value="HYBRID LIFT">HYBRID LIFT
+                                                                                </option>
+                                                                                <option value="MULTI-COPTER">
+                                                                                    MULTI-COPTER</option>
+                                                                            </select>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="form-group">
-                                                            <label for="name">Active</label>
-                                                                <input type="checkbox" id="name" checked="checked">
-                                                        </div>
-                                                        <br>
-                                                        <div class="buttons is-end">
-                                                            <button type="submit" class="common-button is-bg">Submit</button>
-                                                        </div>
-                                                    </form>
+                                                                    <label for="name">Weight(In Kg)</label>
+                                                                    <input type="float" value="{{ object.mass }}"
+                                                                        placeholder="Please Don't Enter String!"
+                                                                        class="form-control" name="mass" required>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Colour</label>
+                                                                            <input type="text"
+                                                                                value="{{ object.color }}"
+                                                                                class="form-control" name="color"
+                                                                                required>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Initial Issued
+                                                                                Date</label>
+                                                                            <input type="date"
+                                                                                value="{{ object.initial_issued_date.date|date:'Y-m-d' }}"
+                                                                                class="form-control"
+                                                                                placeholder="MM/DD/YYYY"
+                                                                                name="initial_issued_date" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Renewal Date</label>
+                                                                            <input type="date"
+                                                                                value="{{ object.renewal_date.date|date:'Y-m-d' }}"
+                                                                                class="form-control"
+                                                                                placeholder="MM/DD/YYYY"
+                                                                                name="renewal_date" required>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="name">Validity</label>
+                                                                            <input type="number" class="form-control"
+                                                                                value="{{ object.validity }}"
+                                                                                name="validity" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="name">Remarks</label>
+                                                                    <textarea class="form-control" name="remarks"
+                                                                        required>{{ object.remarks}}</textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="name">Active</label>
+                                                                    <input type="checkbox" id="name" checked="checked">
+                                                                </div>
+                                                                <br>
+                                                                <div class="buttons is-end">
+                                                                    <button type="submit"
+                                                                        class="common-button is-bg">Submit</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -254,8 +315,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
@@ -276,17 +335,18 @@
                                 <div class="drone-content col-left col-operators">
                                     <form action="{% url 'dashboard:upload-sheet-new' %}" method="POST"
                                         enctype="multipart/form-data">
-                                                {% csrf_token %}
+                                        {% csrf_token %}
                                         <div class="form-group">
                                             <label for="name">Category:</label>
-                                            <select class="form-control" name="name" id="name" >
+                                            <select class="form-control" name="name" id="name">
                                                 <option value="b">B</option>
                                             </select>
 
                                         </div>
                                         <div class="form-group">
                                             <label for="fileUpload">Upload your file</label>
-                                            <input class="form-control" type="file" accept=".xls,.xlsx,.csv" name="sheet" id="sheet">
+                                            <input class="form-control" type="file" accept=".xls,.xlsx,.csv"
+                                                name="sheet" id="sheet">
                                         </div>
                                         <br>
                                         <div class="buttons is-end">
@@ -301,7 +361,7 @@
             </div>
         </div>
     </div>
-        <div class="popup" tabindex="-1" role="dialog" id="upload-sheet-modal1">
+    <div class="popup" tabindex="-1" role="dialog" id="upload-sheet-modal1">
         <div class="popup-container lg-popup map-popup">
             <div class="popup-body">
                 <span class="close-icon"><i class="material-icons">close</i></span>
@@ -316,147 +376,155 @@
                                 <div class="drone-content col-left col-operators">
                                     <form action="{% url 'dashboard:upload-data' %}" method="POST"
                                         enctype="multipart/form-data">
-                                                {% csrf_token %}
-                                                {% if form.errors %}
-                                                {% for field in form %}
-                                                {% for error in field.errors %}
-                                                <div class="alert alert-danger">
-                                                    <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                                        {% csrf_token %}
+                                        {% if form.errors %}
+                                        {% for field in form %}
+                                        {% for error in field.errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                                        </div>
+                                        {% endfor %}
+                                        {% for messages in messages %}
+                                        <div class="success">
+                                            <strong>{{ messages }}</strong>
+                                        </div>
+                                        {% endfor %}
+                                        {% endfor %}
+                                        {% for error in form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">Owner</label>
+                                                    <input type="text" value="{{ object.operator.company_name }}"
+                                                        class="form-control" name="company_name" required>
+
                                                 </div>
-                                                {% endfor %}
-                                                {% for messages in messages %}
-                                                <div class="success">
-                                                    <strong>{{ messages }}</strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">UAV Manufacturer & Model</label>
+                                                    <input type="text" value="{{ object.manufacturer.full_name }}"
+                                                        class="form-control" name="full_name" required>
+
                                                 </div>
-                                                {% endfor %}
-                                                {% endfor %}
-                                                {% for error in form.non_field_errors %}
-                                                <div class="alert alert-danger">
-                                                    <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">Certificate No.</label>
+                                                    <input type="text" class="form-control" name="certification_number"
+                                                        required>
+
                                                 </div>
-                                                {% endfor %}
-                                                {% endif %}
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">Owner</label>
-                                                            <input type="text" value="{{ object.operator.company_name }}" class="form-control" name="company_name" required>
-
-                                                        </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="name">UAV Manufacturer & Model</label>
-                                                            <input type="text" value="{{ object.manufacturer.full_name }}" class="form-control" name="full_name" required>
-
-                                                        </div>
-                                                            </div>
-                                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Certificate No.</label>
-                                            <input type="text" class="form-control" name="certification_number" required>
-
-                                        </div>
                                             </div>
                                             <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Unique Identification No.</label>
-                                            <input type="number" class="form-control" name="unid" required>
-                                        </div>
+                                                <div class="form-group">
+                                                    <label for="name">Unique Identification No.</label>
+                                                    <input type="number" class="form-control" name="unid" required>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Address</label>
-                                            <input type="text" class="form-control" name="address" required>
+                                                <div class="form-group">
+                                                    <label for="name">Address</label>
+                                                    <input type="text" class="form-control" name="address" required>
 
-                                        </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Contact</label>
-                                            <input type="text" class="form-control" name="phone_number" required>
-                                        </div>
+                                                <div class="form-group">
+                                                    <label for="name">Contact</label>
+                                                    <input type="text" class="form-control" name="phone_number"
+                                                        required>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Email</label>
-                                            <input type="email" class="form-control" name="email" required>
+                                                <div class="form-group">
+                                                    <label for="name">Email</label>
+                                                    <input type="email" class="form-control" name="email" required>
 
-                                        </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Serial No</label>
-                                            <input type="text" class="form-control" name="registration_mark" required>
-                                        </div>
+                                                <div class="form-group">
+                                                    <label for="name">Serial No</label>
+                                                    <input type="text" class="form-control" name="registration_mark"
+                                                        required>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Date Of Manufacture</label>
-                                            <input type="date" class="form-control" name="begin_date" required>
+                                                <div class="form-group">
+                                                    <label for="name">Date Of Manufacture</label>
+                                                    <input type="date" class="form-control" name="begin_date" required>
 
+                                                </div>
                                             </div>
-                                            </div>
-                                                <div class="col-md-6">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="category">RPA/DRONE TYPE</label>
-                                                    <select class="form-control" name="category" id="category" required >
-                                                        <option value="Other" >Other</option>
-                                                        <option value="FIXED WING" >FIXED WING</option>
-                                                        <option value="ROTORCRAFT" >ROTORCRAFT</option>
-                                                        <option value="LIGHTER-THAN-AIR" >LIGHTER-THAN-AIR</option>
-                                                        <option value="HYBRID LIFT" >HYBRID LIFT</option>
-                                                        <option value="MULTI-COPTER" >MULTI-COPTER</option>
+                                                    <select class="form-control" name="category" id="category" required>
+                                                        <option value="Other">Other</option>
+                                                        <option value="FIXED WING">FIXED WING</option>
+                                                        <option value="ROTORCRAFT">ROTORCRAFT</option>
+                                                        <option value="LIGHTER-THAN-AIR">LIGHTER-THAN-AIR</option>
+                                                        <option value="HYBRID LIFT">HYBRID LIFT</option>
+                                                        <option value="MULTI-COPTER">MULTI-COPTER</option>
                                                     </select>
 
                                                 </div>
-                                                </div>
                                             </div>
+                                        </div>
                                         <div class="form-group">
                                             <label for="name">Weight(In Kg)</label>
-                                            <input type="float" placeholder="Please Don't Enter String!" class="form-control" name="mass" required>
+                                            <input type="float" placeholder="Please Don't Enter String!"
+                                                class="form-control" name="mass" required>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Colour</label>
-                                            <input type="text" class="form-control" name="color" required>
+                                                <div class="form-group">
+                                                    <label for="name">Colour</label>
+                                                    <input type="text" class="form-control" name="color" required>
 
-                                        </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Initial Issued Date</label>
-                                            <input type="date" class="form-control" name="initial_issued_date" required>
-                                        </div>
+                                                <div class="form-group">
+                                                    <label for="name">Initial Issued Date</label>
+                                                    <input type="date" class="form-control" name="initial_issued_date"
+                                                        required>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Renewal Date</label>
-                                            <input type="date" class="form-control" name="renewal_date" required>
+                                                <div class="form-group">
+                                                    <label for="name">Renewal Date</label>
+                                                    <input type="date" class="form-control" name="renewal_date"
+                                                        required>
 
-                                        </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Validity</label>
-                                            <input type="number" class="form-control" name="validity" required>
-                                        </div>
+                                                <div class="form-group">
+                                                    <label for="name">Validity</label>
+                                                    <input type="number" class="form-control" name="validity" required>
+                                                </div>
                                             </div>
                                         </div>
-                                            <div class="form-group">
+                                        <div class="form-group">
                                             <label for="name">Remarks</label>
-                                                <textarea  class="form-control" name="remarks" required></textarea>
+                                            <textarea class="form-control" name="remarks" required></textarea>
                                         </div>
                                         <br>
                                         <div class="buttons is-end">
@@ -471,7 +539,7 @@
             </div>
         </div>
     </div>
-        <div class="popup" tabindex="-1" role="dialog" id="upload-sheet-modal2">
+    <div class="popup" tabindex="-1" role="dialog" id="upload-sheet-modal2">
         <div class="popup-container lg-popup map-popup">
             <div class="popup-body">
                 <span class="close-icon"><i class="material-icons">close</i></span>
@@ -486,26 +554,26 @@
                                 <div class="drone-content col-left col-operators">
                                     <form action="{% url 'dashboard:add-operator' %}" method="POST"
                                         enctype="multipart/form-data">
-                                                {% csrf_token %}
-                                                {% if form.errors %}
-                                                {% for field in form %}
-                                                {% for error in field.errors %}
-                                                <div class="alert alert-danger">
-                                                    <strong>{{ field.name|title }} {{ error|escape }}</strong>
-                                                </div>
-                                                {% endfor %}
-                                                {% for messages in messages %}
-                                                <div class="success">
-                                                    <strong>{{ messages }}</strong>
-                                                </div>
-                                                {% endfor %}
-                                                {% endfor %}
-                                                {% for error in form.non_field_errors %}
-                                                <div class="alert alert-danger">
-                                                    <strong>{{ error|escape }}</strong>
-                                                </div>
-                                                {% endfor %}
-                                                {% endif %}
+                                        {% csrf_token %}
+                                        {% if form.errors %}
+                                        {% for field in form %}
+                                        {% for error in field.errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                                        </div>
+                                        {% endfor %}
+                                        {% for messages in messages %}
+                                        <div class="success">
+                                            <strong>{{ messages }}</strong>
+                                        </div>
+                                        {% endfor %}
+                                        {% endfor %}
+                                        {% for error in form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
                                         <div class="form-group">
                                             <label for="name">Company Name</label>
                                             <input type="text" class="form-control" name="company_name" required>
@@ -536,3 +604,15 @@
     </div>
 </main>
 {% endblock body %}
+{% block footer_links %}
+<script>
+    function closePopup() {
+        $('.closeit').on('click', function (e) {
+            // e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            $(this).closest('.popup').removeClass('open');
+        });
+    }
+</script>
+{% endblock footer_links %}

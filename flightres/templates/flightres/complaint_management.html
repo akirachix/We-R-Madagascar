@@ -82,7 +82,7 @@
                 </thead>
                 <tbody>
                     {% for i, j, k in data %}
-                    <tr>
+                    <tr modal-link="complain{{ i.uav_uid }}" class="modal-link">
                         <td>{{ i.uav_uid }}</td>
                         <td>
                             <time>{{ i.created_at }}</time>
@@ -110,6 +110,9 @@
                             <a id="show-popup" modal-link="complain{{ i.uav_uid }}" class="modal-link"><i
                                     class="material-icons mapTrigger" data-toggle="modal"
                                     data-target="#complain{{ i.uav_uid }}" value='{{i.uav_uid}}'>chevron_right</i></a>
+                                    </td>
+                                    </tr>
+
                             <div class="popup" tabindex="-1" role="dialog" id="complain{{ i.uav_uid }}">
                                 <div class="popup-container lg-popup map-popup">
                                     <div class="popup-body">
