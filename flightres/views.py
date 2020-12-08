@@ -377,7 +377,8 @@ class ComplainListView(LoginRequiredMixin, ListView):
             
             data.append([complain, nearby, nearby_auth])
             for x in nearby:
-                nearby_flight.append([complain.uav_uid, x.latitude, x.longitude])
+                if x.flight_start_date <= complain.created_at.date() <= x.flight_end_date:
+                    nearby_flight.append([complain.uav_uid, x.latitude, x.longitude])
             for x in nearby_auth:
                 nearby_auth_flight.append([complain.uav_uid, x.latitude, x.longitude])
         com['data'] = data

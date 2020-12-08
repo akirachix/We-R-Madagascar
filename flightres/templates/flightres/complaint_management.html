@@ -6,6 +6,44 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/popup-image.css' %}">
 <script src="{% static 'js/modal-image.js' %}"></script>
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+<style>
+    .legend {
+  padding: 8px 10px;
+  font: 13px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  /*border-radius: 5px;*/
+  line-height: 28px;
+  color: #555;
+  border-radius: 10px;
+  box-shadow: 2px 5px 5px -3px rgba(0, 0, 0, 0.308);
+}
+.legend h4 {
+  text-align: center;
+  font-size: 10px;
+  margin: 0px;
+  color: #777;
+}
+
+.legend span {
+  position: relative;
+  bottom: 3px;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 0.7;
+}
+
+.legend i.icon {
+  background-size: 18px;
+  background-color: rgba(255, 255, 255, 1);
+}
+</style>
 {% endblock links %}
 
 {% block body %}
@@ -327,6 +365,7 @@
             if(container != null){
                 container._leaflet_id = null;
             };
+            
             nearby = nearby.replace(/&quot;/g, '"')
             nearby_flight = JSON.parse(nearby)
             nearby_auth = nearby_auth.replace(/&quot;/g, '"')
@@ -339,7 +378,7 @@
             var mymap = L.map('map'+mapId,{
                 fullscreenControl: {
                     pseudoFullscreen: false // if true, fullscreen to page width and height
-                    }}).setView([dataLatitude,dataLongitude], 8);
+                    }}).setView([dataLatitude,dataLongitude], 10);
 
             osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -360,15 +399,41 @@
                 popupAnchor: [1, -34],
                 shadowSize: [41, 41]
             });
-            var mark = L.marker([dataLatitude, dataLongitude]).addTo(mymap);
+            var nearbyAuthIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+            var legend = L.control({ position: "bottomright" });
+
+            legend.onAdd = function(mymap) {
+                var div = L.DomUtil.create("div", "legend");
+                div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png);background-size:14px 22px;background-repeat: no-repeat;height:22px;width:14px;"></i><span>Nearby Flights</span><br>';
+                div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Complaint Flight</span><br>';
+                div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Local Authorities</span><br>';
+                return div;
+            };
+
+            legend.addTo(mymap);
+            
+            var customPopupComplaint = '<div class="bind-popup" > <div class="bind-header"> <table><tr><th>Latitude</th><th> Longitude</th></tr><tr><td >'+ dataLatitude +'</td><td >'+ dataLongitude +'</td> </tr></table> </div></div>'
+            var mark = L.marker([dataLatitude, dataLongitude], {icon:nearbyIcon}).addTo(mymap);
+            mark.bindPopup(customPopupComplaint);
             for (var i=0;i<nearby_flight.length;i++) {
                 if (String(nearby_flight[i][0]) == mapId) {
-                    mark_nearby = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])], {icon:nearbyIcon}).addTo(mymap);
+                    var customPopupNearby = '<div class="bind-popup" > <div class="bind-header"> <table><tr><th>Latitude</th><th> Longitude</th></tr><tr><td >'+ String(nearby_flight[i][1]) +'</td><td >'+ String(nearby_flight[i][2]) +'</td> </tr></table> </div></div>'
+                    mark_nearby = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])]).addTo(mymap);
+                    mark_nearby.bindPopup(customPopupNearby);
                 }
             }
             for (var i=0;i<nearby_auth_flight.length;i++) {
                 if (String(nearby_auth_flight[i][0]) == mapId) {
-                    mark_nearby_auth = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyIcon}).addTo(mymap);
+                    var  customPopupNearbyAuth= '<div class="bind-popup" > <div class="bind-header"> <table><tr><th>Latitude</th><th> Longitude</th></tr><tr><td >'+ String(nearby_auth_flight[i][1]) +'</td><td >'+ String(nearby_auth_flight[i][2]) +'</td> </tr></table> </div></div>'
+                    mark_nearby_auth = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyAuthIcon}).addTo(mymap);
+                    mark_nearby_auth.bindPopup(customPopupNearbyAuth);
                 }
             }
             osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
