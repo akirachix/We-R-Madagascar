@@ -373,7 +373,7 @@ $(document).ready(function () {
             "Google Terrain": googleTerrain,
 
         };
-        alert('test');
+        //alert('test');
         var geojsonLayer = new L.GeoJSON.AJAX("../data/nepal.geosjson");       
         geojsonLayer.addTo(map);
 

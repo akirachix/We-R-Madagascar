@@ -159,7 +159,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
 
 
         if datasuccess is not None or data_rep_success is not None:
-            if (len(datasuccess) + len(data_rep_success)) > 1:
+            '''if (len(datasuccess) + len(data_rep_success)) > 1:
                 msg = str(len(datasuccess) + len(data_rep_success)) + ' Flights were found'
             elif (len(datasuccess) + len(data_rep_success)) == 1:
                 msg = str(len(datasuccess) + len(data_rep_success)) + ' Flight was found'
@@ -167,7 +167,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
                 object_list = ""
                 msg = 'No Flight Found'
 
-            messages.success(request, msg)
+            messages.success(request, msg)'''
             
 
             context = {
@@ -184,7 +184,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
             }
             
         else:
-            messages.error(request, 'No matched Found')
+            #messages.error(request, 'No matched Found')
             context = {
                 'flight_start_date': start_date,
                 'flight_end_date': end_date,
