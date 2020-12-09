@@ -141,6 +141,7 @@
         position: 'bottomright'
     }).addTo(mymap);
 
+    var markersClusterGroup = L.markerClusterGroup();
 
     var geojsonLayer = new L.GeoJSON.AJAX("../../staticfiles/data/nepal.geojson",{style:{
     "color": "#04AA66",
@@ -179,7 +180,9 @@
     for(i=0;i<dataset.length;i++) {
         customPopup = '<div class="bind-popup" style="margin-right:auto;margin-left:14%;"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ dataset[i][4] +'</td><td>'+ dataset[i][3] +'</td><td>'+ dataset[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
-        mark[i] = L.marker([dataset[i][0], dataset[i][2]], {icon:fltIcon}).addTo(mymap);
+        mark[i] = L.marker([dataset[i][0], dataset[i][2]], {icon:fltIcon});
+        markersClusterGroup.addLayer(mark[i]);
+
         if(dataset[i][1] == 'Approved') {
             cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
                 color: 'green',
@@ -208,10 +211,12 @@
 
         mark[i].bindPopup(customPopup);
     }
+
     for(i=0;i<dataset_comp.length;i++) {
         customPopup1 = '<div class="bind-popup" style="margin-right:auto;margin-left:25%;"> <div class="bind-header"> <table style="width:100%"><tr><th style="padding-right:10px;">ID</th><th style="padding-left:10px;">Status</th></tr><tr><td style="padding-right:10px;">'+ dataset_comp[i][3] +'</td><td style="padding-left:10px;">'+ dataset_comp[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
-        mark1[i] = L.marker([dataset_comp[i][0], dataset_comp[i][2]], {icon:compIcon}).addTo(mymap);
+        mark1[i] = L.marker([dataset_comp[i][0], dataset_comp[i][2]], {icon:compIcon});
+        markersClusterGroup.addLayer(mark1[i]);
         if(dataset_comp[i][1] == 'Pending') {
             cir1[i] = L.circle([dataset_comp[i][0], dataset_comp[i][2]], {
                 color: 'orange',
@@ -232,6 +237,8 @@
         
         mark1[i].bindPopup(customPopup1);
     }
+    mymap.addLayer(markersClusterGroup);
+
     if(cir.length + cir1.length >1) {
 
         var group = new L.featureGroup(cir.concat(cir1));
