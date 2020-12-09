@@ -378,9 +378,9 @@ class ComplainListView(LoginRequiredMixin, ListView):
             data.append([complain, nearby, nearby_auth])
             for x in nearby:
                 if x.flight_start_date <= complain.created_at.date() <= x.flight_end_date:
-                    nearby_flight.append([complain.uav_uid, x.latitude, x.longitude])
+                    nearby_flight.append([complain.uav_uid, x.latitude, x.longitude, x.uav_uid, x.altitude, x.status])
             for x in nearby_auth:
-                nearby_auth_flight.append([complain.uav_uid, x.latitude, x.longitude])
+                nearby_auth_flight.append([complain.uav_uid, x.latitude, x.longitude, x.name, x.phone_number])
         com['data'] = data
         com['nearby_flt'] = json.dumps(list(nearby_flight), cls=DjangoJSONEncoder)
         com['nearby_auth_flt'] = json.dumps(list(nearby_auth_flight), cls=DjangoJSONEncoder)
