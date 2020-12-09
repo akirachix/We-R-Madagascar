@@ -239,6 +239,7 @@ $(document).ready(function () {
     }
 
     function plotMap(data, das, lat, long,alti, status1,id) {
+
         var greenIcon = L.icon({
             iconUrl: 'https://www.flaticon.com/svg/static/icons/svg/2945/2945641.svg',
 
@@ -372,6 +373,9 @@ $(document).ready(function () {
             "Google Terrain": googleTerrain,
 
         };
+        alert('test');
+        var geojsonLayer = new L.GeoJSON.AJAX("../data/nepal.geosjson");       
+        geojsonLayer.addTo(map);
 
         // var Kritipur = L.circle([lat, lon], {
         //     color: '#047c41',
