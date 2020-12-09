@@ -82,7 +82,7 @@
                 </thead>
                 <tbody>
                     {% for i, j, k in data %}
-                    <tr modal-link="complain{{ i.uav_uid }}" class="modal-link">
+                    <tr modal-link="complain{{ i.uav_uid }}" class="modal-link mapTrigger" value='{{i.uav_uid}}'>
                         <td>{{ i.uav_uid }}</td>
                         <td>
                             <time>{{ i.created_at }}</time>
@@ -159,7 +159,7 @@
                                                                 </li>
                                                                 <li >
                                                                     <h4></h4>
-                                                                    <div id="map{{i.uav_uid}}" class='mapadd' data-latitude={{i.latitude}} data-longitude={{i.longitude}} style="width: 100%;height: 300px;"></div>
+                                                                    <div id="map{{i.uav_uid}}" class='mapadd' data-latitude={{i.latitude}} data-longitude={{i.longitude}} data-id={{i.uav_uid}} data-status={{i.status}} style="width: 100%;height: 300px;"></div>
 
                                                                     <!-- <div class="permit-list">
                                                                         {% for perm in j %}
@@ -376,6 +376,8 @@
             const mapElement = document.querySelector('#map'+mapId);
             const dataLatitude = mapElement.dataset.latitude;
             const dataLongitude = mapElement.dataset.longitude;
+            const complainId = mapElement.dataset.id;
+            const complainStatus = mapElement.dataset.status;
             // console.log(map.dataset.latitude);
             // console.log(map.dataset.latitude);
             var mymap = L.map('map'+mapId,{
@@ -422,19 +424,19 @@
 
             legend.addTo(mymap);
             
-            var customPopupComplaint = '<div class="bind-popup" > <div class="bind-header"> <table><tr><th>Latitude</th><th> Longitude</th></tr><tr><td >'+ dataLatitude +'</td><td >'+ dataLongitude +'</td> </tr></table> </div></div>'
+            var customPopupComplaint = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;margin-right:auto;margin-left:25%;"><tr><th>Id</th><th> Status</th></tr><tr><td >'+ complainId +'</td><td >'+ complainStatus +'</td> </tr></table> </div></div>'
             var mark = L.marker([dataLatitude, dataLongitude], {icon:nearbyIcon}).addTo(mymap);
             mark.bindPopup(customPopupComplaint);
             for (var i=0;i<nearby_flight.length;i++) {
                 if (String(nearby_flight[i][0]) == mapId) {
-                    var customPopupNearby = '<div class="bind-popup" > <div class="bind-header"> <table><tr><th>Latitude</th><th> Longitude</th></tr><tr><td >'+ String(nearby_flight[i][1]) +'</td><td >'+ String(nearby_flight[i][2]) +'</td> </tr></table> </div></div>'
+                    var customPopupNearby = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;margin-right:auto;margin-left:10%;"><tr><th>Id</th><th>Altitude</th><th>Status</th></tr><tr><td >'+ String(nearby_flight[i][3]) +'</td><td >'+ String(nearby_flight[i][4]) +'</td><td >'+ String(nearby_flight[i][5]) +'</td> </tr></table> </div></div>'
                     mark_nearby = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])]).addTo(mymap);
                     mark_nearby.bindPopup(customPopupNearby);
                 }
             }
             for (var i=0;i<nearby_auth_flight.length;i++) {
                 if (String(nearby_auth_flight[i][0]) == mapId) {
-                    var  customPopupNearbyAuth= '<div class="bind-popup" > <div class="bind-header"> <table><tr><th>Latitude</th><th> Longitude</th></tr><tr><td >'+ String(nearby_auth_flight[i][1]) +'</td><td >'+ String(nearby_auth_flight[i][2]) +'</td> </tr></table> </div></div>'
+                    var  customPopupNearbyAuth= '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;margin-right:auto;margin-left:20%;"><tr><th>Name</th><th> Phone Number</th></tr><tr><td >'+ String(nearby_auth_flight[i][3]) +'</td><td >'+ String(nearby_auth_flight[i][4]) +'</td> </tr></table> </div></div>'
                     mark_nearby_auth = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyAuthIcon}).addTo(mymap);
                     mark_nearby_auth.bindPopup(customPopupNearbyAuth);
                 }
