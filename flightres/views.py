@@ -20,8 +20,8 @@ from datetime import date
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-
-from .models import FlightPermission, Report, LocalAuthorities
+from django.core.serializers import serialize
+from .models import FlightPermission, Report, LocalAuthorities, NoFlyZone
 from registry.models import Aircraft, Operator, Manufacturer, Address
 from django.contrib.messages.views import SuccessMessageMixin
 from .form import AircraftForm, OperatorForm
@@ -89,8 +89,12 @@ class FlightView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         object_list = FlightPermission.objects.all()
+        
+        obj = serialize('geojson', NoFlyZone.objects.all())
+        #print(obj)
         context = {
-            "object_list": object_list
+            "object_list": object_list,
+            'obj':obj
 
         }
         return render(request, 'flightres/map.html', context)

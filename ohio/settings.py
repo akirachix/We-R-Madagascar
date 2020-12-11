@@ -32,15 +32,18 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
+    'leaflet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    
     # 'drf_yasg',
     'django_extensions',
     'registry',
@@ -122,7 +125,7 @@ LOGIN_REDIRECT_URL = '/np/dashboard'
 #     }
 # }
 
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -135,15 +138,15 @@ DATABASES = {
 '''
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dronereg',
-        'USER': 'superuser',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'drone',
+        'USER': 'vushan',
         'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-'''
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -190,3 +193,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # django_heroku.settings(locals())
 
 AUTH_USER_MODEL = 'authentication.User'
+
+LEAFLET_CONFIG = {
+    
+    'DEFAULT_CENTER': (27.71, 85.32),
+    'DEFAULT_ZOOM': 6,
+    'MIN_ZOOM': 1,
+    'MAX_ZOOM': 20,
+    #'TILES': "http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+    
+    
+}

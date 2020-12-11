@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.gis.db import models as gismodels
 from django.contrib import admin
 import uuid
 from django.contrib.auth.models import User
@@ -158,3 +159,9 @@ class LocalAuthorities(models.Model):
 
     def __str__(self):
         return self.name
+
+class NoFlyZone(models.Model):
+    location = gismodels.MultiPolygonField(srid=4326, null=True, blank=True)
+    
+
+    

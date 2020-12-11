@@ -146,7 +146,11 @@
 {% block footer_links %}
 <script>
     var defa = [27.71, 85.32]
-
+    var noFlyZone = '{{obj}}'
+    noFlyZone = noFlyZone.replace(/&quot;/g, '"')
+    var noFlyZone_json = JSON.parse(noFlyZone)
+    //var noFlyZone_area = noFlyZone['features'][0]['geometry']['coordinates']
+    //console.log(typeof noFlyZone_json['features'][0])
     var dataset = [{% if data3 %}{% for x in data3 %}
                 [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}',{{ x.uav_uid }}],
                 {% endfor %}{% else %}{% for x in object_list %}
@@ -163,7 +167,12 @@
     }).addTo(mymap);
 
     var markersClusterGroup = L.markerClusterGroup();
-
+    var noFlyZoneLayer = new L.GeoJSON(noFlyZone_json['features'][0], {style : {
+        "color": "red",
+        "weight": 3,
+        "opacity": 1,
+        'fill': 'red'
+    }}).addTo(mymap);
     var geojsonLayer = new L.GeoJSON.AJAX("../../staticfiles/data/nepal.geojson",{style:{
     "color": "#04AA66",
     "weight": 5,
