@@ -20,6 +20,7 @@ class LocalAuthoritiesAdmin(admin.ModelAdmin):
 
 class NoFlyZoneAdmin(LeafletGeoAdmin):
     pass
+    #exclude = ('shp_file', 'shx_file',)
 admin.site.register(Report, WhatsappComplainAdmin)
 admin.site.register(FlightPermission, FlightRegistryAdmin)
 admin.site.register(Pilots, PilotsAdmin)

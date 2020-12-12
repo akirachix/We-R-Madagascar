@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.core import serializers
 import decimal
 import pandas as pd
+import geopandas
 from django.core.exceptions import ObjectDoesNotExist
 import json
 import requests
@@ -27,6 +28,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from .form import AircraftForm, OperatorForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
+from zipfile import ZipFile
 
 
 def homeView(request):
@@ -89,12 +91,19 @@ class FlightView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         object_list = FlightPermission.objects.all()
-        
-        obj = serialize('geojson', NoFlyZone.objects.all())
-        #print(obj)
+        shp_files = NoFlyZone.objects.all()
+        shp_names = []
+        count = -1
+        for x in shp_files:
+            count += 1
+            if str(x.spatialdata_zip_file).endswith('.zip'):
+                zipped = ZipFile(x.spatialdata_zip_file, 'r')
+                for y in zipped.namelist():
+                    if y.endswith('.shp'):
+                        shp_names.append(y.replace('.shp', '.geojson'))
         context = {
             "object_list": object_list,
-            'obj':obj
+            'obj': json.dumps(list(shp_names), cls=DjangoJSONEncoder)
 
         }
         return render(request, 'flightres/map.html', context)
@@ -102,8 +111,6 @@ class FlightView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         start_date = request.POST['flight_start_date']
         end_date = request.POST['flight_end_date']
-        
-        
         flt_status = [
             request.POST.get('flt_approved', None),
             request.POST.get('flt_pending', None),

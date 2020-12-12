@@ -188,8 +188,8 @@ CELERY_BROKER_URL = 'redis://[::1]:6379/0'
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# MEDIA_URL = '/uploads/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 # django_heroku.settings(locals())
 
 AUTH_USER_MODEL = 'authentication.User'

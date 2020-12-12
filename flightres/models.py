@@ -1,14 +1,16 @@
 from django.db import models
 from django.contrib.gis.db import models as gismodels
 from django.contrib import admin
+#from django.db.models.signals import post_save
 import uuid
 from django.contrib.auth.models import User
-
+import geopandas
 from api.twilio import Twilio
 
 from registry.models import Aircraft
 from flightres.utils import reverseGeocode
 from ohio import settings
+from zipfile import ZipFile
 
 
 class FlightPermission(models.Model):
@@ -161,7 +163,40 @@ class LocalAuthorities(models.Model):
         return self.name
 
 class NoFlyZone(models.Model):
-    location = gismodels.MultiPolygonField(srid=4326, null=True, blank=True)
+
+    spatialdata_zip_file = models.FileField(upload_to='shp_files', blank=True, null=True)
     
+
+    def save(self, *args, **kwargs):
+        with ZipFile(self.spatialdata_zip_file, 'r') as zipped:
+            dat = str(self.spatialdata_zip_file)
+            datpath = str(self.spatialdata_zip_file.path)
+            for x in zipped.namelist():
+                if x.endswith('.shp'):
+                    outfile = open(datpath.replace(dat, '') + 'shp_files/' + x, 'wb')
+                    outfile.write(zipped.read(x))
+                    outfile.close()
+                    shpname = datpath.replace(dat, '') + 'shp_files/' + x
+                elif x.endswith('.shx'):
+                    outfile = open(datpath.replace(dat, '') + 'shp_files/' + x, 'wb')
+                    outfile.write(zipped.read(x))
+                    outfile.close()
+        myshpfile = geopandas.read_file(shpname, encoding='ISO8859-1')
+        myshpfile.to_file(shpname.replace('.shp', '.geojson'), driver='GeoJSON')
+        super(NoFlyZone, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return str(self.spatialdata_zip_file).replace('shp_files/', '')
+'''def create_geojson(sender, **kwargs):
+    if kwargs['created']:
+        full_path = kwargs['instance'].shp_file.path
+        
+        myshpfile = geopandas.read_file(full_path, encoding='ISO8859-1')
+        myshpfile.to_file('uploads/'+ str(kwargs['instance'].shp_file).replace('.shp', '.geojson'), driver='GeoJSON')
+
+post_save.connect(create_geojson, sender=NoFlyZone)'''
+    
+
+
 
     
