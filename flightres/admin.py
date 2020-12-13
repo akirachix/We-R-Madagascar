@@ -1,5 +1,5 @@
 from django.contrib import admin
-from leaflet.admin import LeafletGeoAdmin
+#from leaflet.admin import LeafletGeoAdmin
 from .models import Report, FlightPermission, Pilots, LocalAuthorities, NoFlyZone
 
 class FlightRegistryAdmin(admin.ModelAdmin):
@@ -18,7 +18,7 @@ class LocalAuthoritiesAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'phone_number']
     search_fields = ['id', 'name', 'phone_number']
 
-class NoFlyZoneAdmin(LeafletGeoAdmin):
+class NoFlyZoneAdmin(admin.ModelAdmin):
     pass
     #exclude = ('shp_file', 'shx_file',)
 admin.site.register(Report, WhatsappComplainAdmin)
