@@ -11,7 +11,7 @@ from django.http import JsonResponse
 from django.core import serializers
 import decimal
 import pandas as pd
-import geopandas
+#import geopandas
 from django.core.exceptions import ObjectDoesNotExist
 import json
 import requests
