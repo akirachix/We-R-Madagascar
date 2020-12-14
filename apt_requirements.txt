@@ -19,3 +19,4 @@ libproj-dev
 binutils
 libproj-dev
 libgdal-dev
+python3-gdal

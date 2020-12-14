@@ -131,6 +131,7 @@ workflows:
           context: global
           requires:
             - test
+            - build
           filters:
             branches:
               only:
