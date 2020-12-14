@@ -15,6 +15,17 @@ jobs:
   test:
     docker:
       - image: python:3.6-buster #Using python:3.6-buster since, -slim lacks many packages
+        environment:
+          POSTGRES_PASSWORD: test
+          POSTGRES_USER: test
+          POSTGRES_DB: test
+
+      - image: mdillon/postgis:11-alpine
+        environment:
+          POSTGRES_USER: test
+          POSTGRES_DB: test
+          POSTGRES_PASSWORD: test
+
     steps:
       - checkout
       - restore_cache:

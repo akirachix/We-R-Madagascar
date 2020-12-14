@@ -2,10 +2,9 @@ version: "3"
 
 services:
   web:
-    build: .
-    # image: docker.pkg.github.com/naxa-developers/drone-registration/drone-registration:latest
+    image: docker.pkg.github.com/naxa-developers/drone-registration/drone-registration:latest
     restart: always
-    container_name: drone-reg-prod
+    container_name: drone-reg-web
     ports:
       - 8000:8000
     volumes:
@@ -13,6 +12,19 @@ services:
     command: sh entrypoint-prod.sh
     networks:
       - d-network
+  db:
+    image: mdillon/postgis:11-alpine
+    container_name: drone-reg-db
+    restart: always
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+    # ports: 
+    #   - 5432:5432
+    env_file:
+      - postgres.env
+    networks:
+      - d-network
+
 networks:
   d-network:
     external: false
