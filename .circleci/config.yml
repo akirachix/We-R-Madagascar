@@ -14,7 +14,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: python:3.6-buster #Using python:3.6-buster since, -slim lacks many packages
+      - image: python:3.8-buster #Using python:3.6-buster since, -slim lacks many packages
         environment:
           POSTGRES_PASSWORD: test
           POSTGRES_USER: test
