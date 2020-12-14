@@ -30,6 +30,7 @@ from .form import AircraftForm, OperatorForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from zipfile import ZipFile
+from .utils import is_near_senstive_area
 
 
 def homeView(request):
@@ -102,6 +103,9 @@ class FlightView(LoginRequiredMixin, TemplateView):
                 for y in zipped.namelist():
                     if y.endswith('.shp'):
                         shp_names.append(y.replace('.shp', '.geojson'))
+
+        dats = is_near_senstive_area(23.32, 43.34, shp_names)
+        
         context = {
             "object_list": object_list,
             'obj': json.dumps(list(shp_names), cls=DjangoJSONEncoder)
