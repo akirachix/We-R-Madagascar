@@ -16,14 +16,10 @@ jobs:
     docker:
       - image: python:3.8-buster #Using python:3.6-buster since, -slim lacks many packages
         environment:
-          POSTGRES_PASSWORD: test
-          POSTGRES_USER: test
-          POSTGRES_DB: test
           SQL_ENGINE: django.contrib.gis.db.backends.postgis
           SQL_DATABASE: test
           SQL_USER: test
           SQL_PASSWORD: test
-          SQL_HOST: test
 
       - image: mdillon/postgis:11-alpine
         environment:
