@@ -63,6 +63,9 @@ class FlightPermission(models.Model):
         if self.old_status != self.status:
 
             uri = "https://droneregistry.naxa.com.np/np/dashboard/request_response/"
+            msg1_enc = msg1.encode('ASCII')
+            msg1_crypt = base64.b64encode(msg1_enc)
+            msg1_crypt_str = msg1_crypt.decode('ASCII')
             response_data = uri + str(self.uav_uid)
             message = "Your flight permission request has a update. Open this link to find out more {}".format(
                 response_data)
