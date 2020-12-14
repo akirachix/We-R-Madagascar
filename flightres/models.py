@@ -6,7 +6,7 @@ import uuid
 from django.contrib.auth.models import User
 import geopandas
 from api.twilio import Twilio
-
+import base64
 from registry.models import Aircraft
 from flightres.utils import reverseGeocode
 from ohio import settings
@@ -63,10 +63,16 @@ class FlightPermission(models.Model):
         if self.old_status != self.status:
 
             uri = "https://droneregistry.naxa.com.np/np/dashboard/request_response/"
+            msg1 = str(self.uav_uid)
+            msg2 = str(self.status)
             msg1_enc = msg1.encode('ASCII')
             msg1_crypt = base64.b64encode(msg1_enc)
             msg1_crypt_str = msg1_crypt.decode('ASCII')
-            response_data = uri + str(self.uav_uid)
+            msg2_enc = msg2.encode('ASCII')
+            msg2_crypt = base64.b64encode(msg2_enc)
+            msg2_crypt_str = msg2_crypt.decode('ASCII')
+            fin_msg = msg1_crypt_str + '$' + msg2_crypt_str
+            response_data = uri + fin_msg
             message = "Your flight permission request has a update. Open this link to find out more {}".format(
                 response_data)
             try:
