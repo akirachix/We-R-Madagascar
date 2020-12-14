@@ -4,6 +4,8 @@ services:
   web:
     image: docker.pkg.github.com/naxa-developers/drone-registration/drone-registration:latest
     restart: always
+    env_file:
+      - .env
     container_name: drone-reg-web
     ports:
       - 8000:8000

@@ -1,5 +1,7 @@
 #Deploy Script
 deploy.sh
+postgres.env
+.env
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
