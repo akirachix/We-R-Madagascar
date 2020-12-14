@@ -11,6 +11,8 @@ from django.http import JsonResponse
 from django.core import serializers
 import decimal
 import pandas as pd
+import base64
+#import geopandas
 from django.core.exceptions import ObjectDoesNotExist
 import json
 import requests
@@ -20,13 +22,14 @@ from datetime import date
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-
-from .models import FlightPermission, Report, LocalAuthorities
+from django.core.serializers import serialize
+from .models import FlightPermission, Report, LocalAuthorities, NoFlyZone
 from registry.models import Aircraft, Operator, Manufacturer, Address
 from django.contrib.messages.views import SuccessMessageMixin
 from .form import AircraftForm, OperatorForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
+from zipfile import ZipFile
 
 
 def homeView(request):
@@ -89,8 +92,19 @@ class FlightView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         object_list = FlightPermission.objects.all()
+        shp_files = NoFlyZone.objects.all()
+        shp_names = []
+        count = -1
+        for x in shp_files:
+            count += 1
+            if str(x.spatialdata_zip_file).endswith('.zip'):
+                zipped = ZipFile(x.spatialdata_zip_file, 'r')
+                for y in zipped.namelist():
+                    if y.endswith('.shp'):
+                        shp_names.append(y.replace('.shp', '.geojson'))
         context = {
-            "object_list": object_list
+            "object_list": object_list,
+            'obj': json.dumps(list(shp_names), cls=DjangoJSONEncoder)
 
         }
         return render(request, 'flightres/map.html', context)
@@ -98,8 +112,6 @@ class FlightView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         start_date = request.POST['flight_start_date']
         end_date = request.POST['flight_end_date']
-        
-        
         flt_status = [
             request.POST.get('flt_approved', None),
             request.POST.get('flt_pending', None),
@@ -308,8 +320,12 @@ def assignPerm(request, pk, action):
             return JsonResponse(resp4)
 
 
-def flightReqResponseView(request, pk):
-    selected_flight = get_object_or_404(FlightPermission, uav_uid=pk)
+def flightReqResponseView(request, skey):
+    msg = skey.split('$')
+    uid_enc = msg[0].encode('ASCII')
+    uid_b64 = base64.b64decode(uid_enc)
+    uid_enc_str = uid_b64.decode('ASCII')
+    selected_flight = get_object_or_404(FlightPermission, uav_uid=uid_enc_str)
     if selected_flight.status == 'Approved':
         return render(request, 'flightres/verified_pg.html', {'object': selected_flight})
     elif selected_flight.status == 'Rejected':
@@ -649,7 +665,8 @@ def dronedataupdate(request, pk):
             category=request.POST['category'],
             mass=request.POST['mass'],
             registration_mark=request.POST['registration_mark'],
-            begin_date=request.POST['begin_date']
+            begin_date=request.POST['begin_date'],
+            is_active=request.POST['active']
 
         )
         mandata = Manufacturer.objects.order_by('full_name')

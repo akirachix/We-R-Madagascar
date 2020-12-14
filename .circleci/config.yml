@@ -14,7 +14,19 @@ orbs:
 jobs:
   test:
     docker:
-      - image: python:3.6-buster #Using python:3.6-buster since, -slim lacks many packages
+      - image: python:3.8-buster #Using python:3.6-buster since, -slim lacks many packages
+        environment:
+          SQL_ENGINE: django.contrib.gis.db.backends.postgis
+          SQL_DATABASE: test
+          SQL_USER: test
+          SQL_PASSWORD: test
+
+      - image: mdillon/postgis:11-alpine
+        environment:
+          POSTGRES_USER: test
+          POSTGRES_DB: test
+          POSTGRES_PASSWORD: test
+
     steps:
       - checkout
       - restore_cache:
@@ -27,6 +39,14 @@ jobs:
             . venv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
+      - run:
+          name: Installing Project Dependencies (APT)
+          command: |
+            apt-get clean
+            rm -rf /var/lib/apt/lists/*
+            apt-get update
+            apt-get install -y $(cat ./apt_requirements.txt)
+            apt-get clean
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:

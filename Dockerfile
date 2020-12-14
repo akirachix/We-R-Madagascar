@@ -1,7 +1,7 @@
 # create image docker build -t drone-registration:latest
 
 # pull official base image (3.6-slim will have few dependencies missing)
-FROM python:3.6
+FROM python:3.8
 
 # set work directory
 RUN mkdir -p /usr/src/app

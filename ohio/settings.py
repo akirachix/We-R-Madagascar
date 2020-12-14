@@ -32,15 +32,18 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
+    'leaflet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    
     # 'drf_yasg',
     'django_extensions',
     'registry',
@@ -61,11 +64,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django_token.middleware.TokenMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'django.contrib.auth.backends.RemoteUserBackend',
+    'django_token.backends.TokenBackend',
 ]
 
 REST_FRAMEWORK = {
@@ -112,6 +117,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ohio.wsgi.application'
 LOGIN_REDIRECT_URL = '/np/dashboard'
+
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -122,28 +128,28 @@ LOGIN_REDIRECT_URL = '/np/dashboard'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'drone',
+#         'USER': 'vushan',
+#         'PASSWORD': '1234',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'droneregistry.sqlite3'),
-    }
+DATABASES = {      
+    'default': {          
+        'ENGINE': os.environ.get('SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'),          
+        'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),          
+        'USER': os.environ.get('SQL_USER', 'user'),          
+        'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),          
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),          
+        'PORT': os.environ.get('SQL_PORT', '5432'),      
+    }  
 }
 
-
-
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dronereg',
-        'USER': 'superuser',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -185,8 +191,19 @@ CELERY_BROKER_URL = 'redis://[::1]:6379/0'
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# MEDIA_URL = '/uploads/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 # django_heroku.settings(locals())
 
 AUTH_USER_MODEL = 'authentication.User'
+
+LEAFLET_CONFIG = {
+    
+    'DEFAULT_CENTER': (27.71, 85.32),
+    'DEFAULT_ZOOM': 6,
+    'MIN_ZOOM': 1,
+    'MAX_ZOOM': 20,
+    #'TILES': "http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+    
+    
+}

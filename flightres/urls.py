@@ -16,7 +16,7 @@ urlpatterns = [
     path('assign_perm/<int:pk>/<str:action>',
          assignPerm, name='assign-perm'),
     # path('upload_sheet', uploadSheet, name="upload-sheet"),
-    path('request_response/<int:pk>',
+    path('request_response/<str:skey>',
          flightReqResponseView, name='request-response'),
     path('complain', ComplainListView.as_view(), name='complain-list'),
     path('update_complain/<int:pk>/<str:action>/<str:status>',

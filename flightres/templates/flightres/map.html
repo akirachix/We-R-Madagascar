@@ -146,7 +146,12 @@
 {% block footer_links %}
 <script>
     var defa = [27.71, 85.32]
-
+    var noFlyZone = '{{obj}}'
+    noFlyZone = noFlyZone.replace(/&quot;/g, '"')
+    var noFlyZone_json = JSON.parse(noFlyZone)
+    console.log(noFlyZone_json)
+    //var noFlyZone_area = noFlyZone['features'][0]['geometry']['coordinates']
+    //console.log(typeof noFlyZone_json['features'][0])
     var dataset = [{% if data3 %}{% for x in data3 %}
                 [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}',{{ x.uav_uid }}],
                 {% endfor %}{% else %}{% for x in object_list %}
@@ -163,12 +168,21 @@
     }).addTo(mymap);
 
     var markersClusterGroup = L.markerClusterGroup();
-
+    for (var x = 0; x < noFlyZone_json.length; x++) {
+        
+        var noFlyZoneLayer = new L.GeoJSON.AJAX("../../uploads/shp_files/"+ String(noFlyZone_json[x]), {style : {
+            "color": "red",
+            "weight": 3,
+            "opacity": 1
+        }}).addTo(mymap);
+        
+    }
+    
     var geojsonLayer = new L.GeoJSON.AJAX("../../staticfiles/data/nepal.geojson",{style:{
-    "color": "#04AA66",
-    "weight": 5,
-    "opacity": 0.65
-}});       
+        "color": "#04AA66",
+        "weight": 5,
+        "opacity": 0.65
+    }});       
         geojsonLayer.addTo(mymap);
     osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',

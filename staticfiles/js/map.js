@@ -13,7 +13,10 @@ $(document).ready(function () {
 
     for (var i = 0; i < expandBtn.length; i++) {
         expandBtn[i].addEventListener('click', function (e) {
-            object_id = e.target.id.split('_')[1];
+            // object_id = e.target.id.split('_')[1];
+            const closestPopupElement = e.target.closest('.highlight');
+            e.stopPropagation();
+            object_id = closestPopupElement.id.split('_')[1];
             console.log(object_id,'objectId');
             for (var j = 0; j < flight_object.length; j++) {
                 if (object_id == flight_object[j].uav_uid) {
@@ -64,6 +67,16 @@ $(document).ready(function () {
         let approve_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/approve" class="common-button is-bg">Approve</a>`:`<a class="common-button is-bg is-disable">Approve</a>`
         let deny_button = current_email===data.assigned_to__email?`<span  class="common-button is-border cancel-button" id="denyButton">Deny</span>`:`<span  class="common-button is-border cancel-button is-disable">Deny</span>`
         let assignee = data.assigned_to__username===null?`<button class="common-button is-bg assign-btn">Assign Self</button>`:`<p style="display: inline-block;">Assigned to <b> ${data.assigned_to__username}</b></p>`;
+        let drone_insurance = data.flight_insurance_url===null?``:`<div class="col-md-4">
+                                                                        <div class="file-upload">
+                                                                            <a href="`+ data.flight_insurance_url + `" target="_blank" class="file-link">
+                                                                                <div class="file-icon">
+                                                                                    <i class="material-icons">description</i>
+                                                                                </div>
+                                                                                <p>Drone Insurance</p>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>`
         var html1 = `
         <div class="popup-header">
             <h3>Permission Request for <b>ID `+ data.uav_uid + `</b></h3>
@@ -163,16 +176,7 @@ $(document).ready(function () {
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="file-upload">
-                                                <a href="`+ data.flight_insurance_url + `" target="_blank" class="file-link">
-                                                    <div class="file-icon">
-                                                        <i class="material-icons">description</i>
-                                                    </div>
-                                                    <p>Drone Insurance</p>
-                                                </a>
-                                            </div>
-                                        </div>
+                                        ${drone_insurance}
                                     </div>
                                 </li>
                             </ul>
@@ -235,6 +239,7 @@ $(document).ready(function () {
     }
 
     function plotMap(data, das, lat, long,alti, status1,id) {
+
         var greenIcon = L.icon({
             iconUrl: 'https://www.flaticon.com/svg/static/icons/svg/2945/2945641.svg',
 
@@ -255,7 +260,7 @@ $(document).ready(function () {
             shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
-        var map = L.map('map').setView([data.latitude, data.longitude,data.altitude], 8);
+        var map = L.map('map',{maxZoom:19}).setView([data.latitude, data.longitude,data.altitude], 8);
         // var map = L.map('map', {
         //     // layers: [base],
         //     center: new L.LatLng(lat, lon),
@@ -269,12 +274,15 @@ $(document).ready(function () {
         var cir = [];
 
         // console.log(flight_object)
+        var markers = L.markerClusterGroup();
         for(i=0;i<lat.length;i++){
             var c = parseFloat(lat[i]);
             var d = parseFloat(long[i]);
             customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ id[i] +'</td><td>'+ alti[i] +'</td><td>'+ status1[i] +'</td></tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
-            mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon}).addTo(map);
+            // mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon}).addTo(map);
+            mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon})
+            markers.addLayer(mar[i]);
             if(status1[i] == 'Approved') {
                 cir[i] = L.circle([lat[i], long[i]], {
                     color: 'green',
@@ -304,6 +312,9 @@ $(document).ready(function () {
             mar[i].bindPopup(customPopup);
         }
         var mark = L.marker([data.latitude, data.longitude]).addTo(map);
+        markers.addLayer(mark);
+        map.addLayer(markers);
+
         mark.bindPopup(customPopup1);
 
         if(das == 'Approved') {
@@ -362,6 +373,9 @@ $(document).ready(function () {
             "Google Terrain": googleTerrain,
 
         };
+        //alert('test');
+        var geojsonLayer = new L.GeoJSON.AJAX("../data/nepal.geosjson");       
+        geojsonLayer.addTo(map);
 
         // var Kritipur = L.circle([lat, lon], {
         //     color: '#047c41',
@@ -378,6 +392,28 @@ $(document).ready(function () {
         //   myMap.panTo([2, 22]);
 
         layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
+
+        
+        var legend = L.control({position: 'bottomleft'});
+        legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend');
+        labels = ['<strong>Categories</strong>'],
+        categories = ['Approved','Pending','Rejected'];
+        color=['Green','orange','Red'];
+
+        for (var i = 0; i < categories.length; i++) {
+
+                div.innerHTML += 
+                labels.push(
+                    '<i class="circle" style="opacity: 0.5;background:' + color[i] + '"></i> ' +
+                (categories[i] ? categories[i] : '+'));
+
+            }
+            div.innerHTML = labels.join('<br>');
+        return div;
+        };
+        legend.addTo(map);
     }
 
 });
