@@ -12,7 +12,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
-
+import base64
 from flightres.models import Report, FlightPermission, Pilots
 from flightres.utils import validate_lat_lon, is_near_senstive_area
 from registry.models import Aircraft
@@ -64,11 +64,19 @@ class FlightRegistryView(ModelViewSet):
         serializer = FlightRegistrySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-
+            msg1 = str(serializer.data['uav_uid'])
+            msg2 = str(serializer.data['status'])
+            msg1_enc = msg1.encode('ASCII')
+            msg1_crypt = base64.b64encode(msg1_enc)
+            msg1_crypt_str = msg1_crypt.decode('ASCII')
+            msg2_enc = msg2.encode('ASCII')
+            msg2_crypt = base64.b64encode(msg2_enc)
+            msg2_crypt_str = msg2_crypt.decode('ASCII')
+            fin_msg = msg1_crypt_str + '$' + msg2_crypt_str
             uri = "http://127.0.0.1:8000/np/api/v1/flightres/"
             response_data = uri + str(serializer.data['uav_uid'])
             data = {
-                'url': 'https://droneregistry.naxa.com.np/np/dashboard/request_response/' + str(serializer.data['uav_uid']),
+                'url': 'https://droneregistry.naxa.com.np/np/dashboard/request_response/' + fin_msg,
                 'id' : str(serializer.data['uav_uid'])
                 }
             return JsonResponse(data, status=status.HTTP_200_OK)

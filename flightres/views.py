@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.core import serializers
 import decimal
 import pandas as pd
+import base64
 #import geopandas
 from django.core.exceptions import ObjectDoesNotExist
 import json
@@ -319,8 +320,12 @@ def assignPerm(request, pk, action):
             return JsonResponse(resp4)
 
 
-def flightReqResponseView(request, pk):
-    selected_flight = get_object_or_404(FlightPermission, uav_uid=pk)
+def flightReqResponseView(request, skey):
+    msg = skey.split('$')
+    uid_enc = msg[0].encode('ASCII')
+    uid_b64 = base64.b64decode(uid_enc)
+    uid_enc_str = uid_b64.decode('ASCII')
+    selected_flight = get_object_or_404(FlightPermission, uav_uid=uid_enc_str)
     if selected_flight.status == 'Approved':
         return render(request, 'flightres/verified_pg.html', {'object': selected_flight})
     elif selected_flight.status == 'Rejected':
@@ -660,7 +665,8 @@ def dronedataupdate(request, pk):
             category=request.POST['category'],
             mass=request.POST['mass'],
             registration_mark=request.POST['registration_mark'],
-            begin_date=request.POST['begin_date']
+            begin_date=request.POST['begin_date'],
+            is_active=request.POST['active']
 
         )
         mandata = Manufacturer.objects.order_by('full_name')
