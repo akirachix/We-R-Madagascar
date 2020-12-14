@@ -13,14 +13,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 import base64
-from flightres.models import Report, FlightPermission, Pilots
+from flightres.models import Report, FlightPermission, Pilots, NoFlyZone
 from flightres.utils import validate_lat_lon, is_near_senstive_area
 from registry.models import Aircraft
 from registry.models import SheetRegister
 from registry.utils.preprocessor import Preprocessor
 from .serializers import FlightRegistrySerializer, WhatsappComplainSerializer, \
     SheetRegisterSerializer, PilotsSerializer, PilotFromFlightSerializer, WhatsappComplainCreateSerializer
-
+from zipfile import ZipFile
 
 @csrf_exempt
 @xframe_options_exempt
@@ -184,7 +184,21 @@ class GeoLocationValidation(APIView):
         is_valid_lat_lon, lat, lon = validate_lat_lon(lat_lon)
 
         if is_valid_lat_lon:
-            is_near_sensitive_area, message = is_near_senstive_area(lat, lon)
+            no_fly_zone = NoFlyZone.objects.all()
+            shp_names = []
+            if no_fly_zone != None:
+                count = -1
+                for x in no_fly_zone:
+                    count += 1
+                    if str(x.spatialdata_zip_file).endswith('.zip'):
+                        zipped = ZipFile(x.spatialdata_zip_file, 'r')
+                        for y in zipped.namelist():
+                            if y.endswith('.shp'):
+                                shp_names.append(y.replace('.shp', '.geojson'))
+                is_near_sensitive_area, message = is_near_senstive_area(lat, lon, shp_names)
+            else:
+                
+                is_near_sensitive_area, message = is_near_senstive_area(lat, lon, shp_names)
 
         return JsonResponse(
             {'is_valid_lat_lon': is_valid_lat_lon,

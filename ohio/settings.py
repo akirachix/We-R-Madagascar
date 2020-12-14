@@ -69,7 +69,7 @@ MIDDLEWARE = [
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'django.contrib.auth.backends.RemoteUserBackend',
-    'django_token.backends.TokenBackend',
+    
 ]
 
 REST_FRAMEWORK = {
