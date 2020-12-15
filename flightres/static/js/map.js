@@ -384,7 +384,7 @@ $(document).ready(function () {
 
         };
         //alert('test');
-        var geojsonLayer = new L.GeoJSON.AJAX("../data/nepal.geosjson");       
+        var geojsonLayer = new L.GeoJSON.AJAX("/staticfiles/data/nepal.geojson");       
         geojsonLayer.addTo(map);
 
         // var Kritipur = L.circle([lat, lon], {

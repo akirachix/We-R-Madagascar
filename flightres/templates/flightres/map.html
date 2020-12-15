@@ -189,7 +189,6 @@
     var noFlyZone = '{{obj}}'
     noFlyZone = noFlyZone.replace(/&quot;/g, '"')
     var noFlyZone_json = JSON.parse(noFlyZone)
-    console.log(noFlyZone_json)
     //var noFlyZone_area = noFlyZone['features'][0]['geometry']['coordinates']
     //console.log(typeof noFlyZone_json['features'][0])
     var dataset = [{% if data3 %}{% for x in data3 %}
