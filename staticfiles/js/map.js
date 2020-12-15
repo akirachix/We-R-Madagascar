@@ -1,3 +1,4 @@
+
 function permApproval(uid, status) {
     // console.log(uid, status)
 }
@@ -261,6 +262,18 @@ $(document).ready(function () {
             shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
+        var testIcon = L.divIcon({
+            className: `circle-marker ${data.status === 'Approved' ?"is-green": data.status === 'Rejected'? 'is-red':'is-orange'}`,
+            // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+            // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+            html:`<img src='/staticfiles/img/drone-icon.svg' alt="My image">`,
+            iconSize:     [38, 50], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+            // shadowAnchor: [4, 62],  // the same for the shadow
+            // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+       
+        });
         var map = L.map('map',{maxZoom:19}).setView([data.latitude, data.longitude,data.altitude], 8);
         // var map = L.map('map', {
         //     // layers: [base],
@@ -312,16 +325,19 @@ $(document).ready(function () {
 
             mar[i].bindPopup(customPopup);
         }
-        var testIcon = L.divIcon({
-            // className: 'circle-marker',
-            html: "<img src={% static 'img/drone-icon.svg' %}/>",
-            iconSize:     [38, 50], // size of the icon
-            shadowSize:   [50, 64], // size of the shadow
-            iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
-            shadowAnchor: [4, 62],  // the same for the shadow
-            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        // var testIcon = L.divIcon({
+        //     className: `circle-marker ${data.status === 'Approved' ?"is-green": data.status === 'Rejected'? 'is-red':'is-orange'}`,
+        //     // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+        //     // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+        //     html:`<img src='/staticfiles/img/drone-icon.svg' alt="My image">`,
+        //     iconSize:     [38, 50], // size of the icon
+        //     shadowSize:   [50, 64], // size of the shadow
+        //     // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+        //     // shadowAnchor: [4, 62],  // the same for the shadow
+        //     // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
        
-        });
+        // });
+        // console.log(data,'data');
         var mark = L.marker([data.latitude, data.longitude], {icon:testIcon}).addTo(map);
         markers.addLayer(mark);
         map.addLayer(markers);

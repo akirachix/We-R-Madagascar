@@ -9991,18 +9991,21 @@ h3.section-title {
 
 /*# sourceMappingURL=style.css.map */
 
-.leaflet-marker-icon{
+.circle-marker{
     width: 30px !important;
     height: 30px !important;
     border-radius: 50%;
-    background: #f14236;
+    /* background: #f14236; */
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.leaflet-marker-icon.is-red{
+.circle-marker.is-red{
     background: #f14236;
 }
-.leaflet-marker-icon.is-green{
-    background: green;
+.circle-marker.is-green{
+    background: #3aaa66;
+}
+.circle-marker.is-orange{
+    background: #f49158;
 }
