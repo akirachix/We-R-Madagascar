@@ -398,11 +398,20 @@ $(document).ready(function () {
         //     }).addTo(map);
 
         // };
-
-        osm = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2VvbWF0dXBlbiIsImEiOiJja2E5bDFwb2swdHNyMnNvenZxa2Vpeml2In0.fCStqdwmFYFP-cUvb5vMCw', {
-            maxZoom: 20,    
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        
+        noFlyZone = noFlyZone.replace(/&quot;/g, '"')
+        var noFlyZone_json = JSON.parse(noFlyZone)
+        for (var x = 0; x < noFlyZone_json.length; x++) {
+            var noFlyZoneLayer = new L.GeoJSON.AJAX("/uploads/shp_files/"+ String(noFlyZone_json[x]), {style : {
+                "color": "red",
+                "weight": 3,
+                "opacity": 1
+            }}).addTo(map);
+            
+        }
+        osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        })
 
         googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             maxZoom: 20,
