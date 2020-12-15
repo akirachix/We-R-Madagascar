@@ -35,7 +35,7 @@ def is_near_senstive_area(lat, lon, shp_names):
     for area in sensitive_areas:
         distances.append(haversine(area.get('lat'), area.get('lon'), lat, lon))
     for x in shp_names:
-        with open('uploads/shp_files/' + x) as f:
+        with open(x) as f:
             data = json.load(f)
     for feature in data['features']:
         for x in feature['geometry']['coordinates']:
