@@ -342,7 +342,17 @@ $(document).ready(function () {
             }).addTo(map);
 
         };
-
+        
+        noFlyZone = noFlyZone.replace(/&quot;/g, '"')
+        var noFlyZone_json = JSON.parse(noFlyZone)
+        for (var x = 0; x < noFlyZone_json.length; x++) {
+            var noFlyZoneLayer = new L.GeoJSON.AJAX("/uploads/shp_files/"+ String(noFlyZone_json[x]), {style : {
+                "color": "red",
+                "weight": 3,
+                "opacity": 1
+            }}).addTo(map);
+            
+        }
         osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         })

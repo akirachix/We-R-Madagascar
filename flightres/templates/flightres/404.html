@@ -46,6 +46,11 @@
 </head>
 
 <body>
+    {% for message in messages %}
+    <div class="alert alert-danger">
+        <strong>{{ message }}</strong>
+    </div>
+    {% endfor %}
     <div class="permit-pg">
         <div class="landing-section">
             <div class="top-bar"></div>

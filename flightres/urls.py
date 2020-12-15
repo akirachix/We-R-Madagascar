@@ -3,12 +3,13 @@ from . import views
 # importing views from views..py
 from .views import FlightPermissionList, approvePerm, flightReqResponseView, ComplainListView, dashboardView, \
     updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView, denyPerm, \
-    assignPerm, bulkupload, FlightView , OperatorAddView
+    assignPerm, bulkupload, FlightView , OperatorAddView, custom_zip
 
 urlpatterns = [
     path('', dashboardView, name='dashboard'),
     path('permission/<str:type>', FlightPermissionList.as_view(), name="permission"),
     path('allflights', FlightView.as_view(), name="flightview"),
+    path('custom_zip', custom_zip, name="custom_zip"),
     path('approve_perm/<int:pk>/<str:action>',
          approvePerm, name='approve-perm'),
     path('deny_perm/<int:pk>',
