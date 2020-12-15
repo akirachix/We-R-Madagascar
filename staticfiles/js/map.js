@@ -240,6 +240,7 @@ $(document).ready(function () {
 
     function plotMap(data, das, lat, long,alti, status1,id) {
 
+        
         var greenIcon = L.icon({
             iconUrl: 'https://www.flaticon.com/svg/static/icons/svg/2945/2945641.svg',
 
@@ -311,7 +312,17 @@ $(document).ready(function () {
 
             mar[i].bindPopup(customPopup);
         }
-        var mark = L.marker([data.latitude, data.longitude]).addTo(map);
+        var testIcon = L.divIcon({
+            // className: 'circle-marker',
+            html: "<img src={% static 'img/drone-icon.svg' %}/>",
+            iconSize:     [38, 50], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+       
+        });
+        var mark = L.marker([data.latitude, data.longitude], {icon:testIcon}).addTo(map);
         markers.addLayer(mark);
         map.addLayer(markers);
 
@@ -374,7 +385,7 @@ $(document).ready(function () {
 
         };
         //alert('test');
-        var geojsonLayer = new L.GeoJSON.AJAX("../data/nepal.geosjson");       
+        var geojsonLayer = new L.GeoJSON.AJAX("../data/nepal.geojson");       
         geojsonLayer.addTo(map);
 
         // var Kritipur = L.circle([lat, lon], {

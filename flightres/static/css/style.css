@@ -9990,3 +9990,19 @@ h3.section-title {
           transform: scale(1.1); }
 
 /*# sourceMappingURL=style.css.map */
+
+.leaflet-marker-icon{
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50%;
+    background: #f14236;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.leaflet-marker-icon.is-red{
+    background: #f14236;
+}
+.leaflet-marker-icon.is-green{
+    background: green;
+}
