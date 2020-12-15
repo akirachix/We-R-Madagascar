@@ -390,7 +390,7 @@
             osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
-                id: 'mapbox/streets-v11',
+                id: 'mapbox/lights-v10',
                 tileSize: 512,
                 zoomOffset: -1,
                 accessToken: 'your.mapbox.access.token'
@@ -414,20 +414,70 @@
                 popupAnchor: [1, -34],
                 shadowSize: [41, 41]
             });
+            var greenIcon = L.divIcon({
+                className: `circle-marker-complaint is-green`,
+                // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+                // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+                html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-greenIcon.svg' alt="My image">`,
+                iconSize:     [38, 50], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+                // shadowAnchor: [4, 62],  // the same for the shadow
+                // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var orangeIcon = L.divIcon({
+                className: `circle-marker-complaint is-orange`,
+                // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+                // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+                html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-orangeIcon.svg' alt="My image">`,
+                iconSize:     [38, 50], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+                // shadowAnchor: [4, 62],  // the same for the shadow
+                // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            // var nearbyIcon = L.divIcon({
+            //     className: `circle-marker-complaint is-red`,
+            //     // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+            //     // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+            //     html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-redIcon.svg' alt="My image">`,
+            //     iconSize:     [38, 50], // size of the icon
+            //     shadowSize:   [50, 64], // size of the shadow
+            //     // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+            //     // shadowAnchor: [4, 62],  // the same for the shadow
+            //     // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            // });
+            // var nearbyAuthIcon = L.divIcon({
+            //     className: `circle-marker is-orange`,
+            //     // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+            //     // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+            //     html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-redIcon.svg' alt="My image">`,
+            //     iconSize:     [38, 50], // size of the icon
+            //     shadowSize:   [50, 64], // size of the shadow
+            //     // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+            //     // shadowAnchor: [4, 62],  // the same for the shadow
+            //     // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            // });
             var legend = L.control({ position: "bottomright" });
 
             legend.onAdd = function(mymap) {
                 var div = L.DomUtil.create("div", "legend");
-                div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png);background-size:14px 22px;background-repeat: no-repeat;height:22px;width:14px;"></i><span>Nearby Flights</span><br>';
-                div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Complaint Flight</span><br>';
-                div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Local Authorities</span><br>';
+                // div.innerHTML += 
+                // div.innerHTML += '<div class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""><span class="label">Approved Flights</span></div>';
+                // div.innerHTML += '<i class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"></div><span>Complaint Flight</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-orange"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-orangeIcon.svg" alt="My image" style=""/></i><span>Pending Complaints</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-green"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-greenIcon.svg" alt="My image" style=""/></i><span>Resolved Complaints</span><br>';
+                // div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Complaint Flight</span><br>';
+                // div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Local Authorities</span><br>';
                 return div;
             };
 
             legend.addTo(mymap);
-            
+            // console.log(complainStatus,'complainStatus');
+            // console.log(nearby_flight,'nearybyFlight');
+            // console.log(nearby_auth_flight,'nearyby auth Flight');
             var customPopupComplaint = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;margin-right:auto;margin-left:25%;"><tr><th>Id</th><th> Status</th></tr><tr><td >'+ complainId +'</td><td >'+ complainStatus +'</td> </tr></table> </div></div>'
-            var mark = L.marker([dataLatitude, dataLongitude], {icon:nearbyIcon}).addTo(mymap);
+            var mark = L.marker([dataLatitude, dataLongitude], {icon:complainStatus === 'Resolved'?greenIcon:orangeIcon }).addTo(mymap);
             mark.bindPopup(customPopupComplaint);
             for (var i=0;i<nearby_flight.length;i++) {
                 if (String(nearby_flight[i][0]) == mapId) {
@@ -443,6 +493,16 @@
                     mark_nearby_auth.bindPopup(customPopupNearbyAuth);
                 }
             }
+            var geojsonLayer = new L.GeoJSON.AJAX("../../../staticfiles/data/nepal.geojson",{style:{
+                "color": "#04AA66",
+                "weight": 5,
+                "opacity": 0.65
+            }});       
+            geojsonLayer.addTo(mymap);
+
+            osm = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2VvbWF0dXBlbiIsImEiOiJja2E5bDFwb2swdHNyMnNvenZxa2Vpeml2In0.fCStqdwmFYFP-cUvb5vMCw', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mymap);
             for (var x = 0; x < noFlyZone_json.length; x++) {
                 var noFlyZoneLayer = new L.GeoJSON.AJAX("../../uploads/shp_files/"+ String(noFlyZone_json[x]), {style : {
                     "color": "red",
@@ -452,14 +512,11 @@
                 
             }
     
-            osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
-                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                })
 
                 googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
                     maxZoom: 20,
                     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-                }).addTo(mymap);
+                });
                 googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
                     maxZoom: 20,
                     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
@@ -650,14 +707,14 @@
                 radius: 100
             }).addTo(map);
 
-            osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            })
+            osm = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2VvbWF0dXBlbiIsImEiOiJja2E5bDFwb2swdHNyMnNvenZxa2Vpeml2In0.fCStqdwmFYFP-cUvb5vMCw', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
             googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
                 maxZoom: 20,
                 subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            }).addTo(map);
+            });
             googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
                 maxZoom: 20,
                 subdomains: ['mt0', 'mt1', 'mt2', 'mt3']

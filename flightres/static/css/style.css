@@ -9909,7 +9909,7 @@ h3.section-title {
     position: absolute;
     left: 20px;
     bottom: 2rem;
-    padding: 14px  20px;
+    padding: 14px  18px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
@@ -9990,3 +9990,80 @@ h3.section-title {
           transform: scale(1.1); }
 
 /*# sourceMappingURL=style.css.map */
+
+.circle-marker-legend{
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 50%;
+    /* background: #f14236; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circle-marker-legend.is-red{
+    background: #f14236;
+}
+.circle-marker-legend.is-green{
+    background: #3aaa66;
+}
+.circle-marker-legend.is-orange{
+    background: #f49158;
+}
+.circle-marker{
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50%;
+    /* background: #f14236; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circle-marker.is-red{
+    background: #f14236;
+}
+.circle-marker.is-green{
+    background: #3aaa66;
+}
+.circle-marker.is-orange{
+    background: #f49158;
+}
+.circle-marker-complaint{
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle-marker-complaint.is-red{
+    border: 2px solid #f14236;
+  }
+  .circle-marker-complaint.is-green{
+    border: 2px solid #3aaa66;
+    /* background: #3aaa66; */
+  }
+  .circle-marker-complaint.is-orange{
+    border: 2px solid #f49158;
+    /* background: #f49158; */
+}
+.circle-marker-complaint-legend{
+  width: 25px !important;
+  height: 25px !important;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle-marker-complaint-legend.is-red{
+    border: 2px solid #f14236;
+  }
+  .circle-marker-complaint-legend.is-green{
+    border: 2px solid #3aaa66;
+    /* background: #3aaa66; */
+  }
+  .circle-marker-complaint-legend.is-orange{
+    border: 2px solid #f49158;
+    /* background: #f49158; */
+}

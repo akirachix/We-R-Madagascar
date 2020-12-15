@@ -1,3 +1,4 @@
+
 function permApproval(uid, status) {
     // console.log(uid, status)
 }
@@ -185,7 +186,36 @@ $(document).ready(function () {
                     <div class="col-xl-7 col-sm-12">
                         <div class="map-content col-right">
                             <div class="tab-content-holder current" id="location">
-                                <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `" ></div>
+                                <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `" >
+                                <div class="map-section">
+                                <div class="legend-body" style='z-index:9090;min-width: 176px;max-width: 206px;'>
+                        <span class="title">Categories</span>
+                        <ul class="legend">
+                            
+                            <li class="legend-item">
+                                <a href="javascript:void()">
+                                    <div class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="/staticfiles/img/drone-icon.svg" alt="My image" style=""></div>
+                                    <span class="label">Approved Flights</span>
+                                    
+
+                                </a>
+                            </li>
+                            <li class="legend-item">
+                                <a href="javascript:void()">
+                                    <div class="circle-marker-legend is-orange" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="/staticfiles/img/drone-icon.svg" alt="My image" style=""></div>
+                                    <span class="label">Pending Flights</span>
+                                </a>
+                            </li>
+                            <li class="legend-item">
+                                <a href="javascript:void()">
+                                    <div class="circle-marker-legend is-green" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="/staticfiles/img/drone-icon.svg" alt="My image" style=""></div>
+                                    <span class="label">Rejected Flights</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                    </div>
                             </div>
                             <div class="buttons is-end">
                                 ${approve_button}
@@ -240,6 +270,7 @@ $(document).ready(function () {
 
     function plotMap(data, das, lat, long,alti, status1,id) {
 
+        
         var greenIcon = L.icon({
             iconUrl: 'https://www.flaticon.com/svg/static/icons/svg/2945/2945641.svg',
 
@@ -259,6 +290,18 @@ $(document).ready(function () {
             iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
             shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        var testIcon = L.divIcon({
+            className: `circle-marker ${data.status === 'Approved' ?"is-green": data.status === 'Rejected'? 'is-red':'is-orange'}`,
+            // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+            // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+            html:`<img src='/staticfiles/img/drone-icon.svg' alt="My image">`,
+            iconSize:     [38, 50], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+            // shadowAnchor: [4, 62],  // the same for the shadow
+            // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+       
         });
         var map = L.map('map',{maxZoom:19}).setView([data.latitude, data.longitude,data.altitude], 8);
         // var map = L.map('map', {
@@ -311,37 +354,50 @@ $(document).ready(function () {
 
             mar[i].bindPopup(customPopup);
         }
-        var mark = L.marker([data.latitude, data.longitude]).addTo(map);
+        // var testIcon = L.divIcon({
+        //     className: `circle-marker ${data.status === 'Approved' ?"is-green": data.status === 'Rejected'? 'is-red':'is-orange'}`,
+        //     // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+        //     // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+        //     html:`<img src='/staticfiles/img/drone-icon.svg' alt="My image">`,
+        //     iconSize:     [38, 50], // size of the icon
+        //     shadowSize:   [50, 64], // size of the shadow
+        //     // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+        //     // shadowAnchor: [4, 62],  // the same for the shadow
+        //     // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+       
+        // });
+        // console.log(data,'data');
+        var mark = L.marker([data.latitude, data.longitude], {icon:testIcon}).addTo(map);
         markers.addLayer(mark);
         map.addLayer(markers);
 
         mark.bindPopup(customPopup1);
 
-        if(das == 'Approved') {
-            var circle = L.circle([data.latitude, data.longitude], {
-                color: 'green',
-                fillColor: 'green',
-                fillOpacity: 0.5,
-                radius: 1000
-            }).addTo(map);
+        // if(das == 'Approved') {
+        //     var circle = L.circle([data.latitude, data.longitude], {
+        //         color: 'green',
+        //         fillColor: 'green',
+        //         fillOpacity: 0.5,
+        //         radius: 1000
+        //     }).addTo(map);
 
-        } else if(das == 'Pending') {
-            var circle = L.circle([data.latitude, data.longitude], {
-                color: 'orange',
-                fillColor: 'orange',
-                fillOpacity: 0.5,
-                radius: 1000
-            }).addTo(map);
+        // } else if(das == 'Pending') {
+        //     var circle = L.circle([data.latitude, data.longitude], {
+        //         color: 'orange',
+        //         fillColor: 'orange',
+        //         fillOpacity: 0.5,
+        //         radius: 1000
+        //     }).addTo(map);
 
-        } else {
-            var circle = L.circle([data.latitude, data.longitude], {
-                color: 'red',
-                fillColor: 'red',
-                fillOpacity: 0.5,
-                radius: 1000
-            }).addTo(map);
+        // } else {
+        //     var circle = L.circle([data.latitude, data.longitude], {
+        //         color: 'red',
+        //         fillColor: 'red',
+        //         fillOpacity: 0.5,
+        //         radius: 1000
+        //     }).addTo(map);
 
-        };
+        // };
         
         noFlyZone = noFlyZone.replace(/&quot;/g, '"')
         var noFlyZone_json = JSON.parse(noFlyZone)
@@ -360,7 +416,7 @@ $(document).ready(function () {
         googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             maxZoom: 20,
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-        }).addTo(map);
+        });
         googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
             maxZoom: 20,
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
@@ -384,8 +440,12 @@ $(document).ready(function () {
 
         };
         //alert('test');
-        var geojsonLayer = new L.GeoJSON.AJAX("../data/nepal.geosjson");       
-        geojsonLayer.addTo(map);
+        var geojsonLayer = new L.GeoJSON.AJAX("../../../staticfiles/data/nepal.geojson",{style:{
+            "color": "#04AA66",
+            "weight": 5,
+            "opacity": 0.65
+        }});       
+            geojsonLayer.addTo(map);
 
         // var Kritipur = L.circle([lat, lon], {
         //     color: '#047c41',
@@ -404,26 +464,26 @@ $(document).ready(function () {
         layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
 
         
-        var legend = L.control({position: 'bottomleft'});
-        legend.onAdd = function (map) {
+        // var legend = L.control({position: 'bottomleft'});
+        // legend.onAdd = function (map) {
 
-        var div = L.DomUtil.create('div', 'info legend');
-        labels = ['<strong>Categories</strong>'],
-        categories = ['Approved','Pending','Rejected'];
-        color=['Green','orange','Red'];
+        // var div = L.DomUtil.create('div', 'info legend');
+        // labels = ['<strong>Categories</strong>'],
+        // categories = ['Approved','Pending','Rejected'];
+        // color=['Green','orange','Red'];
 
-        for (var i = 0; i < categories.length; i++) {
+        // for (var i = 0; i < categories.length; i++) {
 
-                div.innerHTML += 
-                labels.push(
-                    '<i class="circle" style="opacity: 0.5;background:' + color[i] + '"></i> ' +
-                (categories[i] ? categories[i] : '+'));
+        //         div.innerHTML += 
+        //         labels.push(
+        //             '<i class="circle" style="opacity: 0.5;background:' + color[i] + '"></i> ' +
+        //         (categories[i] ? categories[i] : '+'));
 
-            }
-            div.innerHTML = labels.join('<br>');
-        return div;
-        };
-        legend.addTo(map);
+        //     }
+        //     div.innerHTML = labels.join('<br>');
+        // return div;
+        // };
+        // legend.addTo(map);
     }
 
 });
