@@ -126,18 +126,18 @@ LOGIN_REDIRECT_URL = '/np/dashboard'
 #         'NAME': os.path.join(BASE_DIR, 'droneregistry.sqlite3'),
 #     }
 # }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': 'drone',
-#         'USER': 'vushan',
-#         'PASSWORD': '1234',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'drone',
+        'USER': 'vushan',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+'''
 DATABASES = {      
     'default': {          
         'ENGINE': os.environ.get('SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'),          
@@ -148,6 +148,7 @@ DATABASES = {
         'PORT': os.environ.get('SQL_PORT', '5432'),      
     }  
 }
+
 
 
 # Password validation

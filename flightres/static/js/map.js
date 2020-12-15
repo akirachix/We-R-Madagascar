@@ -440,12 +440,17 @@ $(document).ready(function () {
 
         };
         //alert('test');
+<<<<<<< HEAD
+        var geojsonLayer = new L.GeoJSON.AJAX("/staticfiles/data/nepal.geojson");       
+        geojsonLayer.addTo(map);
+=======
         var geojsonLayer = new L.GeoJSON.AJAX("../../../staticfiles/data/nepal.geojson",{style:{
             "color": "#04AA66",
             "weight": 5,
             "opacity": 0.65
         }});       
             geojsonLayer.addTo(map);
+>>>>>>> f0f9c97df3690fd53e922f4159af1243ee18de5d
 
         // var Kritipur = L.circle([lat, lon], {
         //     color: '#047c41',
