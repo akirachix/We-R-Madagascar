@@ -102,9 +102,9 @@ class FlightView(LoginRequiredMixin, TemplateView):
                 zipped = ZipFile(x.spatialdata_zip_file, 'r')
                 for y in zipped.namelist():
                     if y.endswith('.shp'):
-                        shp_names.append(y.replace('.shp', '.geojson'))
+                        shp_names.append(y.path.replace('.shp', '.geojson'))
 
-        dats = is_near_senstive_area(23.32, 43.34, shp_names)
+        #dats = is_near_senstive_area(23.32, 43.34, shp_names)
         
         context = {
             "object_list": object_list,
