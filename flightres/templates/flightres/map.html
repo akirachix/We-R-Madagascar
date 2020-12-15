@@ -36,7 +36,7 @@
 
 
 <main class="admin-main pd-0">
-    <form id='myform' method="post" action="{% url 'dashboard:flightview' %}">
+    <form id='myform' method="post" action="{% url 'dashboard:flightview' %}" enctype="multipart/form-data">
         {% csrf_token %}
                 <header class="site-header map-header" style='z-index:9090;'>
                         <div class="header-in">
@@ -52,6 +52,12 @@
                                     
                                     <a class="common-button is-clear is-auto" id='reset' href="javascript:void();">Reset</a>
                                 </div>
+                                
+                                <a modal-link="upload-custom-file-modal"
+                                    style="right: 120px;color:white;" class="modal-link common-button is-bg link-btn" data-toggle="modal" data-target="#upload-custom-file-modal">Upload File
+                                </a>
+                                
+                                
                             </div>
                             <div class="right is-flex">
                                 
@@ -89,7 +95,41 @@
                         </div>
                 </header>
                 </form>
-                
+                <div class="popup" tabindex="-1" role="dialog" id="upload-custom-file-modal">
+                    <div class="popup-container lg-popup map-popup">
+                        <div class="popup-body">
+                            <span class="close-icon"><i class="material-icons">close</i></span>
+                            <div class="popup-header">
+                                <h3><b>Upload Data Sheet</b></h3>
+            
+                            </div>
+                            <div class="popup-content">
+                                <div class="drone-details">
+                                    <div class="row gx-md-3 gx-lg-3">
+                                        <div class="col-xl-12 col-sm-12">
+                                            <div class="drone-content col-left col-operators">
+                                                <form action="{% url 'dashboard:custom_zip' %}" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    
+                                                    <div class="form-group">
+                                                        <label for="fileUpload">Upload your file</label>
+                                                        <input class="form-control" type="file" accept=".zip"
+                                                            name="custom_zip" id="sheet">
+                                                    </div>
+                                                    <br>
+                                                    <div class="buttons is-end">
+                                                        <button type="submit" class="common-button is-bg">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <section class="map-section" style='position:relative;'>
                     
                     <div id="mapid"></div>

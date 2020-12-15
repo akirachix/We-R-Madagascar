@@ -200,6 +200,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
             }
             
         else:
+            
             #messages.error(request, 'No matched Found')
             context = {
                 'flight_start_date': start_date,
@@ -215,7 +216,18 @@ class FlightView(LoginRequiredMixin, TemplateView):
 
         return render(request, 'flightres/map.html', context)
 
-
+def custom_zip(request):
+    if request.method == 'POST':
+        custom_zip = request.FILES['custom_zip']
+        if custom_zip is not None:
+            try:
+                cust = NoFlyZone.objects.create(spatialdata_zip_file=custom_zip)
+                cust.save()
+            except:
+                messages.error(request, 'File Curropted')
+                return render(request, 'flightres/404.html')
+            
+        return redirect('/np/dashboard/allflights')
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission
@@ -256,6 +268,18 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
             due_in = due.days
             object_data.append([flight_object, due_in])
         com['object_data'] = object_data
+        shp_files = NoFlyZone.objects.all()
+        shp_names = []
+        count = -1
+        if shp_files is not None:
+            for x in shp_files:
+                count += 1
+                if str(x.spatialdata_zip_file).endswith('.zip'):
+                    zipped = ZipFile(x.spatialdata_zip_file, 'r')
+                    for y in zipped.namelist():
+                        if y.endswith('.shp'):
+                            shp_names.append(y.replace('.shp', '.geojson'))
+            com['obj'] = json.dumps(list(shp_names), cls=DjangoJSONEncoder)
         return com
 
 
@@ -376,6 +400,18 @@ class ComplainListView(LoginRequiredMixin, ListView):
         data = []
         nearby_flight = []
         nearby_auth_flight = []
+        shp_files = NoFlyZone.objects.all()
+        shp_names = []
+        count = -1
+        if shp_files is not None:
+            for x in shp_files:
+                count += 1
+                if str(x.spatialdata_zip_file).endswith('.zip'):
+                    zipped = ZipFile(x.spatialdata_zip_file, 'r')
+                    for y in zipped.namelist():
+                        if y.endswith('.shp'):
+                            shp_names.append(y.replace('.shp', '.geojson'))
+            com['obj'] = json.dumps(list(shp_names), cls=DjangoJSONEncoder)
         for complain in complains:
             nearby = None
             nearby_auth = None
