@@ -303,6 +303,18 @@ $(document).ready(function () {
             // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
        
         });
+        var anothertestIcon = L.divIcon({
+            className: `circle-marker ${status1[i] === 'Approved' ?"is-green": status1[i] === 'Rejected'? 'is-red':'is-orange'}`,
+            // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+            // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+            html:`<img src='/staticfiles/img/drone-icon.svg' alt="My image">`,
+            iconSize:     [38, 50], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+            // shadowAnchor: [4, 62],  // the same for the shadow
+            // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+       
+        });
         var map = L.map('map',{maxZoom:19}).setView([data.latitude, data.longitude,data.altitude], 8);
         // var map = L.map('map', {
         //     // layers: [base],
@@ -324,33 +336,33 @@ $(document).ready(function () {
             customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ id[i] +'</td><td>'+ alti[i] +'</td><td>'+ status1[i] +'</td></tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
             // mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon}).addTo(map);
-            mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon})
+            mar[i] = L.marker([lat[i], long[i]], {icon:anothertestIcon})
             markers.addLayer(mar[i]);
-            if(status1[i] == 'Approved') {
-                cir[i] = L.circle([lat[i], long[i]], {
-                    color: 'green',
-                    fillColor: 'green',
-                    fillOpacity: 0.5,
-                    radius: 1000
-                }).addTo(map);
+            // if(status1[i] == 'Approved') {
+            //     cir[i] = L.circle([lat[i], long[i]], {
+            //         color: 'green',
+            //         fillColor: 'green',
+            //         fillOpacity: 0.5,
+            //         radius: 1000
+            //     }).addTo(map);
 
-            } else if(status1[i] == 'Pending') {
-                cir[i] = L.circle([lat[i], long[i]], {
-                    color: 'orange',
-                    fillColor: 'orange',
-                    fillOpacity: 0.5,
-                    radius: 1000
-                }).addTo(map);
+            // } else if(status1[i] == 'Pending') {
+            //     cir[i] = L.circle([lat[i], long[i]], {
+            //         color: 'orange',
+            //         fillColor: 'orange',
+            //         fillOpacity: 0.5,
+            //         radius: 1000
+            //     }).addTo(map);
 
-            } else if(status1[i] == 'Rejected') {
-                cir[i] = L.circle([lat[i], long[i]], {
-                    color: 'red',
-                    fillColor: 'red',
-                    fillOpacity: 0.5,
-                    radius: 1000
-                }).addTo(map);
+            // } else if(status1[i] == 'Rejected') {
+            //     cir[i] = L.circle([lat[i], long[i]], {
+            //         color: 'red',
+            //         fillColor: 'red',
+            //         fillOpacity: 0.5,
+            //         radius: 1000
+            //     }).addTo(map);
 
-            };
+            // };
 
             mar[i].bindPopup(customPopup);
         }
@@ -409,9 +421,9 @@ $(document).ready(function () {
             }}).addTo(map);
             
         }
-        osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
+        osm = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2VvbWF0dXBlbiIsImEiOiJja2E5bDFwb2swdHNyMnNvenZxa2Vpeml2In0.fCStqdwmFYFP-cUvb5vMCw', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        })
+        }).addTo(map);
 
         googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             maxZoom: 20,
