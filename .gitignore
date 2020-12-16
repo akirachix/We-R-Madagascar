@@ -3,6 +3,7 @@ deploy.sh
 postgres.env
 .env
 docker-compose.yml
+staticfiles
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

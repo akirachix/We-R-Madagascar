@@ -1,17 +1,28 @@
 version: "3"
-
 services:
   web:
     build: .
     restart: always
-    container_name: drone-reg-dev
+    env_file:
+      - .env
+    container_name: drone-reg-web
     ports:
       - 8000:8000
     volumes:
       - ./:/usr/src/app/
     command: sh entrypoint-dev.sh
+    networks:
+      - d-network
+  db:
+    image: mdillon/postgis:11-alpine
+    container_name: drone-reg-db
+    restart: always
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+    # ports: 
+    #   - 5432:5432
     env_file:
-      - env.txt
+      - postgres.env
     networks:
       - d-network
 networks:
