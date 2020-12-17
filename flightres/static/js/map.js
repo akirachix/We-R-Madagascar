@@ -244,7 +244,10 @@ $(document).ready(function () {
                     // closePopup();
                     data.assigned_to__email = result.assigned_to__email
                     data.assigned_to__username = result.assigned_to__username
+                    
                     createModal(data, das, lat, long,alti, status1,id);
+                    openDenyModal(data.uav_uid, data.rejection_reason)
+
                 }});
                 // console.log('assign clicked');
             })
