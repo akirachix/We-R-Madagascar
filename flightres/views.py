@@ -116,6 +116,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         start_date = request.POST['flight_start_date']
         end_date = request.POST['flight_end_date']
+        
         flt_status = [
             request.POST.get('flt_approved', None),
             request.POST.get('flt_pending', None),
@@ -135,13 +136,25 @@ class FlightView(LoginRequiredMixin, TemplateView):
         
         report_data = Report.objects.all()
         object_list = FlightPermission.objects.all()
+        shp_files = NoFlyZone.objects.all()
+        shp_names = []
+        count = -1
+        for x in shp_files:
+            count += 1
+            if str(x.spatialdata_zip_file).endswith('.zip'):
+                zipped = ZipFile(x.spatialdata_zip_file, 'r')
+                for y in zipped.namelist():
+                    if y.endswith('.shp'):
+                        shp_names.append(y.replace('.shp', '.geojson'))
         for data in object_list:
             if start_date or end_date != '' :
-                if data.flight_start_date <= datetime.datetime.strptime(start_date,
-                                                                        '%Y-%m-%d').date() <= data.flight_end_date or data.flight_end_date >= datetime.datetime.strptime(
-                    end_date, '%Y-%m-%d').date() >= data.flight_start_date or (
-                        data.flight_start_date >= datetime.datetime.strptime(start_date,
-                                                                            '%Y-%m-%d').date() and data.flight_end_date <= datetime.datetime.strptime(
+                if (datetime.datetime.strptime(start_date,
+                    '%Y-%m-%d').date() <= data.flight_start_date <= datetime.datetime.strptime(
+                    end_date, '%Y-%m-%d').date()) or ( datetime.datetime.strptime(
+                    start_date, '%Y-%m-%d').date() <= data.flight_end_date <= datetime.datetime.strptime(
+                    end_date, '%Y-%m-%d').date()) or (
+                        data.flight_start_date <= datetime.datetime.strptime(start_date,
+                                                                            '%Y-%m-%d').date() and data.flight_end_date >= datetime.datetime.strptime(
                     end_date, '%Y-%m-%d').date()):
                     #print(report_data)
                     if flt_status[0] == flt_status[1] == flt_status[2] == None:                      
@@ -158,6 +171,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
                                     datasuccess.append(counts)
             else:
                 if flt_status[0] or flt_status[1] or flt_status[2] is not None:
+                    print('inside flt_satus if outside date if')
                     for x in flt_status:
                         if x is not None:
                             if data.status == x:
@@ -174,7 +188,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
                         data_rep_success.append(rep_count)
 
 
-        if datasuccess is not None or data_rep_success is not None:
+        if datasuccess or data_rep_success:
             '''if (len(datasuccess) + len(data_rep_success)) > 1:
                 msg = str(len(datasuccess) + len(data_rep_success)) + ' Flights were found'
             elif (len(datasuccess) + len(data_rep_success)) == 1:
@@ -185,7 +199,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
 
             messages.success(request, msg)'''
             
-
+            
             context = {
                 'flight_start_date': start_date,
                 'flight_end_date': end_date,
@@ -194,13 +208,14 @@ class FlightView(LoginRequiredMixin, TemplateView):
                 'flight_rejected': False if flt_status[2] is None else True,
                 'complaint_pending': False if comp_status[0] is None else True,
                 'complaint_resolved': False if comp_status[1] is None else True,
-                "data3": '' if not data3 else data3,
-                'data_rep': '' if not data_rep else data_rep
-
+                
             }
-            
+            if len(data3) > 0:
+                context['data3'] = data3
+            if len(data_rep) > 0:
+                context['data_rep'] = data_rep
+
         else:
-            
             #messages.error(request, 'No matched Found')
             context = {
                 'flight_start_date': start_date,
@@ -210,10 +225,10 @@ class FlightView(LoginRequiredMixin, TemplateView):
                 'flight_rejected': False if flt_status[2] is None else True,
                 'complaint_pending': False if comp_status[0] is None else True,
                 'complaint_resolved': False if comp_status[1] is None else True,
-                "object_list": object_list
+                
 
             }
-
+        context['obj'] = json.dumps(list(shp_names), cls=DjangoJSONEncoder)
         return render(request, 'flightres/map.html', context)
 
 def custom_zip(request):
@@ -228,6 +243,7 @@ def custom_zip(request):
                 return render(request, 'flightres/404.html')
             
         return redirect('/np/dashboard/allflights')
+
 class FlightPermissionList(LoginRequiredMixin, ListView):
     # specify the model for list view
     model = FlightPermission

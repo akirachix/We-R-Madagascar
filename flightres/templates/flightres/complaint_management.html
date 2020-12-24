@@ -43,6 +43,14 @@
   background-size: 18px;
   background-color: rgba(255, 255, 255, 1);
 }
+.is-blue {
+    border: 2px solid #15139C;
+    background-color: white;
+}
+.is-drn {
+    border: none;
+    background: #15139C;
+}
 </style>
 {% endblock links %}
 
@@ -51,7 +59,7 @@
     <div class="image-container">
         <!-- <div class="modal-body popup-body"> -->
             <span class="close-icon" onclick="closeModal()"><i
-                    class="material-icons">close</i></span>
+                    class="material-icons" style='background-color:white;color:black;'>close</i></span>
             <div class="modal-content" id="openFSImage">
             </div>
         <!-- </div> -->
@@ -138,6 +146,7 @@
                                                                         </p>
                                                                     </div>
                                                                 </li>
+                                                                {% if i.image_url %}
                                                                 <li>
                                                                     <h4>Additional info</h4>
                                                                     <div class="content-list">
@@ -157,6 +166,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </li>
+                                                                {% endif %}
                                                                 <li >
                                                                     <h4></h4>
                                                                     <div id="map{{i.uav_uid}}" class='mapadd' data-latitude={{i.latitude}} data-longitude={{i.longitude}} data-id={{i.uav_uid}} data-status={{i.status}} style="width: 100%;height: 300px;"></div>
@@ -398,6 +408,7 @@
             const customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
             var mark_nearby = []
             var mark_nearby_auth = []
+            /*
             var nearbyIcon = new L.Icon({
                 iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
                 shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -414,6 +425,7 @@
                 popupAnchor: [1, -34],
                 shadowSize: [41, 41]
             });
+            */
             var greenIcon = L.divIcon({
                 className: `circle-marker-complaint is-green`,
                 // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
@@ -426,7 +438,7 @@
                 // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
             });
             var orangeIcon = L.divIcon({
-                className: `circle-marker-complaint is-orange`,
+                className: `circle-marker-complaint`,
                 // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
                 // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
                 html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-orangeIcon.svg' alt="My image">`,
@@ -436,28 +448,28 @@
                 // shadowAnchor: [4, 62],  // the same for the shadow
                 // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
             });
-            // var nearbyIcon = L.divIcon({
-            //     className: `circle-marker-complaint is-red`,
-            //     // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
-            //     // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
-            //     html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-redIcon.svg' alt="My image">`,
-            //     iconSize:     [38, 50], // size of the icon
-            //     shadowSize:   [50, 64], // size of the shadow
-            //     // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
-            //     // shadowAnchor: [4, 62],  // the same for the shadow
-            //     // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-            // });
-            // var nearbyAuthIcon = L.divIcon({
-            //     className: `circle-marker is-orange`,
-            //     // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
-            //     // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
-            //     html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-redIcon.svg' alt="My image">`,
-            //     iconSize:     [38, 50], // size of the icon
-            //     shadowSize:   [50, 64], // size of the shadow
-            //     // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
-            //     // shadowAnchor: [4, 62],  // the same for the shadow
-            //     // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-            // });
+            var nearbyIcon = L.divIcon({
+                className: `circle-marker-complaint is-drn`,
+                 // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+                 // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+                html:`<img width="20px" height="20px" src='/staticfiles/img/drone-icon.svg' alt="My image">`,
+                iconSize:     [38, 50], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                 // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+                 // shadowAnchor: [4, 62],  // the same for the shadow
+                 // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var nearbyAuthIcon = L.divIcon({
+                className: `circle-marker is-blue`,
+                // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+                // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+                html:`<img width="16px" height="16px" src='/staticfiles/img/authority.svg' alt="My image">`,
+                iconSize:     [38, 50], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+                // shadowAnchor: [4, 62],  // the same for the shadow
+                // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
             var legend = L.control({ position: "bottomright" });
 
             legend.onAdd = function(mymap) {
@@ -465,8 +477,10 @@
                 // div.innerHTML += 
                 // div.innerHTML += '<div class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""><span class="label">Approved Flights</span></div>';
                 // div.innerHTML += '<i class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"></div><span>Complaint Flight</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-drn"><img width="16px" height="16px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""/></i><span>Nearby Flights</span><br>';
                 div.innerHTML += '<i class="circle-marker-complaint-legend is-orange"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-orangeIcon.svg" alt="My image" style=""/></i><span>Pending Complaints</span><br>';
                 div.innerHTML += '<i class="circle-marker-complaint-legend is-green"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-greenIcon.svg" alt="My image" style=""/></i><span>Resolved Complaints</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-blue" ><img width="15px" height="15px" src="../../../staticfiles/img/authority.svg" alt="My image" style=""/></i><span>Local Authorities</span><br>';
                 // div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Complaint Flight</span><br>';
                 // div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Local Authorities</span><br>';
                 return div;
@@ -476,19 +490,19 @@
             // console.log(complainStatus,'complainStatus');
             // console.log(nearby_flight,'nearybyFlight');
             // console.log(nearby_auth_flight,'nearyby auth Flight');
-            var customPopupComplaint = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;margin-right:auto;margin-left:25%;"><tr><th>Id</th><th> Status</th></tr><tr><td >'+ complainId +'</td><td >'+ complainStatus +'</td> </tr></table> </div></div>'
+            var customPopupComplaint = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th> Status</th></tr><tr><td >'+ complainId +'</td><td >'+ complainStatus +'</td> </tr></table> </div></div>'
             var mark = L.marker([dataLatitude, dataLongitude], {icon:complainStatus === 'Resolved'?greenIcon:orangeIcon }).addTo(mymap);
             mark.bindPopup(customPopupComplaint);
             for (var i=0;i<nearby_flight.length;i++) {
                 if (String(nearby_flight[i][0]) == mapId) {
-                    var customPopupNearby = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;margin-right:auto;margin-left:10%;"><tr><th>Id</th><th>Altitude</th><th>Status</th></tr><tr><td >'+ String(nearby_flight[i][3]) +'</td><td >'+ String(nearby_flight[i][4]) +'</td><td >'+ String(nearby_flight[i][5]) +'</td> </tr></table> </div></div>'
+                    var customPopupNearby = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th>Altitude</th><th>Status</th></tr><tr><td >'+ String(nearby_flight[i][3]) +'</td><td >'+ String(nearby_flight[i][4]) +'</td><td >'+ String(nearby_flight[i][5]) +'</td> </tr></table> </div></div>'
                     mark_nearby = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])]).addTo(mymap);
                     mark_nearby.bindPopup(customPopupNearby);
                 }
             }
             for (var i=0;i<nearby_auth_flight.length;i++) {
                 if (String(nearby_auth_flight[i][0]) == mapId) {
-                    var  customPopupNearbyAuth= '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;margin-right:auto;margin-left:20%;"><tr><th>Name</th><th> Phone Number</th></tr><tr><td >'+ String(nearby_auth_flight[i][3]) +'</td><td >'+ String(nearby_auth_flight[i][4]) +'</td> </tr></table> </div></div>'
+                    var  customPopupNearbyAuth= '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Name</th><th> Phone Number</th></tr><tr><td >'+ String(nearby_auth_flight[i][3]) +'</td><td >'+ String(nearby_auth_flight[i][4]) +'</td> </tr></table> </div></div>'
                     mark_nearby_auth = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyAuthIcon}).addTo(mymap);
                     mark_nearby_auth.bindPopup(customPopupNearbyAuth);
                 }
