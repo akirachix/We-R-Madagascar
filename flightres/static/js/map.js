@@ -327,18 +327,7 @@ $(document).ready(function () {
             // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
        
         });
-        var anothertestIcon = L.divIcon({
-            className: `circle-marker ${status1[i] === 'Approved' ?"is-green": status1[i] === 'Rejected'? 'is-red':'is-orange'}`,
-            // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
-            // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
-            html:`<img src='/staticfiles/img/drone-icon.svg' alt="My image">`,
-            iconSize:     [38, 50], // size of the icon
-            shadowSize:   [50, 64], // size of the shadow
-            // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
-            // shadowAnchor: [4, 62],  // the same for the shadow
-            // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-       
-        });
+        
         var map = L.map('map',{maxZoom:19}).setView([data.latitude, data.longitude,data.altitude], 8);
         // var map = L.map('map', {
         //     // layers: [base],
@@ -358,7 +347,18 @@ $(document).ready(function () {
             var c = parseFloat(lat[i]);
             var d = parseFloat(long[i]);
             customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ id[i] +'</td><td>'+ alti[i] +'</td><td>'+ status1[i] +'</td></tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
-
+            var anothertestIcon = L.divIcon({
+                className: `circle-marker ${status1[i] === 'Approved' ?"is-green": status1[i] === 'Rejected'? 'is-red':'is-orange'}`,
+                // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+                // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+                html:`<img src='/staticfiles/img/drone-icon.svg' alt="My image">`,
+                iconSize:     [38, 50], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+                // shadowAnchor: [4, 62],  // the same for the shadow
+                // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+           
+            });
             // mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon}).addTo(map);
             mar[i] = L.marker([lat[i], long[i]], {icon:anothertestIcon})
             markers.addLayer(mar[i]);
