@@ -460,7 +460,7 @@ class Aircraft(models.Model):
     renewal_date = models.DateTimeField(blank=True, null=True)
     validity = models.FloatField(max_length=3, blank=True, null=True)
     remarks = models.TextField(blank=True, null=True)
-    is_active = models.BooleanField(default=False, blank=True, null=True)
+    is_active = models.BooleanField(default=True, blank=True, null=True)
 
     def __unicode__(self):
         return self.model

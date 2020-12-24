@@ -195,11 +195,9 @@
                 {% endfor %}{% else %}{% for x in object_list %}
                 [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}',{{ x.uav_uid }}],
                 {% endfor %}{% endif %}];
-
     var dataset_comp = [{% if data_rep %}{% for x in data_rep %}
                         [{{x.latitude}}, '{{x.status}}', {{x.longitude}}, {{x.uav_uid}}],
                         {% endfor %}{% endif %}];
-
     var mymap = L.map('mapid', {zoomControl: false}).setView({% if not data3 %}{% if data_rep %}[dataset_comp[0][0], dataset_comp[0][2]], 8{% else %}[defa[0], defa[1]], 7{% endif %}{% else %}[dataset[0][0], dataset[0][2]], 8{% endif %});
     L.control.zoom({
         position: 'bottomright'
@@ -231,24 +229,30 @@
     accessToken: 'your.mapbox.access.token'
     }).addTo(mymap);
     var mark = [];
-    var cir = [];
+    var cir = 0;
     var mark1 = [];
-    var cir1 = [];
-    var compIcon = new L.Icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
+    //var cir1 = [];
+    var greenIcon = L.divIcon({
+        className: `circle-marker-complaint is-green`,
+        // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+        // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+        html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-greenIcon.svg' alt="My image">`,
+        iconSize:     [38, 50], // size of the icon
+        shadowSize:   [50, 64], // size of the shadow
+        // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+        // shadowAnchor: [4, 62],  // the same for the shadow
+        // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
-    var fltIcon = new L.Icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
+    var orangeIcon = L.divIcon({
+        className: `circle-marker-complaint`,
+        // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+        // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+        html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-orangeIcon.svg' alt="My image">`,
+        iconSize:     [38, 50], // size of the icon
+        shadowSize:   [50, 64], // size of the shadow
+        // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+        // shadowAnchor: [4, 62],  // the same for the shadow
+        // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
     for(i=0;i<dataset.length;i++) {
         customPopup = '<div class="bind-popup" style="margin-right:auto;margin-left:14%;"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ dataset[i][4] +'</td><td>'+ dataset[i][3] +'</td><td>'+ dataset[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
@@ -266,7 +270,7 @@
         });
         mark[i] = L.marker([dataset[i][0], dataset[i][2]], {icon:testIcon});
         markersClusterGroup.addLayer(mark[i]);
-
+        cir += 1;
         // if(dataset[i][1] == 'Approved') {
         //     cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
         //         color: 'green',
@@ -299,33 +303,40 @@
     for(i=0;i<dataset_comp.length;i++) {
         customPopup1 = '<div class="bind-popup" style="margin-right:auto;margin-left:25%;"> <div class="bind-header"> <table style="width:100%"><tr><th style="padding-right:10px;">ID</th><th style="padding-left:10px;">Status</th></tr><tr><td style="padding-right:10px;">'+ dataset_comp[i][3] +'</td><td style="padding-left:10px;">'+ dataset_comp[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
-        mark1[i] = L.marker([dataset_comp[i][0], dataset_comp[i][2]], {icon:compIcon});
-        markersClusterGroup.addLayer(mark1[i]);
+        
         if(dataset_comp[i][1] == 'Pending') {
+            mark1[i] = L.marker([dataset_comp[i][0], dataset_comp[i][2]], {icon:orangeIcon});
+            markersClusterGroup.addLayer(mark1[i]);
+            /*
             cir1[i] = L.circle([dataset_comp[i][0], dataset_comp[i][2]], {
                 color: 'orange',
                 fillColor: 'orange',
                 fillOpacity: 0.5,
                 radius: 500
             }).addTo(mymap);
+            */
+           cir += 1;
 
         } else if(dataset_comp[i][1] == 'Resolved') {
+            mark1[i] = L.marker([dataset_comp[i][0], dataset_comp[i][2]], {icon:greenIcon});
+            markersClusterGroup.addLayer(mark1[i]);
+            /*
             cir1[i] = L.circle([dataset_comp[i][0], dataset_comp[i][2]], {
                 color: 'Green',
                 fillColor: 'Green',
                 fillOpacity: 0.5,
                 radius: 500
             }).addTo(mymap);
-
+            */
+            cir += 1;
         };
         
         mark1[i].bindPopup(customPopup1);
     }
     mymap.addLayer(markersClusterGroup);
+    if(cir > 1) {
 
-    if(cir.length + cir1.length >1) {
-
-        var group = new L.featureGroup(cir.concat(cir1));
+        var group = new L.featureGroup(mark.concat(mark1));
 
         mymap.fitBounds(group.getBounds(), {padding:[50, 50]});
     }

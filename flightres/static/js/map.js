@@ -26,31 +26,52 @@ $(document).ready(function () {
                     var id = [];
                     var alti = [];
                     var status1 = [];
+                    var cent = new L.LatLng(flight_object[j].latitude, flight_object[j].longitude);
+                    
                     for(var k=0; k < flight_object.length; k++) {
-                        if( flight_object[k].flight_start_date < flight_object[j].flight_start_date && flight_object[j].flight_start_date < flight_object[k].flight_end_date) {
-                            lat.push(flight_object[k].latitude);
-                            long.push(flight_object[k].longitude);
-                            alti.push(flight_object[k].altitude);
-                            status1.push(flight_object[k].status);
-                            id.push(flight_object[k].uav_uid);
-                        }
-                        else if(flight_object[k].flight_end_date > flight_object[j].flight_end_date && flight_object[j].flight_end_date > flight_object[k].flight_start_date){
-                            lat.push(flight_object[k].latitude);
-                            long.push(flight_object[k].longitude);
-                            alti.push(flight_object[k].altitude);
-                            status1.push(flight_object[k].status);
-                            id.push(flight_object[k].uav_uid);
-                        }
-                        else if(flight_object[k].flight_start_date > flight_object[j].flight_start_date && flight_object[k].flight_end_date < flight_object[j].flight_end_date){
-                            lat.push(flight_object[k].latitude);
-                            long.push(flight_object[k].longitude);
-                            alti.push(flight_object[k].altitude);
-                            status1.push(flight_object[k].status);
-                            id.push(flight_object[k].uav_uid);
-                        }
-                        else {
-                            console.log("error");
+                        if(flight_object[j].uav_uid != flight_object[k].uav_uid) {
+                            if( flight_object[k].flight_start_date <= flight_object[j].flight_start_date && flight_object[j].flight_end_date <= flight_object[k].flight_end_date) {
+                                var tar = new L.LatLng(flight_object[k].latitude, flight_object[k].longitude);
+                                var distance_from_location = cent.distanceTo(tar) / 1000;
+                                console.log(distance_from_location)
+                                if (distance_from_location <= 10) {
+                                    lat.push(flight_object[k].latitude);
+                                    long.push(flight_object[k].longitude);
+                                    alti.push(flight_object[k].altitude);
+                                    status1.push(flight_object[k].status);
+                                    id.push(flight_object[k].uav_uid);
+                                };
+                            }
+                            else if(flight_object[j].flight_start_date <= flight_object[k].flight_end_date && flight_object[k].flight_end_date <= flight_object[j].flight_end_date){
+                                var tar = new L.LatLng(flight_object[k].latitude, flight_object[k].longitude);
+                                var distance_from_location = cent.distanceTo(tar) / 1000;
+                                if (distance_from_location <= 10) {
+                                    lat.push(flight_object[k].latitude);
+                                    long.push(flight_object[k].longitude);
+                                    alti.push(flight_object[k].altitude);
+                                    status1.push(flight_object[k].status);
+                                    id.push(flight_object[k].uav_uid);
+                                };
+                            }
+                            
+                            else if(flight_object[j].flight_start_date <= flight_object[k].flight_start_date && flight_object[k].flight_start_date <= flight_object[j].flight_end_date){
+                                var tar = new L.LatLng(flight_object[k].latitude, flight_object[k].longitude);
+                                var distance_from_location = cent.distanceTo(tar) / 1000;
+                                if (distance_from_location <= 10) {
+                                    lat.push(flight_object[k].latitude);
+                                    long.push(flight_object[k].longitude);
+                                    alti.push(flight_object[k].altitude);
+                                    status1.push(flight_object[k].status);
+                                    id.push(flight_object[k].uav_uid);
+                                };
+                            }
+                            
+                            else {
+                                console.log("error");
+                            };
+
                         };
+                        
                     };
                     createModal(flight_object[j], flight_object[j].status, lat, long, alti, status1,id)
                     // pass id or sth from here to record the deny reason for a particular item
