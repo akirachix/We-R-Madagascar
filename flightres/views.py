@@ -89,15 +89,37 @@ def dashboardView(request):
                   {'top_data': top_row_data, 'bar_data': barchart_data, 'pie_data': pie_data})
 
 
+def MapView(request):
+    lat = request.GET.get('lat', None)
+    lng = request.GET.get('lng', None)
+    shp_files = NoFlyZone.objects.all()
+    shp_names = []
+    for x in shp_files:
+        if str(x.spatialdata_zip_file).endswith('.zip'):
+            zipped = ZipFile(x.spatialdata_zip_file, 'r')
+            for y in zipped.namelist():
+                if y.endswith('.shp'):
+                    shp_names.append(y.replace('.shp', '.geojson'))
+
+    context = {
+        'noflyZone': json.dumps(list(shp_names), cls=DjangoJSONEncoder),
+    }
+    if lat or lng is not None:
+        context['lat'] = lat
+        context['lng'] = lng
+        context['dat'] = 'True'
+    else:
+        context['lat'] = 27.71
+        context['lng'] = 85.32
+    return render(request, 'flightres/mapview.html', context)
+
 class FlightView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, *args, **kwargs):
         object_list = FlightPermission.objects.all()
         shp_files = NoFlyZone.objects.all()
         shp_names = []
-        count = -1
         for x in shp_files:
-            count += 1
             if str(x.spatialdata_zip_file).endswith('.zip'):
                 zipped = ZipFile(x.spatialdata_zip_file, 'r')
                 for y in zipped.namelist():

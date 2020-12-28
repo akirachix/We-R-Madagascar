@@ -1,4 +1,3 @@
-
 function permApproval(uid, status) {
     // console.log(uid, status)
 }
@@ -209,7 +208,7 @@ $(document).ready(function () {
                             <div class="tab-content-holder current" id="location">
                                 <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `" >
                                 <div class="map-section">
-                                <div class="legend-body" style='z-index:9090;min-width: 176px;max-width: 206px;'>
+                                <div class="legend-body" style='z-index:9090;min-width: 176px;max-width: 206px;position:absolute;left:63%;bottom:50px;'>
                         <span class="title">Categories</span>
                         <ul class="legend">
                             
@@ -328,7 +327,11 @@ $(document).ready(function () {
        
         });
         
-        var map = L.map('map',{maxZoom:19}).setView([data.latitude, data.longitude,data.altitude], 8);
+        var map = L.map('map',{
+            maxZoom:19, 
+            fullscreenControl: {
+                pseudoFullscreen: false
+            }}).setView([data.latitude, data.longitude,data.altitude], 8);
         // var map = L.map('map', {
         //     // layers: [base],
         //     center: new L.LatLng(lat, lon),
@@ -532,12 +535,17 @@ function openDenyModal(flight_id, rejection_reason) {
     denyElement.addEventListener('click', () => {
         // console.log("show pop");
         let smallPopup = document.getElementById('open-modal-deny');
+        if (rejection_reason != 'null') {
+            var rej = rejection_reason;
+        } else {
+            var rej = ''
+        };
         smallPopup.classList.add('open');
         html1 = `
             <div class="popup-header">
                 <h5>Reason for Denial</h5>
             </div>
-            <input value="${rejection_reason}" type="textarea" placeholder="Reason for rejection" id="reasonInput"
+            <input value="${rej}" type="textarea" placeholder="Reason for rejection" id="reasonInput"
                 style="height: 54px; width: 375px; align-self: center;" for="reason"
                 ; name="reason" ; ></input>
             <br>
