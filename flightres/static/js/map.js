@@ -535,7 +535,7 @@ function openDenyModal(flight_id, rejection_reason) {
     denyElement.addEventListener('click', () => {
         // console.log("show pop");
         let smallPopup = document.getElementById('open-modal-deny');
-        if (rejection_reason != 'null') {
+        if (rejection_reason != null) {
             var rej = rejection_reason;
         } else {
             var rej = ''
