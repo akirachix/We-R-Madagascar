@@ -9903,17 +9903,17 @@ h3.section-title {
     width: 100%;
     height: 100%; }
   .map-section .legend-body {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.8);
     min-width: 220px;
     max-width: 220px;
     position: absolute;
     left: 20px;
     bottom: 2rem;
-    padding: 14px  20px;
+    padding: 14px  18px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid #D1D1D1;
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.16);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.16); }
@@ -9991,6 +9991,24 @@ h3.section-title {
 
 /*# sourceMappingURL=style.css.map */
 
+.circle-marker-legend{
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 50%;
+    /* background: #f14236; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circle-marker-legend.is-red{
+    background: #f14236;
+}
+.circle-marker-legend.is-green{
+    background: #3aaa66;
+}
+.circle-marker-legend.is-orange{
+    background: #f49158;
+}
 .circle-marker{
     width: 30px !important;
     height: 30px !important;
@@ -10008,4 +10026,44 @@ h3.section-title {
 }
 .circle-marker.is-orange{
     background: #f49158;
+}
+.circle-marker-complaint{
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle-marker-complaint.is-red{
+    border: 2px solid #f14236;
+  }
+  .circle-marker-complaint.is-green{
+    border: 2px solid #3aaa66;
+    /* background: #3aaa66; */
+  }
+  .circle-marker-complaint.is-orange{
+    border: 2px solid #f49158;
+    /* background: #f49158; */
+}
+.circle-marker-complaint-legend{
+  width: 25px !important;
+  height: 25px !important;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle-marker-complaint-legend.is-red{
+    border: 2px solid #f14236;
+  }
+  .circle-marker-complaint-legend.is-green{
+    border: 2px solid #3aaa66;
+    /* background: #3aaa66; */
+  }
+  .circle-marker-complaint-legend.is-orange{
+    border: 2px solid #f49158;
+    /* background: #f49158; */
 }

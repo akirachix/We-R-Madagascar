@@ -1,4 +1,3 @@
-
 function permApproval(uid, status) {
     // console.log(uid, status)
 }
@@ -26,31 +25,52 @@ $(document).ready(function () {
                     var id = [];
                     var alti = [];
                     var status1 = [];
+                    var cent = new L.LatLng(flight_object[j].latitude, flight_object[j].longitude);
+                    
                     for(var k=0; k < flight_object.length; k++) {
-                        if( flight_object[k].flight_start_date < flight_object[j].flight_start_date && flight_object[j].flight_start_date < flight_object[k].flight_end_date) {
-                            lat.push(flight_object[k].latitude);
-                            long.push(flight_object[k].longitude);
-                            alti.push(flight_object[k].altitude);
-                            status1.push(flight_object[k].status);
-                            id.push(flight_object[k].uav_uid);
-                        }
-                        else if(flight_object[k].flight_end_date > flight_object[j].flight_end_date && flight_object[j].flight_end_date > flight_object[k].flight_start_date){
-                            lat.push(flight_object[k].latitude);
-                            long.push(flight_object[k].longitude);
-                            alti.push(flight_object[k].altitude);
-                            status1.push(flight_object[k].status);
-                            id.push(flight_object[k].uav_uid);
-                        }
-                        else if(flight_object[k].flight_start_date > flight_object[j].flight_start_date && flight_object[k].flight_end_date < flight_object[j].flight_end_date){
-                            lat.push(flight_object[k].latitude);
-                            long.push(flight_object[k].longitude);
-                            alti.push(flight_object[k].altitude);
-                            status1.push(flight_object[k].status);
-                            id.push(flight_object[k].uav_uid);
-                        }
-                        else {
-                            console.log("error");
+                        if(flight_object[j].uav_uid != flight_object[k].uav_uid) {
+                            if( flight_object[k].flight_start_date <= flight_object[j].flight_start_date && flight_object[j].flight_end_date <= flight_object[k].flight_end_date) {
+                                var tar = new L.LatLng(flight_object[k].latitude, flight_object[k].longitude);
+                                var distance_from_location = cent.distanceTo(tar) / 1000;
+                                console.log(distance_from_location)
+                                if (distance_from_location <= 10) {
+                                    lat.push(flight_object[k].latitude);
+                                    long.push(flight_object[k].longitude);
+                                    alti.push(flight_object[k].altitude);
+                                    status1.push(flight_object[k].status);
+                                    id.push(flight_object[k].uav_uid);
+                                };
+                            }
+                            else if(flight_object[j].flight_start_date <= flight_object[k].flight_end_date && flight_object[k].flight_end_date <= flight_object[j].flight_end_date){
+                                var tar = new L.LatLng(flight_object[k].latitude, flight_object[k].longitude);
+                                var distance_from_location = cent.distanceTo(tar) / 1000;
+                                if (distance_from_location <= 10) {
+                                    lat.push(flight_object[k].latitude);
+                                    long.push(flight_object[k].longitude);
+                                    alti.push(flight_object[k].altitude);
+                                    status1.push(flight_object[k].status);
+                                    id.push(flight_object[k].uav_uid);
+                                };
+                            }
+                            
+                            else if(flight_object[j].flight_start_date <= flight_object[k].flight_start_date && flight_object[k].flight_start_date <= flight_object[j].flight_end_date){
+                                var tar = new L.LatLng(flight_object[k].latitude, flight_object[k].longitude);
+                                var distance_from_location = cent.distanceTo(tar) / 1000;
+                                if (distance_from_location <= 10) {
+                                    lat.push(flight_object[k].latitude);
+                                    long.push(flight_object[k].longitude);
+                                    alti.push(flight_object[k].altitude);
+                                    status1.push(flight_object[k].status);
+                                    id.push(flight_object[k].uav_uid);
+                                };
+                            }
+                            
+                            else {
+                                console.log("error");
+                            };
+
                         };
+                        
                     };
                     createModal(flight_object[j], flight_object[j].status, lat, long, alti, status1,id)
                     // pass id or sth from here to record the deny reason for a particular item
@@ -306,19 +326,12 @@ $(document).ready(function () {
             // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
        
         });
-        var anothertestIcon = L.divIcon({
-            className: `circle-marker ${status1[i] === 'Approved' ?"is-green": status1[i] === 'Rejected'? 'is-red':'is-orange'}`,
-            // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
-            // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
-            html:`<img src='/staticfiles/img/drone-icon.svg' alt="My image">`,
-            iconSize:     [38, 50], // size of the icon
-            shadowSize:   [50, 64], // size of the shadow
-            // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
-            // shadowAnchor: [4, 62],  // the same for the shadow
-            // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-       
-        });
-        var map = L.map('map',{maxZoom:19}).setView([data.latitude, data.longitude,data.altitude], 8);
+        
+        var map = L.map('map',{
+            maxZoom:19, 
+            fullscreenControl: {
+                pseudoFullscreen: false
+            }}).setView([data.latitude, data.longitude,data.altitude], 8);
         // var map = L.map('map', {
         //     // layers: [base],
         //     center: new L.LatLng(lat, lon),
@@ -337,7 +350,18 @@ $(document).ready(function () {
             var c = parseFloat(lat[i]);
             var d = parseFloat(long[i]);
             customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ id[i] +'</td><td>'+ alti[i] +'</td><td>'+ status1[i] +'</td></tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
-
+            var anothertestIcon = L.divIcon({
+                className: `circle-marker ${status1[i] === 'Approved' ?"is-green": status1[i] === 'Rejected'? 'is-red':'is-orange'}`,
+                // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+                // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+                html:`<img src='/staticfiles/img/drone-icon.svg' alt="My image">`,
+                iconSize:     [38, 50], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+                // shadowAnchor: [4, 62],  // the same for the shadow
+                // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+           
+            });
             // mar[i] = L.marker([lat[i], long[i]], {icon:greenIcon}).addTo(map);
             mar[i] = L.marker([lat[i], long[i]], {icon:anothertestIcon})
             markers.addLayer(mar[i]);
@@ -511,12 +535,17 @@ function openDenyModal(flight_id, rejection_reason) {
     denyElement.addEventListener('click', () => {
         // console.log("show pop");
         let smallPopup = document.getElementById('open-modal-deny');
+        if (rejection_reason != 'null') {
+            var rej = rejection_reason;
+        } else {
+            var rej = ''
+        };
         smallPopup.classList.add('open');
         html1 = `
             <div class="popup-header">
                 <h5>Reason for Denial</h5>
             </div>
-            <input value="${rejection_reason}" type="textarea" placeholder="Reason for rejection" id="reasonInput"
+            <input value="${rej}" type="textarea" placeholder="Reason for rejection" id="reasonInput"
                 style="height: 54px; width: 375px; align-self: center;" for="reason"
                 ; name="reason" ; ></input>
             <br>

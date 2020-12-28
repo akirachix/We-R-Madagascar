@@ -7,9 +7,10 @@
 <script src="{% static 'js/modal-image.js' %}"></script>
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 <style>
-    .legend {
+.legend {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  /*font-family: inherit; */
   padding: 8px 10px;
-  font: 13px Arial, Helvetica, sans-serif;
   background: white;
   background: rgba(255, 255, 255, 0.8);
   /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
@@ -17,18 +18,23 @@
   line-height: 28px;
   color: #555;
   border-radius: 10px;
-  box-shadow: 2px 5px 5px -3px rgba(0, 0, 0, 0.308);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.16); 
 }
 .legend h4 {
   text-align: center;
+
   font-size: 10px;
   margin: 0px;
   color: #777;
 }
 
 .legend span {
+  font-family: inherit;
   position: relative;
   bottom: 3px;
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.8;
 }
 
 .legend i {
@@ -169,8 +175,9 @@
                                                                 {% endif %}
                                                                 <li >
                                                                     <h4></h4>
+                                                                    <section class='map-section' style='font-family:inherit;'>
                                                                     <div id="map{{i.uav_uid}}" class='mapadd' data-latitude={{i.latitude}} data-longitude={{i.longitude}} data-id={{i.uav_uid}} data-status={{i.status}} style="width: 100%;height: 300px;"></div>
-
+                                                                    </section>
                                                                     <!-- <div class="permit-list">
                                                                         {% for perm in j %}
                                                                         <button data-toggle="modal"
@@ -357,7 +364,6 @@
 
 {% block footer_links %}
 <script src="{% static 'js/modal-image.js' %}"></script>
-<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 <script type="text/javascript">
     var flight_objects = '{{ json_data }}'
     var image_url_objects = '{{image_json_data}}'
@@ -477,7 +483,9 @@
                 // div.innerHTML += 
                 // div.innerHTML += '<div class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""><span class="label">Approved Flights</span></div>';
                 // div.innerHTML += '<i class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"></div><span>Complaint Flight</span><br>';
-                div.innerHTML += '<i class="circle-marker-complaint-legend is-drn"><img width="16px" height="16px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""/></i><span>Nearby Flights</span><br>';
+  
+                
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-drn"><img width="16px" height="16px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""/></i><span >Nearby Flights</span><br>';
                 div.innerHTML += '<i class="circle-marker-complaint-legend is-orange"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-orangeIcon.svg" alt="My image" style=""/></i><span>Pending Complaints</span><br>';
                 div.innerHTML += '<i class="circle-marker-complaint-legend is-green"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-greenIcon.svg" alt="My image" style=""/></i><span>Resolved Complaints</span><br>';
                 div.innerHTML += '<i class="circle-marker-complaint-legend is-blue" ><img width="15px" height="15px" src="../../../staticfiles/img/authority.svg" alt="My image" style=""/></i><span>Local Authorities</span><br>';
@@ -492,19 +500,25 @@
             // console.log(nearby_auth_flight,'nearyby auth Flight');
             var customPopupComplaint = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th> Status</th></tr><tr><td >'+ complainId +'</td><td >'+ complainStatus +'</td> </tr></table> </div></div>'
             var mark = L.marker([dataLatitude, dataLongitude], {icon:complainStatus === 'Resolved'?greenIcon:orangeIcon }).addTo(mymap);
+            var markersClusterGroup = L.markerClusterGroup();
+
             mark.bindPopup(customPopupComplaint);
             for (var i=0;i<nearby_flight.length;i++) {
                 if (String(nearby_flight[i][0]) == mapId) {
                     var customPopupNearby = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th>Altitude</th><th>Status</th></tr><tr><td >'+ String(nearby_flight[i][3]) +'</td><td >'+ String(nearby_flight[i][4]) +'</td><td >'+ String(nearby_flight[i][5]) +'</td> </tr></table> </div></div>'
-                    mark_nearby = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])]).addTo(mymap);
-                    mark_nearby.bindPopup(customPopupNearby);
+                    mark_nearby[i] = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])]).addTo(mymap);
+                    mark_nearby[i].bindPopup(customPopupNearby);
+                    markersClusterGroup.addLayer(mark_nearby[i]);
+
                 }
             }
             for (var i=0;i<nearby_auth_flight.length;i++) {
                 if (String(nearby_auth_flight[i][0]) == mapId) {
                     var  customPopupNearbyAuth= '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Name</th><th> Phone Number</th></tr><tr><td >'+ String(nearby_auth_flight[i][3]) +'</td><td >'+ String(nearby_auth_flight[i][4]) +'</td> </tr></table> </div></div>'
-                    mark_nearby_auth = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyAuthIcon}).addTo(mymap);
-                    mark_nearby_auth.bindPopup(customPopupNearbyAuth);
+                    mark_nearby_auth[i] = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyAuthIcon}).addTo(mymap);
+                    mark_nearby_auth[i].bindPopup(customPopupNearbyAuth);
+                    markersClusterGroup.addLayer(mark_nearby_auth[i]);
+
                 }
             }
             var geojsonLayer = new L.GeoJSON.AJAX("../../../staticfiles/data/nepal.geojson",{style:{

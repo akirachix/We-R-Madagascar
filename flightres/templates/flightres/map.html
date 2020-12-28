@@ -1,11 +1,13 @@
 {% extends 'flightres/base.html' %}
 {% load static %}
 {% block links %}
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 <style>
     #mapid {
         
         height: inherit;
         width: 100%; }
+    /*
     .marker-cluster-small {
         background-color: #3c6ae786;
     }
@@ -27,6 +29,27 @@
         color:white;
         background-color: #174BDD;
     }
+    */
+    
+    .leaflet-control-layers {
+        position: absolute;
+        right:20px;
+        top:80px;
+    }
+    .leaflet-control-layers-expanded {
+        width: 130px;
+    }
+    .leaflet-control-zoom {
+        position: absolute;
+        left:20px;
+        top:80px;
+    }
+    .leaflet-control-fullscreen {
+        position: absolute;
+        left:20px;
+        top:160px;
+    }
+    
 </style>
 {% endblock links %}
 
@@ -134,7 +157,7 @@
                     
                     <div id="mapid"></div>
                     
-                    <div class="legend-body" style='z-index:9090;'>
+                    <div class="legend-body" style='z-index:9090;position:absolute;left:85%;bottom:40px;'>
                         <span class="title">Categories</span>
                         <ul class="legend">
                             
@@ -183,6 +206,7 @@
     
 {% endblock body %}
 {% block footer_links %}
+
 <script>
     var defa = [27.71, 85.32]
     var noFlyZone = '{{obj}}'
@@ -198,10 +222,13 @@
     var dataset_comp = [{% if data_rep %}{% for x in data_rep %}
                         [{{x.latitude}}, '{{x.status}}', {{x.longitude}}, {{x.uav_uid}}],
                         {% endfor %}{% endif %}];
-    var mymap = L.map('mapid', {zoomControl: false}).setView({% if not data3 %}{% if data_rep %}[dataset_comp[0][0], dataset_comp[0][2]], 8{% else %}[defa[0], defa[1]], 7{% endif %}{% else %}[dataset[0][0], dataset[0][2]], 8{% endif %});
-    L.control.zoom({
-        position: 'bottomright'
-    }).addTo(mymap);
+    //var mymap = L.map('mapid', {zoomControl: false}).setView({% if not data3 %}{% if data_rep %}[dataset_comp[0][0], dataset_comp[0][2]], 8{% else %}[defa[0], defa[1]], 7{% endif %}{% else %}[dataset[0][0], dataset[0][2]], 8{% endif %});
+    var mymap = L.map('mapid',{
+        zoomControl: false,
+        fullscreenControl: {
+            pseudoFullscreen: false // if true, fullscreen to page width and height
+        }}).setView({% if not data3 %}{% if data_rep %}[dataset_comp[0][0], dataset_comp[0][2]], 8{% else %}[defa[0], defa[1]], 7{% endif %}{% else %}[dataset[0][0], dataset[0][2]], 8{% endif %});
+    L.control.zoom().addTo(mymap);
 
     var markersClusterGroup = L.markerClusterGroup();
     for (var x = 0; x < noFlyZone_json.length; x++) {
@@ -386,8 +413,7 @@
         return div;
         };
         legend.addTo(mymap); */
-    layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true,
-    position: 'bottomright' }).addTo(mymap);
+    layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true}).addTo(mymap);
 
    // popup = marker.bindPopup("Lat:28.209499,Long:83.959518").openPopup();
 </script>

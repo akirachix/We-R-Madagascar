@@ -1,6 +1,8 @@
 {% extends 'flightres/base.html' %}
 {% load static %}
 {% block links %}
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
 <style>
 .preloader {
     background-color: #ffffff8f;
@@ -112,6 +114,7 @@
 }
 
 </style>
+
 {% endblock links %}
 
 {% block body %}
@@ -255,9 +258,8 @@
 
 </script>
 
-
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-<script src="{% static 'js/map.js' %}"></script>
+
 <script>
         $(window).on('load', function () {
             $('#preloader-active').delay(1000).fadeOut('slow');
