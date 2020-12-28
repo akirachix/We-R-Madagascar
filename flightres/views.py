@@ -100,7 +100,8 @@ def MapView(request):
             for y in zipped.namelist():
                 if y.endswith('.shp'):
                     shp_names.append(y.replace('.shp', '.geojson'))
-
+    datsa = is_near_senstive_area(float(lat), float(lng), shp_names)
+    print(datsa)
     context = {
         'noflyZone': json.dumps(list(shp_names), cls=DjangoJSONEncoder),
     }

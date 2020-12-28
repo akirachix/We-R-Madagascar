@@ -1,7 +1,9 @@
 import requests
 import json
 from math import radians, cos, sin, asin, sqrt
+from shapely.geometry import Point, Polygon
 from zipfile import ZipFile
+
 
 
 
@@ -25,30 +27,29 @@ def reverseGeocode(query):
 
 
 def is_near_senstive_area(lat, lon, shp_names):
-    sensitive_areas = [
-        {'lat': 27.691163902, 'lon': 85.355331912, 'name': 'Tribhuvan International Airport', 'threshold_in_km': 1},
-        {'lat': 27.7042, 'lon': 85.3067, 'name': 'Kathmandu Durbar Square', 'threshold_in_km': 1},
-        {'lat': 27.6721, 'lon': 85.4281, 'name': 'Bhaktapur Durbar Square', 'threshold_in_km': 1},
-        {'lat': 27.6727, 'lon': 85.3253, 'name': 'Patan Durbar Square', 'threshold_in_km': 1},
-    ]
-    distances = []
-    for area in sensitive_areas:
-        distances.append(haversine(area.get('lat'), area.get('lon'), lat, lon))
+    sensitive_areas = []
+    points = Point(lat, lon)
+   
     for x in shp_names:
-        with open('/usr/src/app/uploads/shp_files/' + x) as f:
+        with open('/home/jungey/Documents/work/drone-registration/uploads/shp_files/' + x) as f:
             data = json.load(f)
-    for feature in data['features']:
-        for x in feature['geometry']['coordinates']:
-            for y in x:
-                distances.append(haversine(y[0], y[1], lat, lon))
-
-    nearest_poi_distance = min(distances)
-    nearest_poi_name = sensitive_areas[distances.index(nearest_poi_distance)].get('name')
-    if nearest_poi_distance < 1:
-        return True, "This is near the \"No Fly Zone\" {}. A special flight permission is required for this flight".format(
-            nearest_poi_name)
-
+            for feature in data['features']:
+                for y in feature['geometry']['coordinates']:
+                    areas = []
+                    for z in y:
+                        areas.append([z[1], z[0]])
+                    polyg = Polygon(areas)
+                    sensitive_areas.append(polyg)
+        f.close()
+        
+    for pol in sensitive_areas:
+        if pol.contains(points) or points.touches(pol):
+            return True, "This is inside the \"No Fly Zone\" {}. A special flight permission is required for this flight".format(
+            'No-fly zone')
     return False, ""
+    
+            
+
 
 
     
