@@ -208,7 +208,7 @@ $(document).ready(function () {
                             <div class="tab-content-holder current" id="location">
                                 <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `" >
                                 <div class="map-section">
-                                <div class="legend-body" style='z-index:9090;min-width: 176px;max-width: 206px;position:absolute;left:63%;bottom:50px;'>
+                                <div class="legend-body" style='z-index:9090;min-width: 176px;max-width: 206px;position:absolute;left:auto;right:30px;bottom:50px;'>
                         <span class="title">Categories</span>
                         <ul class="legend">
                             
