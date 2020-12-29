@@ -54,7 +54,7 @@
 }
 .is-blue {
     border: 2px solid #15139C;
-    background-color: white;
+    background: white;
 }
 .is-drn {
     border: none;
@@ -469,7 +469,7 @@
                  // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
             });
             var nearbyAuthIcon = L.divIcon({
-                className: `circle-marker is-blue`,
+                className: `circle-marker-complaint is-blue`,
                 // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
                 // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
                 html:`<img width="16px" height="16px" src='/staticfiles/img/authority.svg' alt="My image">`,
@@ -503,15 +503,16 @@
             // console.log(complainStatus,'complainStatus');
             // console.log(nearby_flight,'nearybyFlight');
             // console.log(nearby_auth_flight,'nearyby auth Flight');
-            var customPopupComplaint = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th> Status</th></tr><tr><td >'+ complainId +'</td><td >'+ complainStatus +'</td> </tr></table> </div></div>'
-            var mark = L.marker([dataLatitude, dataLongitude], {icon:complainStatus === 'Resolved'?greenIcon:orangeIcon }).addTo(mymap);
             var markersClusterGroup = L.markerClusterGroup();
-
+            
+            var customPopupComplaint = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th> Status</th></tr><tr><td >'+ complainId +'</td><td >'+ complainStatus +'</td> </tr></table> </div></div>'
+            var mark = L.marker([dataLatitude, dataLongitude], {icon:complainStatus === 'Resolved'?greenIcon:orangeIcon });
+            markersClusterGroup.addLayer(mark);
             mark.bindPopup(customPopupComplaint);
             for (var i=0;i<nearby_flight.length;i++) {
                 if (String(nearby_flight[i][0]) == mapId) {
                     var customPopupNearby = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th>Altitude</th><th>Status</th></tr><tr><td >'+ String(nearby_flight[i][3]) +'</td><td >'+ String(nearby_flight[i][4]) +'</td><td >'+ String(nearby_flight[i][5]) +'</td> </tr></table> </div></div>'
-                    mark_nearby[i] = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])]).addTo(mymap);
+                    mark_nearby[i] = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])]);
                     markersClusterGroup.addLayer(mark_nearby[i]);
 
                     mark_nearby[i].bindPopup(customPopupNearby);
@@ -521,14 +522,13 @@
             for (var i=0;i<nearby_auth_flight.length;i++) {
                 if (String(nearby_auth_flight[i][0]) == mapId) {
                     var  customPopupNearbyAuth= '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Name</th><th> Phone Number</th></tr><tr><td >'+ String(nearby_auth_flight[i][3]) +'</td><td >'+ String(nearby_auth_flight[i][4]) +'</td> </tr></table> </div></div>'
-                    mark_nearby_auth[i] = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyAuthIcon}).addTo(mymap);
+                    mark_nearby_auth[i] = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyAuthIcon});
                     markersClusterGroup.addLayer(mark_nearby_auth[i]);
 
                     mark_nearby_auth[i].bindPopup(customPopupNearbyAuth);
 
                 }
             }
-            mymap.addLayer(markersClusterGroup);
             var geojsonLayer = new L.GeoJSON.AJAX("../../../staticfiles/data/nepal.geojson",{style:{
                 "color": "#04AA66",
                 "weight": 5,
@@ -539,42 +539,52 @@
             osm = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2VvbWF0dXBlbiIsImEiOiJja2E5bDFwb2swdHNyMnNvenZxa2Vpeml2In0.fCStqdwmFYFP-cUvb5vMCw', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mymap);
-            for (var x = 0; x < noFlyZone_json.length; x++) {
-                var noFlyZoneLayer = new L.GeoJSON.AJAX("../../uploads/shp_files/"+ String(noFlyZone_json[x]), {style : {
-                    "color": "red",
-                    "weight": 3,
-                    "opacity": 1
-                }}).addTo(mymap);
-                
-            }
-    
+        for (var x = 0; x < noFlyZone_json.length; x++) {
+            var noFlyZoneLayer = new L.GeoJSON.AJAX("../../uploads/shp_files/"+ String(noFlyZone_json[x]), {style : {
+                "color": "red",
+                "weight": 3,
+                "opacity": 1
+            }}).addTo(mymap);
+            
+        }
+        mymap.addLayer(markersClusterGroup);
+        
 
-                googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                    maxZoom: 20,
-                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-                });
-                googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
-                    maxZoom: 20,
-                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-                });
-                googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-                    maxZoom: 20,
-                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-                });
-                googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
-                    maxZoom: 20,
-                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-                });
+        googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
 
-                
-            function closePopup() {
-                $('.close-icon').on('click', function (e) {
-                    e.preventDefault();
-                    $(this).closest('.popup').removeClass('open');
-                });
-            }
+        var baseLayers = {
+            "OpenStreetMap": osm,
+            "Google Streets": googleStreets,
+            "Google Hybrid": googleHybrid,
+            "Google Satellite": googleSat,
+            "Google Terrain": googleTerrain,
 
-            closePopup();
+        };
+        layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true}).addTo(mymap);
+        
+        function closePopup() {
+            $('.close-icon').on('click', function (e) {
+                e.preventDefault();
+                $(this).closest('.popup').removeClass('open');
+            });
+        }
+
+        closePopup();
                 // var lat = document.getElementById('map').getAttribute('value').split(',')[0]
                 // var long = document.getElementById('map').getAttribute('value').split(',')[1]
 
