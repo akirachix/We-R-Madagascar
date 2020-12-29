@@ -31,7 +31,7 @@ def is_near_senstive_area(lat, lon, shp_names):
     points = Point(lat, lon)
    
     for x in shp_names:
-        with open('/home/jungey/Documents/work/drone-registration/uploads/shp_files/' + x) as f:
+        with open('/usr/src/app/uploads/shp_files/' + x) as f:
             data = json.load(f)
             for feature in data['features']:
                 for y in feature['geometry']['coordinates']:

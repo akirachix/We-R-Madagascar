@@ -7,8 +7,9 @@
 <script src="{% static 'js/modal-image.js' %}"></script>
 <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 <style>
+
 .legend {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   /*font-family: inherit; */
   padding: 8px 10px;
   background: white;
@@ -28,13 +29,15 @@
   color: #777;
 }
 
-.legend span {
-  font-family: inherit;
-  position: relative;
-  bottom: 3px;
-  font-size: .875rem;
-  font-weight: 400;
-  line-height: 1.8;
+.legend .spar {
+    all: initial;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    
+    position: relative;
+    bottom: 1.5px;
+    font-size: .875rem;
+    font-weight: 300;
+    line-height: 1.8;
 }
 
 .legend i {
@@ -480,15 +483,17 @@
 
             legend.onAdd = function(mymap) {
                 var div = L.DomUtil.create("div", "legend");
+                
+
                 // div.innerHTML += 
                 // div.innerHTML += '<div class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""><span class="label">Approved Flights</span></div>';
                 // div.innerHTML += '<i class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"></div><span>Complaint Flight</span><br>';
   
                 
-                div.innerHTML += '<i class="circle-marker-complaint-legend is-drn"><img width="16px" height="16px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""/></i><span >Nearby Flights</span><br>';
-                div.innerHTML += '<i class="circle-marker-complaint-legend is-orange"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-orangeIcon.svg" alt="My image" style=""/></i><span>Pending Complaints</span><br>';
-                div.innerHTML += '<i class="circle-marker-complaint-legend is-green"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-greenIcon.svg" alt="My image" style=""/></i><span>Resolved Complaints</span><br>';
-                div.innerHTML += '<i class="circle-marker-complaint-legend is-blue" ><img width="15px" height="15px" src="../../../staticfiles/img/authority.svg" alt="My image" style=""/></i><span>Local Authorities</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-drn"><img width="16px" height="16px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""/></i><span class="spar">Nearby Flights</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-orange"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-orangeIcon.svg" alt="My image" style=""/></i><span class="spar">Pending Complaints</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-green"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-greenIcon.svg" alt="My image" style=""/></i><span class="spar">Resolved Complaints</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-blue" ><img width="15px" height="15px" src="../../../staticfiles/img/authority.svg" alt="My image" style=""/></i><span class="spar">Local Authorities</span><br>';
                 // div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Complaint Flight</span><br>';
                 // div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Local Authorities</span><br>';
                 return div;
@@ -507,8 +512,9 @@
                 if (String(nearby_flight[i][0]) == mapId) {
                     var customPopupNearby = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th>Altitude</th><th>Status</th></tr><tr><td >'+ String(nearby_flight[i][3]) +'</td><td >'+ String(nearby_flight[i][4]) +'</td><td >'+ String(nearby_flight[i][5]) +'</td> </tr></table> </div></div>'
                     mark_nearby[i] = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])]).addTo(mymap);
-                    mark_nearby[i].bindPopup(customPopupNearby);
                     markersClusterGroup.addLayer(mark_nearby[i]);
+
+                    mark_nearby[i].bindPopup(customPopupNearby);
 
                 }
             }
@@ -516,8 +522,9 @@
                 if (String(nearby_auth_flight[i][0]) == mapId) {
                     var  customPopupNearbyAuth= '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Name</th><th> Phone Number</th></tr><tr><td >'+ String(nearby_auth_flight[i][3]) +'</td><td >'+ String(nearby_auth_flight[i][4]) +'</td> </tr></table> </div></div>'
                     mark_nearby_auth[i] = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyAuthIcon}).addTo(mymap);
-                    mark_nearby_auth[i].bindPopup(customPopupNearbyAuth);
                     markersClusterGroup.addLayer(mark_nearby_auth[i]);
+
+                    mark_nearby_auth[i].bindPopup(customPopupNearbyAuth);
 
                 }
             }
