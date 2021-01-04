@@ -102,7 +102,7 @@
 </header>
 
 <main class="about-section"style='margin-top:40px'>
-    <div class="container">
+    <div class="container-flex">
             <section class="map-section" style='position:relative;'>
                     
                 <div id="mapid"></div>
@@ -178,6 +178,7 @@
     var noFlyZone_json = JSON.parse(noFlyZone);
     var dat = ['{{lat}}', '{{lng}}']
     var mymap = L.map('mapid',{
+        gestureHandling: true,
         fullscreenControl: {
             pseudoFullscreen: false // if true, fullscreen to page width and height
         }}).setView([parseFloat(dat[0]), parseFloat(dat[1])], 7);
