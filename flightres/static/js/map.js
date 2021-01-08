@@ -85,8 +85,8 @@ $(document).ready(function () {
         console.log(lat,'lat');
         console.log(long,'long');
         let assign_button = current_email===data.assigned_to__email?`<button   class="common-button is-bg unassign-btn" style="display: inline-block;margin-left:10px;">Unassign Self</button>`:``
-        let approve_button = (current_email===data.assigned_to__email && (data.status == 'Rejected' || 'Pending'))?`<a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/` + data.assigned_to__username + `/approve" class="common-button is-bg">Approve</a>`:`<a class="common-button is-bg is-disable">Approve</a>`
-        let deny_button = (current_email===data.assigned_to__email && (data.status == 'Approved' || 'Pending'))?`<span  class="common-button is-border cancel-button" id="denyButton">Deny</span>`:`<span  class="common-button is-border cancel-button is-disable">Deny</span>`
+        let approve_button = (current_email===data.assigned_to__email && data.status != 'Approved')?`<a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/` + data.assigned_to__username + `/approve" class="common-button is-bg">Approve</a>`:`<a class="common-button is-bg is-disable">Approve</a>`
+        let deny_button = (current_email===data.assigned_to__email && data.status != 'Rejected')?`<span  class="common-button is-border cancel-button" id="denyButton">Deny</span>`:`<span  class="common-button is-border cancel-button is-disable">Deny</span>`
         let assignee = data.assigned_to__username===null?`<button class="common-button is-bg assign-btn">Assign Self</button>`:`<p style="display: inline-block;">Assigned to <b> ${data.assigned_to__username}</b></p>`;
         let drone_insurance = data.flight_insurance_url===null?``:`<div class="col-md-4">
                                                                         <div class="file-upload">
