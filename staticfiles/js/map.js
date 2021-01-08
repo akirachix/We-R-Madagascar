@@ -74,7 +74,7 @@ $(document).ready(function () {
                     };
                     createModal(flight_object[j], flight_object[j].status, lat, long, alti, status1,id)
                     // pass id or sth from here to record the deny reason for a particular item
-                    openDenyModal(flight_object[j].uav_uid, flight_object[j].rejection_reason)
+                    openDenyModal(flight_object[j].uav_uid, flight_object[j].rejection_reason, flight_object[j].assigned_to__username)
                 }
             }
         })
@@ -85,7 +85,7 @@ $(document).ready(function () {
         console.log(lat,'lat');
         console.log(long,'long');
         let assign_button = current_email===data.assigned_to__email?`<button   class="common-button is-bg unassign-btn" style="display: inline-block;margin-left:10px;">Unassign Self</button>`:``
-        let approve_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/approve" class="common-button is-bg">Approve</a>`:`<a class="common-button is-bg is-disable">Approve</a>`
+        let approve_button = current_email===data.assigned_to__email?`<a href="/np/dashboard/approve_perm/`+ data.uav_uid + `/` + data.assigned_to__username + `/approve" class="common-button is-bg">Approve</a>`:`<a class="common-button is-bg is-disable">Approve</a>`
         let deny_button = current_email===data.assigned_to__email?`<span  class="common-button is-border cancel-button" id="denyButton">Deny</span>`:`<span  class="common-button is-border cancel-button is-disable">Deny</span>`
         let assignee = data.assigned_to__username===null?`<button class="common-button is-bg assign-btn">Assign Self</button>`:`<p style="display: inline-block;">Assigned to <b> ${data.assigned_to__username}</b></p>`;
         let drone_insurance = data.flight_insurance_url===null?``:`<div class="col-md-4">
@@ -208,7 +208,7 @@ $(document).ready(function () {
                             <div class="tab-content-holder current" id="location">
                                 <div id="map" class="map" value="`+ data.latitude + `, ` + data.longitude + `" >
                                 <div class="map-section">
-                                <div class="legend-body" style='z-index:9090;min-width: 176px;max-width: 206px;'>
+                                <div class="legend-body" style='z-index:9090;min-width: 176px;max-width: 206px;position:absolute;left:auto;right:30px;bottom:50px;'>
                         <span class="title">Categories</span>
                         <ul class="legend">
                             
@@ -266,7 +266,7 @@ $(document).ready(function () {
                     data.assigned_to__username = result.assigned_to__username
                     
                     createModal(data, das, lat, long,alti, status1,id);
-                    openDenyModal(data.uav_uid, data.rejection_reason)
+                    openDenyModal(data.uav_uid, data.rejection_reason, data.assigned_to__username)
 
                 }});
                 // console.log('assign clicked');
@@ -530,16 +530,17 @@ $(document).ready(function () {
 $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
 
 
-function openDenyModal(flight_id, rejection_reason) {
+function openDenyModal(flight_id, rejection_reason, username) {
     let denyElement = document.getElementById('denyButton')
     denyElement.addEventListener('click', () => {
         // console.log("show pop");
         let smallPopup = document.getElementById('open-modal-deny');
-        if (rejection_reason != 'null') {
+        if (rejection_reason != null) {
             var rej = rejection_reason;
         } else {
             var rej = ''
         };
+        
         smallPopup.classList.add('open');
         html1 = `
             <div class="popup-header">
@@ -550,16 +551,19 @@ function openDenyModal(flight_id, rejection_reason) {
                 ; name="reason" ; ></input>
             <br>
             <div class="buttons is-end" style="height:35px;">
-                <button onclick="sendReason(${flight_id})" type="submit" style="margin-right:3px" class="common-button is-bg close-icon" id="denySubmit">Submit</button>
+                <button onclick="sendReason(${flight_id})" uname="${username}" type="submit" style="margin-right:3px" class="common-button is-bg close-icon" id="denySubmit">Submit</button>
             </div>`
         document.getElementById("submit-deny-div").innerHTML = html1
-        closePopup()
+        //closePopup()
     })
 }
 
 function sendReason(flight_id) {
+    
     let inputValue = document.getElementById('reasonInput').value
-    let url = `/np/dashboard/deny_perm/`+ flight_id +``
+    var uname = document.getElementById('reasonInput').uname
+    console.log(typeof uname)
+    let url = `/np/dashboard/deny_perm/`+ flight_id + `/` + uname + ``
     let data = { value: inputValue };
 
     fetch(url, {

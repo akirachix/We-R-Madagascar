@@ -21,6 +21,7 @@ from registry.utils.preprocessor import Preprocessor
 from .serializers import FlightRegistrySerializer, WhatsappComplainSerializer, \
     SheetRegisterSerializer, PilotsSerializer, PilotFromFlightSerializer, WhatsappComplainCreateSerializer
 from zipfile import ZipFile
+from datetime import date
 
 @csrf_exempt
 @xframe_options_exempt
@@ -31,11 +32,17 @@ def date_validation_view(request):
             end_date = request.POST['end_date']
             start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
             end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
-
+            date_today = date.today()
+            is_valid_start_date = (start_date_obj - date_today) >= 0
             is_valid_date = (end_date_obj - start_date_obj).days >= 0
-            data = {
-                'valid': is_valid_date
-            }
+            if is_valid_start_date and is_valid_date:
+                data = {
+                    'valid': is_valid_date
+                }
+            else:
+                data = {
+                    'valid': False
+                }
 
             return JsonResponse(data)
 

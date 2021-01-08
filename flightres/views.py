@@ -23,7 +23,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from django.core.serializers import serialize
-from .models import FlightPermission, Report, LocalAuthorities, NoFlyZone
+from .models import FlightPermission, Report, LocalAuthorities, NoFlyZone, PermissionLogs, ReportsLogs
 from registry.models import Aircraft, Operator, Manufacturer, Address
 from django.contrib.messages.views import SuccessMessageMixin
 from .form import AircraftForm, OperatorForm
@@ -31,6 +31,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from zipfile import ZipFile
 from .utils import is_near_senstive_area
+from authentication.models import User as usrm
 
 
 def homeView(request):
@@ -322,13 +323,19 @@ class FlightPermissionList(LoginRequiredMixin, ListView):
 
 
 @login_required
-def approvePerm(request, pk, action):
+def approvePerm(request, pk, username, action):
     selected_perm = get_object_or_404(FlightPermission, uav_uid=pk)
+    usr = get_object_or_404(usrm, username=username)
     if action == 'approve':
         selected_perm.status = 'Approved'
+        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Approved')
+
     elif action == 'deny':
         selected_perm.status = 'Rejected'
+        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Rejected')
+
     selected_perm.save()
+    perm.save()
     # prev_url = str(request.META.get('HTTP_REFERER'))
     # url = prev_url.split("np")[1]
     if selected_perm.is_special_permission == True:
@@ -338,14 +345,18 @@ def approvePerm(request, pk, action):
 
 
 @login_required
-def denyPerm(request, pk):
+def denyPerm(request, pk, username):
     if request.method == 'POST':
+        print(username)
+        usr = get_object_or_404(usrm, username=username)
         data = json.loads(request.body.decode("utf-8"))
         # print(data['value'], "here")
         selected_perm = get_object_or_404(FlightPermission, uav_uid=pk)
         selected_perm.status = 'Rejected'
         selected_perm.rejection_reason = data['value']
         selected_perm.save()
+        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Rejected')
+        perm.save()
         if selected_perm.is_special_permission == True:
             return redirect('/np/dashboard/permission/special')
         else:
@@ -403,16 +414,24 @@ def flightReqResponseView(request, skey):
 @login_required
 def updateComplain(request, pk, action, status):
     selected_complain = get_object_or_404(Report, uav_uid=pk)
+    usr = get_object_or_404(usrm, username=request.user.username)
     if action == 'status':
         if status == "Pending":
             selected_complain.status = 'Resolved'
+            rep = ReportsLogs.objects.create(user=usr, complaint_id=selected_complain, status='Resolved')
         elif status == "Resolved":
             selected_complain.status = 'Pending'
+            rep = ReportsLogs.objects.create(user=usr, complaint_id=selected_complain, status='Pending')
+
     elif action == 'escalate':
         if status == 'true':
             selected_complain.is_escalated = False
+            rep = ReportsLogs.objects.create(user=usr, complaint_id=selected_complain, escalate='De-Escalated')
+
         elif status == 'false':
             selected_complain.is_escalated = True
+            rep = ReportsLogs.objects.create(user=usr, complaint_id=selected_complain, escalate='Escalated')
+    rep.save()
     selected_complain.save()
     return redirect('/np/dashboard/complain')
 
@@ -420,9 +439,12 @@ def updateComplain(request, pk, action, status):
 @login_required
 def submitReply(request, pk):
     selected_complain = get_object_or_404(Report, uav_uid=pk)
+    usr = get_object_or_404(usrm, username=request.user.username)
     selected_complain.note = request.POST.get('note')
     selected_complain.reply = request.POST.get('reply')
+    rep = ReportsLogs.objects.create(user=usr, complaint_id=selected_complain, note=request.POST.get('note'), reply=request.POST.get('reply'))
     selected_complain.save()
+    rep.save()
     return redirect('/np/dashboard/complain')
 
 
