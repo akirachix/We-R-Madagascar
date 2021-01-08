@@ -196,6 +196,49 @@ class NoFlyZone(models.Model):
 
     def __str__(self):
         return str(self.spatialdata_zip_file).replace('shp_files/', '')
+
+class PermissionLogs(models.Model):
+    STATUS_CHOICE = (
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected')
+    )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+    permission_id = models.ForeignKey(FlightPermission, blank=True, null=True, on_delete=models.SET_NULL)
+    status = models.CharField(choices=STATUS_CHOICE, max_length=15, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name_plural = 'Permission Logs'
+
+    def __str__(self):
+        return self.user.email
+
+class ReportsLogs(models.Model):
+    STATUS_CHOICE = (
+        ('Resolved', 'Resolved'),
+        ('Pending', 'Pending')
+    )
+    CHOICES = (
+        ('Escalated', 'Escalated'),
+        ('De-Escalated', 'De-Escalated')
+    )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+    complaint_id = models.ForeignKey(Report, blank=True, null=True, on_delete=models.SET_NULL)
+    status = models.CharField(choices=STATUS_CHOICE, max_length=15, blank=True, null=True)
+    escalate = models.CharField(choices=CHOICES, max_length=20, blank=True, null=True)
+    reply = models.CharField(max_length=100, blank=True, null=True)
+    note = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name_plural = 'Reports Logs'
+
+    def __str__(self):
+        return self.user.email
+
+
 '''def create_geojson(sender, **kwargs):
     if kwargs['created']:
         full_path = kwargs['instance'].shp_file.path
@@ -205,6 +248,7 @@ class NoFlyZone(models.Model):
 
 post_save.connect(create_geojson, sender=NoFlyZone)'''
     
+
 
 
 
