@@ -33,7 +33,7 @@ def date_validation_view(request):
             start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
             end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
             date_today = date.today()
-            is_valid_start_date = (start_date_obj - date_today) >= 0
+            is_valid_start_date = (start_date_obj - date_today).days >= 0
             is_valid_date = (end_date_obj - start_date_obj).days >= 0
             if is_valid_start_date and is_valid_date:
                 data = {
