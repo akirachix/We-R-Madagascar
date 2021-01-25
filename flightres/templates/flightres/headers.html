@@ -1,0 +1,71 @@
+{% load static %}
+<header class="site-header map-header map-pd" style='position: relative;z-index: 9099;'>
+    <div class="container-fluid">
+        <div class="header-in">
+        <a href="{% url 'home' %}" class="logo">
+            <img src="{% static './img/logo.svg' %}" />
+        </a>
+        <div class="menu-wrap">
+            <div class="menu">
+            <ul>
+                <li>
+                <a href="{% url 'home' %}" class="span-15">Home</a>
+                </li>
+                <li>
+                <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
+                </li>
+                <li>
+                <a href="{% url 'dashboard:mapview' %}" class="span-15">No-Fly Zone</a>
+                </li>
+                <li>
+                <a href="{% url 'dashboard:guidelines' %}" class="span-15 call-to-action"
+                    >UAV Guidelines</a
+                >
+                </li>
+            </ul>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="custom-dropdown profile-dropdown is-right">
+            <a href="javascript:void(0)" class="dropdown-link">
+                <i class="material-icons" style='font-size: 30px;'>account_circle</i>
+            </a>
+            <ul class="custom-dropdown-menu no-arrow">
+                <li>
+                    <a href="/np/dashboard" id='dash'
+                        ><i class="material-icons">book</i>Dashboard
+                    </a>
+                    </li>
+                <li>
+                <a href="changepassword/" id='settings'
+                    ><i class="material-icons">settings</i>Settings
+                </a>
+                </li>
+                <li>
+                <a href="/accounts/logout" id='dash_logout'
+                    ><i class="material-icons" style="color: #ed3646"
+                    >exit_to_app</i
+                    >Sign out</a
+                >
+                </li>
+            </ul>
+            </div>
+            {% else %}
+            <div class="custom-dropdown profile-dropdown is-right">
+            
+            <a href="/accounts/login" class="dropdown-link" id='dash_login'>
+                <i class="material-icons" style='font-size: 30px;'>account_circle</i>
+            </a>
+            </div>
+            
+            {% endif %}
+    
+        </div>
+        <div class="toggle-button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        </div>
+    </div>
+    </header>
