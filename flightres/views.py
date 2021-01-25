@@ -112,7 +112,7 @@ def MapView(request):
     else:
         context['lat'] = 27.71
         context['lng'] = 85.32
-    return render(request, 'flightres/mapview.html', context)
+    return render(request, 'flightres/drone-map.html', context)
 
 class FlightView(LoginRequiredMixin, TemplateView):
 
