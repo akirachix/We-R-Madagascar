@@ -129,7 +129,7 @@ LOGIN_URL = '/accounts/login'
 #         'NAME': os.path.join(BASE_DIR, 'droneregistry.sqlite3'),
 #     }
 # }
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -151,7 +151,7 @@ DATABASES = {
         'PORT': os.environ.get('SQL_PORT', '5432'),      
     }  
 }
-
+'''
 
 
 # Password validation
