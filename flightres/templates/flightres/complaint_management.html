@@ -512,7 +512,7 @@
             for (var i=0;i<nearby_flight.length;i++) {
                 if (String(nearby_flight[i][0]) == mapId) {
                     var customPopupNearby = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th>Altitude</th><th>Status</th></tr><tr><td >'+ String(nearby_flight[i][3]) +'</td><td >'+ String(nearby_flight[i][4]) +'</td><td >'+ String(nearby_flight[i][5]) +'</td> </tr></table> </div></div>'
-                    mark_nearby[i] = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])]);
+                    mark_nearby[i] = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])], {icon:nearbyIcon});
                     markersClusterGroup.addLayer(mark_nearby[i]);
 
                     mark_nearby[i].bindPopup(customPopupNearby);
