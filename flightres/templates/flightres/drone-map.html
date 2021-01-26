@@ -70,8 +70,10 @@
                       <span><i class="material-icons">place</i></span>
                       <input type='number' class="form-control lat-long" id='long-in' placeholder="longitude" />
                     </div>
+                    
+                    <p id='ptext' style='color:black;font-size:17px;font-weight:500;'></p>
                   </div>
-                
+                  
                   <div id="mapid"></div>
                  
               </section>
@@ -87,16 +89,30 @@
     <script src="{% static 'js/drone.js' %}"></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-
-
+    <script src='https://unpkg.com/@mapbox/leaflet-pip@latest/leaflet-pip.js'></script>
+    
     <script>
+      function geocheck(lat, long) {
+        for (var x = 0; x < noFlyZoneLayer.length; x++) {
+              // console.log(noFlyZone_json[x])
+              // var noFlyLayer = new L.GeoJSON("../../uploads/shp_files/"+ String(noFlyZone_json[x]));
+          var results = leafletPip.pointInLayer([long, lat], noFlyZoneLayer[x]);
+          console.log(results)
+          if (results.length > 0) {
+            return true
+          };
+        };
+        return false
+      };
+    </script>
+    <script>
+      
       $(document).ready(function(){
         $(".lat-long").change(function(){
           if(($('#long-in').val().length != 0) && ($('#lat-in').val().length != 0)) {
             markerGroup.clearLayers();
             lat = $('#lat-in').val();
             long = $('#long-in').val();
-            console.log(lat, long)
             var orangeIcon = new L.Icon({
               iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
               shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -104,7 +120,14 @@
               iconAnchor: [12, 41],
               popupAnchor: [1, -34],
               shadowSize: [41, 41]
-          });
+            });
+            var rslt = geocheck(lat, long);
+            
+            if (rslt == true) {
+              $('#ptext').text('Given Co-ordinates fall under No Fly Zone')
+            }else {
+              $('#ptext').text('Given Co-ordinates do not fall under No Fly Zone')
+            };
             var mar = new L.marker([lat, long], {icon:orangeIcon}).addTo(markerGroup);
             mymap.panTo(mar.getLatLng());
             // var group = new L.featureGroup(mark);
@@ -163,7 +186,7 @@
           popupAnchor: [1, -34],
           shadowSize: [41, 41]
       });
-      var markerGroup = L.layerGroup().addTo(mymap);
+      var markerGroup = new L.layerGroup().addTo(mymap);
 
       if (das == 'True') {
           var mark = L.marker(
@@ -173,21 +196,28 @@
               ), {icon:orangeIcon}
           ).addTo(markerGroup);
       }
-      
+      var noFlyZoneLayer = []
       for (var x = 0; x < noFlyZone_json.length; x++) {
-          var noFlyZoneLayer = new L.GeoJSON.AJAX("../../uploads/shp_files/"+ String(noFlyZone_json[x]), {style : {
-              "color": "red",
-              "weight": 3,
-              "opacity": 1
-          }}).addTo(mymap);
+        noFlyZoneLayer[x] = new L.GeoJSON.AJAX("../../uploads/shp_files/"+ String(noFlyZone_json[x]), {
+          onEachFeature: function (feature, layer) {
+            layer.bindPopup('<h5 style="font-size:17px;font-weight:400;"> Name: '+feature.properties.name+'</h5>');
+          },
+          style : {
+            "color": "red",
+            "weight": 3,
+            "opacity": 1
+          }
+        }).addTo(mymap);
           
       }
       
-      var geojsonLayer = new L.GeoJSON.AJAX("../../staticfiles/data/nepal.geojson",{style:{
+      var geojsonLayer = new L.GeoJSON.AJAX("../../staticfiles/data/nepal.geojson",{
+        style:{
           "color": "#04AA66",
           "weight": 5,
           "opacity": 0.65
-      }});       
+        }
+      });       
       geojsonLayer.addTo(mymap);
       osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',

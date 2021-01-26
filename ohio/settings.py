@@ -115,7 +115,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ohio.wsgi.application'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/np/dashboard'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 LOGIN_URL = '/accounts/login'
 
