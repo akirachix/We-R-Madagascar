@@ -22,9 +22,10 @@
                     >UAV Guidelines</a
                 >
                 </li>
+            
+            {% if user.is_authenticated %}
             </ul>
             </div>
-            {% if user.is_authenticated %}
             <div class="custom-dropdown profile-dropdown is-right">
             <a href="javascript:void(0)" class="dropdown-link">
                 <i class="material-icons" style='font-size: 30px;'>account_circle</i>
@@ -50,13 +51,13 @@
             </ul>
             </div>
             {% else %}
-            <div class="custom-dropdown profile-dropdown is-right">
-            
+            <li>
             <a href="/accounts/login" class="dropdown-link" id='dash_login'>
-                <i class="material-icons" style='font-size: 30px;'>account_circle</i>
+                Login
             </a>
+            </li>
+            </ul>
             </div>
-            
             {% endif %}
     
         </div>
