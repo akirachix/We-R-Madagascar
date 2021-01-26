@@ -152,6 +152,9 @@
           fullscreenControl: {
               pseudoFullscreen: false // if true, fullscreen to page width and height
           }}).setView([parseFloat(dat[0]), parseFloat(dat[1])], 7);
+      mymap.createPane('labels');
+      mymap.getPane('labels').style.zIndex = 650;
+      mymap.getPane('labels').style.pointerEvents = 'none'
       var orangeIcon = new L.Icon({
           iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
           shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -187,9 +190,9 @@
             "opacity": 1
           },
           onEachFeature: function (feature, layer) {
-            console.log(layer);
-            layer.bindPopup('<h5 style="font-size:17px;font-weight:400;"> Name:'+feature.properties.name+'</h5>');
-          }
+            layer.bindPopup('<h5 style="font-size:17px;font-weight:400;"> Name: '+feature.properties.name+'</h5>');
+          },
+          pane: 'labels'
         }).addTo(geoLayerGroup);
       }
       
