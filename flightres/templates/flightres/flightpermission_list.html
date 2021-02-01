@@ -154,7 +154,7 @@
                 <tbody>
                 {% for object, due_in in object_data %}
                 <!-- <tr class="highlight"> -->
-                    <tr id="expand_{{ object.uav_uid }}" data-toggle="modal" data-target="#open-modal" modal-link="open-modal" class="highlight modal-link expandData">
+                <tr id="expand_{{ object.uav_uid }}" data-toggle="modal" data-target="#open-modal" modal-link="open-modal" class="highlight modal-link expandData">
                     <td>{{ object.uav_uid }}</td>
                     <td>{{ object.uav_uuid.unid }}</td>
                     <td>
@@ -225,12 +225,13 @@
                                 </div>
                             </div>
                         </div>
-        </div>
+        <!-- </div> -->
         <!-- </td>
         </tr> -->
         {% endfor %}
         </tbody>
         </table>
+        </div>
     </div>
 </main>
 

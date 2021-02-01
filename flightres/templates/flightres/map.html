@@ -65,27 +65,11 @@
                         <div class="header-in">
                             
                                 
-                            <div class="left is-flex">
+                            <div class="left is-flex" style='max-width: 70%;'>
                                 <div class="form-group inline-group mb-0">
-                                    <input placeholder="Start Date Format-(YY/MM/DD)" value='{% if flight_start_date %}{{flight_start_date}}{% endif %}' type="date" name="flight_start_date"  class="form-control date" >
-                                    <input placeholder="End Date Format-(YY/MM/DD)" value='{% if flight_end_date %}{{flight_end_date}}{% endif %}' type="date" name="flight_end_date"  class="form-control date" >
+                                    <input placeholder="Start Date Format-(YY/MM/DD)" value='{% if flight_start_date %}{{flight_start_date}}{% endif %}' type="date" name="flight_start_date"  class="form-control date" max="2099-12-31" min="2001-12-31">
+                                    <input placeholder="End Date Format-(YY/MM/DD)" value='{% if flight_end_date %}{{flight_end_date}}{% endif %}' type="date" name="flight_end_date"  class="form-control date" max="2099-12-31" min="2001-12-31">
                                 </div>
-                                <div class="buttons is-flex">
-                                    <button class="common-button is-bg is-auto" type='submit'>Apply</button>
-                                    
-                                    <a class="common-button is-clear is-auto" id='reset' href="javascript:void();">Reset</a>
-                                </div>
-                                <br>
-                                <div class="buttons is-flex">
-                                <a modal-link="upload-custom-file-modal"
-                                    style="right: 0px;color:white;" class="modal-link common-button is-bg link-btn" data-toggle="modal" data-target="#upload-custom-file-modal">Upload No-Fly Zone
-                                </a>
-                                </div>
-                                
-                                
-                            </div>
-                            <div class="right is-flex">
-                                
                                 <div class="custom-select-wrap">
                                     <label>Flight Status</label>
                                     <div id='flt_dropdown' class="custom-select">
@@ -112,6 +96,22 @@
                                             <li class='comp_stat' value='Resolved'><span>Resolved</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if complaint_resolved %}Resolved{%endif%}' class='comp_stat_in' id='comp_resolved' name='comp_resolved' type='checkbox' {% if complaint_resolved %}checked{%endif%}></span></li>
                                         </ul>
                                     </div>
+                                </div>
+                                
+                                
+                                
+                            </div>
+                            <div class="right is-flex" style='max-width: 30%;'>
+                                
+                                <div class="buttons is-flex">
+                                    <button class="common-button is-bg is-auto" type='submit'>Apply</button>
+                                    
+                                    <a class="common-button is-clear is-auto" id='reset' href="javascript:void();">Reset</a>
+                                </div>
+                                <div class="buttons is-flex">
+                                <a modal-link="upload-custom-file-modal"
+                                    style="color:white;" class="modal-link common-button is-bg link-btn is-auto" data-toggle="modal" data-target="#upload-custom-file-modal">Upload No-Fly Zone
+                                </a>
                                 </div>
                                
                                 
