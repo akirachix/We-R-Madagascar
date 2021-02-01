@@ -153,8 +153,11 @@
               pseudoFullscreen: false // if true, fullscreen to page width and height
           }}).setView([parseFloat(dat[0]), parseFloat(dat[1])], 7);
       mymap.createPane('labels');
-      mymap.getPane('labels').style.zIndex = 650;
+      mymap.getPane('labels').style.zIndex = 450;
       mymap.getPane('labels').style.pointerEvents = 'none'
+      mymap.createPane('markers');
+      mymap.getPane('markers').style.zIndex = 750;
+      mymap.getPane('markers').style.pointerEvents = 'none'
       var orangeIcon = new L.Icon({
           iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
           shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -163,15 +166,7 @@
           popupAnchor: [1, -34],
           shadowSize: [41, 41]
       });
-      var markerGroup = new L.layerGroup().addTo(mymap);
-      if (das == 'True') {
-        var mark = L.marker(
-          L.latLng(
-            parseFloat(dat[0]),
-            parseFloat(dat[1])
-          ), {icon:orangeIcon}
-        ).addTo(markerGroup);
-      };
+      
       var geojsonLayer = new L.GeoJSON.AJAX("../../staticfiles/data/nepal.geojson",{
         style:{
           "color": "#04AA66",
@@ -195,7 +190,18 @@
           pane: 'labels'
         }).addTo(geoLayerGroup);
       }
-      
+      var markerGroup = new L.layerGroup().addTo(mymap);
+      if (das == 'True') {
+        var mark = L.marker(
+          L.latLng(
+            parseFloat(dat[0]),
+            parseFloat(dat[1])
+          ), {
+            icon:orangeIcon,
+            pane: 'markers'
+          }
+        ).addTo(markerGroup);
+      };
       
       osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',

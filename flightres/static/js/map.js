@@ -17,6 +17,7 @@ $(document).ready(function () {
             const closestPopupElement = e.target.closest('.highlight');
             e.stopPropagation();
             object_id = closestPopupElement.id.split('_')[1];
+            console.log(closestPopupElement)
             console.log(object_id,'objectId');
             for (var j = 0; j < flight_object.length; j++) {
                 if (object_id == flight_object[j].uav_uid) {
@@ -251,6 +252,7 @@ $(document).ready(function () {
         </div>
         `
         document.getElementById('flightPopUp').innerHTML = html1
+        
         var btnAssignElement = document.querySelectorAll('.assign-btn');
         var btnUnassignElement = document.querySelectorAll('.unassign-btn');
         // console.log(btnElement,'btn')
