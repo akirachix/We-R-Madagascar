@@ -128,6 +128,5 @@ pyvenv.cfg
 env.txt
 
 #settings
-settings.py
 docker-compose-dev.yaml
 docker-compose-prod.yaml

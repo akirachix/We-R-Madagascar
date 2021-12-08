@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'phonenumber_field',
     
     # 'drf_yasg',
     'django_extensions',
@@ -134,8 +135,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'werobotics',
-        'USER': 'weruser',
-        'PASSWORD': 'password',
+        'USER': 'postgres',
+        'PASSWORD': 'postgis',
+
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -145,8 +147,9 @@ DATABASES = {
 #     'default': {          
 #         'ENGINE': os.environ.get('SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'),          
 #         'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),          
-#         'USER': os.environ.get('SQL_USER', 'user'),          
-#         'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),          
+#         'USER': os.environ.get('SQL_USER', 'postgres'),          
+#         'PASSWORD': os.environ.get('SQL_PASSWORD', 'postgis'),          
+
 #         'HOST': os.environ.get('SQL_HOST', 'localhost'),          
 #         'PORT': os.environ.get('SQL_PORT', '5432'),      
 #     }  
