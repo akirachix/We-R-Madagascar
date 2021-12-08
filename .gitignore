@@ -126,3 +126,6 @@ pyvenv.cfg
 
 *.xlsx
 env.txt
+
+docker-compose-dev.yaml
+docker-compose-prod.yaml
