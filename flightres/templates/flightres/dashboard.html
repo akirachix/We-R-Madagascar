@@ -8,183 +8,374 @@
 
 
 {% block body %}
-<main class="admin-main">
-    <div class="main-card">
-        <div class="dashboard-title">
-            <h1>Welcome to <span>Nepal Drone Portal</span></h1>
-        </div>
-        <div class="drone-info">
-            <div class="row row-wrap g-xl-3 g-lg-2 gy-md-2 gy-sm-2 gy-2">
-                <div class="col-lg-3 col-md-6">
-                    <div class="info-content">
-                        <div class="total-count">
-                            <h4>{{ top_data.0.0 }}</h4>
-                            <span class="span-dark"><i class="material-icons">person</i></span>
-                        </div>
-                        <span class="count-label">Registered Drone Operators</span>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="info-content">
-                        <div class="total-count">
-                            <h4>{{ top_data.0.1 }}</h4>
-                            <span class="span-light"><i class="material-icons">local_airport</i></span>
-                        </div>
-                        <span class="count-label">Registered Drones</span>
-                    </div>
-                </div>
+<body>
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="info-content">
-                        <div class="total-count">
-                            <h4>{{ top_data.0.2 }}</h4>
-                            <span class="span-dark"><i class="material-icons">email</i></span>
-                        </div>
-                        <span class="count-label">Approved Flight Requests</span>
-                    </div>
-                </div>
+    <style>
+       
+    body{
+        font-family: 'Nunito', sans-serif;
+        font-family: 'Roboto', sans-serif;
+    }
+      
+        /* New Site */
+        .scheduled-flights {
+            margin-top: 2%;
+        }
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="info-content info-content-wrap">
-                        <div class="info-content-part">
-                            <div class="total-count">
-                                <h4>{{ top_data.0.3 }} <span class="count-label">Pending Flight Requests</span></h4>
-                                <span class="span-light"><i class="material-icons">access_time</i></span>
+        h5 {
+            color: #02129D;
+        }
+
+        a {
+            color: #1B7FC2;
+        }
+
+        /* Float four columns side by side */
+        .column {
+            float: left;
+            width: 25%;
+            padding: 0 10px;
+        }
+
+        /* Remove extra left and right margins, due to padding */
+        .row {
+            margin: 0 -5px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive columns */
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+                display: block;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Style the counter cards */
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+
+        .scheduled-flights-section {
+            border-left: 1px solid #C4C4C4;
+        }
+
+        #card {
+            padding: 0;
+            width: 95%;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        .admin-main {
+            background: #F2F8FF;
+
+        }
+
+        ul li {
+            list-style-type: disc;
+            list-style-position: inside;
+        }
+
+        .card {
+            background-color: #fff !important;
+        }
+    </style>
+
+    <main class="admin-main">
+        <div class="main-card">
+
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="dashboard-title">
+                        <h1>Hello <span>Username!</span></h1>
+                        <p>Check out the latest updates today</p>
+                        <p>Dashboard / <a href="">Overview</a></p>
+                    </div>
+                    <div class="row">
+                        <div class="column w-25 pt-5">
+                            <div class="card">
+                                <h5>256</h5>
+                                <p class="pt-2">Current Request</p>
+                                <span class="pt-4"><a href="">View All ></a></span>
                             </div>
-
                         </div>
-                        <div class="info-content-part">
-                            <div class="total-count">
-                                <h4>{{ top_data.0.4 }} <span class="count-label">Rejected Flight Requests</span></h4>
-                                <span class="span-light"><i class="material-icons">cancel</i></span>
-                            </div>
 
+                        <div class="column w-25 pt-5">
+                            <div class="card">
+                                <h5>256</h5>
+                                <p class="pt-2">Total Shipments</p>
+                                <span class="pt-4"><a href="">View All ></a></span>
+                            </div>
+                        </div>
+
+                        <div class="column w-25 pt-5">
+                            <div class="card">
+                                <h5>256</h5>
+                                <p class="pt-2">Scheduled Flights</p>
+                                <span class="pt-4"><a href="">View All ></a></span>
+                            </div>
+                        </div>
+
+                        <div class="column w-25 pt-5">
+                            <div class="card">
+                                <h5>256</h5>
+                                <p class="pt-2">Delayed Flights</p>
+                                <span class="pt-4"><a href="">View All ></a></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Chart-->
+                    <div class="card mt-5">
+                        <div id="chart" style="min-height: 365px;"></div>
+                    </div>
+
+
+                </div>
+                <div class="col-6 col-md-4 scheduled-flights-section">
+                    <div id="datetimepicker1" class="md-form md-outline input-with-post-icon datepicker">
+                        <input placeholder="Select date" type="text" id="example" class="form-control">
+                        <!-- <label for="example">Try me...</label> -->
+                        <i class="fas fa-calendar input-prefix" tabindex=0></i>
+                    </div>
+
+
+
+                    <div class="row scheduled-flights">
+                        <div class="col-12 col-md-8 pt-4">
+                            <h5>SHEDULED FLIGHTS</h5>
+                        </div>
+                        <div class="col-12 col-md-4 pt-4">
+                            <span><a href="">View All</a></span>
+                        </div>
+
+                        <!-- Dynamically input time-->
+                        <p>9:00</p>
+                        <div class="card" id="card">
+                            <div class="card-body">
+                                <h6 class="card-title text-left">Destination Name </h6>
+                                <div class="row">
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>50gms</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>Capsules</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>9:00am</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3"></div>
+                        <!-- To be dynamic-->
+                        <div class="card" id="card">
+                            <div class="card-body">
+                                <h6 class="card-title text-left">Destination Name </h6>
+                                <div class="row">
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>50gms</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>Capsules</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>9:00am</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row scheduled-flights">
+                        <div class="col-12 col-md-8 pt-4">
+                            <h5>DELAYED FLIGHTS</h5>
+                        </div>
+                        <div class="col-12 col-md-4 pt-4">
+                            <span><a href="">View All</a></span>
+                        </div>
+
+                        <!-- Dynamically input time-->
+                        <p>9:00</p>
+                        <div class="card" id="card">
+                            <div class="card-body">
+                                <h6 class="card-title text-left">Destination Name </h6>
+                                <div class="row">
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>50gms</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>Capsules</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>9:00am</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3"></div>
+                        <!-- To be dynamic-->
+                        <div class="card" id="card">
+                            <div class="card-body">
+                                <h6 class="card-title text-left">Destination Name </h6>
+                                <div class="row">
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>50gms</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>Capsules</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>9:00am</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row scheduled-flights">
+                        <div class="col-12 col-md-8 pt-4">
+                            <h5>COMPLETED FLIGHTS</h5>
+                        </div>
+                        <div class="col-12 col-md-4 pt-4">
+                            <span><a href="">View All</a></span>
+                        </div>
+
+                        <!-- Dynamically input time-->
+                        <p>9:00</p>
+                        <div class="card" id="card">
+                            <div class="card-body">
+                                <h6 class="card-title text-left">Destination Name </h6>
+                                <div class="row">
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>50gms</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>Capsules</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>9:00am</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3"></div>
+                        <!-- To be dynamic-->
+                        <div class="card" id="card">
+                            <div class="card-body">
+                                <h6 class="card-title text-left">Destination Name </h6>
+                                <div class="row">
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>50gms</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>Capsules</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <ul>
+                                            <li>9:00am</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
         </div>
-        <div class="chart-section">
-            <div class="row row-wrap g-xl-4 g-lg-3 gy-xl-0 gy-4">
-                <div class="col-xl-6 col-lg-6 col-md-12 column">
-                    <div class="main-card">
-                        <div class="card-header">
-                            <h1>Monthly Flight Requests <a href="#/"><i class="material-icons">more_vert</i></a></h1>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="graph-item">
-                                        <div id="line-chart1"></div>
-<!--                                        <div id="line-chart2"></div>-->
-                                    </div>
-                                </div>
-                            </div>
+    </main>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-12 column">
-                    <div class="main-card">
-                        <div class="card-header">
-                            <h1>All Complaints Status<a href="#/"><i class="material-icons">more_vert</i></a></h1>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="graph-item">
-                                        <div id="pie-chart1"></div>
-<!--                                        <div id="pie-chart2"></div>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-
-<script>
-    //pie-chart
-    var options = {
-        series: [{% for i in pie_data %}{{ i.0}}, {{i.1}}{% if not forloop.last %}, {% endif %}{% endfor %}],
-        colors: ['#24DB15', '#FCBA15'],
-        chart: {
-            height: '280',
-            type: 'donut',
-        },
-        labels: ['Solved', 'Pending'],
-        /*  responsive: [{
-           breakpoint: 480,
-           options: {
-             chart: {
-               height: 200,
-             },
-             legend: {
-               position: 'right center'
-             },
-           }
-         }] */
-    };
-
-    var chart = new ApexCharts(document.querySelector("#pie-chart1"), options);
-    chart.render();
-
-    // line-chart
-    var options = {
-        series: [
-            {
-                name: "Total Requests",
-                data: [{% for i in bar_data %}{{ i.0}}{% if not forloop.last %}, {% endif %}{% endfor %}]
+    <script>
+        //pie-chart
+        var options = {
+            series: [{
+                name: "Desktops",
+                data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
             },
-            {
-                name: "Approved Requests",
-                data: [{% for i in bar_data %}{{ i.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}]
-            }
-        ],
-        colors: ['#3346D1', '#00BCFF'],
-        chart: {
-            height: 370,
-            type: 'line',
-            zoom: {
+            dataLabels: {
                 enabled: false
-            }
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                chart: {
-                    height: 200,
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            title: {
+                text: 'Monthly Flight Requests Analysis',
+                align: 'left'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
                 },
             },
-        }],
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            width: 2,
-            curve: 'straight'
-        },
-        markers: {
-            size: 5
-        },
-        grid: {
-            row: {
-                colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.5
-            },
-        },
-        xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        }
-    };
+            xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+            }
+        };
 
-    var chart = new ApexCharts(document.querySelector("#line-chart1"), options);
-    chart.render();
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
 
-</script>
-{% endblock body %}
+    </script>
+    {% endblock body %}
+
+</body>

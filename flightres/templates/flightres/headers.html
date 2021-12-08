@@ -1,9 +1,10 @@
 {% load static %}
-<header class="site-header map-header map-pd" style='position: relative;z-index: 9099;'>
+
+<header class="site-header map-header map-pd" style='position: relative;z-index: 9099; border: none;'>
     <div class="container-fluid">
         <div class="header-in">
         <a href="{% url 'home' %}" class="logo">
-            <img src="{% static './img/logo.svg' %}" />
+            <img src="{% static './img/we_robotics.png' %}" />
         </a>
         <div class="menu-wrap">
             <div class="menu">
@@ -14,14 +15,14 @@
                 <li>
                 <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
                 </li>
-                <li>
+                <!-- <li>
                 <a href="{% url 'dashboard:mapview' %}" class="span-15">No-Fly Zone</a>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                 <a href="{% url 'dashboard:guidelines' %}" class="span-15 call-to-action"
                     >UAV Guidelines</a
                 >
-                </li>
+                </li> -->
             
             {% if user.is_authenticated %}
             </ul>
@@ -45,15 +46,15 @@
                 <a href="/accounts/logout" id='dash_logout'
                     ><i class="material-icons" style="color: #ed3646"
                     >exit_to_app</i
-                    >Sign out</a
+                    >Sign Out</a
                 >
                 </li>
             </ul>
             </div>
             {% else %}
             <li>
-            <a href="/accounts/login" class="dropdown-link" id='dash_login'>
-                Login
+            <a href="/accounts/login" class="dropdown-link btn" id='dash_login' style="background-color: #ed3646; color: #fff;">
+                Sign In
             </a>
             </li>
             </ul>

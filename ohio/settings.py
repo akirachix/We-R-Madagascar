@@ -129,28 +129,28 @@ LOGIN_URL = '/accounts/login'
 #         'NAME': os.path.join(BASE_DIR, 'droneregistry.sqlite3'),
 #     }
 # }
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'drone',
-        'USER': 'jungey',
-        'PASSWORD': '1234',
+        'NAME': 'werobotics',
+        'USER': 'weruser',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-'''
-DATABASES = {      
-    'default': {          
-        'ENGINE': os.environ.get('SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'),          
-        'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),          
-        'USER': os.environ.get('SQL_USER', 'user'),          
-        'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),          
-        'HOST': os.environ.get('SQL_HOST', 'localhost'),          
-        'PORT': os.environ.get('SQL_PORT', '5432'),      
-    }  
-}
+
+# DATABASES = {      
+#     'default': {          
+#         'ENGINE': os.environ.get('SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'),          
+#         'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),          
+#         'USER': os.environ.get('SQL_USER', 'user'),          
+#         'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),          
+#         'HOST': os.environ.get('SQL_HOST', 'localhost'),          
+#         'PORT': os.environ.get('SQL_PORT', '5432'),      
+#     }  
+# }
 
 
 

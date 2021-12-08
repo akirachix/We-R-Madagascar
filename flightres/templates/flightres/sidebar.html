@@ -12,7 +12,7 @@
     </header>
     <div class="admin-aside-body">
         <ul class="admin-aside-menu">
-            <li class="is-submenu">
+            <li class="is-submenu " style="list-style: none;">
                 <a href="{% url 'dashboard:dashboard' %}">
                     <i class="material-icons">equalizer</i>
                     <span>Dashboard</span>
@@ -20,79 +20,81 @@
 
             </li>
 
-            <li class="is-submenu">
+            <li class="is-submenu" style="list-style: none;">
                 <a href="javascript:void(0);" class="menu-title">
                     <i class="material-icons">border_all</i>
-                    <span>Flight Permissions</span>
+                    <span>Flight and Shipments
+            
+                    </span>
                 </a>
                 <ul class="submenu">
-                    <li>
+                    <li style="list-style: none;">
                         <a href="{% url 'dashboard:permission' type='general' %}">Manage Flight Permissions</a>
                     </li>
-                    <li>
+                    <li style="list-style: none;">
                         <a href="{% url 'dashboard:permission'  type='special' %}">Manage Special Flight Permissions</a>
                     </li>
                     
                 </ul>
             </li>
-            <li class="is-submenu">
+            <li class="is-submenu" style="list-style: none;">
                 <a href="{% url 'dashboard:flightview' %}">
                     <i class="material-icons">location_on</i>
                     <span>All Flights Map</span>
                 </a>
 
             </li>
-            <li class="is-submenu">
+            <li class="is-submenu" style="list-style: none;">
                 <a href="javascript:void(0);" class="menu-title">
                     <i class="material-icons">group</i>
                     <span>Drone Registry Database</span>
                 </a>
                 <ul class="submenu">
-                    <li>
+                    <li style="list-style: none;">
                         <a href="{% url 'dashboard:operators' %}">Manage Drone Operators</a>
                     </li>
                 </ul>
             </li>
-            {#            <li class="is-submenu">#}
+            {#            <li class="is-submenu" style="list-style: none;">#}
             {#                <a href="javascript:void(0);" class="menu-title">#}
             {#                    <i class="material-icons">airplanemode_active</i>#}
             {#                    <span>Drone Database</span>#}
             {#                </a>#}
             {#                <ul class="submenu">#}
-            {#                    <li>#}
+            {#                    <li style="list-style: none;">#}
             {#                        <a href="javascript:void(0);">Management</a>#}
             {#                    </li>#}
             {#                </ul>#}
             {#            </li>#}
-            <li class="is-submenu">
+            <li class="is-submenu" style="list-style: none;">
                 <a href="javascript:void(0);" class="menu-title">
                     <i class="material-icons">equalizer</i>
                     <span>Civilian Complaints</span>
                 </a>
                 <ul class="submenu">
-                    <li>
+                    <li style="list-style: none;">
                         <a href="{% url 'dashboard:complain-list' %}">Manage Civilian Complaints</a>
                     </li>
                 </ul>
             </li>
-            {#            <li class="is-submenu">#}
+            {#            <li class="is-submenu" style="list-style: none;">#}
             {#                <a href="javascript:void(0);" class="menu-title">#}
             {#                    <i class="material-icons">settings</i>#}
             {#                    <span>Page Management</span>#}
             {#                </a>#}
             {#                <ul class="submenu">#}
-            {#                    <li>#}
+            {#                    <li style="list-style: none;">#}
             {#                        <a href="javascript:void(0);">Management</a>#}
             {#                    </li>#}
             {#                </ul>#}
             {#            </li>#}
-            <li class="is-submenu">
+            <li class="is-submenu" style="list-style: none;">
                 <a href="javascript:void(0);" class="menu-title">
                     <i class="material-icons">person</i>
                     <span>User</span>
                 </a>
                 <ul class="submenu">
-                    <li>
+                    <li style="list-style: none;">
                         <a href="{% url 'logout' %}?next=/"> Logout</a>
                         <a href="{% url 'dashboard:changepassword' %}">Change Password</a>
                     </li>

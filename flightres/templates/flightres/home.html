@@ -30,16 +30,39 @@
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" sizes="32x32">
 
     <!-- stylesheet start -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/font-humanitarian.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/humanitarian-webfont.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <style>
-        .list-item{
+        body{
+            font-family: 'Roboto', sans-serif;
+            color: #000;
+            font-size: 18px;
+            line-height: 32.74px;
+        }
+        h4{
+            font-size: 34px;
+        }
+        .list-item {
             list-style: initial;
         }
+
+        .welcome-to-werobotics {
+            /* background: linear-gradient(180deg, rgba(255, 255, 255, 0) 4.09%, #6BE9F1 69.78%); */
+            padding: 10%;
+
+        }
+
+        .footer-center {
+            text-align: center !important;
+        }
+
     </style>
 </head>
 
@@ -47,11 +70,27 @@
 
 
     {% include 'flightres/headers.html' %}
-         
-        
-<main class="banner-section">
-    <div class="container container-mod">
-        <div class="wrap-container">
+
+
+    <main class="">
+        <div class="">
+            <div class="row">
+                
+
+                <div class="col-sm-6 col-md-5 col-lg-6  welcome-to-werobotics">
+                    <h4>Welcome to <span style="color:  #D54232;">WeRobotics</span></h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pharetra, in elementum, lectus non donec
+                        ultrices risus neque ultrices. Fermentum blandit ipsum </p>
+                        <a href="" class="btn btn-primary mt-5" style="background-color:#D54232; border-color: #D54232;"> Register Clinic </a>
+                </div>
+
+                <div class="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0 second-column" style="height: 100vh;">
+                    <img src="{% static './img/medicineDronedelivery.png' %}" class="h-100"/>
+                </div>
+            </div>
+
+
+            <!-- <div class="wrap-container">
             <div class="row no-gutters">
                 <div class="col-lg-9 col-md-12 col-12">
                     <div class="banner">
@@ -59,21 +98,20 @@
                         <ul>
                             <li class="list-item">
                                 <h2>
-                                    <!-- <i class="material-icons">check_circle</i>  -->
                                     What do I need to do to Fly? Here you can
                                     learn <a href="{% url 'dashboard:guidelines' %}">general information</a> about drone
                                     registration</h2>
                             </li>
                             <li class="list-item">
                                 <h2>
-                                    <!-- <i class="material-icons">check_circle</i>  -->
+                                   
                                     How to apply for a <a
                                         href="{% url 'dashboard:guidelines' %}">flight authorization</a>
                                 </h2>
                             </li>
                             <li class="list-item">
                                 <h2>
-                                    <!-- <i class="material-icons">check_circle</i>  -->
+                                  
                                     You have concerns or questions about a
                                     drone operation, <a href="{% url 'dashboard:guidelines' %}">find out how to file a
                                         complaint</a>
@@ -84,40 +122,40 @@
                     </div>
                 </div>
             </div>
+        </div> -->
         </div>
-    </div>
-</main>
-<footer class="site-footer home-footer">
-    <div class="container">
-        <div class="wrap-container">
-            <div class="footer-in">
-                <p class="footer-left">© 2020 Nepal Drone Portal. All rights reserved.</p>
+    </main>
+    <!-- <footer class="site-footer home-footer pt-5">
+        <div class="container">
+            <div class="wrap-container">
+                <div class="footer-in">
+                    <p class="footer-center text-center">© 2021 WeRobotics Portal. All rights reserved.</p>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
-<!-- Jquery Core Js -->
-<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-<script src="{% static 'js/map.js' %}"></script>
-<script src="{% static 'datatable/datatables.min.js' %}"></script>
-<script src="{% static 'js/custom-datatable.js' %}"></script>
-<script src="{% static 'js/drone.js' %}"></script>
-<script>
-    $(document).ready(function() {
-      $('#dash_login').click(function() {
-        window.location.href = $(this).attr('href')
-      });
-      $('#dash_logout').click(function() {
-        window.location.href = $(this).attr('href')
-      });
-      $('#dash').click(function() {
-        window.location.href = $(this).attr('href')
-      });
-      $('#settings').click(function() {
-        window.location.href = $(this).attr('href')
-      });
-    });
-  </script>
+    </footer> -->
+    <!-- Jquery Core Js -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'datatable/datatables.min.js' %}"></script>
+    <script src="{% static 'js/custom-datatable.js' %}"></script>
+    <script src="{% static 'js/drone.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dash_login').click(function () {
+                window.location.href = $(this).attr('href')
+            });
+            $('#dash_logout').click(function () {
+                window.location.href = $(this).attr('href')
+            });
+            $('#dash').click(function () {
+                window.location.href = $(this).attr('href')
+            });
+            $('#settings').click(function () {
+                window.location.href = $(this).attr('href')
+            });
+        });
+    </script>
 </body>
 
 </html>

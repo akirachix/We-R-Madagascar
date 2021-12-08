@@ -19,8 +19,8 @@ services:
     restart: always
     volumes:
       - ./postgres_data:/var/lib/postgresql/data/
-    # ports: 
-    #   - 5432:5432
+    ports: 
+      - 5432:5432
     env_file:
       - postgres.env
     networks:
@@ -28,3 +28,4 @@ services:
 networks:
   d-network:
     external: false
+
