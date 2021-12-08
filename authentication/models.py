@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 from ohio import settings
@@ -25,3 +26,8 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=50)
     zip = models.CharField(max_length=5)
     photo = models.ImageField(upload_to='uploads', blank=True)
+
+class ClinicProfile(models.Model):
+    name=models.CharField(max_length=50)
+    phone_number=PhoneNumberField()
+    location=models.CharField(max_length=60)
