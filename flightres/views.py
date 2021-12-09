@@ -59,15 +59,16 @@ def change_password(request):
 def dashboardView(request):
     # data for cards on top of the dashboard page
     top_row_data = []
-    drone_op_num = Operator.objects.all().count()
-    drone_num = Aircraft.objects.all().count()
+    # drone_op_num = Operator.objects.all().count()
+    # drone_num = Aircraft.objects.all().count()
     complaint_num = Report.objects.all().count()
     solved_complaints = Report.objects.filter(status='Resolved').count()
     pending_complaints = Report.objects.filter(status='Pending').count()
     approved_requests_num = FlightPermission.objects.filter(status="Approved").count()
     pending_requests_num = FlightPermission.objects.filter(status="Pending").count()
     rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
-    top_row_data.append([drone_op_num, drone_num, approved_requests_num,
+    total_requests_num= FlightPermission.objects.all().count()
+    top_row_data.append([total_requests_num, approved_requests_num,
                          pending_requests_num, rejected_requests_num])
     # data for pie chart
     pie_data = []
@@ -83,6 +84,19 @@ def dashboardView(request):
         # data for bar chart
         total_requests = FlightPermission.objects.filter(
             created_date__gt=getDay, created_date__lt=getEndday).count()
+
+
+
+
+
+
+
+
+
+
+
+
+            
         approved_requests = FlightPermission.objects.filter(
             status='Approved', created_date__gt=getDay, created_date__lt=getEndday).count()
         barchart_data.append([total_requests, approved_requests])
@@ -143,7 +157,9 @@ class FlightView(LoginRequiredMixin, TemplateView):
         flt_status = [
             request.POST.get('flt_approved', None),
             request.POST.get('flt_pending', None),
-            request.POST.get('flt_rejected', None)
+            request.POST.get('flt_rejected', None),
+            request.POST.get('flt_delayed', None),
+            request.POST.get('flt_completed', None)
         ]
         comp_status = [
             request.POST.get('comp_pending', None),
