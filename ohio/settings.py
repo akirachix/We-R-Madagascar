@@ -133,14 +133,14 @@ LOGIN_URL = '/accounts/login'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'werobotics',
-        'USER': 'postgres',
-        'PASSWORD': 'postgis',
+       'ENGINE': 'django.contrib.gis.db.backends.postgis',
+       'NAME': 'werobotics',
+       'USER': 'weruser',
+       'PASSWORD': 'password',
+       'HOST': 'localhost',
+       'PORT': '5432',
+   }
 
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
 }
 
 # DATABASES = {      

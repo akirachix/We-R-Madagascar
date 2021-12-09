@@ -2,27 +2,17 @@ from django.core import paginator
 from django.db.models.base import Model
 from django.http.response import Http404
 from django.shortcuts import render
-<<<<<<< HEAD
-=======
 from django.views import generic
 from django.urls.base import reverse_lazy
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
->>>>>>> dfd43dfe7d2272e02ccb1218e0d9ff570f440f0a
 # Create your views here.
-from rest_framework import generics, permissions
-from rest_framework import status,generics
+from rest_framework import permissions
+from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import MyTokenObtainPairSerializer, UserSerializer
-<<<<<<< HEAD
-class ObtainTokenPairWithUserDetail(TokenObtainPairView):
-    permission_classes = (permissions.AllowAny,)
-    serializer_class = MyTokenObtainPairSerializer
-class CustomUserCreate(generics.GenericAPIView):
-=======
 from rest_framework import generics
 from .models import ClinicProfile
 from django.views.generic import TemplateView,FormView ,CreateView
@@ -37,9 +27,8 @@ class ObtainTokenPairWithUserDetail(TokenObtainPairView):
 
 class CustomUserCreate(generics.GenericAPIView):
     serializer_class = UserSerializer
->>>>>>> dfd43dfe7d2272e02ccb1218e0d9ff570f440f0a
     permission_classes = (permissions.AllowAny,)
-    serializer_class=UserSerializer
+
     def post(self, request, format='json'):
         serializer_context = {
             'request': request,
@@ -94,8 +83,6 @@ class ClinicUpdateView(UpdateView):
             form.save()
         return render(request,self.template_name,{'form':form})
         
-
-
 
 
 
