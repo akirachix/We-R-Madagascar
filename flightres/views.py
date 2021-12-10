@@ -67,9 +67,12 @@ def dashboardView(request):
     approved_requests_num = FlightPermission.objects.filter(status="Approved").count()
     pending_requests_num = FlightPermission.objects.filter(status="Pending").count()
     rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
+    delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
+    completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
     total_requests_num= FlightPermission.objects.all().count()
+    
     top_row_data.append([total_requests_num, approved_requests_num,
-                         pending_requests_num, rejected_requests_num])
+                         pending_requests_num, rejected_requests_num, delayed_requests_num, completed_requests_num])
     # data for pie chart
     pie_data = []
     pie_data.append([solved_complaints, pending_complaints])
@@ -245,6 +248,8 @@ class FlightView(LoginRequiredMixin, TemplateView):
                 'flight_approved': False if flt_status[0] is None else True,
                 'flight_pending': False if flt_status[1] is None else True,
                 'flight_rejected': False if flt_status[2] is None else True,
+                'flight_delayed': False if flt_status[3] is None else True,
+                'flight_completed': False if flt_status[4] is None else True,
                 'complaint_pending': False if comp_status[0] is None else True,
                 'complaint_resolved': False if comp_status[1] is None else True,
                 
@@ -262,6 +267,8 @@ class FlightView(LoginRequiredMixin, TemplateView):
                 'flight_approved': False if flt_status[0] is None else True,
                 'flight_pending': False if flt_status[1] is None else True,
                 'flight_rejected': False if flt_status[2] is None else True,
+                'flight_delayed': False if flt_status[3] is None else True,
+                'flight_completed': False if flt_status[4] is None else True,
                 'complaint_pending': False if comp_status[0] is None else True,
                 'complaint_resolved': False if comp_status[1] is None else True,
                 
@@ -348,7 +355,20 @@ def approvePerm(request, pk, username, action):
 
     elif action == 'deny':
         selected_perm.status = 'Rejected'
-        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Rejected')
+        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Rejected') 
+    elif action == 'delay':
+        selected_perm.status = 'Delayed'
+        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Delayed')
+
+
+    elif action == 'complete':
+        selected_perm.status = 'Completed'
+        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Completed')
+
+    
+
+
+  
 
     selected_perm.save()
     perm.save()
