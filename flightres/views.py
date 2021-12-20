@@ -32,6 +32,7 @@ from django.urls import reverse, reverse_lazy
 from zipfile import ZipFile
 from .utils import is_near_senstive_area
 from authentication.models import User as usrm
+from clinic.views import ClinicViewDetails, ClinicCreateView
 
 
 def homeView(request):
@@ -59,19 +60,23 @@ def change_password(request):
 def dashboardView(request):
     # data for cards on top of the dashboard page
     top_row_data = []
-    drone_op_num = Operator.objects.all().count()
-    drone_num = Aircraft.objects.all().count()
+    # drone_op_num = Operator.objects.all().count()
+    # drone_num = Aircraft.objects.all().count()
+    # solved_complaints = Report.objects.filter(status='Resolved').count()
+    # pending_complaints = Report.objects.filter(status='Pending').count()
+    # approved_requests_num = FlightPermission.objects.filter(status="Approved").count()
+    # pending_requests_num = FlightPermission.objects.filter(status="Pending").count()
+    # rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
+    # delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
+    completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
+    total_requests_num= FlightPermission.objects.all().count()
     complaint_num = Report.objects.all().count()
-    solved_complaints = Report.objects.filter(status='Resolved').count()
-    pending_complaints = Report.objects.filter(status='Pending').count()
-    approved_requests_num = FlightPermission.objects.filter(status="Approved").count()
-    pending_requests_num = FlightPermission.objects.filter(status="Pending").count()
-    rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
-    top_row_data.append([drone_op_num, drone_num, approved_requests_num,
-                         pending_requests_num, rejected_requests_num])
+
+    
+    top_row_data.append([total_requests_num, completed_requests_num])
     # data for pie chart
     pie_data = []
-    pie_data.append([solved_complaints, pending_complaints])
+    # pie_data.append([solved_complaints, pending_complaints])
 
     day_delta = datetime.timedelta(days=30)
     start_date = datetime.date(datetime.date.today().year, 1, 1)
@@ -83,6 +88,19 @@ def dashboardView(request):
         # data for bar chart
         total_requests = FlightPermission.objects.filter(
             created_date__gt=getDay, created_date__lt=getEndday).count()
+
+
+
+
+
+
+
+
+
+
+
+
+            
         approved_requests = FlightPermission.objects.filter(
             status='Approved', created_date__gt=getDay, created_date__lt=getEndday).count()
         barchart_data.append([total_requests, approved_requests])
@@ -143,7 +161,9 @@ class FlightView(LoginRequiredMixin, TemplateView):
         flt_status = [
             request.POST.get('flt_approved', None),
             request.POST.get('flt_pending', None),
-            request.POST.get('flt_rejected', None)
+            request.POST.get('flt_rejected', None),
+            request.POST.get('flt_delayed', None),
+            request.POST.get('flt_completed', None)
         ]
         comp_status = [
             request.POST.get('comp_pending', None),
@@ -180,7 +200,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
                                                                             '%Y-%m-%d').date() and data.flight_end_date >= datetime.datetime.strptime(
                     end_date, '%Y-%m-%d').date()):
                     #print(report_data)
-                    if flt_status[0] == flt_status[1] == flt_status[2] == None:                      
+                    if flt_status[0] == flt_status[1] == flt_status[2] == flt_status[3] == flt_status[4] == None:                      
                         data3.append(data)
                         counts += 1
                         datasuccess.append(counts)
@@ -193,7 +213,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
                                     counts += 1
                                     datasuccess.append(counts)
             else:
-                if flt_status[0] or flt_status[1] or flt_status[2] is not None:
+                if flt_status[0] or flt_status[1] or flt_status[2] or flt_status[3] or flt_status[4] is not None:
                     print('inside flt_satus if outside date if')
                     for x in flt_status:
                         if x is not None:
@@ -229,6 +249,8 @@ class FlightView(LoginRequiredMixin, TemplateView):
                 'flight_approved': False if flt_status[0] is None else True,
                 'flight_pending': False if flt_status[1] is None else True,
                 'flight_rejected': False if flt_status[2] is None else True,
+                'flight_delayed': False if flt_status[3] is None else True,
+                'flight_completed': False if flt_status[4] is None else True,
                 'complaint_pending': False if comp_status[0] is None else True,
                 'complaint_resolved': False if comp_status[1] is None else True,
                 
@@ -246,6 +268,8 @@ class FlightView(LoginRequiredMixin, TemplateView):
                 'flight_approved': False if flt_status[0] is None else True,
                 'flight_pending': False if flt_status[1] is None else True,
                 'flight_rejected': False if flt_status[2] is None else True,
+                'flight_delayed': False if flt_status[3] is None else True,
+                'flight_completed': False if flt_status[4] is None else True,
                 'complaint_pending': False if comp_status[0] is None else True,
                 'complaint_resolved': False if comp_status[1] is None else True,
                 
@@ -332,7 +356,20 @@ def approvePerm(request, pk, username, action):
 
     elif action == 'deny':
         selected_perm.status = 'Rejected'
-        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Rejected')
+        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Rejected') 
+    elif action == 'delay':
+        selected_perm.status = 'Delayed'
+        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Delayed')
+
+
+    elif action == 'complete':
+        selected_perm.status = 'Completed'
+        perm = PermissionLogs.objects.create(user=usr, permission_id=selected_perm, status='Completed')
+
+    
+
+
+  
 
     selected_perm.save()
     perm.save()
