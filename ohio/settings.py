@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'whatsappmsg',
     'authentication',
     'flightres',
-    'api'
+    'api',
+    'clinic',
 ]
 
 MIDDLEWARE = [

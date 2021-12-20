@@ -1,0 +1,150 @@
+{% include 'flightres/base.html' %} {% load static %}
+ {% block links %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/custom-charts.css' %}"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/apexcharts.css' %}"
+/>
+<!-- <link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/search_bar.css' %}"
+/> -->
+{% endblock links %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/a130a97af0.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+        margin-left: 18%;
+      }
+      .search {
+        width: 40%;
+        margin-left: 53%;
+        margin-top: 3%;
+      }
+      #profile {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        box-shadow: gray 2px 2px 2px;
+        object-fit: cover;
+      }
+      .search > form > input {
+        width: 95%;
+        padding: 10px 10px;
+        color: #202020;
+        border: none;
+        border-bottom-right-radius: 20px;
+        border-top-right-radius: 20px;
+      }
+      form > input:focus {
+        outline: none;
+      }
+      .search-button:focus {
+        outline: none;
+      }
+      .search-button {
+        border: none;
+        outline: none;
+        margin-left: 0.5%;
+        text-align: center;
+        padding: 5px 5px;
+        position: absolute;
+        margin-top: 0%;
+        padding-top: 1%;
+        background-color: transparent;
+     
+      }
+      .search-button > i {
+        text-decoration: none;
+      }
+      .fas {
+        color: #561278;
+      }
+      
+    </style>
+  </head>
+
+  {%block body%}
+
+  <main class="admin-main">
+    <div class="search">
+      <form method="get">
+        <button type="submit" class="search-button">
+          <i class="fas fa-search"></i>
+        </button>
+        <input
+          type="search"
+          placeholder="     Search by location"
+          name="search"
+        />
+      </form>
+      {%if message%}
+      <h6>{{message}}</h6>
+      {%endif%}
+
+    {%if results%}
+      <p class="results">Found {{results}} clinic{{ results|pluralize }}</p>
+      {%endif%}
+    </div>
+   
+
+    <table class="table table-hover table-stripped" style="font-size: 1.2em">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Location</th>
+          <th>Registration No.</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      {%for clinic in clinics%}
+      <tr>
+        <td>{{clinic.clinic_name}}</td>
+        <td>{{clinic.phone_number}}</td>
+        <td>{{clinic.location}}</td>
+        <td>{{clinic.registration_number}}</td>
+        <td><a href="{%url 'edit_clinic' clinic.id%}">Edit</a></td>
+      </tr>
+      {%empty%}
+      <p>Looks like clinic does not exist</p>
+      <a href="{%url 'view_clinic'%}"><i class="fas fa-arrow-left"></i></a>
+      {%endfor%}
+    </table>
+
+    {% if is_paginated %}
+    <div class="pagination">
+      <span class="step-links">
+        {% if clinics.has_previous %}
+        <a href="?page={{ clinics.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span>
+          Page {{ clinics.number }} of {{ clinics.paginator.num_pages }}.
+        </span>
+
+        {% if clinics.has_next %}
+        <a href="?page={{ clinics.next_page_number }}">next</a>
+        {% endif %}
+      </span>
+    </div>
+    {% endif %}
+  </main>
+  {%endblock%}
+</html>
