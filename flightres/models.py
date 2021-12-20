@@ -239,7 +239,6 @@ class ReportsLogs(models.Model):
         return self.user.email
 
 
-
 '''def create_geojson(sender, **kwargs):
     if kwargs['created']:
         full_path = kwargs['instance'].shp_file.path
