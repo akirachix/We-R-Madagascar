@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'phonenumber_field',
     
     # 'drf_yasg',
     'django_extensions',
@@ -50,7 +51,8 @@ INSTALLED_APPS = [
     'whatsappmsg',
     'authentication',
     'flightres',
-    'api'
+    'api',
+    'clinic',
 ]
 
 MIDDLEWARE = [
@@ -129,28 +131,28 @@ LOGIN_URL = '/accounts/login'
 #         'NAME': os.path.join(BASE_DIR, 'droneregistry.sqlite3'),
 #     }
 # }
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'drone',
-        'USER': 'jungey',
-        'PASSWORD': '1234',
+        'NAME': 'werobotics',
+        'USER': 'postgres',
+        'PASSWORD': 'postgis',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-'''
-DATABASES = {      
-    'default': {          
-        'ENGINE': os.environ.get('SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'),          
-        'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),          
-        'USER': os.environ.get('SQL_USER', 'weruser'),          
-        'PASSWORD': os.environ.get('SQL_PASSWORD', 'wer@123'),          
-        'HOST': os.environ.get('SQL_HOST', 'localhost'),          
-        'PORT': os.environ.get('SQL_PORT', '5432'),      
-    }  
-}
+
+# DATABASES = {      
+#     'default': {          
+#         'ENGINE': os.environ.get('SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'),          
+#         'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),          
+#         'USER': os.environ.get('SQL_USER', 'postgres'),          
+#         'PASSWORD': os.environ.get('SQL_PASSWORD', 'postgis'),          
+#         'HOST': os.environ.get('SQL_HOST', 'localhost'),          
+#         'PORT': os.environ.get('SQL_PORT', '5432'),      
+#     }  
+# }
 
 
 
