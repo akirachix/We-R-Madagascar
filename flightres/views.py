@@ -33,7 +33,8 @@ from zipfile import ZipFile
 from .utils import is_near_senstive_area
 from authentication.models import User as usrm
 from clinic.views import ClinicViewDetails, ClinicCreateView
-
+from clinic.models import ClinicProfile
+from clinic.forms import RegisterclinicForm
 
 def homeView(request):
     return render(request, 'flightres/home.html')
@@ -68,12 +69,13 @@ def dashboardView(request):
     # pending_requests_num = FlightPermission.objects.filter(status="Pending").count()
     # rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
     # delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
-    completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
     total_requests_num= FlightPermission.objects.all().count()
+    completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
+    clinics_count_num = ClinicProfile.objects.all().count()
     complaint_num = Report.objects.all().count()
 
     
-    top_row_data.append([total_requests_num, completed_requests_num])
+    top_row_data.append([total_requests_num, completed_requests_num, clinics_count_num, complaint_num  ])
     # data for pie chart
     pie_data = []
     # pie_data.append([solved_complaints, pending_complaints])
@@ -235,7 +237,8 @@ class FlightView(LoginRequiredMixin, TemplateView):
             '''if (len(datasuccess) + len(data_rep_success)) > 1:
                 msg = str(len(datasuccess) + len(data_rep_success)) + ' Flights were found'
             elif (len(datasuccess) + len(data_rep_success)) == 1:
-                msg = str(len(datasuccess) + len(data_rep_success)) + ' Flight was found'
+                msg = str(len(datasuccespip install django-crispy-forms
+s) + len(data_rep_success)) + ' Flight was found'
             else:
                 object_list = ""
                 msg = 'No Flight Found'
@@ -854,3 +857,11 @@ def view_500(request):
     This if for custom 500 template
     '''
     return render(request, 'flightres/404.html')
+
+    
+def countClinics(request):
+    clist = ClinicProfile.objects.all().count()
+    # countc = clist.count()
+    return render(request, 'dashboard.html', {
+        
+    })
