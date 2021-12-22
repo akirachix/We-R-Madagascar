@@ -32,6 +32,9 @@ from django.urls import reverse, reverse_lazy
 from zipfile import ZipFile
 from .utils import is_near_senstive_area
 from authentication.models import User as usrm
+from clinic.views import ClinicViewDetails, ClinicCreateView
+from clinic.forms import RegisterclinicForm
+from clinic.models import ClinicProfile
 
 
 def homeView(request):
@@ -61,21 +64,22 @@ def dashboardView(request):
     top_row_data = []
     # drone_op_num = Operator.objects.all().count()
     # drone_num = Aircraft.objects.all().count()
-    complaint_num = Report.objects.all().count()
-    solved_complaints = Report.objects.filter(status='Resolved').count()
-    pending_complaints = Report.objects.filter(status='Pending').count()
-    approved_requests_num = FlightPermission.objects.filter(status="Approved").count()
-    pending_requests_num = FlightPermission.objects.filter(status="Pending").count()
-    rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
-    delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
-    completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
+    # solved_complaints = Report.objects.filter(status='Resolved').count()
+    # pending_complaints = Report.objects.filter(status='Pending').count()
+    # approved_requests_num = FlightPermission.objects.filter(status="Approved").count()
+    # pending_requests_num = FlightPermission.objects.filter(status="Pending").count()
+    # rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
+    # delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
     total_requests_num= FlightPermission.objects.all().count()
+    completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
+    clinics_num = ClinicProfile.objects.all().count()
+    complaint_num = Report.objects.all().count()
+
     
-    top_row_data.append([total_requests_num, approved_requests_num,
-                         pending_requests_num, rejected_requests_num, delayed_requests_num, completed_requests_num])
+    top_row_data.append([total_requests_num, completed_requests_num, clinics_num, complaint_num])
     # data for pie chart
     pie_data = []
-    pie_data.append([solved_complaints, pending_complaints])
+    # pie_data.append([solved_complaints, pending_complaints])
 
     day_delta = datetime.timedelta(days=30)
     start_date = datetime.date(datetime.date.today().year, 1, 1)
@@ -199,7 +203,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
                                                                             '%Y-%m-%d').date() and data.flight_end_date >= datetime.datetime.strptime(
                     end_date, '%Y-%m-%d').date()):
                     #print(report_data)
-                    if flt_status[0] == flt_status[1] == flt_status[2] == None:                      
+                    if flt_status[0] == flt_status[1] == flt_status[2] == flt_status[3] == flt_status[4] == None:                      
                         data3.append(data)
                         counts += 1
                         datasuccess.append(counts)
@@ -212,7 +216,7 @@ class FlightView(LoginRequiredMixin, TemplateView):
                                     counts += 1
                                     datasuccess.append(counts)
             else:
-                if flt_status[0] or flt_status[1] or flt_status[2] is not None:
+                if flt_status[0] or flt_status[1] or flt_status[2] or flt_status[3] or flt_status[4] is not None:
                     print('inside flt_satus if outside date if')
                     for x in flt_status:
                         if x is not None:
@@ -853,3 +857,9 @@ def view_500(request):
     This if for custom 500 template
     '''
     return render(request, 'flightres/404.html')
+
+def countClinics(request):
+    cliniclist = ClinicProfile.objects.all().count()
+    return render(request,'dashboard.html',{
+        'cliniclist' : cliniclist,
+    })
