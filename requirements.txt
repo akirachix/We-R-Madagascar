@@ -46,5 +46,3 @@ vine==5.0.0
 wcwidth==0.2.5
 whitenoise==5.2.0
 uWSGI==2.0.18
-phonenumbers== 8.12.39
-phonenumber==6.0.0

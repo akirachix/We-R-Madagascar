@@ -21,7 +21,7 @@
                             <h4>{{ top_data.0.0 }}</h4>
                             <span class="span-dark"><i class="material-icons">person</i></span>
                         </div>
-                        <span class="count-label">Total Flight Requests</span>
+                        <span class="count-label">Registered Drone Operators</span>
                     </div>
                 </div>
 
@@ -31,7 +31,7 @@
                             <h4>{{ top_data.0.1 }}</h4>
                             <span class="span-light"><i class="material-icons">local_airport</i></span>
                         </div>
-                        <span class="count-label">Total Complete Shipments</span>
+                        <span class="count-label">Registered Drones</span>
                     </div>
                 </div>
 
@@ -41,21 +41,11 @@
                             <h4>{{ top_data.0.2 }}</h4>
                             <span class="span-dark"><i class="material-icons">email</i></span>
                         </div>
-                        <span class="count-label">Total Registered Clinics</span>
+                        <span class="count-label">Approved Flight Requests</span>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="info-content">
-                        <div class="total-count">
-                            <h4>{{ top_data.0.3 }}</h4>
-                            <span class="span-dark"><i class="material-icons">email</i></span>
-                        </div>
-                        <span class="count-label">Total Complaints</span>
-                    </div>
-                </div>
-
-                <!-- <div class="col-lg-3 col-md-6">
                     <div class="info-content info-content-wrap">
                         <div class="info-content-part">
                             <div class="total-count">
@@ -75,13 +65,13 @@
                 </div>
             </div>
 
-        </div> -->
+        </div>
         <div class="chart-section">
             <div class="row row-wrap g-xl-4 g-lg-3 gy-xl-0 gy-4">
                 <div class="col-xl-6 col-lg-6 col-md-12 column">
                     <div class="main-card">
                         <div class="card-header">
-                            <h1>Monthly Flight Requests Analysis <a href="#/"><i class="material-icons">more_vert</i></a></h1>
+                            <h1>Monthly Flight Requests <a href="#/"><i class="material-icons">more_vert</i></a></h1>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -96,7 +86,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-xl-6 col-lg-6 col-md-12 column">
+                <div class="col-xl-6 col-lg-6 col-md-12 column">
                     <div class="main-card">
                         <div class="card-header">
                             <h1>All Complaints Status<a href="#/"><i class="material-icons">more_vert</i></a></h1>
@@ -107,7 +97,7 @@
                                     <div class="graph-item">
                                         <div id="pie-chart1"></div>
 <!--                                        <div id="pie-chart2"></div>-->
-                                    <!-- </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +105,7 @@
                 </div>
             </div>
         </div>
-    </div> --> 
+    </div>
 </main>
 
 <script>
@@ -148,11 +138,11 @@
     var options = {
         series: [
             {
-                name: "Total Flight  Requests",
+                name: "Total Requests",
                 data: [{% for i in bar_data %}{{ i.0}}{% if not forloop.last %}, {% endif %}{% endfor %}]
             },
             {
-                name: "Total Complete Shipments",
+                name: "Approved Requests",
                 data: [{% for i in bar_data %}{{ i.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}]
             }
         ],
@@ -197,6 +187,4 @@
     chart.render();
 
 </script>
-
-
 {% endblock body %}
