@@ -81,7 +81,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 column">
                     <div class="main-card">
                         <div class="card-header">
-                            <h1>Monthly Flight Requests <a href="#/"><i class="material-icons">more_vert</i></a></h1>
+                            <h1>Monthly Flight Requests Analysis <a href="#/"><i class="material-icons">more_vert</i></a></h1>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -148,11 +148,11 @@
     var options = {
         series: [
             {
-                name: "Total Requests",
+                name: "Total Flight Requests",
                 data: [{% for i in bar_data %}{{ i.0}}{% if not forloop.last %}, {% endif %}{% endfor %}]
             },
             {
-                name: "Approved Requests",
+                name: "Complete Shipments",
                 data: [{% for i in bar_data %}{{ i.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}]
             }
         ],
