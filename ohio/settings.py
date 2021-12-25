@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'flightres',
     'api',
     'clinic',
-    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
