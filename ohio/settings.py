@@ -51,8 +51,8 @@ INSTALLED_APPS = [
     'flightres',
     'api',
     'clinic',
-    'phonenumber_field',]
-
+    'phonenumber_field',
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

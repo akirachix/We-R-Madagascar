@@ -1,1 +1,0 @@
-web: gunicorn Madagascar Cargo Project.wsgi --log-file -
