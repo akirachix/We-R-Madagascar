@@ -1,1 +1,1 @@
-web: gunicorn app.wsgi
+web: gunicorn Madagascar Cargo Project.wsgi --log-file -
