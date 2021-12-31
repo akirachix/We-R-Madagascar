@@ -126,3 +126,5 @@ pyvenv.cfg
 
 *.xlsx
 env.txt
+postgres_data
+my_env
