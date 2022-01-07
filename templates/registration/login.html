@@ -23,88 +23,106 @@
     <meta name="twitter:image" content="preview.html">
 
     <!--title-->
-    <title>Nepal Drone Portal</title>
+    <title>Madagascar Drone Portal</title>
 
     <!-- faveicon start   -->
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" sizes="32x32">
 
     <!-- stylesheet start -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
 <body class="">
-<!-- login page start -->
+    <style>
+        body{
+            font-family: 'Nunito', sans-serif;
+        }
+    </style>
+    <!-- login page start -->
 
-<div class="authentication">
-    <!-- login form start -->
-    <div class="auth-form login-form">
-        <div class="login-content">
-            <header class="login-header">
-                <h3>Sign in to <span>Nepal Drone Portal</span></h3>
-                <p>Enter your details below</p>
-            </header>
-            <form class="auth_form" method="post" action="">
-                {% csrf_token %}
-                {% if form.errors %}
-                {% for field in form %}
-                {% for error in field.errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ field.name|title }} {{ error|escape }}</strong>
-                </div>
-                {% endfor %}
-                {% endfor %}
-                {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-                {% endfor %}
-                {% endif %}
-                <div class="form-group">
-                    <label for="" class="">Email</label>
-                    <input name="username" type="text" class="form-control" placeholder="Username or email"/>
-                </div>
-                <div class="form-group">
-                    <label for="" class="">password</label>
-                    <input name="password" type="password" class="form-control" placeholder="*********"/>
-                </div>
-                                    <footer class="login-footer">
-                                        <button type="submit" class="common-button is-bg">Sign in</button>
-                                    </footer>
-            </form>
+    <div class="authentication">
+        <!-- login form start -->
+        <div class="auth-form login-form">
+            <div class="login-content">
+                <header class="login-header">
+                    <h3>Sign in to <span>Madagascar Drone Portal</span></h3>
+                    <p>Enter your details below</p>
+                </header>
+                <form class="auth_form" method="post" action="">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="" class="">Email</label>
+                        <input name="username" type="text" class="form-control" placeholder="Username or email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="">password</label>
+                        <input name="password" type="password" class="form-control" placeholder="*********" />
+                    </div>
 
-            {#                <p class="privacy"><a href="#">Privacy</a><a href="#">Terms of Service</a></p>#}
+                    <div class="form-group forgot-password">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="Remember" name="Remember">
+                            <label class="custom-control-label" for="Remember">Remember me</label>
+                        </div>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+
+                    <footer class="login-footer">
+                        <button type="submit" class="common-button is-bg" style="background: #117BCC;
+                        ">Sign in</button>
+                    </footer>
+                </form>
+
+                {# <p class="privacy"><a href="#">Privacy</a><a href="#">Terms of Service</a></p>#}
+
+            </div>
 
         </div>
-
+        <!-- <div class="login-figure">
+            <div class="login-figure-content">
+                <header class="login-figure-header">
+                    <a href="#">
+                        <img src="{% static 'img/admin-logo.png' %}" alt="" />
+                    </a>
+                    <p>A Small Leap towards better drone flight permission in Nepal.</p>
+                </header>
+                <figure class="login-map" style="background-image: url(../../static/flightres/img/login-bg.jpg);">
+                    <div class="copyright">
+                        <p>© 2020 Nepal Drone Portal. All rights reserved.</p>
+                    </div>
+                </figure>
+            </div>
+        </div> -->
     </div>
-    <div class="login-figure">
-        <div class="login-figure-content">
-            <header class="login-figure-header">
-                <a href="#">
-                    <img src="{% static 'img/admin-logo.png' %}"
-                         alt=""/>
-                </a>
-                <p>A Small Leap towards better drone flight permission in Nepal.</p>
-            </header>
-            <figure class="login-map" style="background-image: url(../../static/flightres/img/login-bg.jpg);">
-                <div class="copyright">
-                    <p>© 2020 Nepal Drone Portal. All rights reserved.</p>
-                </div>
-            </figure>
-        </div>
-    </div>
-</div>
 
 
-<!-- Jquery Core Js -->
-<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-<script src="{% static 'js/map.js' %}"></script>
-<script src="{% static 'js/ims.js' %}"></script>
+    <!-- Jquery Core Js -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+    <script src="{% static 'js/ims.js' %}"></script>
 </body>
 
 </html>

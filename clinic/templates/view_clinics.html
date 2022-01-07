@@ -1,15 +1,8 @@
-{% include 'flightres/base.html' %} {% load static %}
- {% block links %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'css/custom-charts.css' %}"
-/>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'css/apexcharts.css' %}"
-/>
+{% include 'flightres/base.html' %}
+{% load static %}
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom-charts.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/apexcharts.css' %}" />
 <!-- <link
   rel="stylesheet"
   type="text/css"
@@ -18,98 +11,151 @@
 {% endblock links %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script
-      src="https://kit.fontawesome.com/a130a97af0.js"
-      crossorigin="anonymous"
-    ></script>
-    <style>
-      body {
-        margin-left: 18%;
-      }
-      .search {
-        width: 40%;
-        margin-left: 53%;
-        margin-top: 3%;
-      }
-      #profile {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        box-shadow: gray 2px 2px 2px;
-        object-fit: cover;
-      }
-      .search > form > input {
-        width: 95%;
-        padding: 10px 10px;
-        color: #202020;
-        border: none;
-        border-bottom-right-radius: 20px;
-        border-top-right-radius: 20px;
-      }
-      form > input:focus {
-        outline: none;
-      }
-      .search-button:focus {
-        outline: none;
-      }
-      .search-button {
-        border: none;
-        outline: none;
-        margin-left: 0.5%;
-        text-align: center;
-        padding: 5px 5px;
-        position: absolute;
-        margin-top: 0%;
-        padding-top: 1%;
-        background-color: transparent;
-     
-      }
-      .search-button > i {
-        text-decoration: none;
-      }
-      .fas {
-        color: #561278;
-      }
-      
-    </style>
-  </head>
 
-  {%block body%}
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="https://kit.fontawesome.com/a130a97af0.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+    }
 
-  <main class="admin-main">
+    .search {
+      width: 50%;
+      float: right;
+      /* margin-top: 2%; */
+      margin-bottom: 2%;
+      overflow: auto;
+    }
+
+    #profile {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: gray 2px 2px 2px;
+      object-fit: cover;
+    }
+
+    .search>form>input {
+      width: 55%;
+      padding: 10px 10px;
+      color: #202020;
+      border: none;
+      border-radius: 8px 8px 8px 8px;
+      float: right;
+    }
+
+    form>input:focus {
+      outline: none;
+    }
+   
+
+    .search-button:focus {
+      outline: none;
+    }
+
+    .search-button {
+      border: none;
+      outline: none;
+      margin-left: 0.5%;
+      text-align: center;
+      padding: 5px 5px;
+      position: absolute;
+      margin-top: 0%;
+      padding-top: 1%;
+      background-color: transparent;
+      float: right;
+    }
+
+    .search-button>i {
+      text-decoration: none;
+      float: right;
+    }
+
+    .fas {
+      color: #4A4A4A;
+      float: right;
+
+    }
+
+    th {
+      color: #117BCC;
+      border-color: #EBEEF5;
+    }
+
+    .table>:not(:last-child)>:last-child>* {
+      border-bottom-color: #EBEEF5;
+    }
+
+    .table>tr>td {
+      border-bottom-color: #EBEEF5;
+    }
+
+    .table {
+      margin-bottom: 4%;
+    }
+
+    .admin-main {
+      position: relative;
+      width: calc(100% - 350px);
+      padding: 3.75rem 2.325rem 1rem;
+      float: right;
+    }
+  </style>
+</head>
+
+{%block body%}
+
+<main class="admin-main">
+  <div style="overflow: auto; display: block;">
     <div class="search">
-      <form method="get">
+      <form method="get" class="w-100">
         <button type="submit" class="search-button">
           <i class="fas fa-search"></i>
         </button>
-        <input
-          type="search"
-          placeholder="     Search by location"
-          name="search"
-        />
+        <input type="search" placeholder="     Search by location" name="search" />
       </form>
       {%if message%}
       <h6>{{message}}</h6>
       {%endif%}
 
-    {%if results%}
+      {%if results%}
       <p class="results">Found {{results}} clinic{{ results|pluralize }}</p>
       {%endif%}
     </div>
-   
+  </div>
 
+  <div class="w-100"></div>
+
+  <div class="row no-gutters mt-4 mb-4">
+    <div class="col-8">
+      <h5 style=" color: #117BCC;
+      ">Registered Clinics</h5>
+    </div>
+    <div class="col-4">
+      <div class="row no-gutters">
+        <div class="col-6">
+          <p style="float: right;">Total registered clincs</p>
+        </div>
+        <div class="col-6">
+          <p style="float: left; color: #117BCC;
+        ">500</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="width: 100%;">
     <table class="table table-hover table-stripped" style="font-size: 1.2em">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Clinic(CSB)Name</th>
+          <th>Region</th>
+          <th>District</th>
           <th>Phone Number</th>
-          <th>Location</th>
-          <th>Registration No.</th>
           <th></th>
         </tr>
       </thead>
@@ -127,24 +173,27 @@
       <a href="{%url 'view_clinic'%}"><i class="fas fa-arrow-left"></i></a>
       {%endfor%}
     </table>
+  </div>
 
-    {% if is_paginated %}
-    <div class="pagination">
-      <span class="step-links">
-        {% if clinics.has_previous %}
-        <a href="?page={{ clinics.previous_page_number }}">previous</a>
-        {% endif %}
 
-        <span>
-          Page {{ clinics.number }} of {{ clinics.paginator.num_pages }}.
-        </span>
+  {% if is_paginated %}
+  <div class="pagination">
+    <span class="step-links">
+      {% if clinics.has_previous %}
+      <a href="?page={{ clinics.previous_page_number }}">previous</a>
+      {% endif %}
 
-        {% if clinics.has_next %}
-        <a href="?page={{ clinics.next_page_number }}">next</a>
-        {% endif %}
+      <span>
+        Page {{ clinics.number }} of {{ clinics.paginator.num_pages }}.
       </span>
-    </div>
-    {% endif %}
-  </main>
-  {%endblock%}
+
+      {% if clinics.has_next %}
+      <a href="?page={{ clinics.next_page_number }}">next</a>
+      {% endif %}
+    </span>
+  </div>
+  {% endif %}
+</main>
+{%endblock%}
+
 </html>
