@@ -125,6 +125,7 @@ pyvenv.cfg
 /dronenv
 
 *.xlsx
-env.txt
 postgres_data
 my_env
+
+
