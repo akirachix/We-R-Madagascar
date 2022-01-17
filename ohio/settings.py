@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
-    'phonenumber_field',
-    
     # 'drf_yasg',
     'django_extensions',
     'registry',
@@ -53,8 +51,8 @@ INSTALLED_APPS = [
     'flightres',
     'api',
     'clinic',
+    'phonenumber_field',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
