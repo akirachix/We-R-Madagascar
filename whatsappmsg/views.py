@@ -9,7 +9,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 
 @csrf_exempt
 @xframe_options_exempt
-def reply_whatsapp(request):
+def reply_sms(request):
     if request.method == 'POST':
         response = MessagingResponse()
         print(request.POST.get('Body'))
@@ -18,3 +18,6 @@ def reply_whatsapp(request):
         return HttpResponse(str(response))
     else:
         return HttpResponse("")
+
+
+    

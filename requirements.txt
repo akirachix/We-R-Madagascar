@@ -48,4 +48,3 @@ whitenoise==5.2.0
 uWSGI==2.0.18
 phonenumbers== 8.12.39
 phonenumber==6.0.0
-

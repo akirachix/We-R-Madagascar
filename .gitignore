@@ -126,4 +126,7 @@ pyvenv.cfg
 
 *.xlsx
 env.txt
+
+
+
 postgres_data

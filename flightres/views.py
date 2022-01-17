@@ -33,6 +33,8 @@ from zipfile import ZipFile
 from .utils import is_near_senstive_area
 from authentication.models import User as usrm
 from clinic.views import ClinicViewDetails, ClinicCreateView
+from clinic.forms import RegisterclinicForm
+from clinic.models import ClinicProfile
 
 
 def homeView(request):
@@ -68,12 +70,13 @@ def dashboardView(request):
     # pending_requests_num = FlightPermission.objects.filter(status="Pending").count()
     # rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
     # delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
-    completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
     total_requests_num= FlightPermission.objects.all().count()
+    completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
+    clinics_num = ClinicProfile.objects.all().count()
     complaint_num = Report.objects.all().count()
 
     
-    top_row_data.append([total_requests_num, completed_requests_num])
+    top_row_data.append([total_requests_num, completed_requests_num, clinics_num, complaint_num])
     # data for pie chart
     pie_data = []
     # pie_data.append([solved_complaints, pending_complaints])
@@ -854,3 +857,9 @@ def view_500(request):
     This if for custom 500 template
     '''
     return render(request, 'flightres/404.html')
+
+def countClinics(request):
+    cliniclist = ClinicProfile.objects.all().count()
+    return render(request,'dashboard.html',{
+        'cliniclist' : cliniclist,
+    })
