@@ -11,15 +11,7 @@
                 <li>
                 <a href="{% url 'home' %}" class="span-15">Home</a>
                 </li>
-                <li>
-                <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
-                </li>
                 
-                <!-- <li>
-                <a href="{% url 'dashboard:guidelines' %}" class="span-15 call-to-action"
-                    >UAV Guidelines</a
-                >
-                </li> -->
             
             {% if user.is_authenticated %}
             </ul>
