@@ -1,24 +1,35 @@
 {% load static %}
-<header class="site-header map-header map-pd" style='position: relative;z-index: 9099; border: none;'>
+{% block body %}
+<header class="site-header map-header map-pd" style="position: relative;z-index: 9099; border: none; background: #117BCC;
+font-family: 'Nunito', sans-serif;">
     <div class="container-fluid">
         <div class="header-in">
         <!-- <a href="{% url 'home' %}" class="logo">
             <img src="{% static './img/logo.svg' %}" />
         </a> -->
+        <h5 style="color: #fff;">Madagascar Cargo Drone Portal</h5>
         <div class="menu-wrap">
             <div class="menu">
             <ul>
-                <li>
+                <!-- <li>
                 <a href="{% url 'home' %}" class="span-15">Home</a>
                 </li>
+                <li>
+                <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
+                </li> -->
                 
+                <!-- <li>
+                <a href="{% url 'dashboard:guidelines' %}" class="span-15 call-to-action"
+                    >UAV Guidelines</a
+                >
+                </li> -->
             
             {% if user.is_authenticated %}
             </ul>
             </div>
             <div class="custom-dropdown profile-dropdown is-right">
             <a href="javascript:void(0)" class="dropdown-link">
-                <i class="material-icons" style='font-size: 30px; color: #117BCC;'>account_circle</i>
+                <i class="material-icons" style='font-size: 30px; color: #fff;'>account_circle</i>
             </a>
             <ul class="custom-dropdown-menu no-arrow">
                 <li>
@@ -33,7 +44,7 @@
                 </li>
                 <li>
                 <a href="/accounts/logout" id='dash_logout'
-                    ><i class="material-icons" style="color: #117BCC"
+                    ><i class="material-icons" style="color: #fff"
                     >exit_to_app</i
                     >Sign out</a
                 >
@@ -60,3 +71,4 @@
         </div>
     </div>
     </header>
+    {% endblock body %}

@@ -125,6 +125,10 @@ pyvenv.cfg
 /dronenv
 
 *.xlsx
+my_env
+
+
+=======
 env.txt
 
 
