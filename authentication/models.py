@@ -25,3 +25,31 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=50)
     zip = models.CharField(max_length=5)
     photo = models.ImageField(upload_to='uploads', blank=True)
+
+
+
+class Role(models.Model):
+    CLINIC = 1
+    FLYING_LABS = 2
+    MINISTRY = 3
+    ADMIN = 4
+
+    ROLE_CHOICES = (
+        (CLINIC, 'clinic'),
+        (FLYING_LABS, 'flying_labs'),
+        (MINISTRY, 'ministry'),
+        (ADMIN, 'admin')
+    )
+
+    id = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, primary_key=True)
+
+    def __str__(self):
+        return self.get_id_display()
+
+        
+    
+
+
+
+
+
