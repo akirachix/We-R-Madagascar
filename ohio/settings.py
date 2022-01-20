@@ -31,7 +31,7 @@ SECRET_KEY = '0o=aajzmkgwtb=in$6mn))k)krkf^_4o^@**xdj@z@2v@ro_e+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'madagascar-drone-vaccine.herokuapp.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -136,8 +136,8 @@ LOGIN_URL = '/accounts/login'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'werobotics',
-        'USER': 'postgres',
+        'NAME': 'postgres',
+        'USER': 'wendyorengo',
         'PASSWORD': 'postgis',
         'HOST': 'localhost',
         'PORT': '5432',
