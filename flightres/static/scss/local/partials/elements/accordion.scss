@@ -1,0 +1,137 @@
+.acc{
+    .acc-list{
+        .acc-header{
+            position: relative;
+            padding:0.775rem 0;
+            padding-right: 2.5rem;
+            @include transition(all .5s ease-in-out);
+            border-bottom: 1px solid $border-dark;
+            @include display-flex(flex);
+            @include justify-content-between;
+            @include align-items-center;
+            cursor: pointer;
+            &::before,
+            &::after{
+                font-size: 1.4rem;
+                position: absolute;
+                top:.35rem;
+                right: .6125rem;
+                font-family: 'Material Icons';
+                color:$body-color;
+                z-index: 99;
+            }
+            &::before{
+                content: 'arrow_drop_down';
+            }
+            h5{
+                font-size:1rem;
+                font-weight: 600;
+                span{
+                    &.selected-count{
+                        padding:.15rem;
+                        min-width: 18px;
+                        text-align: center;
+                        display: inline-block;
+                        @include radius(50%);
+                        background-color: $primary-color;
+                        color:$white-color;
+                        font-size: .6125rem;
+                        margin-left: .25rem;
+                        font-weight: 400;
+                    }
+                }
+                @media screen and (max-width:1366px){
+                    font-size: .875rem;
+                }
+            }
+            a{
+                color:$body-color;
+                padding-top:.25rem;
+                &.clear{
+                    i{
+                        font-size: 1rem;
+                    }
+                }
+            }
+            
+            &.active{
+                h5{
+                    color:$secondary-color;
+                }
+                &::before{
+                    content: 'arrow_drop_up';
+                    color:$primary-color;
+                } 
+                
+            }
+        }
+        .acc-body{
+            display: none;
+            padding:.5rem 0;
+            overflow-y:auto;
+            -webkit-overflow-scrolling:touch;
+            -ms-overflow-style:-ms-autohiding-scrollbar;
+            max-height: 500px;
+        
+
+            &::-webkit-scrollbar {
+                width: 4px;
+                background: $border-color;
+                @include radius(4px);
+            }
+
+            &::-webkit-scrollbar-track {
+                background-color:$border-color;
+                @include radius(4px);
+            }
+
+            &::-webkit-scrollbar-thumb {
+                @include radius(4px);
+                background: $border-dark;
+            }
+            ul{
+                &.checkbox-list{
+                    li{
+                        a{
+                            @include display-flex(flex);
+                            @include justify-content-between;
+                            @include align-items-center;
+                            font-weight: 500;
+                            color:$body-color;
+                            padding:.35rem .6125rem;
+                            &:hover{
+                                background-color: $primary-light;
+                            }
+                            
+                            .custom-checkbox{
+                                margin:0;
+                                label{
+                                    font-size: .875rem;
+                                    @include display-flex(flex);
+                                    @include justify-content-start;
+                                    @include align-items-center;
+                                    font-weight: 400;
+                                    i{
+                                        font-size: 1.2rem;
+                                        margin-right: .5rem;
+                                    }
+                                    @media screen and (max-width:1366px){
+                                        font-size: .775rem;
+                                        i{
+                                            font-size: 1rem;
+                                        }
+                                    }
+                                }
+                            }
+                            span{
+                                &.counter{
+                                    color:$body-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

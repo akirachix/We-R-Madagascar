@@ -1,0 +1,165 @@
+{% extends 'flightres/base.html' %}
+{% load static %}
+{% block links %}
+<style>
+    #mapid { height: 790px; }
+</style>
+{% endblock links %}
+
+{% block body %}
+<main class="admin-main">
+    <div class="main-card">
+        <div class="container">
+            {% for messages in messages %}
+                <div class="alert alert-danger">
+                    <strong>{{ messages }}</strong>
+                </div>
+            {% endfor %}
+            <form method="post" action="{% url 'dashboard:flightview' %}">
+                {% csrf_token %}
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ field.name|title }} {{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-3">
+                      <input placeholder="Start Date Format-(YY/MM/DD)" type="date" name="flight_start_date"  class="form-control" required>
+                    </div>
+                    <div   class="col-md-3">
+                      <input placeholder="End Date Format-(YY/MM/DD)" type="date" name="flight_end_date"  class="form-control" required>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                        <a class="btn btn-danger mb-2" style="color: #E8E8FE;" href="/np/dashboard/allflights">Reset</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="container" style="padding-top:20px;">
+            <div id="mapid"></div>
+        </div>
+    </div>
+</main>
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+<script>
+
+
+    var dataset = [{% if data3 %}{% for x in data3 %}
+                [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}',{{ x.uav_uid }}],
+                {% endfor %}{% else %}{% for x in object_list %}
+                [{{x.latitude}},'{{x.status}}', {{x.longitude}}, '{{x.altitude}}',{{ x.uav_uid }}],
+                {% endfor %}{% endif %}];
+
+
+
+    var mymap = L.map('mapid').setView([dataset[0][0], dataset[0][2]], 8);
+
+    osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'your.mapbox.access.token'
+    }).addTo(mymap);
+    var mark = [];
+    var cir = [];
+
+    for(i=0;i<dataset.length;i++) {
+        customPopup = '<div class="bind-popup"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ dataset[i][4] +'</td><td>'+ dataset[i][3] +'</td><td>'+ dataset[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+
+        mark[i] = L.marker([dataset[i][0], dataset[i][2]]).addTo(mymap);
+        if(dataset[i][1] == 'Approved') {
+            cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
+                color: 'green',
+                fillColor: 'green',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        } else if(dataset[i][1] == 'Pending') {
+            cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
+                color: 'orange',
+                fillColor: 'orange',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        } else if(dataset[i][1] == 'Rejected') {
+            cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
+                color: 'red',
+                fillColor: 'red',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(mymap);
+
+        };
+
+        mark[i].bindPopup(customPopup);
+    }
+    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(mymap);
+    googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+    googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+    googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+
+
+    var baseLayers = {
+            "OpenStreetMap": osm,
+            "Google Streets": googleStreets,
+            "Google Hybrid": googleHybrid,
+            "Google Satellite": googleSat,
+            "Google Terrain": googleTerrain,
+
+        };
+        var legend = L.control({position: 'bottomleft'});
+        legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend');
+        labels = ['<strong>Categories</strong>'],
+        categories = ['Approved','Pending','Rejected'];
+        color=['Green','orange','Red'];
+
+        for (var i = 0; i < categories.length; i++) {
+
+                div.innerHTML += 
+                labels.push(
+                    '<i class="circle" style="opacity: 0.5;background:' + color[i] + '"></i> ' +
+                (categories[i] ? categories[i] : '+'));
+
+            }
+            div.innerHTML = labels.join('<br>');
+        return div;
+        };
+        legend.addTo(mymap);
+    layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(mymap);
+
+   // popup = marker.bindPopup("Lat:28.209499,Long:83.959518").openPopup();
+</script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+{% endblock body %}

@@ -1,0 +1,244 @@
+[class*=common-button] {
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-decoration: none;
+    text-transform: capitalize;
+    padding: .25rem 1rem;
+    display: -webkit-inline-box;
+    display: inline-flex;
+    position: relative;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 150px;
+    min-height: 40px;
+    height: 40px;
+    border: none;
+    outline: none;
+    line-height: inherit;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-appearance: none;
+    overflow: hidden;
+    vertical-align: middle;
+    @include radius(5px);
+    cursor: pointer;
+    @include transition(all .3s linear);
+    &:focus{
+        outline: none !important;
+    }
+    @media #{$breakpoint-lg-desktop}{
+        font-size: .75rem;
+        min-width: 130px;
+        min-height: 35px;
+        height: 35px;
+        @include radius(4px);
+    }
+    @media #{$breakpoint-desktop}{
+        padding: .25rem 1rem;
+        min-width: 100px;
+        min-height: 30px;
+        height: 30px;
+        border: .5px solid $body-color;
+    }
+    &:disabled {
+        color: $grey-color;
+        background-color: $body-color;
+        border-color: 0;
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+  
+    &.is-disable {
+        color: $grey-color;
+        background-color: $body-color;
+        border-color: $body-color;
+  
+        &.is-icon {
+            @include display-flex(flex);
+            @include justify-content-start;
+            @include align-items-center;
+            color: $grey-color;
+  
+            i {
+                margin-right: .5rem;
+                font-size: .9375rem;
+            }
+        }
+    }
+  
+    &.is-bg {
+        color: $white-color;
+        background-color: $primary-color;
+        border-color: $primary-color;
+  
+        &:disabled {
+            color: $body-color;
+            background-color: $border-color;
+            border-color: transparent;
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+  
+        &:hover {
+            background-color: $primary-light;
+            border-color:  $primary-light;
+            color:$white-color;
+        }
+  
+        &.is-disable {
+            color: $white-color;
+            background-color: $border-color;
+            border-color: $border-color;
+  
+            
+        }
+        &.is-icon {
+          @include display-flex(flex);
+          @include justify-content-start;
+          @include align-items-center;
+  
+          i {
+              margin-right: .5rem;
+              font-size: 1.2rem;
+          }
+      }
+    }
+  
+    &.is-full-line {
+        width: 100%;
+    }
+  
+    &.is-auto{
+        min-width: auto;
+    }
+    &.is-clear {
+        background-color: transparent;
+        border-width: 0;
+        min-width: auto;
+        @include display-flex(flex);
+        @include justify-content-start;
+        @include align-items-center;
+        color: $primary-color;
+
+        i {
+            margin-left: .5rem;
+        }
+  
+        &:hover {
+            color: $secondary-color;
+        }
+    }
+  
+    &.is-border {
+        background-color: transparent;
+        color: $secondary-color;
+        border:1px solid;
+        border-color: $secondary-color;
+        @media #{$breakpoint-desktop}{
+            border: .5px solid;
+        }
+        &.is-icon {
+            @include display-flex(flex);
+            @include justify-content-start;
+            @include align-items-center;
+            color: $heading-color;
+            font-size: .9375rem;
+  
+            i {
+                margin-right: .5rem;
+            }
+        }
+        &:hover{
+            border-color: $secondary-color;
+            color:$secondary-color;
+        }
+    }
+  
+    &.no-border {
+        background-color: transparent;
+        color: $secondary-color;
+        border-color: transparent;
+  
+        &.is-icon {
+            @include display-flex(flex);
+            @include justify-content-start;
+            @include align-items-center;
+            color: $secondary-color;
+            font-size: .9375rem;
+  
+            i {
+                margin-right: .5rem;
+            }
+        }
+    }
+  
+    // @media #{$break1} {
+    //     &.full-line-mobile {
+    //         width: 100%;
+    //     }
+    // }
+  
+  }
+  
+  .buttons {
+  width: 100%;
+    button {
+        &:not(:last-child) {
+            margin-right: .6125rem;
+        }
+    }
+    &.is-flex{
+        @include display-flex(flex);
+    }
+  
+    &.is-center {
+        @include display-flex(flex);
+        @include justify-content-center;
+        @include align-items-center;
+    }
+    &.is-between{
+        @include display-flex(flex);
+        @include justify-content-between;
+        @include align-items-center;
+    }
+    &.is-end {
+        @include display-flex(flex);
+        @include justify-content-end;
+        @include align-items-center;
+    }
+  }
+  span{
+    &.status{
+        font-weight: 600;
+        text-transform: capitalize;
+        padding:2px 10px;
+        @include radius(20px);
+        font-size: .875rem;
+        display: inline-block;
+        @media #{$breakpoint-lg-desktop}{
+            padding: 4px 20px 5px;
+            font-size: .625rem;
+        }
+        @media #{$breakpoint-desktop}{
+            padding: 3px 15px 4px;
+            font-size: .525rem;
+        }
+        &.approved{
+            color:$green-color;
+            background-color: rgba($green-color,.2);
+        }
+        &.pending{
+            color:$orange-color;
+            background-color: rgba($orange-color,.2);
+        }
+        &.failed{
+            color:$red-color;
+        }
+    }
+}

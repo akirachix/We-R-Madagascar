@@ -1,0 +1,33 @@
+.main-card{
+    position: relative;
+    @include display-flex(flex);
+    @include flex-direction-column(column);
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border:none;
+    border-radius: .25rem;
+    .card-header{
+        background-color: transparent;
+        padding:0 1.5rem;
+        border:none;
+        h1{
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: $text-color;
+            @media #{$breakpoint-lg-desktop}{
+                font-size: .938rem;
+            }
+            @media #{$breakpoint-desktop}{
+                font-size: .785rem;
+            }
+        }
+    }
+    .card-body{
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 1.25rem;
+        position: relative;
+    }
+}

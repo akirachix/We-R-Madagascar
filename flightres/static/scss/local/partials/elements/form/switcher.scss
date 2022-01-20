@@ -1,0 +1,63 @@
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 18px;
+  margin:0;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid $border-dark;
+    @include transition(.4s ease-in-out);
+    @include radius(30px);
+    background: $primary-light;
+
+    &::before {
+      position: absolute;
+      content: "";
+      // font-family: 'Material Icons';
+      height: 14px;
+      width: 14px;
+      left: 2px;
+      bottom:1px;
+      @include radius(50%);
+      background-color: $primary-color;
+      color:$primary-color;
+      @include transition(.4s ease-in-out);
+      @include box-shadow(0 1px 6px rgba($border-color, 0.5));
+      text-transform: initial;
+    }
+
+    .round {
+      @include radius(34px);
+
+      &::before {
+        @include radius(50%);
+      }
+    }
+  }
+
+  input:checked+.slider {
+    background-color: $primary-light;
+  }
+
+  input:checked+.slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+    background-color: $primary-color;
+  }
+
+}

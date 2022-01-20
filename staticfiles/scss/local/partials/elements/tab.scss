@@ -1,0 +1,88 @@
+.custom-tab{
+    
+    .tab-list{
+        @include display-flex(flex);
+        @include justify-content-start;
+        @include align-items-center;
+        
+        
+        li{
+            // @include flex(0 0 33.333333%);
+            // max-width: 33.333333%;
+            @include flex-wrap(nowrap);
+            
+            a{
+                display: block;
+                text-transform: capitalize;
+                padding:.5rem 1rem;
+                color:$heading-color;
+                font-weight: 600;
+                position: relative;
+                @include transition(all .5s linear);
+                font-size:.875rem;
+                border:1px solid transparent;
+                @media #{$breakpoint-lg-desktop}{
+                    padding: .325rem 1rem;
+                    font-size: .75rem;
+                }
+                @media #{$breakpoint-desktop}{
+                    padding: .25rem 1rem;
+                    font-size: .625rem;
+                    border: .5px solid $body-color;
+                }
+                
+            }
+            
+        }
+        &.is-bg{
+            li{
+                a{
+                    background-color: $white-color;
+                    @include radius(10px);
+                    &.current,
+                    &:hover {
+                        color: $white-color;
+                        background-color: lighten($secondary-color, 10%);
+                    }
+                }
+            }
+        }
+        &.is-border{
+            li{
+                a{
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        width: 0;
+                        left: 0;
+                        bottom: 0;
+                        height: 1.5px;
+                        background-color: $secondary-color;
+                        @include transition(width .3s linear);
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                    &.current,
+                    &:hover {
+                        color: $secondary-color;
+                        &::after {
+                            width: 100%;
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .custom-tab-content{
+        padding:.6125rem;
+        .tab-item{
+            display: none;
+            &.current{
+                display: block;
+            }
+        }
+    }
+}
+

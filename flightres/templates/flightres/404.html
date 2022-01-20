@@ -1,0 +1,82 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Nepal Drone Portal">
+    <meta property="og:image" content="preview.html">
+    <meta property="og:site_name" content="Nepal Drone Portal">
+    <meta property="og:title" content="Nepal Drone Portal">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://naxa.com.np">
+
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Nepal Drone Portal">
+    <meta name="twitter:creator" content="@Nepal Drone Portal">
+    <meta name="twitter:title" content="Nepal Drone Portal">
+    <meta name="twitter:description" content="Nepal Drone Portal">
+    <meta name="twitter:image" content="preview.html">
+
+    <!--title-->
+    <title>Nepal Drone Portal</title>
+
+    <!-- faveicon start   -->
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" sizes="32x32">
+
+    <!-- stylesheet start -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+</head>
+
+<body>
+    {% for message in messages %}
+    <div class="alert alert-danger">
+        <strong>{{ message }}</strong>
+    </div>
+    {% endfor %}
+    <div class="permit-pg">
+        <div class="landing-section">
+            <div class="top-bar"></div>
+            <div class="contents">
+                <div class="container-fluid">
+                    <div class="wrapper">
+                        <a href="home.html" class="logo"><img src="{% static '/img/logo-blue.png' %}"
+                                alt="Nepal Drone Portal" /></a>
+                        <figure class="center-image"><img src="{% static '/img/drone_and_Clouds.svg' %}" alt="Drone" />
+                        </figure>
+                        <div class="message">
+                            <h1>Sorry, this page does not exist.</h1>
+                            <figure class="result"><img src="{% static '/img/rejected.svg' %}" alt="verified"></figure>
+                            <a href="javascript:history.back()"><p><u>You may want to go back to previous page</u></p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Jquery Core Js -->
+        <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+        <script src="{% static 'js/map.js' %}"></script>
+        <script src="{% static 'datatable/datatables.min.js' %}"></script>
+        <script src="{% static 'js/custom-datatable.js' %}"></script>
+        <script src="{% static 'js/drone.js' %}"></script>
+</body>
+
+</html>

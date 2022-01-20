@@ -1,0 +1,797 @@
+{% extends 'flightres/base.html' %}
+{% load static %}
+
+
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/popup-image.css' %}">
+<script src="{% static 'js/modal-image.js' %}"></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+<style>
+
+.legend {
+  font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  /*font-family: inherit; */
+  padding: 8px 10px;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  /*border-radius: 5px;*/
+  line-height: 28px;
+  color: #555;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.16); 
+}
+.legend h4 {
+  text-align: center;
+
+  font-size: 10px;
+  margin: 0px;
+  color: #777;
+}
+
+.legend .spar {
+    all: initial;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    
+    position: relative;
+    bottom: 1.5px;
+    font-size: .875rem;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 0.7;
+}
+
+.legend i.icon {
+  background-size: 18px;
+  background-color: rgba(255, 255, 255, 1);
+}
+.is-blue {
+    border: 2px solid #15139C;
+    background: white;
+}
+.is-drn {
+    border: none;
+    background: #15139C;
+}
+</style>
+{% endblock links %}
+
+{% block body %}
+<div style="z-index: 1111; " id="myModalVideo" class="popup">
+    <div class="image-container">
+        <!-- <div class="modal-body popup-body"> -->
+            <span class="close-icon" onclick="closeModal()"><i
+                    class="material-icons" style='background-color:white;color:black;'>close</i></span>
+            <div class="modal-content" id="openFSImage">
+            </div>
+        <!-- </div> -->
+    </div>
+</div>
+<main class="admin-main">
+    <div class="main-card">
+        <div class="card-header">
+            <h1>CIVILIAN COMPLAINTS / MANAGE CIVILIAN COMPLAINTS</h1>
+        </div>
+        <div class="card-body">
+            <!-- {% for i, j, k in data %}
+            <p>{{i.uav_uid }}</p>
+            {% endfor %} -->
+            <table id="admin-datatable" class="admin-datatable">
+                <thead>
+                    <tr>   
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Complaint Category</th>
+                        <th>Message</th>
+                        <th>Sender Name</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Escalated</th>
+                        <th class="modal-th"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i, j, k in data %}
+                    <tr modal-link="complain{{ i.uav_uid }}" class="modal-link mapTrigger" value='{{i.uav_uid}}'>
+                        <td>{{ i.uav_uid }}</td>
+                        <td>
+                            <time>{{ i.created_at }}</time>
+                        </td>
+                        <td>{{ i.category }}</td>
+                        <td><b>{{ i.message }}</b></td>
+                        <td>{{ i.complainer_name|default:"--" }}</td>
+                        <td>{{ i.location }}</td>
+                        <td>
+                            {% if i.status == "Pending" %}
+                            <span class="status pending">{{ i.status }}</span>
+                            {% else %}
+                            <span class="status approved">{{ i.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if i.is_escalated %}
+                            <span class="status approved">Yes</span>
+                            {% else %}
+                            <span class="status pending">No</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <a id="show-popup" modal-link="complain{{ i.uav_uid }}" class="modal-link"><i
+                                    class="material-icons mapTrigger" data-toggle="modal"
+                                    data-target="#complain{{ i.uav_uid }}" value='{{i.uav_uid}}'>chevron_right</i></a>
+                                    </td>
+                                    </tr>
+
+                            <div class="popup" tabindex="-1" role="dialog" id="complain{{ i.uav_uid }}">
+                                <div class="popup-container lg-popup map-popup">
+                                    <div class="popup-body">
+                                        <span class="close-icon"><i class="material-icons">close</i></span>
+                                        <div class="popup-header">
+                                            <h3>Complaint management for <b>ID {{ i.uav_uid }}</b></h3>
+
+                                        </div>
+                                        <div class="popup-content">
+                                            <div class="drone-details">
+                                                <div class="row gx-md-3 gx-lg-3">
+                                                    <div class="col-xl-5 col-sm-12 order-2">
+                                                        <div class="info-content col-left">
+                                                            <ul>
+                                                                <li>
+                                                                    <h4>Sender info</h4>
+                                                                    <div class="content-list">
+                                                                        <p>
+                                                                            <b>Name:</b><span>{{ i.complainer_name|default:"--" }}</span>
+                                                                        </p>
+                                                                        <p>
+                                                                            <b>Location:</b><span>{{ i.location }}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </li>
+                                                                {% if i.image_url %}
+                                                                <li>
+                                                                    <h4>Additional info</h4>
+                                                                    <div class="content-list">
+                                                                        <div class="image-content">
+                                                                            <figure>
+                                                                                <button data-toggle="modal"
+                                                                                    data-target="#myModalVideo"
+                                                                                    modal-link="myModalVideo"
+                                                                                    type="button"
+                                                                                    class="hover-shadow cursor btn modal-link">
+                                                                                    <img id="image_{{ i.uav_uid }}"
+                                                                                        class="expandImage"
+                                                                                        src="https://winaero.com/blog/wp-content/uploads/2019/11/Photos-new-icon.png"
+                                                                                        alt="">
+                                                                                </button>
+                                                                            </figure>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                {% endif %}
+                                                                <li >
+                                                                    <h4></h4>
+                                                                    <section class='map-section' style='font-family:inherit;'>
+                                                                    <div id="map{{i.uav_uid}}" class='mapadd' data-latitude={{i.latitude}} data-longitude={{i.longitude}} data-id={{i.uav_uid}} data-status={{i.status}} style="width: 100%;height: 300px;"></div>
+                                                                    </section>
+                                                                    <!-- <div class="permit-list">
+                                                                        {% for perm in j %}
+                                                                        <button data-toggle="modal"
+                                                                            data-target="#open-modal-flight"
+                                                                            modal-link="open-modal-flight" type="button"
+                                                                            class="btn modal-link flightPop"
+                                                                            id="flight_{{ perm.uav_uid }}">
+                                                                            Permission Request for ID
+                                                                            {{ perm.uav_uid }}
+                                                                        </button>
+
+                                                                        <div class="popup" id="open-modal-flight">
+                                                                            <div id="modal-dialog"
+                                                                                class="popup-container lg-popup map-popup">
+                                                                                <div class="popup-body">
+                                                                                    <span class="close-icon"><i
+                                                                                            class="material-icons">close</i></span>
+                                                                                    <div class="popup-body"
+                                                                                        id="flightPopUp">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        {% endfor %}
+                                                                    </div> -->
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-7 col-sm-12  order1">
+                                                        <div class="complaint-content col-right">
+                                                            <h3 class="title">COMPLAINT MESSAGE <span>
+                                                                    {% if i.status == 'Resolved' %}
+                                                                    <a class="common-button is-bg"
+                                                                        href="{% url 'dashboard:update-complain' pk=i.uav_uid action='status' status=i.status %}">Mark
+                                                                        as Unresolved</a>
+                                                                    {% else %}
+                                                                    <a class="common-button is-bg"
+                                                                        href="{% url 'dashboard:update-complain' pk=i.uav_uid action='status' status=i.status %}">Mark
+                                                                        as Resolved</a>
+                                                                    {% endif %}
+                                                                </span></h3>
+                                                            <div class="info-para">
+                                                                <h6>Complain Category:
+                                                                    <span>{{ i.category }}</span></h6>
+                                                                <span class="time">{{ i.created_at }}</span>
+                                                            </div>
+                                                            <div class="info-block">
+                                                                <p>{{ i.message }}</p>
+                                                            </div>
+                                                            <div class="button-wrap">
+                                                                {% if i.is_escalated %}
+                                                                <button id="show-popup"
+                                                                    modal-link="open-modal-escalated{{ i.uav_uid }}"
+                                                                    class="modal-link common-button is-bg escalate-button"
+                                                                    data-toggle="modal"
+                                                                    data-target="#open-modal-escalated{{ i.uav_uid }}">De-Escalate
+                                                                    Issue</button>
+                                                                {% else %}
+                                                                <button id="show-popup"
+                                                                    modal-link="open-modal-escalated{{ i.uav_uid }}"
+                                                                    class="modal-link common-button is-bg escalate-button"
+                                                                    data-toggle="modal"
+                                                                    data-target="#open-modal-escalated{{ i.uav_uid }}">Escalate
+                                                                    Issue</button>
+                                                                {% endif %}
+                                                            </div>
+                                                            <form action="{% url 'dashboard:submit-reply' pk=i.pk %}"
+                                                                method="POST">
+                                                                {% csrf_token %}
+                                                                <textarea class="form-control" id="note" type="text"
+                                                                    placeholder="Write a internal note"
+                                                                    name="note">{{ i.note|default_if_none:"" }}</textarea>
+                                                                <br />
+
+                                                                <div class="textarea-message">
+                                                                    <textarea class="form-control" id="reply"
+                                                                        placeholder="Write a reply back" type="text"
+                                                                        name="reply">{{ i.reply|default_if_none:"" }}</textarea>
+                                                                </div>
+                                                                <br>
+                                                                <div class="buttons is-end">
+                                                                    <button type="submit"
+                                                                        class="common-button is-bg">Reply
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="popup-footer popup-permission">
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </li>
+    
+                          </ul>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="popup-footer popup-permission"></div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="popup"
+            tabindex="-1"
+            role="dialog"
+            id="open-modal-escalated{{ i.uav_uid }}"
+          >
+            <div class="popup-container sm-popup map-popup">
+              <div class="popup-body">
+                <span class="close-icon"
+                  ><i class="material-icons">close</i></span
+                >
+                <div class="popup-header">
+                  <h3>Escalate Issue</h3>
+                </div>
+                <div class="popup-content">
+                  <div class="drone-details">
+                    <div class="row">
+                      <div class="col-xl-12 col-sm-12">
+                        <div class="drone-content col-left">
+                          <ul>
+                            <li>
+                              <h4>Police Contacts</h4>
+                              {% if k %}
+                              {% for auth in k %}
+                              <div class="content-list">
+                                <p>
+                                  <b>{{ auth.name }}</b
+                                  ><span>{{ auth.phone_number }}</span>
+                                </p>
+                              </div>
+                              {% endfor %}
+                              {% else %}
+                              <div class="content-list">
+                                <p>
+                                  No Data Found.
+                                </p>
+                              </div>
+                              {% endif %}
+                              
+
+                              <div class="button-wrap">
+                                {% if i.is_escalated %}
+                                <a
+                                  class="common-button is-bg"
+                                  href="{% url 'dashboard:update-complain' pk=i.uav_uid action='escalate' status='true' %}"
+                                  >De-Escalate</a
+                                >
+                                {% else %}
+                                <a
+                                  class="common-button is-bg"
+                                  href="{% url 'dashboard:update-complain' pk=i.uav_uid action='escalate' status='false' %}"
+                                  >Escalate</a
+                                >
+                                {% endif %}
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="popup-footer popup-permission"></div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</main>
+{% endblock body %}
+
+{% block footer_links %}
+<script src="{% static 'js/modal-image.js' %}"></script>
+<script type="text/javascript">
+    var flight_objects = '{{ json_data }}'
+    var image_url_objects = '{{image_json_data}}'
+    var nearby = '{{nearby_flt}}';
+    var nearby_auth = '{{nearby_auth_flt}}'
+    
+</script>
+<script>
+    function permApproval(uid, status) {
+        console.log(uid, status)
+    }
+    
+    $(function () {
+        $('.mapTrigger').on('click', function(e) {
+            e.preventDefault(e);
+            var mapId = $(this).attr('value');
+            var container = L.DomUtil.get('map'+mapId);
+            if(container != null){
+                container._leaflet_id = null;
+            };
+            var noFlyZone = '{{obj}}'
+            noFlyZone = noFlyZone.replace(/&quot;/g, '"')
+            var noFlyZone_json = JSON.parse(noFlyZone)
+            nearby = nearby.replace(/&quot;/g, '"')
+            nearby_flight = JSON.parse(nearby)
+            nearby_auth = nearby_auth.replace(/&quot;/g, '"')
+            nearby_auth_flight = JSON.parse(nearby_auth)
+            const mapElement = document.querySelector('#map'+mapId);
+            const dataLatitude = mapElement.dataset.latitude;
+            const dataLongitude = mapElement.dataset.longitude;
+            const complainId = mapElement.dataset.id;
+            const complainStatus = mapElement.dataset.status;
+            // console.log(map.dataset.latitude);
+            // console.log(map.dataset.latitude);
+            var mymap = L.map('map'+mapId,{
+                fullscreenControl: {
+                    pseudoFullscreen: false // if true, fullscreen to page width and height
+                    }}).setView([dataLatitude,dataLongitude], 10);
+
+            osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2lqYW4zNSIsImEiOiJja2FvM2h0bHMxazNlMnRwNnV4MGU1bDg2In0.JiZ6xxDTNT1zuIhdo9PTeA', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox/lights-v10',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'your.mapbox.access.token'
+            }).addTo(mymap);
+            const customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+            var mark_nearby = []
+            var mark_nearby_auth = []
+            /*
+            var nearbyIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+            var nearbyAuthIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+            */
+            var greenIcon = L.divIcon({
+                className: `circle-marker-complaint is-green`,
+                // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+                // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+                html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-greenIcon.svg' alt="My image">`,
+                iconSize:     [38, 50], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+                // shadowAnchor: [4, 62],  // the same for the shadow
+                // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var orangeIcon = L.divIcon({
+                className: `circle-marker-complaint`,
+                // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+                // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+                html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-orangeIcon.svg' alt="My image">`,
+                iconSize:     [38, 50], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+                // shadowAnchor: [4, 62],  // the same for the shadow
+                // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var nearbyIcon = L.divIcon({
+                className: `circle-marker-complaint is-drn`,
+                 // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+                 // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+                html:`<img width="20px" height="20px" src='/staticfiles/img/drone-icon.svg' alt="My image">`,
+                iconSize:     [38, 50], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                 // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+                 // shadowAnchor: [4, 62],  // the same for the shadow
+                 // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var nearbyAuthIcon = L.divIcon({
+                className: `circle-marker-complaint is-blue`,
+                // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
+                // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+                html:`<img width="16px" height="16px" src='/staticfiles/img/authority.svg' alt="My image">`,
+                iconSize:     [38, 50], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
+                // shadowAnchor: [4, 62],  // the same for the shadow
+                // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+            });
+            var legend = L.control({ position: "bottomright" });
+
+            legend.onAdd = function(mymap) {
+                var div = L.DomUtil.create("div", "legend");
+                
+
+                // div.innerHTML += 
+                // div.innerHTML += '<div class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""><span class="label">Approved Flights</span></div>';
+                // div.innerHTML += '<i class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"></div><span>Complaint Flight</span><br>';
+  
+                
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-drn"><img width="16px" height="16px" src="../../../staticfiles/img/drone-icon.svg" alt="My image" style=""/></i><span class="spar">Nearby Flights</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-orange"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-orangeIcon.svg" alt="My image" style=""/></i><span class="spar">Pending Complaints</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-green"><img width="12px" height="12px" src="../../../staticfiles/img/complaint-greenIcon.svg" alt="My image" style=""/></i><span class="spar">Resolved Complaints</span><br>';
+                div.innerHTML += '<i class="circle-marker-complaint-legend is-blue" ><img width="15px" height="15px" src="../../../staticfiles/img/authority.svg" alt="My image" style=""/></i><span class="spar">Local Authorities</span><br>';
+                // div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Complaint Flight</span><br>';
+                // div.innerHTML += '<i style="background: url(https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png);background-size:13px 21px;background-repeat: no-repeat;height:21px;width:13px;"></i><span>Local Authorities</span><br>';
+                return div;
+            };
+
+            legend.addTo(mymap);
+            // console.log(complainStatus,'complainStatus');
+            // console.log(nearby_flight,'nearybyFlight');
+            // console.log(nearby_auth_flight,'nearyby auth Flight');
+            var markersClusterGroup = L.markerClusterGroup();
+            
+            var customPopupComplaint = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th> Status</th></tr><tr><td >'+ complainId +'</td><td >'+ complainStatus +'</td> </tr></table> </div></div>'
+            var mark = L.marker([dataLatitude, dataLongitude], {icon:complainStatus === 'Resolved'?greenIcon:orangeIcon }).addTo(mymap);
+            //markersClusterGroup.addLayer(mark);
+            mark.bindPopup(customPopupComplaint);
+            for (var i=0;i<nearby_flight.length;i++) {
+                if (String(nearby_flight[i][0]) == mapId) {
+                    var customPopupNearby = '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Id</th><th>Altitude</th><th>Status</th></tr><tr><td >'+ String(nearby_flight[i][3]) +'</td><td >'+ String(nearby_flight[i][4]) +'</td><td >'+ String(nearby_flight[i][5]) +'</td> </tr></table> </div></div>'
+                    mark_nearby[i] = L.marker([String(nearby_flight[i][1]), String(nearby_flight[i][2])], {icon:nearbyIcon});
+                    markersClusterGroup.addLayer(mark_nearby[i]);
+
+                    mark_nearby[i].bindPopup(customPopupNearby);
+
+                }
+            }
+            for (var i=0;i<nearby_auth_flight.length;i++) {
+                if (String(nearby_auth_flight[i][0]) == mapId) {
+                    var  customPopupNearbyAuth= '<div class="bind-popup" > <div class="bind-header"> <table style="width:100%;"><tr><th>Name</th><th> Phone Number</th></tr><tr><td >'+ String(nearby_auth_flight[i][3]) +'</td><td >'+ String(nearby_auth_flight[i][4]) +'</td> </tr></table> </div></div>'
+                    mark_nearby_auth[i] = L.marker([String(nearby_auth_flight[i][1]), String(nearby_auth_flight[i][2])], {icon:nearbyAuthIcon});
+                    markersClusterGroup.addLayer(mark_nearby_auth[i]);
+
+                    mark_nearby_auth[i].bindPopup(customPopupNearbyAuth);
+
+                }
+            }
+            var geojsonLayer = new L.GeoJSON.AJAX("../../../staticfiles/data/nepal.geojson",{style:{
+                "color": "#04AA66",
+                "weight": 5,
+                "opacity": 0.65
+            }});       
+            geojsonLayer.addTo(mymap);
+
+            osm = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2VvbWF0dXBlbiIsImEiOiJja2E5bDFwb2swdHNyMnNvenZxa2Vpeml2In0.fCStqdwmFYFP-cUvb5vMCw', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+        for (var x = 0; x < noFlyZone_json.length; x++) {
+            var noFlyZoneLayer = new L.GeoJSON.AJAX("../../uploads/shp_files/"+ String(noFlyZone_json[x]), {style : {
+                "color": "red",
+                "weight": 3,
+                "opacity": 1
+            }}).addTo(mymap);
+            
+        }
+        mymap.addLayer(markersClusterGroup);
+        
+
+        googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+        googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+
+        var baseLayers = {
+            "OpenStreetMap": osm,
+            "Google Streets": googleStreets,
+            "Google Hybrid": googleHybrid,
+            "Google Satellite": googleSat,
+            "Google Terrain": googleTerrain,
+
+        };
+        layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true}).addTo(mymap);
+        
+        function closePopup() {
+            $('.close-icon').on('click', function (e) {
+                e.preventDefault();
+                $(this).closest('.popup').removeClass('open');
+            });
+        }
+
+        closePopup();
+                // var lat = document.getElementById('map').getAttribute('value').split(',')[0]
+                // var long = document.getElementById('map').getAttribute('value').split(',')[1]
+
+            
+            
+        });
+    });
+    $(document).ready(function () {
+        var expandBtn = document.getElementsByClassName('flightPop')
+
+        flight_objects = flight_objects.replace(/&quot;/g, '"').replace(/uav_uuid__operator__company_name/g, 'company_name');
+        flight_object = JSON.parse(flight_objects)
+        console.log(flight_object);
+
+        for (var i = 0; i < expandBtn.length; i++) {
+            expandBtn[i].addEventListener('click', function (e) {
+                // console.log('clicked');
+                object_id = e.target.id.split('_')[1]
+                for (j = 0; j < flight_object.length; j++) {
+                    if (object_id == flight_object[j].uav_uid) {
+                        createModal(flight_object[j])
+                    }
+                }
+            })
+        }
+
+        function createModal(data) {
+            var html1 = `
+                <div class="popup-header">
+                <h3>Permission Request for <b>ID ` + data.uav_uid + `</b></h3>
+                </div>
+                <div class="popup-content">
+                    <div class="drone-details">
+                        <div class="row gx-md-3 gx-lg-3">
+                            <div class="col-xl-5 col-sm-12">
+                                <div class="drone-content col-left">
+                                    <ul>
+                                        <li>
+                                            <h4>Operators info</h4>
+                                            <div class="content-list">
+                                                <p>
+                                                    <b>Company Name:</b>
+                                                    <span>` + data.company_name + `</span>
+                                                </p>
+                                                <p>
+                                                    <b>Phone Number:</b>
+                                                    <span>` + data.uav_uuid__operator__phone_number + `</span>
+                                                </p>
+                                                <p>
+                                                    <b>Email:</b>
+                                                    <span>` + data.uav_uuid__operator__email + `</span>
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <h4>Flight info</h4>
+                                            <div class="content-list">
+                                                <p><b>Start Date:
+                                                    </b><span>` + data.flight_start_date + `</span>
+                                                </p>
+                                                <p><b>End Date:
+                                                    </b><span>` + data.flight_end_date + `</span>
+                                                </p>
+                                                <p><b> Time:
+                                                    </b><span>` + data.flight_time + `</span>
+                                                </p>
+                                                <p><b>Purpose:
+                                                    </b><span>` + data.flight_purpose + `</span>
+                                                </p>
+                                                <p><b>Aircraft Name:
+                                                    </b><span>` + data.uav_uuid__popular_name + `</span>
+                                                </p>
+                                                <p><b>Unique ID:
+                                                    </b><span>`+ data.uav_uuid + `</span>
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <h4>Pilot info</h4>
+                                            <div class="content-list">
+                                                <p><b>Pilot Name: </b><span>
+                                                    ` + data.pilot_id__name + `
+                                                    </span>
+                                                    <p><b>Pilot Phone Number:
+                                                    </b><span>` + data.pilot_id__phone_number + `</span>
+                                                    </p>
+                                                    <p><b>Pilot Company:
+                                                    </b><span>`+ data.pilot_id__company + `</span>
+                                                    </p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h4>Documentation</h4>
+                                            <div class="row g-2">
+                                                <div class="col-md-4">
+                                                    <div class="file-upload">
+                                                        <a href="` + data.pilot_id__cv_url + `" target="_blank" class="file-link">
+                                                            <div class="file-icon">
+                                                                <i class="material-icons">description</i>
+                                                            </div>
+                                                            <div class="file-info">
+                                                                <div class ="file-wrap">
+                                                                    <p>Pilot CV</p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="file-upload">
+                                                        <a href="` + data.flight_plan_url + `" target="_blank" class="file-link">
+                                                            <div class="file-icon">
+                                                                <i class="material-icons">description</i>
+                                                            </div>
+                                                            <p>Flight Plan</p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="file-upload">
+                                                        <a href="` + data.flight_insurance_url + `" target="_blank" class="file-link">
+                                                            <div class="file-icon">
+                                                                <i class="material-icons">description</i>
+                                                            </div>
+                                                            <p>Drone Insurance</p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-sm-12">
+                                <div class="map-content col-right">
+                                    <div class="tab-content-holder current" id="location">
+                                        <div id="map" class="map" value="` + data.latitude + `, ` + data.longitude + `"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+            document.getElementById('flightPopUp').innerHTML = html1
+            plotMap(data)
+        }
+
+        function plotMap(data) {
+            var map = L.map('map').setView([data.latitude, data.longitude], 8);
+            // var map = L.map('map', {
+            //     // layers: [base],
+            //     center: new L.LatLng(lat, lon),
+            //     zoom: 12,
+            // });
+            
+            var mark = L.marker([data.latitude, data.longitude]).addTo(map);
+
+            // console.log(flight_object)
+
+            var circle = L.circle([data.latitude, data.longitude], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 100
+            }).addTo(map);
+
+            osm = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ2VvbWF0dXBlbiIsImEiOiJja2E5bDFwb2swdHNyMnNvenZxa2Vpeml2In0.fCStqdwmFYFP-cUvb5vMCw', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+            googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+            googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+            googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+            googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+
+
+            var baseLayers = {
+                "OpenStreetMap": osm,
+                "Google Streets": googleStreets,
+                "Google Hybrid": googleHybrid,
+                "Google Satellite": googleSat,
+                "Google Terrain": googleTerrain,
+
+            };
+
+
+            customPopup = '<div class="bind-popup"> <div class="bind-header"><h5>Proposed FLight Location</h5> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
+
+
+            layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
+        }
+    });
+    $('.leaflet-popup-content, .leaflet-popup-content-wrapper').css('width', '300px');
+
+</script>
+{% endblock footer_links %}

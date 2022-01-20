@@ -1,0 +1,270 @@
+
+.custom-select {
+    position: relative;
+      width: 100%;
+      min-width: 160px;
+      @media #{$breakpoint-desktop}{
+          min-width: 120px;
+      }
+    .search {
+      position: relative;
+      max-width: 94%;
+      margin: 0 auto;
+      margin-top: 0.6125rem;
+    }
+    p {
+      display: inline-block;
+      width: 100%;
+      @include transition(all .4s ease);
+     
+      &.selected-item {
+        border: 1px solid $border-light;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        padding: 0 1.5rem 0 1rem;
+        text-transform: capitalize;
+        @include radius(5px);
+        position: relative;
+        cursor: pointer;
+        color: $heading-color;
+        background-color: $white-color;
+        @include line-clamp(1);
+        @include display-flex(flex);
+        @include justify-content-start;
+        @include align-items-center;
+        @media #{$breakpoint-lg-desktop}{
+          height: 2.25rem;
+          line-height: 2.25rem;
+         }
+        @media #{$breakpoint-desktop}{
+          height: 1.75rem;
+          line-height: 1.75rem;
+          padding: 0 1.25rem 0 .875rem;   
+         }
+         &.selected{
+           background: $secondary-light;
+           span{
+             font-weight:  600;
+           }
+         }
+        span{
+          font-weight: 400;
+          padding-right: 15px;
+          @include transition(all .3s ease);
+        }
+        i{
+            margin-right: .5rem;
+            font-size: 22px;
+            color: $body-color;
+            @media #{$breakpoint-desktop}{
+              font-size: 18px;        
+            }
+        }
+  
+        &::after {
+          content: "arrow_drop_down";
+          font-family: "Material Icons";
+          position: absolute;
+          text-transform: initial;
+          right:.5rem;
+          top:0;
+          font-size: 22px;
+          color: $heading-color;
+          z-index: 99;
+          @media #{$breakpoint-desktop}{
+            font-size: 18px;   
+            top: -1px;     
+          }
+        }
+      }
+      
+    }
+    .select-list {
+      min-width: 120px;
+      width: 100%;
+      position: absolute;
+      top: 100%;
+      border: 0px solid $border-color;
+      z-index: 1000;
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+      -ms-overflow-style:-ms-autohiding-scrollbar;
+      background-color: $white-color;
+      @include box-shadow(0 5px 15px rgba(0, 0, 0, 0.15));
+      @include transition(all .4s ease);
+      max-height: 0;
+      @include radius(5px);
+      &::-webkit-scrollbar {
+        width: 4px;
+        background: $border-color;
+        @include radius(4px);
+      }
+
+      &::-webkit-scrollbar-track {
+          background-color:$border-color;
+          @include radius(4px);
+      }
+
+      &::-webkit-scrollbar-thumb {
+          @include radius(4px);
+          background: $border-dark;
+      }
+      &.sm-length{
+        overflow-y: initial;
+      }
+      &.is-border{
+        border: 1px solid $border-light;
+      }
+      li {
+        height: 100%;
+        visibility: hidden;
+        opacity: 0;
+        background: $white-color;
+        padding: .5rem 0.75rem;
+        @include display-flex(flex);
+        @include justify-content-start;
+        @include align-items-center;
+        cursor: pointer;
+        @include transition(all 0.3s linear);
+        border-bottom: 1px solid $border-color;
+        
+        margin-bottom: 0;
+        label,span {
+          font-weight: 400;
+          text-transform: capitalize;
+          color: $text-color;
+        }
+        i{
+            font-weight: 400;
+            font-size: 1.2rem;
+            max-width: 18px;
+            @include flex(0 0 24px);
+            max-width: 24px;
+            line-height: 1;
+            @media #{$breakpoint-desktop}{
+              font-size: .875rem;
+            }
+        }
+        img{
+            max-width: 14px;
+        }
+      }
+  
+      &.right-dropdown {
+        right: 0;
+      }
+  
+      &.left-dropdown {
+        left: 0;
+      }
+    }
+    &:hover{
+      p {
+        &.selected-item {
+          background: $secondary-light;
+        }
+      }
+    }
+    &.is-bg{
+      p{
+        background: $secondary-color;
+      }
+    }
+    
+    &.is-disable{
+      p{
+        &.selected-item{
+          color: $text-color;
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        &:hover{
+          background: $white-color;
+        }
+      }
+      &.show-dropdown {
+        p {
+          &.selected-item {
+            background: $white-color;
+            &::after {
+              content: "expand_more";
+            }
+          }
+        }
+        .select-list{
+         display: none;
+        }
+       
+      }
+    }
+    &.is-sm{
+      p{
+        &.selected-item {
+          height: 2.5rem;
+          line-height: 2.5rem;
+          @media #{$breakpoint-desktop} {
+            height: 2rem;
+            line-height: 2rem;
+            font-size: .75rem;
+          }
+        }
+      }
+      .select-list{
+        li {
+          @media #{$breakpoint-desktop}{
+            font-size: .75rem;
+          }
+        }
+      } 
+    }
+    &.show-dropdown {
+      p {
+        &.selected-item {
+          background: $secondary-light;
+          &::after {
+            content: "arrow_drop_up";
+          }
+        }
+      }
+      .select-list{
+        border: 1px solid $border-color;
+        max-height: 200px;
+        height: auto;
+        &.sm-length {
+          max-height: 100px;
+        }
+        li{
+            visibility: visible;
+            opacity: 1;
+            &:hover{
+              background: $secondary-light;
+              span{
+                font-weight: 600;
+                color: $heading-color;
+              }
+              i{
+                  color: $primary-color;
+              }
+            }
+        }
+      }
+    }
+}
+
+.custom-select-wrap{
+  @include display-flex(flex);
+  @include align-items-center;
+  label{
+    font-weight: 600;
+    color: $body-color;
+    font-size: 13px;
+    white-space: nowrap;
+    padding-right: .5rem;
+    @media #{$breakpoint-desktop}{
+      font-size: 11px;
+    }
+  }
+  &:not(:last-child){
+    padding-right: 1.5rem;
+  }
+}

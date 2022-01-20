@@ -1,0 +1,272 @@
+{% extends 'flightres/base.html' %}
+{% load static %}
+{% block links %}
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+<style>
+.preloader {
+    background-color: #ffffff8f;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+    -webkit-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s ease;
+    margin: 0 auto;
+  }
+
+  /* line 627, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_common.scss */
+  .preloader .preloader-circle {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border-style: solid;
+    border-width: 1px;
+    border-top-color: #1e74c9;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    z-index: 10;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 1px 5px 0 rgba(35, 181, 185, 0.15);
+    box-shadow: 0 1px 5px 0 rgba(35, 181, 185, 0.15);
+    background-color: #fff;
+    -webkit-animation: zoom 2000ms infinite ease;
+    animation: zoom 2000ms infinite ease;
+    -webkit-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s;
+  }
+
+  /* line 649, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_common.scss */
+  .preloader .preloader-circle2 {
+    border-top-color: #0078ff;
+  }
+
+  /* line 652, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_common.scss */
+  .preloader .preloader-img {
+    position: absolute;
+    top: 50%;
+    z-index: 200;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    display: inline-block;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding-top: 6px;
+    -webkit-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s;
+  }
+
+  /* line 670, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_common.scss */
+  .preloader .preloader-img img {
+    max-width: 55px;
+  }
+
+  /* line 673, C:/Users/HP/Desktop/jun-2020/277.Charity _Non-profit/assets/scss/_common.scss */
+  .preloader .pere-text strong {
+    font-weight: 800;
+    color: #dca73a;
+    text-transform: uppercase;
+  }
+
+  @-webkit-keyframes zoom {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s;
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    -webkit-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s;
+  }
+}
+
+@keyframes zoom {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s;
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+    -webkit-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s;
+  }
+}
+
+</style>
+
+{% endblock links %}
+
+{% block body %}
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="{% static 'img/phantom3.jpg' %}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="admin-main">
+    <div class="main-card">
+        <div class="card-header">
+            <h1>FLIGHT PERMISSION / MANAGE {{ title }} PERMISSION</h1>
+        </div>
+        <div class="card-body">
+            <table id="admin-datatable" class="admin-datatable ">
+                <thead>
+
+                <tr>
+                    <th class="serial-th">ID</th>
+                    <th>UIN</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Due (In days)</th>
+                    <th>Purpose</th>
+                    <th>Flight Location</th>
+                    <th>Status</th>
+                    <th>Comments</th>
+                    <th class="modal-th"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for object, due_in in object_data %}
+                <!-- <tr class="highlight"> -->
+                <tr id="expand_{{ object.uav_uid }}" data-toggle="modal" data-target="#open-modal" modal-link="open-modal" class="highlight modal-link expandData">
+                    <td>{{ object.uav_uid }}</td>
+                    <td>{{ object.uav_uuid.unid }}</td>
+                    <td>
+                        <time>{{ object.flight_start_date }}</time>
+                    </td>
+                    <td>
+                        <time>{{ object.flight_end_date }}</time>
+                    </td>
+
+                    {% if due_in < 0 %}
+                    <td>Overdue</td>
+                    {% elif due_in == 0 %}
+                    <td>Today</td>
+                    {% elif due_in == 1 %}
+                    <td>{{ due_in }} Day</td>
+                    {% else %}
+                    <td>{{ due_in }} Days</td>
+                    {% endif %}
+
+
+                    <td>{{ object.flight_purpose }}</td>
+                    <td>Latitude: {{ object.latitude }} Longitude: {{ object.longitude }}</td>
+                    {% if object.status == 'Approved' %}
+                    <td><span class="status approved">{{ object.status }}</span></td>
+                    {% elif object.status == 'Rejected' %}
+                    <td><span class="status failed">{{ object.status }}</span></td>
+                    {% else %}
+                    <td><span class="status pending">{{ object.status }}</span></td>
+                    {% endif %}
+                    <td>{{ object.rejection_reason|default:"--" }}</td>
+                    <td class="table-action">
+                        <button id="expand_{{ object.uav_uid }}" data-toggle="modal" data-target="#open-modal" modal-link="open-modal"
+                        type="button"
+                                class="btn modal-link expandData">
+                               <i class="material-icons expandData">chevron_right</i>
+                        </button>
+                    </td>
+                </tr>
+                        <div class="popup" id="open-modal">
+                            <div id="modal-dialog" class="popup-container lg-popup map-popup">
+                                <div class="popup-body">
+                                    <span class="close-icon"><i class="material-icons">close</i></span>
+                                    <div class="popup-body" id="flightPopUp">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popup" id="open-modal-deny">
+                            <div class="popup-container sm-popup map-popup">
+                                <div class="popup-body">
+                                    <span class="close-icon"><i class="material-icons">close</i></span>
+                                    <div class="popup-body" id="submit-deny-div">
+                                        <!-- <form action="/np/dashboard/deny_perm/{{object.uav_uid}}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="popup-header">
+                                            <h5>Reason for Denial</h5>
+                                        </div>
+                                        <input type="textarea" placeholder="Reason for denial"
+                                            style="height: 54px; width: 375px; align-self: center;" for="reason"
+                                            name="reason"></input>
+                                        <br />
+                                        <div class="buttons is-end" style="height:35px;">
+                                            <button type="submit" class="common-button is-bg"
+                                                style="margin-right:3px">Submit</button>
+                                        </div>
+                                    </form> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        <!-- </div> -->
+        <!-- </td>
+        </tr> -->
+        {% endfor %}
+        </tbody>
+        </table>
+        </div>
+    </div>
+</main>
+
+<script type="text/javascript">
+        // jQuery(document).ready(function ($) {
+        //     $(window).load(function () {
+        //         setTimeout(function(){
+        //             $('#preloader').fadeOut('slow', function () {
+        //             });
+        //         },10000);
+
+        //     });
+        // });
+        // var lat;
+        // var lon;
+        // {% for object in object_list %}
+            //     window.lat = '{{ object.latitude|safe }}';
+            //     window.lon = '{{ object.longitude|safe }}';
+            // {% endfor %}
+        var flight_objects = '{{ json_data }}'
+        var current_user = '{{ current_user }}'
+        var current_email = '{{current_user_email}}'
+        var noFlyZone = '{{obj}}'
+
+
+</script>
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+<script>
+        $(window).on('load', function () {
+            $('#preloader-active').delay(1000).fadeOut('slow');
+            $('body').delay(1000).css({
+                'overflow': 'visible'
+            });
+        });
+   </script>
+{% endblock body %}

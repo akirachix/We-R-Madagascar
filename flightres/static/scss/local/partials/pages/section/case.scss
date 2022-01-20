@@ -1,0 +1,146 @@
+.case-section{
+    background-color: $grey-color;
+    border-color: $border-color;
+    padding:80px 0 50px 50px;
+    margin-top:100px;
+    @include radius(16px);
+    .slick-list{
+        padding:0 30% 0 0;
+    }
+    .case-box{
+        padding-right: 30px;
+        .casebox-in{
+            @include display-flex(flex);
+            @include justify-content-between;
+            @include align-items-center;
+            background-color: $white-color;
+            border:1px solid $border-color;
+            padding:2rem;
+            @include radius(10px);
+            margin-bottom: 2rem;
+
+            .casebox-news{
+                flex-grow: 1;
+                padding-right: 2rem;
+                h5{
+                    margin-bottom: 2rem;
+                    line-height: 1.5;
+                    font-weight: 600;
+                    font-size: 1.35rem;
+                }
+                p{
+                    @include trim(4);
+                    font-size: .875rem;
+                }
+            }
+            figure{
+                margin:0;
+                @include flex( 0 0 250px);
+                max-width: 250px;
+            }
+        }
+        // &.slick-active.slick-current{
+        //     padding-right: 30px;
+        // }
+    }
+    .slick-prev,.slick-next{
+        width: 44px;
+        z-index: 999;
+        height: 44px;
+        @include display-flex(flex);
+        @include justify-content-center;
+        @include align-items-center;
+        @include flex-direction-column(column);
+        z-index: 1000;
+        line-height: 2.2;
+        background:$white-color;
+        @include transition(all .2s ease-in-out 0s);
+        @include radius(100%);
+        border:1px solid $border-color;
+        &::before{
+            font-family: "Material Icons";
+            opacity: .75;
+            color: $body-color;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        &:hover{
+            background-color: $primary-color;
+            border-color: $primary-color;
+            &::before{
+                color:$white-color;
+            }
+        }
+        
+    }
+    .slick-prev{
+        right:100px;
+        top:-50px;
+        left:auto;
+        &::before{
+            font-family: "Material Icons";
+            content:'chevron_left';
+        }
+    }
+    .slick-next{
+        right:50px;
+        top:-50px;
+        &::before{
+            font-family: "Material Icons";
+            content:'chevron_right';
+        }
+    }
+    @media screen and (max-width:1440px){
+        .slick-prev,.slick-next{
+            width: 36px;
+            height: 36px;
+        }
+    }
+    @media screen and (max-width:1199px){
+        .slick-list{
+            padding:0;
+        }
+        .slick-prev{
+            right:40px;
+        }
+        .slick-next{
+            right:0px;
+        }
+    }
+    @media #{$breakpoint-ls}{
+        padding-left: 30px;
+    }
+    @media #{$breakpoint-lg}{
+        padding-left: 30px;
+            .case-box{
+                .casebox-in{
+                    @include flex-wrap(wrap);
+                    figure{
+                        margin-top:1rem;
+                    }
+                }
+            }
+        
+    }
+    @media #{$breakpoint-md}{
+        padding:15px;
+        padding-top:50px;
+            .case-box{
+                padding:0;
+                .casebox-in{
+                    @include flex-wrap(wrap);
+                    padding:.6125rem;
+                    .casebox-news{
+                        h5{
+                            margin-bottom: 1rem;
+                            font-size: 1.25rem;
+                        }
+                    }
+                    figure{
+                        margin-top:1rem;
+                    }
+                }
+            }
+        
+    }
+}

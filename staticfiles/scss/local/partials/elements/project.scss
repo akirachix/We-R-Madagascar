@@ -1,0 +1,245 @@
+.project-wrapper{
+    @include display-flex(flex);
+    @include align-items-stretch;
+    @include justify-content-end;
+    .sidebar-profile{
+      background-color: $grey-color;
+      @include flex(0 0 480px);
+      max-width: 480px;
+      @include display-flex(flex);
+      @include flex-direction-column(column);
+      flex-grow: 0;
+      flex-shrink: 0;
+      @media screen and (max-width:1540px){
+        @include flex(0 0 350px);
+        max-width: 350px;
+      }
+      .profile-header{
+        @include display-flex(flex);
+        @include align-items-center;
+        @include justify-content-between;
+        padding:1rem 2rem;
+        flex-shrink: 0;
+        h6{
+          text-transform: capitalize;
+        }
+      }
+      .profile-body{
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        margin: 0;
+        padding: 2rem;
+        overflow-y:auto;
+        -webkit-overflow-scrolling:touch;
+        -ms-overflow-style:-ms-autohiding-scrollbar;
+        min-height: calc(100vh - 150px);
+        @media #{$breakpoint-ls}{
+          padding:1rem;
+        }
+  
+  
+        &::-webkit-scrollbar {
+           background: $border-color;
+            @include radius(4px);
+            width: 2px;
+        }
+  
+        &::-webkit-scrollbar-track {
+            background-color:$border-color;
+            @include radius(4px);
+            width: 2px;
+        }
+  
+        &::-webkit-scrollbar-thumb {
+            @include radius(4px);
+            background: $border-dark;
+        }    width: 2px;
+         
+        .owner-figure{
+          text-align: center;
+          padding-bottom: 2rem;
+          border-bottom: 2px solid $border-color;
+          figure{
+            max-width: 120px;
+            width: 120px;
+            height: 120px;
+            @include display-flex(flex);
+            @include flex-direction-column(column);
+            @include align-items-center;
+            @include justify-content-center;
+            @include radius(100%);
+            text-align: center;
+            border:1px solid $primary-color;
+            padding:5px;
+            margin: 0 auto;
+            img{
+              width:120px;
+              height: 120px;
+              @include radius(100%);
+              vertical-align: middle;
+            }
+          }
+          .owner-content{
+            margin-top:1rem;
+            h5{
+              font-size: 1.1rem;
+              text-transform: capitalize;
+            }
+            span{
+              color:$primary-color;
+              text-transform: capitalize;
+              font-weight: 500;
+            }
+          }
+        }
+        .owner-bio{
+            margin:2rem 0;
+            p{
+                @include display-flex(flex);
+                @include align-items-center;
+                @include justify-content-between;
+                span{
+                    font-size: .775rem;
+                }
+                b{
+                    font-size: .875rem;
+                    font-weight: 600;
+                }
+            }
+        }
+        .buttons{
+            button{
+                width: 100%;
+                padding:.5rem 1rem;
+                min-height: 40px;
+            }
+        }
+      }
+    }
+    @media #{$breakpoint-ls}{
+        @include flex-wrap(wrap);
+        .form-card{
+            margin-bottom: 2rem;
+        }
+        .sidebar-profile{
+            @include flex(0 0 100%);
+            max-width: 100%;
+            .profile-body{
+                max-height: initial;
+                min-height: initial;
+
+            }
+        }
+    }
+  }
+.form-body{
+    .acc{
+        .acc-list{
+            @include radius(10px);
+            .acc-header{
+                @include display-flex(flex);
+                @include align-items-center;
+                @include justify-content-between;
+                padding:1rem;
+                padding-right: 2rem;
+                .acc-left{
+                    flex-grow: 1;
+                    @include display-flex(flex);
+                    @include align-items-center;
+                    @include justify-content-start;
+                    span{
+                        &.icon{
+                          @include display-flex(flex);
+                          @include justify-content-center;
+                          @include align-items-center;
+                          @include flex-direction-column(column);
+                          width:50px;
+                          height: 50px;
+                          border:1px solid $border-color;
+                          @include radius(10px);
+                          margin-right: 1rem;
+                        }
+                      }
+                    .acc-left-content{
+                        h5{
+                            @include display-flex(flex);
+                            @include align-items-center;
+                            font-size: 1rem;
+                            margin-bottom: .5rem;
+                            @include justify-content-start;
+                            i{
+                                font-size: 1rem;
+                                margin-left: .6125rem;
+                                color:$red-color;
+                            }
+                          }
+                          p{
+                              font-size: .875rem;
+                          }
+                    }
+                }
+                
+            }
+            .acc-body{
+                padding:0 2rem;
+                .project-sublist{
+                    display: block;
+                    .sublist{
+                        @include display-flex(flex);
+                        @include align-items-center;
+                        @include justify-content-between;
+                        padding:.35rem 0; 
+                        h6{
+                            font-size: .91235rem;
+                            cursor: pointer;
+                            @include display-flex(flex);
+                            @include align-items-center;
+                            @include justify-content-start;
+                            i{
+                                font-size: 1rem;
+                                margin-left:.5rem;
+                            }
+                        }
+                        &:hover{
+                            h6{
+                                color:$primary-color;
+                            }
+                        }
+                        .icons{
+                            i{
+                                font-size: 1rem;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            &.active{
+                background-color: $primary-light-1;
+                .acc-header{
+                    border-color: $primary-light-1;
+                }
+            }
+        }
+    }
+    .blank-project{
+        background-color: $grey-color;
+        @include radius(10px);
+        height:calc(100vh - 300px);
+        @include display-flex(flex);
+        @include align-items-center;
+        @include justify-content-center;
+        @include flex-direction-column(column);
+        b{
+            margin-bottom: .6125rem;
+        }
+        span{
+            font-size: .775rem;
+        }
+        button{
+            margin-top:2rem;
+            padding:.5rem 1rem;
+            min-height: 40px;
+        }
+      }
+}

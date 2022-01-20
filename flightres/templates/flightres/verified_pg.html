@@ -1,0 +1,256 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Nepal Drone Portal">
+    <meta property="og:image" content="preview.html">
+    <meta property="og:site_name" content="Nepal Drone Portal">
+    <meta property="og:title" content="Nepal Drone Portal">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://naxa.com.np">
+
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Nepal Drone Portal">
+    <meta name="twitter:creator" content="@Nepal Drone Portal">
+    <meta name="twitter:title" content="Nepal Drone Portal">
+    <meta name="twitter:description" content="Nepal Drone Portal">
+    <meta name="twitter:image" content="preview.html">
+
+    <!--title-->
+    <title>Nepal Drone Portal</title>
+
+    <!-- faveicon start   -->
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" sizes="32x32">
+
+    <!-- stylesheet start -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+</head>
+
+<body>
+    <div class="permit-pg">
+        <div class="landing-section">
+            <div class="top-bar"></div>
+            <div class="contents">
+                <div class="container-fluid">
+                    <div class="wrapper">
+                        <a href="home.html" class="logo"><img src="{% static '/img/logo-blue.png' %}"
+                                alt="Drone Registry" /></a>
+                        <figure class="center-image"><img src="{% static '/img/drone_and_Clouds.svg' %}" alt="Drone" />
+                        </figure>
+                        <div class="message">
+                            <h1>Thanks for your request.</h1>
+                            <figure class="result"><img src="{% static '/img/Verified.svg' %}" alt="verified"></figure>
+                            <p>Your permission request has been verified and approved. You can perform this flight.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="details-section">
+            <div class="container-fluid">
+                <div class="wrapper">
+                    <h2>Permission request details</h2>
+                    <div class="details-wrap">
+                        <div class="row row-details">
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Operators Info</h6>
+                                    <div class="info">
+                                        <p><b>Company Name: </b><span>
+                                                {{ object.uav_uuid.operator.company_name }}
+                                            </span>
+                                        </p>
+                                        <p><b>Phone Number:
+                                            </b><span>{{ object.uav_uuid.operator.phone_number }}</span>
+                                        </p>
+                                        <p><b>Email:
+                                            </b><span>{{ object.uav_uuid.operator.email }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Flight Info</h6>
+                                    <div class="info">
+                                        <p><b>Start Date:
+                                            </b><span>{{ object.flight_start_date }}</span>
+                                        </p>
+                                        <p><b>End Date:
+                                            </b><span>{{ object.flight_end_date }}</span>
+                                        </p>
+                                        <p><b>Time:
+                                            </b><span>{{ object.flight_time }}</span>
+                                        </p>
+                                        <p><b>Flight Purpose:
+                                            </b><span>{{ object.flight_purpose }}</span>
+                                        </p>
+                                        <p><b>Aircraft Name:
+                                            </b><span>{{ object.uav_uuid.popular_name }}</span>
+                                        </p>
+                                        <p><b>Drone Insurance:
+                                            </b><span><a href="{{ object.flight_insurance_url }}">View File</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Pilot Info</h6>
+                                    <div class="info">
+                                        <p><b>Pilot Name:
+                                            </b><span>{{ object.pilot_id.name }}</span>
+                                        </p>
+                                        <p><b>Pilot Phone Number:
+                                            </b><span>{{ object.pilot_id.phone_number }}</span>
+                                        </p>
+                                        <p><b>Pilot CV URL: </b><span><a href="{{ object.pilot_id.cv_url }}">View
+                                                    File</a></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row row-details">
+                            <div class="col-md-6 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Location map</h6>
+                                    <div class="map">
+                                        <div id="location-map" style="height: 300px; width: 300px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-7 column">
+                                <div class="details-info">
+                                    <h6 class="col-title">Images</h6>
+                                    <div class="row g-2">
+                                        <div class="col-lg-6 col-md-7">
+                                            <div class="file-upload">
+                                                <a href="{{ object.pilot_id.cv_url }}" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">description</i>
+                                                    </div>
+                                                    <div class="file-info">
+                                                        <div class="file-wrap">
+                                                            <i class="material-icons">description</i>
+                                                            <p>Pilot Cv</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-7">
+                                            <div class="file-upload">
+                                                <a href="{{ object.flight_plan_url }}" class="file-link">
+                                                    <div class="file-icon">
+                                                        <i class="material-icons">map</i>
+                                                    </div>
+                                                    <div class="file-info">
+                                                        <div class="file-wrap">
+                                                            <i class="material-icons">map</i>
+                                                            <p>Flight Plan</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="site-footer home-footer">
+                        <div class="wrapper">
+                            <div class="footer-in">
+                                <p class="footer-left">© 2020 Nepal Drone Portal. All rights reserved.</p>
+                                <p class="footer-right"><span>Developed by <a href="#/">NAXA</a></span></p>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <!-- Jquery Core Js -->
+        <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+        <script src="{% static 'js/map.js' %}"></script>
+        <script src="{% static 'datatable/datatables.min.js' %}"></script>
+        <script src="{% static 'js/custom-datatable.js' %}"></script>
+        <script src="{% static 'js/drone.js' %}"></script>
+
+        <script>
+            var lat = '{{ object.latitude|safe }}';
+            var lon= '{{ object.longitude|safe }}';
+
+            var map = L.map('location-map').setView([lat, lon], 15);
+
+            var mark = L.marker([lat, lon], 15).addTo(map);
+
+            var circle = L.circle([lat, lon], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 100
+            }).addTo(map);
+
+            osm = L.tileLayer('https://api.mapbox.com/styles/v1/upendraoli/cjuvfcfns1q8r1focd0rdlgqn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidXBlbmRyYW9saSIsImEiOiJjaWYwcnFnNmYwMGY4dGZseWNwOTVtdW1tIn0.uhY72SyqmMJNTKa0bY-Oyw', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            })
+
+            googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            }).addTo(map);
+            googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+            googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+            googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+            });
+
+
+            var baseLayers = {
+                "OpenStreetMap": osm,
+                "Google Streets": googleStreets,
+                "Google Hybrid": googleHybrid,
+                "Google Satellite": googleSat,
+                "Google Terrain": googleTerrain,
+
+            };
+
+            layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true }).addTo(map);
+        </script>
+
+
+</body>
+
+</html>

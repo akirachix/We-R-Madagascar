@@ -1,0 +1,33 @@
+
+
+
+main{
+    &.main{
+        
+    }
+    
+}
+.main-card-header{
+    @include display-flex(flex);
+    @include justify-content-between;
+    @include align-items-center;
+    @include flex-wrap(wrap);
+    padding-bottom: 1.5rem;
+    h5{
+        font-size: 1.5rem;
+        font-weight: 600;
+        @media #{$breakpoint-ls}{
+            font-size: 1.5rem;
+        }
+        @media #{$breakpoint-lg}{
+            font-size: 1.2rem;
+        }
+    }
+}
+.leaflet-top, .leaflet-bottom{
+    z-index: 801;
+}
+
+
+
+

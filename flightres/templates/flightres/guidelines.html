@@ -1,0 +1,632 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Nepal Drone Portal">
+    <meta property="og:image" content="preview.html">
+    <meta property="og:site_name" content="Nepal Drone Portal">
+    <meta property="og:title" content="Nepal Drone Portal">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://naxa.com.np">
+
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@Nepal Drone Portal">
+    <meta name="twitter:creator" content="@Nepal Drone Portal">
+    <meta name="twitter:title" content="Nepal Drone Portal">
+    <meta name="twitter:description" content="Nepal Drone Portal">
+    <meta name="twitter:image" content="preview.html">
+
+    <!--title-->
+    <title>Nepal Drone Portal</title>
+
+    <!-- faveicon start   -->
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
+
+    <!-- stylesheet start -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-humanitarian.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/humanitarian-webfont.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="home-pg">
+    {% include 'flightres/headers.html' %}
+<!-- <header class="site-header">
+   
+    <div class="container">
+        <div class="wrap-container">
+            <div class="header-in">
+                <a href="{% url 'home' %}" class="active span-15">
+                    <img src="{% static 'img/logo-blue.png' %}"/>
+                </a>
+                <div class="menu-wrap">
+                    <div class="menu">
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}" class="active span-15">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'dashboard:about' %}" class="span-15">About</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <a href="{% url 'dashboard:guidelines' %}" class="common-button is-bg">UAV Guidelines</a>
+                </div>
+                <div class="toggle-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header> -->
+
+<main class="guidelines-main">
+    <div class="container">
+        <div class="wrap-container">
+            <h2>Anyone applying for drone permissions can get their drone permit from the District Administration Office of the proposed project location, if they are flying a drone that weighs less than two kilogram. </h2>
+            <div class="guidelines-row">
+                <h4>Government of Nepal has different concern for drone operation.</h4>
+                <div class="row no-gutters gx-2 gy-5">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="col-wrap">
+                            <div class="logo-img logo-fixed"><img src="{% static 'img/CAAN_LOGO.png' %}" alt="CANN">
+                            </div>
+                            <div class="info">
+                                <h6>Civil Aviation Authority of Nepal (CAAN)</h6>
+                                <p class="info-para">
+                                    CAAN is mainly concerned about collision with other aircrafts i.e. safety. They
+                                    believe that drone flying poses security threats and weakens air safety.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="col-wrap">
+                            <div class="logo-img"><img src="{% static 'img/Nepal-logo.jpg' %}" alt="GON logo"></div>
+                            <div class="info">
+                                <h6>Ministry of Information and Communication</h6>
+                                <p class="info-para">
+                                    They are concerned about the frequency of the remote control of the device used.
+                                    This frequency might create interference with devices being used by security
+                                    personnel and communication.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="col-wrap">
+                            <div class="logo-img"><img src="{% static 'img/Nepal-logo.jpg' %}" alt="GON logo"></div>
+                            <div class="info">
+                                <h6>Home Ministry</h6>
+                                <p class="info-para">
+                                    Drones initially were used for military purposes to strike attacks remotely in
+                                    different areas. While drones being used today carry payloads in the form of
+                                    different optical and other kinds of sensors. As they are capable of carrying other
+                                    payloads when tweaked, the home ministry concerns the illegal and unethical use of
+                                    drones encroaching state’s safety and personal privacy.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="col-wrap">
+                            <div class="logo-img"><img src="{% static 'img/Nepal-logo.jpg' %}" alt="GON logo"></div>
+                            <div class="info">
+                                <h6>Relevant Line Ministries</h6>
+                                <p class="info-para">Drones in its original terms means the vehicles which are being
+                                    used by military to strike weapons in different areas. As such, the home
+                                    ministry which looks after country’s security is worried if people use drones
+                                    for illegal activities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quote-section">
+                    <p>
+                        "Beside above agencies, line agencies needs also to be contacted for drone permissions eg. National parks department for flying in protected areas, Heritage Development Trust in case of heritage sites.
+                        <br><br/>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main class="guidelines-rules">
+    <div class="container">
+        <div class="wrap-container">
+            <h3 class="section-title">Drone/UAV Flight Guidelines in Nepal</h3>
+            <div class="rules-row">
+                <div class="row gx-2 gy-4">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="rules-wrap">
+                            <h6 class="title">2015</h6>
+                            <span>CANN</span>
+                            <a href="https://caanepal.gov.np/storage/app/media/uploaded-files/fod7Flight-Operations-Directives.pdf"
+                               class="link-wrap">
+                                <i class="material-icons">get_app</i>
+                                <span class="link">Drone Regulation Nepal after Earthquake.</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="rules-wrap">
+                            <h6 class="title">2015</h6>
+                            <span>MoHA</span>
+                            <a href="#/" class="link-wrap">
+                                <i class="material-icons">get_app</i>
+                                <span class="link">Drone Regulation Nepal after Earthquake.</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="rules-wrap">
+                            <h6 class="title">2019</h6>
+                            <span>CANN</span>
+                            <a href="https://caanepal.gov.np/drone" class="link-wrap">
+                                <i class="material-icons">get_app</i>
+                                <span class="link">Drone Regulation Nepal after Earthquake.</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="rules-wrap">
+                            <h6 class="title">2019</h6>
+                            <span>MoHA</span>
+                            <a href="https://moha.gov.np/en/post/drone-related-procedure-2019" class="link-wrap">
+                                <i class="material-icons">get_app</i>
+                                <span class="link">Drone Regulation Nepal after Earthquake.</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main class="guidelines-permission">
+    <div class="container">
+        <div class="wrap-container">
+            <h3 class="section-title">As per latest 2015, granting permission depends on the category.</h3>
+            <p>For any type of drone expect category A, getting recommendation /project support letter from local local municipality/rural municipality 
+                Will help you expedite the process
+                </p>
+            <div class="permission-row">
+                <div class="row gy-4">
+                    <div class="col-lg-8 col md-8 col-sm-12">
+                        <ul class="nav-wrap">
+                            <li class="nav-item active"><a href="#categoryA">Category A</a><span
+                                    class="bottom-border"></span></li>
+                            <li class="nav-item"><a href="#categoryB">Category B</a><span
+                                    class="bottom-border"></span></li>
+                            <li class="nav-item"><a href="#categoryC">Category C</a><span
+                                    class="bottom-border"></span></li>
+                            <li class="nav-item"><a href="#categoryD">Category D</a><span
+                                    class="bottom-border"></span></li>
+                        </ul>
+                        <div class="category-content">
+                            <div class="category-table" id="categoryA">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th>Weight</th>
+                                        <td>Below 250 gms</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Level of Risk</th>
+                                        <td>Very Low</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Permission Process</th>
+                                        <td>
+                                            <p>Step 1: Register your drone at Flight Safety Standards Department , Sinamangal</p>
+                                            <p>Note: No need of permission if you are flying on your private place, house, your
+                                            own land, flight under operator responsibility , all drone flights up to 200
+                                            feet in public spaces require approval from the local administration office,
+                                            inform nearby police.</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Drone Example</th>
+                                        <td>DJI Tello (80gms)</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="category-table" id="categoryB">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th>Weight</th>
+                                        <td>250 gms to 2 kgs</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Level of Risk</th>
+                                        <td>Low</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Permission Process</th>
+                                        <td>
+                                            <p>STEP 1-Register your drone at Flight Safety Standards Department , Sinamangal</p>
+                                            <p>STEP 2-Get Frequency permission from MoICT</p>
+                                            <p>STEP 3-Apply for permission at CAAN, Babarmahal</p>
+                                            <p>STEP 4-Apply for permission at District Administration Office</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Drone Example</th>
+                                        <td> DJI Phantom 4 Pro (1.39 kgs)</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="category-table" id="categoryC">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th>Weight</th>
+                                        <td>2kgs to 25 kgs</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Level of Risk</th>
+                                        <td>Regulated, Low</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Permission Process</th>
+                                        <td> 
+                                        <p>STEP 1-Register your drone at Flight Safety Standards Department , Sinamangal</p>
+                                        <p>STEP 2-Get Frequency permission from MoICT</p>
+                                        <p>STEP 3-Apply for permission at CAAN, Babarmahal</p>
+                                        <p>STEP 4-Apply for permission at Home Ministry</p>
+                                            <p>
+                                            Note: for recreational drones, also permission should be taken from the
+                                            tourism ministry.
+                                        </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Drone Example</th>
+                                        <td>DJI Matrice 600 Pro (9.6 kgs)</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="category-table" id="categoryD">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <th>Weight</th>
+                                        <td>Above 25 kgs</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Level of Risk</th>
+                                        <td>Regulated, High</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Permission Process</th>
+                                        <td> Permission Process:
+                                            <p>STEP 1-Register your drone at Flight Safety Standards Department , Sinamangal</p>
+                                            <p>STEP 2-Get Frequency permission from MoICT</p>
+                                            <p>STEP 3-Apply for permission at CAAN, Babarmahal</p>
+                                            <p>STEP 4-Apply for permission at Home Ministry</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Drone Example</th>
+                                        <td> MQ-9 Reaper (2223 kgs)</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col md-4 col-sm-12">
+                        <ul class="nav-wrap nav-steps">
+                            <li class="nav-item"><a href="#/">STEPS</a></li>
+                        </ul>
+                        <div class="category-content">
+                            <ul class="category-lists">
+                                <li>
+                                    <div class="icon-wrap"><span class="icon-span icon-blue"><i
+                                            class="material-icons">account_box</i></span></div>
+                                    <div class="step-process">
+                                        <span>1. Submit your documents</span>
+                                        <a
+                                                href="#/">https://caanepal.gov.np/storage/app/media/uploaded-files/RPA-Application-1.pdf</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-wrap"><span class="icon-span icon-light-blue"><i
+                                            class="material-icons">assignment</i></span></div>
+                                    <div class="step-process">
+                                        <span>2. Fill up a form and submit to our office</span>
+                                        <a
+                                                href="#/">https://caanepal.gov.np/storage/app/media/uploaded-files/RPA-Application-1.pdf</a>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-wrap"><span class="icon-span icon-blue"><i
+                                            class="material-icons">assignment</i></span></div>
+                                    <div class="step-process">
+                                        <span>3. Step 3</span>
+                                        <a
+                                                href="#/">https://caanepal.gov.np/storage/app/media/uploaded-files/RPA-Application-1.pdf</a>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main class="guideline-condition">
+    <div class="container">
+        <div class="wrap-container">
+            <h3 class="section-title">How to request a UAV flight permission as a pilot</h3>
+            <ul class="guideline-list-wrap">
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">lens</i>
+                    <span>Install the WhatsApp on your phone device</span>
+                </li>
+
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">lens</i>
+                    <span>Add a new contact with the name Nepal Drone Portal and number
++977 9818817052 to your phone book </span>
+                </li>
+
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">lens</i>
+                    <span>Open WhatsApp and Message ‘Hi’ or any other message to Nepal Drone Portal</span>
+                </li>
+
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">lens</i>
+                    <span>Text the number ‘1’ to start the conversation for a new flight permission</span>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+
+</main>
+<main class="guideline-condition">
+    <div class="container">
+        <div class="wrap-container">
+            <h3 class="section-title"> How to lodge a complaint as third-party</h3>
+            <ul class="guideline-list-wrap">
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">lens</i>
+                    <span>Install the WhatsApp on your phone device</span>
+                </li>
+
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">lens</i>
+                    <span>Add a new contact with the name Nepal Drone Portal and number
++977 9818817052 to your phone book </span>
+                </li>
+
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">lens</i>
+                    <span>Open WhatsApp and Message ‘Hi’ or any other message to Nepal Drone Portal</span>
+                </li>
+
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">lens</i>
+                    <span>Text the number ‘3’ to start the conversation to send a complaint for new flight permission</span>
+                </li>
+
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">lens</i>
+                    <span>Follow the guiding prompts to lodge your complaint accordinglyThen after, continue answering questions and submit a complaint </span>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+
+</main>
+<main class="guideline-condition">
+    <div class="container">
+        <div class="wrap-container">
+            <h3 class="section-title">Eligibility criteria to be a Remote Pilot and get flight permission: </h3>
+            <ul class="guideline-list-wrap">
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">check_circle</i>
+                    <span>You must register your UAV in CAAN and get a Unique Identification Number (UIN)</span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">check_circle</i>
+                    <span>At least 18 years old. </span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:orange">check_circle</i>
+                    <span>Able to read, write, speak, and understand English.</span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:orange">check_circle</i>
+                    <span>Be in a physical and mental condition to safely fly a UAS.</span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:red">check_circle</i>
+                    <span>You must fly within visual line-of-sight.  </span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:red">check_circle</i>
+                    <span>You must follow community-based safety guidelines and fly within your property. Note: if you are flying in a public place you should take permission from nearby police and sometimes with district authority and ATC as well.  </span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:red">check_circle</i>
+                    <span>Respect others’ privacy when flying your drone.</span>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+
+</main>
+<main class="guideline-condition">
+    <div class="container">
+        <div class="wrap-container">
+            <h3 class="section-title">Things to note while operating UAVs in Nepal</h3>
+            <ul class="guideline-list-wrap">
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">check_circle</i>
+                    <span>Free to fly UAV under 200m (656 feet) of under 2 kg (4.4 lb) on your personal properties like inside your house, land, and garden.</span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:green">check_circle</i>
+                    <span> Unmanned aircraft shall be permitted to be operated in day VMC conditions only.</span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:orange">check_circle</i>
+                    <span>If the operations are to be conducted in a Restricted or Prohibited area, prior approval from the concerned Authority is required before applying for flight permission</span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:orange">check_circle</i>
+                    <span>In Nepal, permissions are for a short period of time ( a few days to 3 months) and not for a longer period of time.</span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:red">check_circle</i>
+                    <span>You must never fly near other aircraft. </span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:red">check_circle</i>
+                    <span>Do not fly your drone over heritage sites, national parks, conservation areas, military installations,
+                        power plants or other NO FLY ZONES that could cause concern among the local authorities </span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:red">check_circle</i>
+                    <span>Do not fly within 50 meters (164 feet) of any vessel, vehicle, or structure. </span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:red">check_circle</i>
+                    <span>Airport areas including take-off and approach paths shall be free of all UAV activity at all times regardless of altitude.</span>
+                </li>
+                <li class="list-item">
+                    <i class="material-icons" style="color:red">check_circle</i>
+                    <span>Drone must be flown within the visual line of sight (normally within 500 m horizontally and 400 feet vertically) of its remote pilot (the person in charge of operating the drone). Operations beyond these distances are not allowed. </span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+</main>
+<footer class="site-footer home-footer">
+    <div class="container">
+        <div class="wrap-container">
+            <div class="footer-in">
+                <p class="footer-left">© 2020 Nepal Drone Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="guideline-popup open">
+    <a href="#/" class="popup-info">
+            <span class="img-span">
+                <img src="{% static 'img/tourist.svg' %}" alt="Tourist_guideline">
+            </span>
+    </a>
+    <div class="guideline-popup-content">
+        <a href="#/" class="icon-close"><i class="material-icons">close</i></a>
+        <div class="content-wrap">
+            <div class="img-wrap">
+                <img src="{% static 'img/tourist.svg' %}" alt="tourist-svg">
+            </div>
+            <div class="content-aside">
+                <h4 class=title>Are you a tourist and planning to fly a drone during your stay ?</h4>
+                <div class="row gy-4 row-container">
+                    <div class="col-lg-12 col-md-12 column">
+                        <div class="col-wrap">
+                                <span class="title-case">Follow the following steps :
+                                </span>
+                            <ul class="case-wrap">
+                                <li class="case-item"><i class="material-icons">check_circle</i><span> Visit the custom office desk at Airport. Get a temporary custom receipit.
+                                </span></li>
+                                <li class="case-item"><i class="material-icons">check_circle</i><span>Submit the temporary reciept at Department of Flight safety office sinamangal
+                                </span></li>
+                                <li class="case-item"><i class="material-icons">check_circle</i><span>Get a Temporary Unique Identification Number (UIN).</span></li>
+                                <li class="case-item"><i class="material-icons">check_circle</i><span>Follow other steps as per your drone category.
+                                </span></li>
+                                <li class="case-item"><i class="material-icons">check_circle</i><span>Carry out your drone flights
+                                </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-5 col-md-12 column">
+                        <div class="col-wrap">
+                                <span class="title-case">Case II: Shall obtain prior permission from following
+                                    agencies:</span>
+                            <ul class="case-wrap">
+                                <li class="case-item"><i class="material-icons">check_circle</i><span>Department of
+                                            Tourism</span></li>
+                                <li class="case-item"><i class="material-icons">check_circle</i><span>Ministry of
+                                            Home Affairs</span></li>
+                                <li class="case-item"><i class="material-icons">check_circle</i><span>Civil Avation
+                                            Authority of Nepal(not necessary for UAV less than 2kg and below 200ft from
+                                            ground level)</span></li>
+                            </ul>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jquery Core Js -->
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/map.js' %}"></script>
+<script src="{% static 'datatable/datatables.min.js' %}"></script>
+<script src="{% static 'js/custom-datatable.js' %}"></script>
+<script src="{% static 'js/drone.js' %}"></script>
+<script>
+    $(document).ready(function() {
+      $('#dash_login').click(function() {
+        window.location.href = $(this).attr('href')
+      });
+      $('#dash_logout').click(function() {
+        window.location.href = $(this).attr('href')
+      });
+      $('#dash').click(function() {
+        window.location.href = $(this).attr('href')
+      });
+      $('#settings').click(function() {
+        window.location.href = $(this).attr('href')
+      });
+    });
+  </script>
+</body>
+
+</html>
