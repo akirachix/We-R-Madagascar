@@ -32,9 +32,9 @@ from django.urls import reverse, reverse_lazy
 from zipfile import ZipFile
 from .utils import is_near_senstive_area
 from authentication.models import User as usrm
-from clinic.views import ClinicViewDetails, ClinicCreateView
-from clinic.forms import RegisterclinicForm
-from clinic.models import ClinicProfile
+# from clinic.views import ClinicViewDetails, ClinicCreateView
+# from clinic.forms import RegisterclinicForm
+# from clinic.models import ClinicProfile
 
 
 def homeView(request):
