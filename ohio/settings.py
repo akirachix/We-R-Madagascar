@@ -31,7 +31,7 @@ SECRET_KEY = '0o=aajzmkgwtb=in$6mn))k)krkf^_4o^@**xdj@z@2v@ro_e+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'drone-vaccine-disbursment.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'madagascar-project.herokuapp.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',

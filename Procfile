@@ -1,1 +1,1 @@
-web: gunicorn ohio.wsgi --preload
+web: gunicorn ohio.wsgi --log-file -
