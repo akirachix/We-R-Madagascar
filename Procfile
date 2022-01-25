@@ -1,1 +1,1 @@
-gunicorn --log-file=- ohio.wsgi:application
+web: gunicorn ohio.wsgi
