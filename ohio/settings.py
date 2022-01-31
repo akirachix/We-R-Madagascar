@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
 ]
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,9 +134,9 @@ LOGIN_URL = '/accounts/login'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'werobotics',
-        'USER': 'postgres',
-        'PASSWORD': 'postgis',
+        'NAME': 'werdb',
+        'USER': 'weruser',
+        'PASSWORD': 'wer@123',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -193,6 +194,12 @@ CELERY_BROKER_URL = 'redis://[::1]:6379/0'
 
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+#  Add configuration for static files storage using whitenoise
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
@@ -210,3 +217,6 @@ LEAFLET_CONFIG = {
     
     
 }
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
