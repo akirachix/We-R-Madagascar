@@ -228,10 +228,10 @@ WHITENOISE_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'root')
 
 # GEOS_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgeos_c.so' if os.environ.get('ENV') == 'HEROKU' else os.getenv('/usr/local/lib/libgdal.dylib')
 # GDAL_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgdal.so' if os.environ.get('ENV') == 'HEROKU' else os.getenv('/usr/local/Cellar/gdal/3.4.1/lib/libgdal.dylib')
-
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 # GEOS_LIBRARY_PATH = config('/usr/local/lib/libgdal.dylib')
-GDAL_LIBRARY_PATH = '/usr/local/Cellar/gdal/3.4.1_1/lib/libgdal.dylib'
-GEOS_LIBRARY_PATH = '/usr/local/lib/libgdal.dylib'
+GDAL_LIBRARY_PATH = '/System/Volumes/Data/usr/local/Cellar/gdal/3.4.1_1/lib/libgdal.dylib'
+GEOS_LIBRARY_PATH = '/System/Volumes/Data/usr/local/lib/libgdal.dylib'
 
 
 import dj_database_url 
