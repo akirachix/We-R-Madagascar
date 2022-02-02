@@ -72,11 +72,11 @@ def dashboardView(request):
     # delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
     total_requests_num= FlightPermission.objects.all().count()
     completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
-    clinics_num = ClinicProfile.objects.all().count()
+    # clinics_num = ClinicProfile.objects.all().count()
     complaint_num = Report.objects.all().count()
 
     
-    top_row_data.append([total_requests_num, completed_requests_num, clinics_num, complaint_num])
+    top_row_data.append([total_requests_num, completed_requests_num, complaint_num])
     # data for pie chart
     pie_data = []
     # pie_data.append([solved_complaints, pending_complaints])
@@ -858,8 +858,8 @@ def view_500(request):
     '''
     return render(request, 'flightres/404.html')
 
-def countClinics(request):
-    cliniclist = ClinicProfile.objects.all().count()
-    return render(request,'dashboard.html',{
-        'cliniclist' : cliniclist,
-    })
+# def countClinics(request):
+#     cliniclist = ClinicProfile.objects.all().count()
+#     return render(request,'dashboard.html',{
+#         'cliniclist' : cliniclist,
+#     })

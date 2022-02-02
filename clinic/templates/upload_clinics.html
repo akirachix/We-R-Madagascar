@@ -33,7 +33,30 @@
     color: #117BCC;
   }
 </style>
-<main class="admin-main">
+
+<body>
+  {% if messages %}
+      {% for message in messages %}
+          <div>
+<!--                | means OR operator-->
+              <strong>{{message|safe}}</strong>
+          </div>
+      {% endfor %}
+  {% else %}
+  {{order}}
+  <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="file1"> Upload a file</label>
+      <input type="file" id="file1" name="file">
+      <small>Only accepts CSV files</small>
+      <button type="submit">Upload</button>
+  </form>
+  {% endif %}
+  {% for clinic in Clinic %}
+  {{clinic.name}}
+  {% endfor %}
+</body>
+<!-- <main class="admin-main">
 
 
   <div class="container">
@@ -41,19 +64,9 @@
       <div class="panel-heading"><strong>Upload Files</strong> <small>with the list of clinics</small></div>
       <div class="panel-body">
 
-        <!-- Standard Form -->
-        <!-- <h5>Select files from your computer</h5>
-        <form action="" method="post" enctype="multipart/form-data" id="js-upload-form">
-          <div class="form-inline">
-            <div class="form-group">
-              <input type="file" name="files[]" id="js-upload-files" multiple>
-            </div>
-            <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
-          </div>
-        </form> -->
 
         <!-- Drop Zone -->
-        <h5 class="pt-5 pb-3">Register New Clinic</h5>
+        <!-- <h5 class="pt-5 pb-3">Register New Clinic</h5>
         <div class="upload-drop-zone" id="drop-zone">
           <i class="material-icons pt-5" id="icon">cloud_download</i>
           <div class="w-100"> </div>
@@ -61,7 +74,7 @@
         </div>
 
         <!-- Progress Bar -->
-        <div class="w-100 pt-4"></div>
+        <!-- <div class="w-100 pt-4"></div>
         <div class="card pt-4 pb-4 pl-3">
           <h6>Uploading...</h6>
         <div class="progress">
@@ -72,56 +85,13 @@
           </div>
         </div>
 
-        <!-- Upload Finished -->
-        <!-- <div class="js-upload-finished">
-          <h3>Processed files</h3>
-          <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
-            <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
-          </div>
-        </div> -->
+       
       </div>
     </div>
-  </div> <!-- /container -->
+  </div> 
 
 
-  <!-- <div class="main-card">
-    <h1>Register A Clinic</h1>
-  </div> -->
-  <!-- <br />
-  <div class="card-header">
-    <form method="post">
-      {%csrf_token%}
-      <div class="row">
-        <div class="col">
-            <label> Clinic (CSB) Name</label>
-            {{form.clinic_name}}
-          
-        </div>
-        <div class="col">
-            <label>Phone No.</label>
-            {{form.phone_number}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-            <label>Location</label>
-            {{form.location}}
-        </div>
-        <div class="col">
-            <label>Registration Number</label>
-            {{form.registration_number}}
-        </div>
-      </div>
-
-      <button
-        class="btn btn-primary"
-        style="margin-top: 1%; width: 10%"
-        type="submit"
-      >
-        Save
-      </button>
-    </form> -->
+       
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -131,8 +101,8 @@
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
     crossorigin="anonymous"></script>
   <script>
-    let dropArea = document.getElementById('drop-area')
+    let dropArea = document.getElementById('drop-area') -->
 
   </script>
-</main>
+</main> 
 {%endblock%}
