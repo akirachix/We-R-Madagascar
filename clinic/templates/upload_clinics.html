@@ -35,26 +35,20 @@
 </style>
 
 <body>
-  {% if messages %}
-      {% for message in messages %}
-          <div>
-<!--                | means OR operator-->
-              <strong>{{message|safe}}</strong>
-          </div>
-      {% endfor %}
-  {% else %}
-  {{order}}
-  <form action="" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <label for="file1"> Upload a file</label>
-      <input type="file" id="file1" name="file">
-      <small>Only accepts CSV files</small>
-      <button type="submit">Upload</button>
-  </form>
-  {% endif %}
-  {% for clinic in Clinic %}
-  {{clinic.name}}
-  {% endfor %}
+  <form action="{% url "myapp:upload_csv" %}" method="POST" enctype="multipart/form-data"> 
+    {% csrf_token %}
+    <div>
+      <label for="name">File: </label>
+      <div>
+        <input type="file" name="csv_file" required="True">
+      </div>          
+    </div>
+    <div>          
+      <div style="margin-bottom:10px;">
+         <button> <span style="margin-right:5px;"></span>Upload </button>
+      </div> 
+    </div>
+    </form>
 </body>
 <!-- <main class="admin-main">
 
