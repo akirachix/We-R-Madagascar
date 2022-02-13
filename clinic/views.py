@@ -7,17 +7,17 @@ from .models import Clinic
 def clinic_upload(request):
 	data = {}
 	if "GET" == request.method:
-		return render(request, "clinic/templates/upload_clinics.html", data)
+		return render(request, 'clinic/upload_clinics.html', data)
   # if not GET, then proceed
 	try:
 		csv_file = request.FILES["csv_file"]
 		if not csv_file.name.endswith('.csv'):
 			messages.error(request,'File is not CSV type')
-			return HttpResponseRedirect(reverse("clinic:upload-csv"))
+			return HttpResponseRedirect(reverse("clinic_upload"))
     #if file is too large, return
 		if csv_file.multiple_chunks():
 			messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
-			return HttpResponseRedirect(reverse("clinc:upload_csv"))
+			return HttpResponseRedirect(reverse("clinic_upload"))
  
 		file_data = csv_file.read().decode("utf-8")		
  
@@ -44,4 +44,4 @@ def clinic_upload(request):
 		logging.getLogger("error_logger").error("Unable to upload file. "+repr(e))
 		messages.error(request,"Unable to upload file. "+repr(e))
  
-	return HttpResponseRedirect(reverse("clinic:upload-csv"))
+	return HttpResponseRedirect(reverse("clinic_upload"))
