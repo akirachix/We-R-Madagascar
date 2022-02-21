@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 from datetime import timedelta
+import dj_database_url 
+
 
 # import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -213,6 +215,15 @@ LEAFLET_CONFIG = {
     
     
 }
-import dj_database_url 
 prod_db  =  dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'zakiyamustafazm@gmail.com'
+EMAIL_HOST_PASSWORD = 'vrjcrxwbfbahvtlq'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
