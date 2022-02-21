@@ -136,9 +136,9 @@ LOGIN_URL = '/accounts/login'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'postgres',
-        'USER': 'wendyorengo',
-        'PASSWORD': 'postgis',
+        'NAME': 'test2',
+        'USER': 'alma',
+        'PASSWORD': 'realme6',
         'HOST': 'localhost',
         'PORT': '5432',
     }

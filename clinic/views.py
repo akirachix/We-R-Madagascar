@@ -1,47 +1,38 @@
 import csv, io
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import Clinic
+from .forms import ClinicForm
+import logging
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth.decorators import permission_required
 
 
 def clinic_upload(request):
-	data = {}
-	if "GET" == request.method:
-		return render(request, 'clinic/upload_clinics.html', data)
-  # if not GET, then proceed
-	try:
-		csv_file = request.FILES["csv_file"]
-		if not csv_file.name.endswith('.csv'):
-			messages.error(request,'File is not CSV type')
-			return HttpResponseRedirect(reverse("clinic_upload"))
-    #if file is too large, return
-		if csv_file.multiple_chunks():
-			messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
-			return HttpResponseRedirect(reverse("clinic_upload"))
- 
-		file_data = csv_file.read().decode("utf-8")		
- 
-		lines = file_data.split("\n")
-		#loop over the lines and save them in db. If error , store as string and then display
-		for line in lines:						
-			fields = line.split(",")
-			data_dict = {}
-			data_dict["name"] = fields[0]
-			data_dict["email"] = fields[1]
-			data_dict["address"] = fields[2]
-			data_dict["profile"] = fields[3]
-			try:
-				form = EventsForm(data_dict)
-				if form.is_valid():
-					form.save()					
-				else:
-					logging.getLogger("error_logger").error(form.errors.as_json())												
-			except Exception as e:
-				logging.getLogger("error_logger").error(repr(e))					
-				pass
- 
-	except Exception as e:
-		logging.getLogger("error_logger").error("Unable to upload file. "+repr(e))
-		messages.error(request,"Unable to upload file. "+repr(e))
- 
-	return HttpResponseRedirect(reverse("clinic_upload"))
+	template = 'clinic/upload_clinics.html'
+	prompt = {
+		'order': 'order of csv should be name, email, address, profile'
+	}
+	if request.method == "GET":
+		return render(request, template, prompt)
+
+	csv_file = request.FILES["file"]
+
+	if not csv_file.name.endswith('.csv'):
+		messages.error(request,'This is not a csv file')
+
+	data_set = csv_file.read().decode("UTF-8")	
+	io_string = io.StringIO(data_set)
+	next(io_string)
+
+	for column in csv.reader(io_string, delimiter=',', quotechar='|'):
+		_, created = Clinic.objects.update_or_create(
+			name = column[0],
+			email = column[1],
+			address = column[2],
+			profile = column[3]
+		)
+
+	context = {}
+	return render (request, template, context)

@@ -3,7 +3,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth, User
-from django.shortcuts import get_object_or_404, redirect, reverse
+from django.shortcuts import get_object_or_404, redirect,reverse 
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import FileSystemStorage
