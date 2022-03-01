@@ -8,7 +8,6 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import permission_required
 
-
 def clinic_upload(request):
 	template = 'clinic/upload_clinics.html'
 	prompt = {
