@@ -30,7 +30,7 @@ def clinic_upload(request):
 			name = column[0],
 			email = column[1],
 			address = column[2],
-			profile = column[3]
+			profile = column[3],
 		)
 
 	context = {}
