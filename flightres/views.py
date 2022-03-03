@@ -36,9 +36,7 @@ from django.urls import reverse, reverse_lazy
 from zipfile import ZipFile
 from .utils import is_near_senstive_area
 from authentication.models import User as usrm
-from clinic.views import ClinicViewDetails, ClinicCreateView
-from clinic.forms import RegisterclinicForm
-from clinic.models import ClinicProfile
+from clinic.models import Clinic
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 from django.utils.translation import gettext_lazy as _
@@ -231,7 +229,7 @@ def dashboardView(request):
     # delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
     total_requests_num= FlightPermission.objects.all().count()
     completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
-    clinics_num = ClinicProfile.objects.all().count()
+    clinics_num = Clinic.objects.all().count()
     complaint_num = Report.objects.all().count()
 
     
