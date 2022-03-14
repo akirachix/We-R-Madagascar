@@ -39,7 +39,7 @@ def clinic_upload(request):
 	return render (request, template, context)
 
 def clinic_display(request):
-	template = ' clinic/view_clinics.html'
+	template = 'clinic/view_clinics.html'
 
 	context = {
 		'clinics': Clinic.objects.all()
