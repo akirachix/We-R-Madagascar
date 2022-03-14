@@ -1,0 +1,60 @@
+{% extends 'flightres/base.html' %} {% load static %} 
+
+<!DOCTYPE html>
+
+{% block body %}
+
+
+
+<div class="container">
+  <h2>Delayed Shipments List</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">shipment_id </th>
+
+        <th scope="col">destination </th>
+        <th scope="col"> delay_reasons</th>
+
+       
+      </tr>
+    </thead>
+  
+    <tbody>
+        {% for shipment in delayedlist %} 
+
+      <tr>
+
+        <td>{{shipment.shipment_id}}</td>
+ 
+
+
+        <td>{{shipment.destination}}</td>
+        <td>{{shipment.delay_reasons}}</td>
+
+       
+  
+
+        <!-- <td><a href ="{{shipment.id}}/delete"><button type="submit" class="save btn btn-danger">Delete</button></td></a> -->
+        <!-- <td><a href ="{{shipment.id}}/edit"><button type="submit" class="save btn btn-primary">Edit</button></td></a> -->
+        <!-- <td><a href ="{{student.id}}/view"><button type="submit" class="save btn btn-info">Profile</button></td></a> -->
+
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+
+              
+<style>
+  h2{
+    text-align: center;
+  }
+  .container{
+    margin-left: 20%;
+  }
+</style>
+</html>
+{%endblock body%}

@@ -56,18 +56,26 @@
                     
                 </ul> -->
             </li>
-            <li class="is-submenu">
+            <!-- <li class="is-submenu">
                 <a href="{% url 'dashboard:flightview' %}" style="color: #A8A4A4;">
                     <i class="material-icons">location_on</i>
                     <span>All Flights Map</span>
                 </a>
 
-            </li>
+            </li> -->
             <li class="is-submenu">
                 <a href="javascript:void(0);" class="menu-title" style="color: #A8A4A4;">
                     <i class="material-icons">group</i>
                     <span>Shipments</span>
                 </a>
+            <ul class="submenu">
+                <li>
+                    <a href="{% url 'shipment:schedule_shipments' %}" style="color: #A8A4A4;"> Schedule Shipment</a>
+                    <a href="{% url 'shipment:shipment' %}" style="color: #A8A4A4;">Scheduled Shipments Lists</a>
+                    <a href="{% url 'shipment:delayed_shipments' %}" style="color: #A8A4A4;">Delayed Shipments Lists</a>
+
+                </li>
+            </ul>
                 <!-- <ul class="submenu">
                     <li>
                         <a href="{% url 'dashboard:operators' %}" style="color: #A8A4A4;">Manage Drone Operators</a>
@@ -124,7 +132,7 @@
                     </li>
                 </ul>
 
-            </li>
+          
 
             <li class="is-submenu">
                 <a href="javascript:void(0);" class="menu-title" style="color: #A8A4A4;">

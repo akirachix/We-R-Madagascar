@@ -1,0 +1,73 @@
+{% extends 'flightres/base.html' %} {% load static %} 
+
+<!DOCTYPE html>
+
+{% block body %}
+
+
+
+<div class="container">
+  <h2>Scheduled Shipments List</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">shipment_id </th>
+        <th scope="col">clinic_name</th>
+        <th scope="col">medication</th>
+        <th scope="col">units</th>
+        <th scope="col">delivery_date </th>
+        <th scope="col"> take_of_time</th>
+        <th scope="col">delivery_time</th>
+        <th scope="col">destination </th>
+        <th scope="col"> status</th>
+
+       
+      </tr>
+    </thead>
+  
+    <tbody>
+        {% for shipment in mylist %} 
+
+      <tr>
+
+        <td>{{shipment.shipment_id}}</td>
+        <td>{{shipment.clinic_name}}</td>
+     
+        <td>{{shipment.medication}}</td>
+    
+        <td>{{shipment.units}}</td>
+       
+        <td>{{shipment.delivery_date}}</td>
+        <td>{{shipment.take_of_time}}</td>
+        <td>{{shipment.delivery_time}}</td>
+
+
+        <td>{{shipment.destination}}</td>
+        <td>{{shipment.status}}</td>
+
+       
+  
+
+        <!-- <td><a href ="{{shipment.id}}/delete"><button type="submit" class="save btn btn-danger">Delete</button></td></a> -->
+        <td><a id="edit_shipment" href="{%url 'shipments:edit_shipment' shipment.id%}"><button type="submit" class="save btn btn-primary">Edit</button></td></a>
+        <!-- <td><a href ="{{student.id}}/view"><button type="submit" class="save btn btn-info">Profile</button></td></a> -->
+
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+
+              
+<style>
+  h2{
+    text-align: center;
+  }
+  .container{
+    margin-left: 20%;
+  }
+</style>
+</html>
+{%endblock body%}
