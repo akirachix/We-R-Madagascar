@@ -33,5 +33,17 @@ def clinic_upload(request):
 			profile = column[3]
 		)
 
-	context = {}
+	context = {
+		'clinics': Clinic.objects.all()
+	}
 	return render (request, template, context)
+
+def clinic_display(request):
+	template = ' clinic/view_clinics.html'
+
+	context = {
+		'clinics': Clinic.objects.all()
+	}
+
+	return render (request, template, context)
+
