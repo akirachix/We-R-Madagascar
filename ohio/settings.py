@@ -131,26 +131,17 @@ LOGIN_URL = '/accounts/login'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': 'werdb',
-#         'USER': 'weruser',
-#         'PASSWORD': 'wer@123',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'test2',
-        'USER': 'alma',
-        'PASSWORD': 'realme6',
+        'NAME': 'werdb',
+        'USER': 'weruser',
+        'PASSWORD': 'wer@123',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
 
 
 # DATABASES = {      
