@@ -22,15 +22,7 @@
     </style>
 
 <aside class="admin-sidebar" style="background-color: #fff; color: #A8A4A4; padding-top: 5%;">
-    <!-- <header class="admin-aside-header">
-        <a href="{% url 'dashboard:dashboard' %}"><img src="{% static 'img/admin-logo.png' %}" alt="Drone logo"/></a>
-        <a href="#" class="toggle-sidebar">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </a>
-    </header> -->
+
     <div class="admin-aside-body">
         <ul class="admin-aside-menu">
             <li class="is-submenu">
@@ -46,15 +38,7 @@
                     <i class="material-icons">flight</i>
                     <span>Flight </span>
                 </a>
-                <!-- <ul class="submenu">
-                    <li>
-                        <a href="{% url 'dashboard:permission' type='general' %}" style="color: #A8A4A4;">Manage Flight Permissions</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'dashboard:permission'  type='special' %}" style="color: #A8A4A4;">Manage Special Flight Permissions</a>
-                    </li>
-                    
-                </ul> -->
+            
             </li>
             <li class="is-submenu">
                 <a href="{% url 'dashboard:flightview' %}" style="color: #A8A4A4;">
@@ -68,23 +52,8 @@
                     <i class="material-icons">group</i>
                     <span>Shipments</span>
                 </a>
-                <!-- <ul class="submenu">
-                    <li>
-                        <a href="{% url 'dashboard:operators' %}" style="color: #A8A4A4;">Manage Drone Operators</a>
-                    </li>
-                </ul> -->
+                
             </li>
-            <!-- {#            <li class="is-submenu">#}
-            {#                <a href="javascript:void(0);" class="menu-title" style="color: #A8A4A4;">#}
-            {#                    <i class="material-icons">airplanemode_active</i>#}
-            {#                    <span>Drone Database</span>#}
-            {#                </a>#}
-            {#                <ul class="submenu">#}
-            {#                    <li>#}
-            {#                        <a href="javascript:void(0);" style="color: #A8A4A4;">Management</a>#}
-            {#                    </li>#}
-            {#                </ul>#}
-            {#            </li>#} -->
            
             {#            <li class="is-submenu">#}
             {#                <a href="javascript:void(0);" class="menu-title" style="color: #A8A4A4;">#}
@@ -97,19 +66,6 @@
             {#                    </li>#}
             {#                </ul>#}
             {#            </li>#}
-
-            <!-- <li class="is-submenu">
-                <a href="javascript:void(0);" class="menu-title" style="color: #A8A4A4;">
-                    <i class="material-icons">person</i>
-                    <span>User</span>
-                </a>
-                <ul class="submenu">
-                    <li>
-                        <a href="{% url 'logout' %}?next=/" style="color: #A8A4A4;"> Logout</a>
-                        <a href="{% url 'dashboard:changepassword' %}" style="color: #A8A4A4;">Change Password</a>
-                    </li>
-                </ul>
-            </li> -->
 
             <!-- Register clinic -->
             <li class="is-submenu">
