@@ -4,13 +4,10 @@
 
 {% block body %}
 
-<div class="container">
-  <h6>Total Scheduled Shipments=<span class="badge">{{ shipments_count }}</span></h6>
-</div>
 
 
 <div class="container">
-  <h2>Scheduled Shipments List</h2>
+  <h2> Shipments Details</h2>
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -29,7 +26,7 @@
     </thead>
   
     <tbody>
-        {% for shipment in mylist %} 
+        {% for shipment in view_profile %} 
 
       <tr>
 
@@ -51,7 +48,6 @@
        
   
 
-        <td><a id="edit_shipment" href="{%url 'shipments:edit_shipment' shipment.id%}"><button type="submit" class="save btn btn-primary">Edit</button></td></a>
 
 
       </tr>

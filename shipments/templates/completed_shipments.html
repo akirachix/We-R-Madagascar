@@ -7,23 +7,22 @@
 
 
 <div class="container">
-  <h2>Delayed Shipments List</h2>
+  <h2>Completed Shipments List</h2>
   <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">shipment_id </th>
 
         <th scope="col">destination </th>
-        <th scope="col"> delay_reasons</th>
 
-        <th scope="col"> status</th>
+        <th scope="col"> delivery_time</th>
 
        
       </tr>
     </thead>
   
     <tbody>
-        {% for shipment in shipments_list %} 
+        {% for shipment in completed_list %} 
 
       <tr>
 
@@ -32,15 +31,12 @@
 
 
         <td>{{shipment.destination}}</td>
-        <td>{{shipment.delay_reasons}}</td>
-        <td>{{shipment.status}}</td>
+        <td>{{shipment.delivery_time}}</td>
 
        
-     
+        <td><a id="view_profile" href="{%url 'shipments:completed_profile' shipment.id%}"><button type="submit" class="save btn btn-primary"> More</button></td></a>
 
-
-
-        <td><a id="edit_delay" href="{%url 'shipments:edit_delays' shipment.id%}"><button type="submit" class="save btn btn-primary">Reschedule Shipment</button></td></a>
+       
 
 
       </tr>
