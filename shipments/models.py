@@ -23,7 +23,7 @@ class Schedule(models.Model):
     delivery_time = models.TimeField(default=dt.time(00, 00))
     status = models.CharField(max_length=30, choices=STATUS_CHOICES,default='dispatched')
     destination = models.CharField(max_length=20)
-    delay_reasons= models.CharField(max_length=20,default='Weather')
+    delay_reasons= models.CharField(max_length=20,default='Air Traffic')
 
 
 

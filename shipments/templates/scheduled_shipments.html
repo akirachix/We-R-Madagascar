@@ -4,9 +4,7 @@
 
 {% block body %}
 
-<div class="container">
-  <h6>Total Scheduled Shipments=<span class="badge">{{ shipments_count }}</span></h6>
-</div>
+
 
 
 <div class="container">
@@ -56,7 +54,9 @@
 
       </tr>
       {% endfor %}
-
+      <div class="inner">
+        <p>Total Scheduled Shipments:<h3>{{ schedule_count }}</h3></p>
+      </div>
     </tbody>
   </table>
 </div>

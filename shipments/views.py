@@ -18,8 +18,10 @@ class ScheduleFormView(CreateView):
 
 
 def scheduledShipmentsList(request):
+
     mylist=Schedule.objects.all()
-    return render(request,'scheduled_shipments.html',{'mylist':mylist}
+    schedule_count = mylist.count()
+    return render(request,'scheduled_shipments.html',{'mylist':mylist,'schedule_count':schedule_count}
 )
 
 def edit_shipment(request, id):
@@ -44,15 +46,10 @@ def edit_shipment(request, id):
 
 def checkDelayedShipments(request):
     shipments_list =Schedule.objects.filter(status = 'Delayed')
-    return render(request,'delayed_shipments.html',{'shipments_list' : shipments_list })
+    delayed_count = shipments_list.count()
+    return render(request,'delayed_shipments.html',{'shipments_list' : shipments_list ,'delayed_count':delayed_count})
 
 
-
-
-def countScheduledShipments(request):
-    shipments_count = Schedule.objects.all().count()
-    return render(request,'shipment:shipment',{'shipments_count':shipments_count})
-  
 
 def edit_delay(request, id):
     context = {}
@@ -70,7 +67,8 @@ def edit_delay(request, id):
 
 def checkCompletedShipments(request):
     completed_list =Schedule.objects.filter(status = 'Completed')
-    return render(request,'completed_shipments.html',{'completed_list' : completed_list })
+    completed_count = completed_list.count()
+    return render(request,'completed_shipments.html',{'completed_list' : completed_list,'completed_count':completed_count })
 
 def completed_profile(request, id):
     view_profile = Schedule.objects.filter(id =id,status = 'Completed')
