@@ -8,78 +8,77 @@
 
 
 {% block body %}
-<style>
-    h4{
-        color: #02129D !important;
-        font-size: 2.1rem !important;
-    }
-</style>
-
 <main class="admin-main">
     <div class="main-card">
         <div class="dashboard-title">
-            <h1>Welcome to <span>Madagascar Cargo Project Portal</span></h1>
+            <h1>Welcome to <span>Nepal Drone Portal</span></h1>
         </div>
         <div class="drone-info">
             <div class="row row-wrap g-xl-3 g-lg-2 gy-md-2 gy-sm-2 gy-2">
                 <div class="col-lg-3 col-md-6">
-                    <div class="card">
                     <div class="info-content">
-                        <i class="material-icons">pie_chart_two_tone</i>
                         <div class="total-count">
                             <h4>{{ top_data.0.0 }}</h4>
+                            <span class="span-dark"><i class="material-icons">person</i></span>
                         </div>
                         <span class="count-label">Total Flight Requests</span>
-                        <a href="" class="mt-4">view all</a>
-                    </div>
                     </div>
                 </div> 
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="card">
                     <div class="info-content">
-                        <i class="material-icons">pie_chart</i>
                         <div class="total-count">
                             <h4>{{ top_data.0.1 }}</h4>
+                            <span class="span-light"><i class="material-icons">local_airport</i></span>
                         </div>
                         <span class="count-label">Total Complete Shipments</span>
-                        <a href="" class="mt-4">view all</a>
                     </div>
-                </div>
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="card">
                     <div class="info-content">
-                        <i class="material-icons">pie_chart</i>
                         <div class="total-count">
                             <h4>{{ top_data.0.2 }}</h4>
+                            <span class="span-dark"><i class="material-icons">email</i></span>
                         </div>
                         <span class="count-label">Total Registered Clinics</span>
-                        <a href="" class="mt-4">view all</a>
-                    </div>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="card">
                     <div class="info-content">
-                        <i class="material-icons">pie_chart</i>
                         <div class="total-count">
                             <h4>{{ top_data.0.3 }}</h4>
+                            <span class="span-dark"><i class="material-icons">email</i></span>
                         </div>
                         <span class="count-label">Total Complaints</span>
-                        <a href="" class="mt-4">view all</a>
-                    </div>
                     </div>
                 </div>
-                </div>
-        </div>
 
-        
+                <!-- <div class="col-lg-3 col-md-6">
+                    <div class="info-content info-content-wrap">
+                        <div class="info-content-part">
+                            <div class="total-count">
+                                <h4>{{ top_data.0.3 }} <span class="count-label">Total Complaints</span></h4>
+                                <span class="span-light"><i class="material-icons">access_time</i></span>
+                            </div>
+
+                        </div> -->
+                        <!-- <div class="info-content-part"> -->
+                            <!-- <div class="total-count">
+                                <h4>{{ top_data.0.4 }} <span class="count-label">Rejected Flight Requests</span></h4>
+                                <span class="span-light"><i class="material-icons">cancel</i></span>
+                            </div> -->
+
+                        <!-- </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> -->
         <div class="chart-section">
             <div class="row row-wrap g-xl-4 g-lg-3 gy-xl-0 gy-4">
-                <div class="col-xl-12 col-lg-12 col-md-12 column">
+                <div class="col-xl-6 col-lg-6 col-md-12 column">
                     <div class="main-card">
                         <div class="card-header">
                             <h1>Monthly Flight Requests Analysis <a href="#/"><i class="material-icons">more_vert</i></a></h1>
@@ -89,7 +88,7 @@
                                 <div class="col-md-12">
                                     <div class="graph-item">
                                         <div id="line-chart1"></div>
-                                       <div id="line-chart2"></div>
+<!--                                        <div id="line-chart2"></div>-->
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +106,7 @@
                                 <div class="col-md-12">
                                     <div class="graph-item">
                                         <div id="pie-chart1"></div>
-                                      <div id="pie-chart2"></div>-->
+<!--                                        <div id="pie-chart2"></div>-->
                                     <!-- </div>
                                 </div>
                             </div>
@@ -116,12 +115,7 @@
                 </div>
             </div>
         </div> -->
-
-        </div>
     </div> 
-
-    </div> 
-
 </main>
 
 <script>
