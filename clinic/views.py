@@ -7,6 +7,8 @@ import logging
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import permission_required
+from django.core.paginator import InvalidPage,Paginator
+from django.views.generic.list import ListView
 
 def clinic_upload(request):
 	template = 'clinic/upload_clinics.html'
@@ -38,13 +40,53 @@ def clinic_upload(request):
 	}
 	return render (request, template, context)
 
-def clinic_display(request):
-	template = 'clinic/view_clinics.html'
-	
-	context = {
-		'clinics': Clinic.objects.all(),
-		'count': Clinic.objects.all().count()
-	}
+class ClinicViewDetails(ListView):
+    model=Clinic
+    template_name='clinic/view_clinics.html'
+    context_object_name="clinics"
 
-	return render (request, template, context)
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        
+        search_post = self.request.GET.get('search')
+        if search_post:
+            context['clinics']=context['clinics'].filter(Q(name__icontains=search_post)  | Q(name__icontains=search_post) )
+            context['results']=context['clinics'].count()
+        context['search_post']=search_post
+        return context
+
+    def get(self, request, *args,**kwargs):
+        clinics=Clinic.objects.all()
+        paginator=Paginator(clinics,30)
+        is_paginated=True if paginator.num_pages > 1 else False
+        page=request.GET.get("page") or 1
+        search_post = request.GET.get('search')
+        try:
+            current_page=paginator.page(page)
+        except InvalidPage as e:
+            raise Http404(str(e))
+
+        context={"clinics":current_page,"is_paginated":is_paginated,"count": Clinic.objects.all().count()}
+        return render(request,self.template_name,context)
+
+
+
+
+
+
+
+
+# def get(self, request, *args,**kwargs):
+# 	clinics=Clinic.objects.all()
+#     paginator=Paginator(clinics,3)
+# 	is_paginated=True if paginator.num_pages > 1 else False
+#     page=request.GET.get("page") or 1
+#     search_post = request.GET.get('search')
+#     try:
+# 		current_page=paginator.page(page)
+#     except InvalidPage as e:
+# 		raise Http404(str(e))
+
+#     context={"clinics":current_page,"is_paginated":is_paginated}
+#     return render(request,self.template_name,context)
 
