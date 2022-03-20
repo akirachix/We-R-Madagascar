@@ -1,24 +1,15 @@
-{% include 'flightres/base.html' %}
+{% extends 'flightres/base.html' %}
+
 {% load static %}
-{% block links %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/custom-charts.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/apexcharts.css' %}" />
+{%block body%}
 
-{% endblock links %}
-
-  <style>
-    body {
-      font-family: 'Nunito', sans-serif;
-    }
-
-    .search {
+<style>
+  .search {
       width: 50%;
       float: right;
       margin-bottom: 2%;
-      margin-top: 7%;
       overflow: auto;
     }
-
     #profile {
       width: 50px;
       height: 50px;
@@ -26,7 +17,6 @@
       box-shadow: gray 2px 2px 2px;
       object-fit: cover;
     }
-
     .search>form>input {
       width: 55%;
       padding: 10px 10px;
@@ -35,16 +25,12 @@
       border-radius: 8px 8px 8px 8px;
       float: right;
     }
-
     form>input:focus {
       outline: none;
     }
-
-
     .search-button:focus {
       outline: none;
     }
-
     .search-button {
       border: none;
       outline: none;
@@ -57,15 +43,13 @@
       background-color: transparent;
       float: right;
     }
-
     .search-button>i {
       text-decoration: none;
       float: right;
     }
-
     .fas {
       color: #4A4A4A;
-      float: right;
+      /* float: right; */
 
     }
 
@@ -85,127 +69,69 @@
     .table {
       margin-bottom: 4%;
     }
-
-    .admin-main {
-      position: relative;
-      width: 80%;
-      float: right;
-    }
-  
     @media screen and (max-width: 1300px) {
-      .admin-main {
-        width: 80%;
-        margin: auto;
-        margin-right: 1.1%;
-      }
 
-      .search-button {
-        border: none;
-        outline: none;
-        margin-left: 43%;
-        text-align: center;
-        padding: 5px 5px;
-        position: absolute;
-        margin-top: 0.5%;
-        padding-top: 1%;
-        background-color: transparent;
-        float: right;
-      }
-    }
-  </style>
+.search-button {
+  border: none;
+  outline: none;
+  margin-left: 43%;
+  text-align: center;
+  padding: 5px 5px;
+  position: absolute;
+  margin-top: 0.5%;
+  padding-top: 1%;
+  background-color: transparent;
+  float: right;
+}
+}
 
-{%block body%}
+</style>
 
 <main class="admin-main">
-  <div class="panel panel-default">
-  <div style="overflow: auto; display: block;">
-    <div class="search">
-      <form method="get" class="w-100">
-        <button type="submit" class="search-button">
-          <i class="fas fa-search"></i>
-        </button>
-        <input type="search" placeholder="     Search by location" name="search" />
-      </form>
-      {%if message%}
-      <h6>{{message}}</h6>
-      {%endif%}
+  
+    <div class="card-header">
 
-      {%if results%}
-      <p class="results">Found {{results}} clinic{{ results|pluralize }}</p>
-      {%endif%}
-    </div>
-  </div>
-
-  <div class="w-100"></div>
-
-  <div class="row no-gutters mt-4 mb-4">
-    <a href="{% url 'clinic_upload' %}" >
-      <button class="GFG">
-          Add clinic
-      </button>
-  </a>
-    <div class="col-8">
-      <h5 style=" color: #117BCC;
-      ">Registered Clinics</h5>
-    </div>
-    
-    <div class="col-4">
-      <div class="row no-gutters">
-        <div class="col-6">
-          <p style="float: right;">Total registered clincs</p>
-        </div>
-        <div class="col-6">
-          <p style="float: left; color: #117BCC;
-        ">{{count}} clinics </p>
-        </div>
+      <div class="search">
+        <form method="get" class="w-100">
+          <button type="submit" class="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+          <input type="search" placeholder="     Search by location" name="search" />
+        </form>
+        {%if message%}
+        <h6>{{message}}</h6>
+        {%endif%}
+  
+        {%if results%}
+        <p class="results">Found {{results}} clinic{{ results|pluralize }}</p>
+        {%endif%}
       </div>
-    </div>
-  </div>
 
-  <div class="card" style="width: 100%;">
-    <table class="table table-hover table-stripped" style="font-size: 1.2em">
-      <thead>
+      <table class="table table-hover table-stripped" style="font-size: 1.2em">
+        <thead>
+          <tr>
+            <th>Clinic(CSB)Name</th>
+            <th>Region</th>
+            <th>District</th>
+            <th>Phone Number</th>
+            <th></th>
+          </tr>
+        </thead>
+  
+        {%for clinic in clinics%}
         <tr>
-          <th>Clinic Name</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th>Profile</th>
-          <th></th>
+          <td>{{clinic.clinic_name}}</td>
+          <td>{{clinic.phone_number}}</td>
+          <td>{{clinic.location}}</td>
+          <td>{{clinic.registration_number}}</td>
+          <td><a href="{%url 'edit_clinic' clinic.id%}">Edit</a></td>
         </tr>
-      </thead>
-      {%for clinic in clinics%}
-      <tr>
-        <td>{{clinic.name}}</td>
-        <td>{{clinic.email}}</td>
-        <td>{{clinic.address}}</td>
-        <td>{{clinic.profile}}</td>
-       
-      </tr>
-      {%empty%}
-      <p>Looks like clinic does not exist</p>
-     
-      {%endfor%}
-    </table>
-  </div>
-
-
-  {% if is_paginated %}
-  <div class="pagination">
-    <span class="step-links">
-      {% if clinics.has_previous %}
-      <a href="?page={{ clinics.previous_page_number }}">previous</a>
-      {% endif %}
-
-      <span>
-        Page {{ clinics.number }} of {{ clinics.paginator.num_pages }}.
-      </span>
-
-      {% if clinics.has_next %}
-      <a href="?page={{ clinics.next_page_number }}">next</a>
-      {% endif %}
-    </span>
-  </div>
-  {% endif %}
-  </div>
+        {%empty%}
+        <p>Looks like clinic does not exist</p>
+        <a href="{%url 'view_clinic'%}"><i class="fas fa-arrow-left"></i></a>
+        {%endfor%}
+      </table>
+    </div>
+   
 </main>
 {%endblock%}
