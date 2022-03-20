@@ -7,23 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- SOCIAL MEDIA META -->
-    <meta property="og:description" content="Nepal Drone Portal">
+    <meta property="og:description" content="Madagascar Drone Project">
     <meta property="og:image" content="preview.html">
-    <meta property="og:site_name" content="Nepal Drone Portal">
-    <meta property="og:title" content="Nepal Drone Portal">
+    <meta property="og:site_name" content="Madagascar Drone Project">
+    <meta property="og:title" content="Madagascar Drone Project">
     <meta property="og:type" content="website">
     <meta property="og:url" content="http://naxa.com.np">
 
     <!-- TWITTER META -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@Nepal Drone Portal">
-    <meta name="twitter:creator" content="@Nepal Drone Portal">
-    <meta name="twitter:title" content="Nepal Drone Portal">
-    <meta name="twitter:description" content="Nepal Drone Portal">
+    <meta name="twitter:site" content="@Madagascar Drone Project">
+    <meta name="twitter:creator" content="@Madagascar Drone Project">
+    <meta name="twitter:title" content="Madagascar Drone Project">
+    <meta name="twitter:description" content="Madagascar Drone Project">
     <meta name="twitter:image" content="preview.html">
 
     <!--title-->
-    <title>Nepal Drone Portal</title>
+    <title>Madagascar Drone Project</title>
 
     <!-- faveicon start   -->
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" sizes="32x32">
@@ -46,11 +46,11 @@
                     <a href="#">
                         <img src="{% static 'img/admin-logo.png' %}" alt="" />
                     </a>
-                    <p>A Small Leap towards better drone flight permission in Nepal.</p>
+                    <p>A Small Leap towards better drone flight permission in Madagascar.</p>
                 </header>
                 <figure class="login-map" style="background-image: url(../../static/flightres/img/login-bg.jpg);">
                     <div class="copyright">
-                        <p>© 2020 Nepal Drone Portal. All rights reserved.</p>
+                        <p>© 2022 Madagascar Drone Project. All rights reserved.</p>
                     </div>
                 </figure>
             </div>
@@ -79,11 +79,11 @@
                             <input type="checkbox" class="custom-control-input" id="Remember" name="Remember">
                             <label class="custom-control-label" for="Remember">Remember me</label>
                         </div>
-                        <a href="#">Forgot Password?</a>
+                        <a href="{% url 'reset_password' %}">Forgot Password?</a>
                     </div>
                     <footer class="login-footer">
                         <button type="submit" class="common-button is-bg">Sign in</button>
-                        <p><a hre="#">Forgot your password?</a></p>
+                        <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
                     </footer>
                 </form>
 

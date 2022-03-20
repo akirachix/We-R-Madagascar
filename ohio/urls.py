@@ -30,7 +30,7 @@ from django.conf.urls.static import static
 from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
 from django.contrib.auth.views import LoginView, LogoutView
-from flightres.views import homeView
+from flightres.views import homeView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 import django.views.static
 
 # from registry.views import UserViewSet
@@ -40,6 +40,7 @@ handler500 = 'flightres.views.view_500'
 
 admin.autodiscover()
 from rest_framework_simplejwt import views as jwt_views
+from django.contrib.auth import views
 
 # schema_view = get_schema_view(
 #    openapi.Info(
@@ -56,6 +57,10 @@ urlpatterns = [
     path('', homeView, name='home'),
     path('accounts/login/', LoginView.as_view()),
     path('accounts/logout/', LogoutView.as_view(), name='logout'),
+    path('password_reset/', PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('api/v1/', registryviews.APIView.as_view()),
     path('api/v1/operators', registryviews.OperatorList.as_view()),
     path('api/v1/operators/<uuid:pk>', registryviews.OperatorDetail.as_view()),
