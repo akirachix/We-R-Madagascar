@@ -1,0 +1,66 @@
+{% extends 'flightres/base.html' %} {% load static %} 
+
+<!DOCTYPE html>
+
+{% block body %}
+
+
+
+<div class="container">
+  <h2>Delayed Shipments List</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">shipment_id </th>
+
+        <th scope="col">destination </th>
+        <th scope="col"> delay_reasons</th>
+
+        <th scope="col"> status</th>
+
+       
+      </tr>
+    </thead>
+  
+    <tbody>
+        {% for shipment in shipments_list %} 
+
+      <tr>
+
+        <td>{{shipment.shipment_id}}</td>
+ 
+
+
+        <td>{{shipment.destination}}</td>
+        <td>{{shipment.delay_reasons}}</td>
+        <td>{{shipment.status}}</td>
+
+       
+     
+
+
+
+        <td><a id="edit_delay" href="{%url 'shipments:edit_delays' shipment.id%}"><button type="submit" class="save btn btn-primary">Reschedule Shipment</button></td></a>
+
+
+      </tr>
+      {% endfor %}
+      <div class="inner">
+        <p>Total Delayed Shipments:<h3>{{ delayed_count }}</h3></p>
+      </div>
+
+    </tbody>
+  </table>
+</div>
+
+              
+<style>
+  h2{
+    text-align: center;
+  }
+  .container{
+    margin-left: 20%;
+  }
+</style>
+</html>
+{%endblock body%}

@@ -6,30 +6,10 @@
     #mapid {
         
         height: inherit;
-        width: 100%; }
-    /*
-    .marker-cluster-small {
-        background-color: #3c6ae786;
+        width: 100%; 
     }
-    .marker-cluster-small div {
-        color:white;
-        background-color: #174BDD;
-    }
-    .marker-cluster-medium {
-        background-color: #3c6ae786;
-    }
-    .marker-cluster-medium div {
-        color:white;
-        background-color: #174BDD;
-    }
-    .marker-cluster-large {
-        background-color: #3c6ae786;
-    }
-    .marker-cluster-large div {
-        color:white;
-        background-color: #174BDD;
-    }
-    */
+
+
     
     .leaflet-control-layers {
         position: absolute;
@@ -49,13 +29,14 @@
         left:20px;
         top:160px;
     }
+    .
     
 </style>
 {% endblock links %}
 
 {% block body %}
 
-    
+
 
 
 <main class="admin-main pd-0">
@@ -66,53 +47,24 @@
                             
                                 
                             <div class="left is-flex" style='max-width: 70%;'>
-                                <div class="form-group inline-group mb-0">
-                                    <input placeholder="Start Date Format-(YY/MM/DD)" value='{% if flight_start_date %}{{flight_start_date}}{% endif %}' type="date" name="flight_start_date"  class="form-control date" max="2099-12-31" min="2001-12-31">
-                                    <input placeholder="End Date Format-(YY/MM/DD)" value='{% if flight_end_date %}{{flight_end_date}}{% endif %}' type="date" name="flight_end_date"  class="form-control date" max="2099-12-31" min="2001-12-31">
-                                </div>
+                              
                                 <div class="custom-select-wrap">
-                                    <label>Flight Status</label>
                                     <div id='flt_dropdown' class="custom-select">
-                                        <p class="selected-item selected">
-                                            <span id='flt_select'>{% if flight_approved or flight_pending or flight_rejected %} View Selection{% else %}Select One{% endif %}</span>
                                         </p>
                                         <ul class="select-list">
-                                            <li class='stat' value='Approved'><span >Approved</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if flight_approved %}Approved{%endif%}' class='stat_in' id='flt_approved' name='flt_approved' type='checkbox' {% if flight_approved %}checked{%endif%}></span></li>
-                                            <li class='stat' value='Pending'><span>Pending</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if flight_pending %}Pending{%endif%}' class='stat_in' id='flt_pending' name='flt_pending' type='checkbox' {% if flight_pending %}checked{%endif%}></span></li>
-                                            <li class='stat' value='Rejected'><span>Rejected</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if flight_rejected %}Rejected{%endif%}' class='stat_in' id='flt_rejected' name='flt_rejected' type='checkbox' {% if flight_rejected %}checked{%endif%}></span></li>   
+
                                         </ul>    
                                     </div>
                                 </div>
-                                <div class="custom-select-wrap">
-                                    <label>Complaint Status</label>
-                                    <div id='comp_dropdown' class="custom-select">
-                                        <p class="selected-item selected">
-                                            <span id='comp_select'>{% if complaint_pending or complaint_resolved %}View Selection{% else %}Select One{% endif %}</span>
-                                        </p>
-                                        
-                                        <ul class="select-list">
-                                            
-                                            <li class='comp_stat' value='Pending'><span>Pending</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if complaint_pending %}Pending{%endif%}' class='comp_stat_in' id='comp_pending' name='comp_pending' type='checkbox' {% if complaint_pending %}checked{%endif%}></span></li>
-                                            <li class='comp_stat' value='Resolved'><span>Resolved</span><span style='margin-left: auto;margin-right: 10px;'><input value='{% if complaint_resolved %}Resolved{%endif%}' class='comp_stat_in' id='comp_resolved' name='comp_resolved' type='checkbox' {% if complaint_resolved %}checked{%endif%}></span></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                              
                                 
                                 
                                 
                             </div>
                             <div class="right is-flex" style='max-width: 30%;'>
                                 
-                                <div class="buttons is-flex">
-                                    <button class="common-button is-bg is-auto" type='submit'>Apply</button>
-                                    
-                                    <a class="common-button is-clear is-auto" id='reset' href="javascript:void();">Reset</a>
-                                </div>
-                                <div class="buttons is-flex">
-                                <a modal-link="upload-custom-file-modal"
-                                    style="color:white;" class="modal-link common-button is-bg link-btn is-auto" data-toggle="modal" data-target="#upload-custom-file-modal">Upload No-Fly Zone
-                                </a>
-                                </div>
+                               
+                               
                                
                                 
                             </div>
@@ -120,84 +72,23 @@
                         </div>
                 </header>
                 </form>
-                <div class="popup" tabindex="-1" role="dialog" id="upload-custom-file-modal">
-                    <div class="popup-container lg-popup map-popup">
-                        <div class="popup-body">
-                            <span class="close-icon"><i class="material-icons">close</i></span>
-                            <div class="popup-header">
-                                <h3><b>Upload No-Fly Zone</b></h3>
-            
-                            </div>
-                            <div class="popup-content">
-                                <div class="drone-details">
-                                    <div class="row gx-md-3 gx-lg-3">
-                                        <div class="col-xl-12 col-sm-12">
-                                            <div class="drone-content col-left col-operators">
-                                                <form action="{% url 'dashboard:custom_zip' %}" method="POST"
-                                                    enctype="multipart/form-data">
-                                                    {% csrf_token %}
-                                                    
-                                                    <div class="form-group">
-                                                        <label for="fileUpload">Select zip file with .shp files</label>
-                                                        <input class="form-control" type="file" accept=".zip"
-                                                            name="custom_zip" id="sheet">
-                                                    </div>
-                                                    <br>
-                                                    <div class="buttons is-end">
-                                                        <button type="submit" class="common-button is-bg">Submit</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+         
                 <section class="map-section" style='position:relative;'>
                     
                     <div id="mapid"></div>
                     
                     <div class="legend-body" style='z-index:9090;position:absolute;left:auto;right:40px;bottom:40px;'>
-                        <span class="title">Categories</span>
                         <ul class="legend">
                             
-                            <li class="legend-item">
-                                <a href="javascript:void()">
-                                    <div class="circle-marker-legend is-green" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="/staticfiles/img/drone-icon.svg" alt="My image" style=""></div>
-                                    <span class="label">Approved Flights</span>
-                                    
-
-                                </a>
-                            </li>
-                            <li class="legend-item">
-                                <a href="javascript:void()">
-                                    <div class="circle-marker-legend is-orange" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="/staticfiles/img/drone-icon.svg" alt="My image" style=""></div>
-                                    <span class="label">Pending Flights</span>
-                                </a>
-                            </li>
+           
                             <li class="legend-item">
                                 <a href="javascript:void()">
                                     <div class="circle-marker-legend is-red" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="15px" height="15px" src="/staticfiles/img/drone-icon.svg" alt="My image" style=""></div>
-                                    <span class="label">Rejected Flights</span>
+                                    <span class="label">Completed Flights</span>
                                 </a>
                             </li>
-                            <li class="legend-item">
-                                <a href="javascript:void()">
-                                    <div class="circle-marker-complaint-legend is-orange" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="12px" height="12px" src="/staticfiles/img/complaint-orangeIcon.svg" alt="My image" style=""></div>
-                                    <!-- <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png" style='height:23px;width:15px;'> -->
-                                    <span class="label">Pending Complaints</span>
-                                </a>
-                            </li>
-                            <li class="legend-item">
-                                <a href="javascript:void()">
-                                    <div class="circle-marker-complaint-legend is-green" tabindex="0" style="width: 25px;height: 25px;z-index: 381;outline: none;"><img width="12px" height="12px" src="/staticfiles/img/complaint-greenIcon.svg" alt="My image" style=""></div>
-
-                                    <!-- <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png" style='height:22px;width:14px;'> -->
-                                    <span class="label">Resolved Complaints</span>
-                                </a>
-                            </li>
+                           
+            
                         </ul>
                     </div>
                 </section>
@@ -263,25 +154,19 @@
     //var cir1 = [];
     var greenIcon = L.divIcon({
         className: `circle-marker-complaint is-green`,
-        // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
-        // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+
         html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-greenIcon.svg' alt="My image">`,
         iconSize:     [38, 50], // size of the icon
         shadowSize:   [50, 64], // size of the shadow
-        // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
-        // shadowAnchor: [4, 62],  // the same for the shadow
-        // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+
     });
     var orangeIcon = L.divIcon({
         className: `circle-marker-complaint`,
-        // html: "<img src='/static/img/drone-icon.svg' alt='drone-img'/>",
-        // html:`<img src='{% static "img/drone-icon.svg" %}' alt="My image">`,
+
         html:`<img width="16px" height="16px" src='/staticfiles/img/complaint-orangeIcon.svg' alt="My image">`,
         iconSize:     [38, 50], // size of the icon
         shadowSize:   [50, 64], // size of the shadow
-        // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
-        // shadowAnchor: [4, 62],  // the same for the shadow
-        // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+
     });
     for(i=0;i<dataset.length;i++) {
         customPopup = '<div class="bind-popup" style="margin-right:auto;margin-left:14%;"> <div class="bind-header"> <table style="width:100%"><tr><th>ID</th><th>Altitude</th><th>Status</th></tr><tr><td>'+ dataset[i][4] +'</td><td>'+ dataset[i][3] +'</td><td>'+ dataset[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
@@ -292,39 +177,12 @@
             html:`<img src='/staticfiles/img/drone-icon.svg' alt="My image">`,
             iconSize:     [38, 50], // size of the icon
             shadowSize:   [50, 64], // size of the shadow
-            // iconAnchor:   [19, 46], // point of the icon which will correspond to marker's location
-            // shadowAnchor: [4, 62],  // the same for the shadow
-            // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-       
+           
         });
         mark[i] = L.marker([dataset[i][0], dataset[i][2]], {icon:testIcon});
         markersClusterGroup.addLayer(mark[i]);
         cir += 1;
-        // if(dataset[i][1] == 'Approved') {
-        //     cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
-        //         color: 'green',
-        //         fillColor: 'green',
-        //         fillOpacity: 0.5,
-        //         radius: 500
-        //     }).addTo(mymap);
-
-        // } else if(dataset[i][1] == 'Pending') {
-        //     cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
-        //         color: 'orange',
-        //         fillColor: 'orange',
-        //         fillOpacity: 0.5,
-        //         radius: 500
-        //     }).addTo(mymap);
-
-        // } else if(dataset[i][1] == 'Rejected') {
-        //     cir[i] = L.circle([dataset[i][0], dataset[i][2]], {
-        //         color: 'red',
-        //         fillColor: 'red',
-        //         fillOpacity: 0.5,
-        //         radius: 500
-        //     }).addTo(mymap);
-
-        // };
+      
 
         mark[i].bindPopup(customPopup);
     }
@@ -333,31 +191,14 @@
         customPopup1 = '<div class="bind-popup" style="margin-right:auto;margin-left:25%;"> <div class="bind-header"> <table style="width:100%"><tr><th style="padding-right:10px;">ID</th><th style="padding-left:10px;">Status</th></tr><tr><td style="padding-right:10px;">'+ dataset_comp[i][3] +'</td><td style="padding-left:10px;">'+ dataset_comp[i][1] +'</td> </tr></table> <p><i class="fa fa-map-marker"></i> </p><em><span> </span> </em></div><a href="openSpace_details.html" class="openSpace_btn"></a></div><ul><li></li><li></li></ul>'
 
         
-        if(dataset_comp[i][1] == 'Pending') {
+       
+        if(dataset_comp[i][1] == 'Completed') {
             mark1[i] = L.marker([dataset_comp[i][0], dataset_comp[i][2]], {icon:orangeIcon});
             markersClusterGroup.addLayer(mark1[i]);
-            /*
-            cir1[i] = L.circle([dataset_comp[i][0], dataset_comp[i][2]], {
-                color: 'orange',
-                fillColor: 'orange',
-                fillOpacity: 0.5,
-                radius: 500
-            }).addTo(mymap);
-            */
+          
            cir += 1;
 
-        } else if(dataset_comp[i][1] == 'Resolved') {
-            mark1[i] = L.marker([dataset_comp[i][0], dataset_comp[i][2]], {icon:greenIcon});
-            markersClusterGroup.addLayer(mark1[i]);
-            /*
-            cir1[i] = L.circle([dataset_comp[i][0], dataset_comp[i][2]], {
-                color: 'Green',
-                fillColor: 'Green',
-                fillOpacity: 0.5,
-                radius: 500
-            }).addTo(mymap);
-            */
-            cir += 1;
+       
         };
         
         mark1[i].bindPopup(customPopup1);
@@ -395,26 +236,7 @@
             "Google Terrain": googleTerrain,
 
         };
-        /* var legend = L.control({position: 'bottomleft'});
-        legend.onAdd = function (map) {
-
-        var div = L.DomUtil.create('div', 'info legend');
-        labels = ['<strong>Categories</strong>'],
-        categories = ['Approved','Pending','Rejected'];
-        color=['Green','orange','Red'];
-
-        for (var i = 0; i < categories.length; i++) {
-
-                div.innerHTML += 
-                labels.push(
-                    '<i class="circle" style="opacity: 0.5;background:' + color[i] + '"></i> ' +
-                (categories[i] ? categories[i] : '+'));
-
-            }
-            div.innerHTML = labels.join('<br>');
-        return div;
-        };
-        legend.addTo(mymap); */
+      
     layerswitcher = L.control.layers(baseLayers, {}, { collapsed: true}).addTo(mymap);
 
    // popup = marker.bindPopup("Lat:28.209499,Long:83.959518").openPopup();
@@ -430,40 +252,20 @@
             }
             
             switch (sta) {
-                case 'Approved':
+                case 'Completed':
                 case 'flt_approved':
-                    if ($('#flt_approved').prop('checked') == true) {
-                        $('#flt_approved').prop('checked', false);
-                        $('#flt_approved').attr('value', '');
+                    if ($('#flt_completed').prop('checked') == true) {
+                        $('#flt_completed').prop('checked', false);
+                        $('#flt_completed').attr('value', '');
                     }else{
-                        $('#flt_approved').prop('checked', true);   
-                        $('#flt_approved').attr('value', 'Approved');
+                        $('#flt_completed').prop('checked', true);   
+                        $('#flt_completed').attr('value', 'Approved');
                     }
                     break;
-                case 'Pending':
-                case 'flt_pending':
-                    if ($('#flt_pending').prop('checked') == true) {
-                        $('#flt_pending').prop('checked', false);
-                        $('#flt_pending').attr('value', '');
-                    }else{
-                        $('#flt_pending').prop('checked', true);       
-                        $('#flt_pending').attr('value', 'Pending');       
-                    }
-                    break;
-                case 'Rejected':
-                case 'flt_rejected':
-                    if ($('#flt_rejected').prop('checked') == true) {
-                        $('#flt_rejected').prop('checked', false);
-                        $('#flt_rejected').attr('value', '');
-                    }else{
-                        $('#flt_rejected').prop('checked', true);       
-                        $('#flt_rejected').attr('value', 'Rejected');       
-                    }
-                    break;
-                    
+                        
             }
             if (sta != ''){
-                if ($('#flt_approved').prop('checked') == false && $('#flt_pending').prop('checked') == false && $('#flt_rejected').prop('checked') == false ) {
+                if ($('#flt_approved').prop('checked') == false && $('#flt_pending').prop('checked') == false && $('#flt_rejected').prop('checked') == false && $('#flt_completed').prop('checked') == false ) {
                     document.getElementById('flt_select').innerHTML = 'Select One';
                 } else {
                     document.getElementById('flt_select').innerHTML = 'View Selection';
@@ -472,61 +274,14 @@
         });
     });
 </script>
-<script>
-    $(function() {
-        $(".comp_stat").on("click",function(e) {
-            e.preventDefault();
-            if ($(this).hasClass('comp_stat')) {
-                var sta1 = $(this).attr('value');
-            } else {
-                var sta1 = $(this).attr('id');
-            }
-            switch(sta1) {
-                case 'Pending':
-                case 'comp_pending':
-                    if ($('#comp_pending').prop('checked') == true) {
-                        $('#comp_pending').prop('checked', false);
-                        $('#comp_pending').attr('value', '');
-                    }else{
-                        $('#comp_pending').prop('checked', true);   
-                        $('#comp_pending').attr('value', 'Pending');
 
-                    }
-                    break;
-                case 'Resolved':
-                case 'comp_resolved':
-                    if ($('#comp_resolved').prop('checked') == true) {
-                        $('#comp_resolved').prop('checked', false);
-                        $('#comp_resolved').attr('value', '');
-                    }else{
-                        $('#comp_resolved').prop('checked', true);   
-                        $('#comp_resolved').attr('value', 'Resolved');
-
-                    }
-                    break;
-            }
-            if (sta1 != ''){
-                if ($('#comp_pending').prop('checked') == false && $('#comp_resolved').prop('checked') == false ) {
-                    document.getElementById('comp_select').innerHTML = 'Select One';
-                } else {
-                    document.getElementById('comp_select').innerHTML = 'View Selection';
-                } 
-                
-            };
-            
-        });
-    });
-</script>
 <script>
     $(function() {
         $('#reset').on('click', function(e){
             e.preventDefault();
             $('#myform').trigger('reset');
-            $("#flt_approved").prop('checked', false);
-            $("#flt_pending").prop('checked', false);
-            $("#flt_rejected").prop('checked', false);
-            $("#comp_pending").prop('checked', false);
-            $("#comp_resolved").prop('checked', false);
+            $("#flt_completed").prop('checked', false);
+
             $('.date').attr('value', '')
             
             document.getElementById('flt_select').innerHTML = 'Select One';
