@@ -227,6 +227,7 @@ def dashboardView(request):
     # pending_requests_num = FlightPermission.objects.filter(status="Pending").count()
     # rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
     # delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
+    #dashboard check
     total_requests_num= FlightPermission.objects.all().count()
     completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
     clinics_num = Clinic.objects.all().count()
@@ -1003,7 +1004,7 @@ def view_500(request):
     return render(request, 'flightres/404.html')
 
 def countClinics(request):
-    cliniclist = ClinicProfile.objects.all().count()
+    cliniclist = Clinic.objects.all().count()
     return render(request,'dashboard.html',{
         'cliniclist' : cliniclist,
     })

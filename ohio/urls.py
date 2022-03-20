@@ -78,6 +78,7 @@ urlpatterns = [
     path('api/v1/user/', include('authentication.urls')),
     path('np/clinic/', include('clinic.urls')),
     path('np/api/v1/', include('api.urls')),
+    path('np/shipments/',include(('shipments.urls', 'shipments'), namespace="shipment")),
     path('np/dashboard/', include(('flightres.urls', 'flightres'), namespace='dashboard')),
     url(r'^assets/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     # url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),

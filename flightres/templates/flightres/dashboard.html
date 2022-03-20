@@ -116,16 +116,12 @@
                 </div>
             </div>
         </div> -->
+
         </div>
     </div> 
 
-    <div class="map-section">
-        <div class="row row-wrap g-xl-4 g-lg-3 gy-xl-0 gy-4">
-        <div class="col-xl-12 col-lg-12 col-md-12 column">
-       <p>Map goes here</p>
-        </div>
-        </div>
-    </div>
+    </div> 
+
 </main>
 
 <script>
@@ -207,4 +203,7 @@
     chart.render();
 
 </script>
+<iframe src="{% url 'dashboard:flightview' %}" name="iframe_a" height="650px" width="100%" title="Iframe Example"></iframe>
+
 {% endblock body %}
+

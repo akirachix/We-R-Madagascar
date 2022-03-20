@@ -1,0 +1,62 @@
+{% extends 'flightres/base.html' %} {% load static %} 
+
+<!DOCTYPE html>
+
+{% block body %}
+
+
+
+<div class="container">
+  <h2>Completed Shipments List</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">shipment_id </th>
+
+        <th scope="col">destination </th>
+
+        <th scope="col"> delivery_time</th>
+
+       
+      </tr>
+    </thead>
+  
+    <tbody>
+        {% for shipment in completed_list %} 
+
+      <tr>
+
+        <td>{{shipment.shipment_id}}</td>
+ 
+
+
+        <td>{{shipment.destination}}</td>
+        <td>{{shipment.delivery_time}}</td>
+
+       
+        <td><a id="view_profile" href="{%url 'shipments:completed_profile' shipment.id%}"><button type="submit" class="save btn btn-primary"> More</button></td></a>
+
+       
+
+
+      </tr>
+      {% endfor %}
+      <div class="inner">
+        <p>Total Completed Shipments:<h3>{{ completed_count }}</h3></p>
+      </div>
+
+    </tbody>
+  </table>
+</div>
+
+              
+<style>
+  h2{
+    text-align: center;
+  }
+  .container{
+    margin-left: 20%;
+  }
+</style>
+</html>
+{%endblock body%}
