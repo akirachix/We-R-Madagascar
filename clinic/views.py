@@ -34,7 +34,7 @@ def clinic_upload(request):
 		)
 
 	context = {
-		
+	 
 	}
 	return render (request, template, context)
 
