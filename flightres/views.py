@@ -48,6 +48,7 @@ from django .views.decorators.cache import never_cache
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth import (login as auth_login, get_user_model)
+from shipments.models import Schedule
 
 def homeView(request):
     return render(request, 'flightres/home.html')
@@ -229,7 +230,7 @@ def dashboardView(request):
     # delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
     #dashboard check
     total_requests_num= FlightPermission.objects.all().count()
-    completed_requests_num = FlightPermission.objects.filter(status="Completed").count()
+    completed_requests_num = Schedule.objects.filter(status="Completed").count()
     clinics_num = Clinic.objects.all().count()
     complaint_num = Report.objects.all().count()
 
