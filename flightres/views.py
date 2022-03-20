@@ -860,7 +860,7 @@ def view_500(request):
     return render(request, 'flightres/404.html')
 
 def countClinics(request):
-    cliniclist = ClinicProfile.objects.all().count()
+    cliniclist = Clinic.objects.all().count()
     return render(request,'dashboard.html',{
         'cliniclist' : cliniclist,
     })
