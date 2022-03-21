@@ -1,4 +1,8 @@
 {% extends 'flightres/base.html' %} {% load static %} 
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
 <!Doctype html>
 <html>
     <head>
@@ -20,10 +24,10 @@
 
 <form method="post" novalidate>
     {% csrf_token %}
-    <table border="1">
-      {{ form }}
-    </table>
-    <button type="submit">Submit</button>
+    <form>
+      {{ form.as_table }}
+      <button type="submit">Schedule</button>
+    </form>
   </form>
 
     </body>
@@ -32,6 +36,7 @@
             text-align: center;
             margin-left: 500px;
         }
+   
     </style>
     {% endblock body %}
         
