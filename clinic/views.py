@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import permission_required
 from django.core.paginator import InvalidPage,Paginator
 from django.views.generic.list import ListView
+from django.db.models import Q
 
 def clinic_upload(request):
 	template = 'clinic/upload_clinics.html'
@@ -60,7 +61,7 @@ class ClinicViewDetails(ListView):
         context={"clinics":current_page,"is_paginated":is_paginated,"count": Clinic.objects.all().count()}
         return render(request,self.template_name,context)
 
-def search_student(request):
+def search_clinic(request):
     search_post = request.GET.get('search')
     if search_post:
         clinics = Clinic.objects.filter(Q(name__icontains=search_post))
@@ -68,6 +69,6 @@ def search_student(request):
     else:
         clinics = Clinic.objects.all()
         message="Looks like the clinic doesn't exist. Try searching using the clinic name"
-        return render (request,'reward.html',{'clinics':clinics,'message':message})
-    return render (request,'reward.html',{'students':students,'results':results})
+        return render (request,'clinic/view_clinics.html',{'clinics':clinics,'message':message})
+    return render (request,'clinic/view_clinics.html',{'clinics': clinics,'results':results})
 

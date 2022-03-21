@@ -121,7 +121,7 @@
    
   <div style="overflow: auto; display: block;">
     <div class="search">
-      <form method="get" class="w-100">
+      <form method="get" class="w-100" action="{% url 'search_clinic' %}">
         <button type="submit" class="search-button">
           <i class="fas fa-search"></i>
         </button>
@@ -131,8 +131,9 @@
       <h6>{{message}}</h6>
       {%endif%}
 
-      {%if results%}
+      {%if results %}
       <p class="results">Found {{results}} clinic{{ results|pluralize }}</p>
+      
       {%endif%}
     </div>
   </div>
