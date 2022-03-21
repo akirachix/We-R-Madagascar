@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save
 import datetime as dt
 
+from django.utils import timezone
 
 
 STATUS_CHOICES = (
@@ -18,7 +19,7 @@ class Schedule(models.Model):
     clinic_name = models.CharField(max_length=20)
     medication = models.CharField(max_length=20)
     units = models.CharField(max_length=5)
-    delivery_date = models.DateField()
+    delivery_date = models.DateField(default=timezone.now)
     take_of_time= models.TimeField(default=dt.time(00, 00))
     delivery_time = models.TimeField(default=dt.time(00, 00))
     status = models.CharField(max_length=30, choices=STATUS_CHOICES,default='dispatched')
