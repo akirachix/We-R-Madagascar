@@ -6,6 +6,7 @@ from .forms import ClinicForm
 import logging
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import permission_required
 from django.core.paginator import InvalidPage,Paginator
 from django.views.generic.list import ListView
@@ -39,7 +40,8 @@ def clinic_upload(request):
 	context = {
 		
 	}
-	return render (request, template, context)
+    
+	return redirect ("view_clinics")
 
 class ClinicViewDetails(ListView):
     model=Clinic
