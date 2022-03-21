@@ -6,42 +6,45 @@ from .forms import ClinicForm
 import logging
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.shortcuts import redirect
+# from django.shortcuts import redirect
 from django.contrib.auth.decorators import permission_required
 from django.core.paginator import InvalidPage,Paginator
 from django.views.generic.list import ListView
 from django.db.models import Q
+from django.db import IntegrityError
 
 def clinic_upload(request):
-	template = 'clinic/upload_clinics.html'
-	prompt = {
-		'order': 'order of csv should be name, email, address, profile'
-	}
-	if request.method == "GET":
-		return render(request, template, prompt)
+    template = 'clinic/upload_clinics.html'
+    try:
 
-	csv_file = request.FILES["file"]
+        prompt = {
+'order': 'order of csv should be name, email, address, profile'
+}
+        if request.method == "GET":
+            return render(request, template, prompt)
 
-	if not csv_file.name.endswith('.csv'):
-		messages.error(request,'This is not a csv file')
+        csv_file = request.FILES["file"]
 
-	data_set = csv_file.read().decode("UTF-8")	
-	io_string = io.StringIO(data_set)
-	next(io_string)
+        if not csv_file.name.endswith('.csv'):
+            messages.error(request,'This is not a csv file')
 
-	for column in csv.reader(io_string, delimiter=',', quotechar='|'):
-		_, created = Clinic.objects.update_or_create(
-			name = column[0],
-			email = column[1],
-			address = column[2],
-			profile = column[3]
-		)
+        data_set = csv_file.read().decode("UTF-8")	
+        io_string = io.StringIO(data_set)
+        next(io_string)
 
-	context = {
-		
-	}
-    
-	return redirect ("view_clinics")
+        for column in csv.reader(io_string, delimiter=',', quotechar='|'):
+            _, created = Clinic.objects.update_or_create(
+            name = column[0],
+            email = column[1],
+            address = column[2],
+            profile = column[3]
+            )
+    except IntegrityError as e:
+        return render (request, 'clinic/error.html')
+
+    context = {
+}
+    return redirect ("view_clinics")
 
 class ClinicViewDetails(ListView):
     model=Clinic
