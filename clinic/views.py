@@ -45,15 +45,6 @@ class ClinicViewDetails(ListView):
     template_name='clinic/view_clinics.html'
     context_object_name="clinics"
 
-    def get_context_data(self, **kwargs):
-        context=super().get_context_data(**kwargs)
-        
-        search_post = self.request.GET.get('search')
-        if search_post:
-            context['clinics']=context['clinics'].filter(Q(name__icontains=search_post)  | Q(name__icontains=search_post) )
-            context['results']=context['clinics'].count()
-        context['search_post']=search_post
-        return context
 
     def get(self, request, *args,**kwargs):
         clinics=Clinic.objects.all()
@@ -69,24 +60,14 @@ class ClinicViewDetails(ListView):
         context={"clinics":current_page,"is_paginated":is_paginated,"count": Clinic.objects.all().count()}
         return render(request,self.template_name,context)
 
-
-
-
-
-
-
-
-# def get(self, request, *args,**kwargs):
-# 	clinics=Clinic.objects.all()
-#     paginator=Paginator(clinics,3)
-# 	is_paginated=True if paginator.num_pages > 1 else False
-#     page=request.GET.get("page") or 1
-#     search_post = request.GET.get('search')
-#     try:
-# 		current_page=paginator.page(page)
-#     except InvalidPage as e:
-# 		raise Http404(str(e))
-
-#     context={"clinics":current_page,"is_paginated":is_paginated}
-#     return render(request,self.template_name,context)
+def search_student(request):
+    search_post = request.GET.get('search')
+    if search_post:
+        clinics = Clinic.objects.filter(Q(name__icontains=search_post))
+        results=clinics.count()
+    else:
+        clinics = Clinic.objects.all()
+        message="Looks like the clinic doesn't exist. Try searching using the clinic name"
+        return render (request,'reward.html',{'clinics':clinics,'message':message})
+    return render (request,'reward.html',{'students':students,'results':results})
 
