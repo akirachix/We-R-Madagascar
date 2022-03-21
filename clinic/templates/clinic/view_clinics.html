@@ -139,10 +139,16 @@
   <div class="w-100"></div>
 
   <div class="row no-gutters mt-4 mb-4">
+    <a href="{% url 'clinic_upload' %}" >
+      <button class="GFG">
+          Add clinic
+      </button>
+  </a>
     <div class="col-8">
       <h5 style=" color: #117BCC;
       ">Registered Clinics</h5>
     </div>
+    
     <div class="col-4">
       <div class="row no-gutters">
         <div class="col-6">
@@ -150,7 +156,7 @@
         </div>
         <div class="col-6">
           <p style="float: left; color: #117BCC;
-        ">500</p>
+        ">{{count}} clinics </p>
         </div>
       </div>
     </div>
@@ -160,18 +166,46 @@
     <table class="table table-hover table-stripped" style="font-size: 1.2em">
       <thead>
         <tr>
-          <td>{{clinic.clinic_name}}</td>
-          <td>{{clinic.phone_number}}</td>
-          <td>{{clinic.location}}</td>
-          <td>{{clinic.registration_number}}</td>
-          <td><a href="{%url 'edit_clinic' clinic.id%}">Edit</a></td>
+          <th>Clinic Name</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Profile</th>
+          <th></th>
         </tr>
-        {%empty%}
-        <p>Looks like clinic does not exist</p>
-        <a href="{%url 'view_clinic'%}"><i class="fas fa-arrow-left"></i></a>
-        {%endfor%}
-      </table>
-    </div>
-   
+      </thead>
+      {%for clinic in clinics%}
+      <tr>
+        <td>{{clinic.name}}</td>
+        <td>{{clinic.email}}</td>
+        <td>{{clinic.address}}</td>
+        <td>{{clinic.profile}}</td>
+       
+      </tr>
+      {%empty%}
+      <p>Looks like clinic does not exist</p>
+     
+      {%endfor%}
+    </table>
+  </div>
+
+
+  {% if is_paginated %}
+  <div class="pagination">
+    <span class="step-links">
+      {% if clinics.has_previous %}
+      <a href="?page={{ clinics.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span>
+        Page {{ clinics.number }} of {{ clinics.paginator.num_pages }}.
+      </span>
+
+      {% if clinics.has_next %}
+      <a href="?page={{ clinics.next_page_number }}">next</a>
+      {% endif %}
+    </span>
+  </div>
+  {% endif %}
+  </div>
 </main>
 {%endblock%}
