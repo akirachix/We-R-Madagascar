@@ -13,7 +13,8 @@ class ScheduleForm(forms.ModelForm):
             'shipment_id': forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
             'clinic_name': forms.TextInput( attrs={'class': 'form-control','style':'width:50%',}),
             'medication':  forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
-            'units': forms.NumberInput(attrs={'class': 'form-control','style':'width:50%'}),  
+            'units': forms.TextInput(attrs={'class': 'form-control','style':'width:50%'}), 
+
             'delivery_date': forms.DateInput( attrs={'class': 'form-control','style':'width:50%'}),
 
           
@@ -50,7 +51,7 @@ class DelayedForm(forms.ModelForm):
             'shipment_id': forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
             'clinic_name': forms.TextInput( attrs={'class': 'form-control','style':'width:50%',}),
             'medication':  forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
-            'units': forms.NumberInput(attrs={'class': 'form-control','style':'width:50%'}), 
+            'units': forms.TextInput(attrs={'class': 'form-control','style':'width:50%'}), 
             'delivery_date': forms.DateInput( attrs={'class': 'form-control','style':'width:50%'}),
 
            
@@ -86,7 +87,8 @@ class RescheduleForm(forms.ModelForm):
             'shipment_id': forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
             'clinic_name': forms.TextInput( attrs={'class': 'form-control','style':'width:50%',}),
             'medication':  forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
-            'units': forms.NumberInput(attrs={'class': 'form-control','style':'width:50%'}),
+            'units': forms.TextInput(attrs={'class': 'form-control','style':'width:50%'}), 
+
             'delivery_date': forms.DateInput( attrs={'class': 'form-control','style':'width:50%'}),
 
             
