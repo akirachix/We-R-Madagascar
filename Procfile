@@ -1,1 +1,1 @@
-web: gunicorn ohio.wsgi
+web: gunicorn ohio.wsgi --log-file -
