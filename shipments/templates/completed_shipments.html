@@ -1,0 +1,87 @@
+{% extends 'flightres/base.html' %} {% load static %}
+{% load static %}
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom-charts.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/apexcharts.css' %}" />
+{% endblock links %}
+
+
+
+{% block body %}
+
+<style>
+  body {
+      font-family: 'Nunito', sans-serif;
+    }
+
+  th{
+    color: #117BCC !important;
+    border-color: #EBEEF5;
+  }
+
+  .table>:not(:last-child)>:last-child>* {
+    border-bottom-color: #EBEEF5;
+  }
+
+  .table>tr>td {
+    border-bottom-color: #EBEEF5;
+  }
+
+  .table {
+    margin-bottom: 4%;
+  }
+
+  .admin-main {
+    position: relative;
+    width: 80%;
+    float: right;
+  }
+</style>
+
+<main class="admin-main">
+  <div class="panel panel-default">
+
+    <div class="float-right">
+      <p style="color: #117BCC;">Total Completed Shipments:
+      <h4>{{ completed_count }}</h4>
+      </p>
+    </div>
+
+    <h4 style="color: #117BCC;"> Shipments Details</h4>
+
+    <div class="card" style="width: 100%;">
+      <table class="table table-hover table-stripped" style="font-size: 1.2em">
+        <thead>
+          <tr id="table-headings">
+            <th>shipment_id </th>
+
+            <th>destination </th>
+
+            <th> delivery_time</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for shipment in completed_list %}
+
+          <tr>
+
+            <td>{{shipment.shipment_id}}</td>
+
+
+
+            <td>{{shipment.destination}}</td>
+            <td>{{shipment.delivery_time}}</td>
+
+
+            <td><a id="view_profile" href="{%url 'shipments:completed_profile' shipment.id%}"><button type="submit"
+                  class="save btn btn-primary"> More</button></td></a>
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+{%endblock body%}

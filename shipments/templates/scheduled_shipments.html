@@ -1,0 +1,91 @@
+{% extends 'flightres/base.html' %} {% load static %}
+{% load static %}
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom-charts.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/apexcharts.css' %}" />
+{% endblock links %}
+
+
+{% block body %}
+<style>
+  body {
+    font-family: 'Nunito', sans-serif;
+  }
+
+  th {
+    color: #117BCC !important;
+    border-color: #EBEEF5;
+  }
+
+  .table>:not(:last-child)>:last-child>* {
+    border-bottom-color: #EBEEF5;
+  }
+
+  .table>tr>td {
+    border-bottom-color: #EBEEF5;
+  }
+
+  .table {
+    margin-bottom: 4%;
+  }
+
+  .admin-main {
+    position: relative;
+    width: 80%;
+    float: right;
+  }
+</style>
+
+
+<main class="admin-main">
+  <div class="panel panel-default">
+
+    <div class="float-right">
+      <p>Total Scheduled Shipments:
+      <h3>{{ schedule_count }}</h3>
+      </p>
+    </div>
+
+    <h4 style="color: #117BCC;"> Shipments Details</h4>
+
+    <div class="card" style="width: 100%;">
+      <table class="table table-hover table-stripped" style="font-size: 1.2em">
+        <thead>
+          <tr id="table-headings">
+            <th>shipment_id </th>
+            <th>clinic_name</th>
+            <th>medication</th>
+            <th>units</th>
+            <th>delivery_date </th>
+            <th> take_of_time</th>
+            <th>delivery_time</th>
+            <th>destination </th>
+            <th> status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for shipment in mylist %}
+
+          <tr>
+            <td>{{shipment.shipment_id}}</td>
+            <td>{{shipment.clinic_name}}</td>
+            <td>{{shipment.medication}}</td>
+            <td>{{shipment.units}}</td>
+            <td>{{shipment.delivery_date}}</td>
+            <td>{{shipment.take_of_time}}</td>
+            <td>{{shipment.delivery_time}}</td>
+            <td>{{shipment.destination}}</td>
+            <td>{{shipment.status}}</td>
+            <td><a id="edit_shipment" href="{%url 'shipments:edit_shipment' shipment.id%}"><button type="submit"
+                  class="save btn btn-primary">Edit</button></td></a>
+
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+{%endblock body%}
