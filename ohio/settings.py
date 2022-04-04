@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'clinic',
     'phonenumber_field',
     'shipments',
+    'flights',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
