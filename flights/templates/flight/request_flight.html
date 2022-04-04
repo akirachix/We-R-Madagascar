@@ -4,24 +4,6 @@
 {% endblock links %} {%block body%}
 <center>
 <main>
-  <div style="overflow: auto; display: block;">
-    <div class="search">
-      <form method="get" class="w-100" action="{% url 'search_clinic' %}">
-        <button type="submit" class="search-button">
-          <i class="fas fa-search"></i>
-        </button>
-        <input type="search" placeholder="Search by clinic name" name="search" />
-      </form>
-      {%if message%}
-      <h6>{{message}}</h6>
-      {%endif%}
-
-      {%if results %}
-      <p class="results">Found {{results}} pending flight requests {{ results|pluralize }}</p>
-      
-      {%endif%}
-    </div>
-  </div>
 <div class="main-card">
     <h3>Register Flight</h3>
   </div> 

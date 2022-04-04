@@ -10,7 +10,7 @@ class RequestFlightView(CreateView):
     model=FlightRequest
     form_class=RequestFlightForm
     template_name='flight/request_flight.html'
-    success_url=reverse_lazy('pending-flight')
+    success_url=reverse_lazy('pending-flights')
     
 
     def form_valid(self,form):
@@ -27,8 +27,9 @@ class PendingFlightRequestsListView(ListView):
         context={
             'pending_flight_requests ':pending_flight_requests,
             'pending_flight_requests_count':pending_flight_requests_count,
+            'flight/pending_requests.html':flight/pending_requests.html
             }
-        return render(request,context,self.template)
+        return render(request,context)
 
 class DelayedFlightRequestsListView(ListView):
     model = FlightRequest
