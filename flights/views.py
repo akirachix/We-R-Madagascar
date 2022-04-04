@@ -18,7 +18,7 @@ class RequestFlightView(CreateView):
 
 class PendingFlightRequestsListView(ListView):
     model = FlightRequest
-    template = 'flight/pending_request.html'
+    template = 'flight/pending_requests.html'
 
     def pending_requests(request):
         pending_flight_requests = FlightRequest.objects.all()
@@ -28,7 +28,7 @@ class PendingFlightRequestsListView(ListView):
             'pending_flight_requests ':pending_flight_requests,
             'pending_flight_requests_count':pending_flight_requests_count,
             }
-        return render(request,context)
+        return render(request,context,self.template)
 
 class DelayedFlightRequestsListView(ListView):
     model = FlightRequest
