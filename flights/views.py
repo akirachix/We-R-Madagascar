@@ -1,14 +1,16 @@
 from django.shortcuts import render
-from django.views.generic.list import ListView
+from django.views.generic import ListView,CreateView
 from django.shortcuts import render
 from .models import FlightRequest
+from .forms import RequestFlightForm
+from django.urls import reverse_lazy
 
 
 class RequestFlightView(CreateView):
     model=FlightRequest
-    form_class=RegisterclinicForm
+    form_class=RequestFlightForm
     template_name='flight/request_flight.html'
-    success_url=reverse_lazy('')
+    success_url=reverse_lazy('pending-flight')
     
 
     def form_valid(self,form):
@@ -16,7 +18,7 @@ class RequestFlightView(CreateView):
 
 class PendingFlightRequestsListView(ListView):
     model = FlightRequest
-    template = 'pending_request.html'
+    template = 'flight/pending_request.html'
 
     def pending_requests(request):
         pending_flight_requests = FlightRequest.objects.all()
@@ -26,7 +28,7 @@ class PendingFlightRequestsListView(ListView):
             'pending_flight_requests ':pending_flight_requests,
             'pending_flight_requests_count':pending_flight_requests_count,
             }
-        return render(request,context}
+        return render(request,context)
 
 class DelayedFlightRequestsListView(ListView):
     model = FlightRequest
@@ -40,7 +42,7 @@ class DelayedFlightRequestsListView(ListView):
             'delayed_flight_requests':pending_requests ,
             'delayed_flight_requests_count':delayed_flight_requests_count,
         }
-        return render(request,context}
+        return render(request,context)
 
 class ScheduledFlightRequestsListView(ListView):
     model = FlightRequest
