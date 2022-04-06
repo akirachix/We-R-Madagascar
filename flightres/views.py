@@ -230,12 +230,12 @@ def dashboardView(request):
     # delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
     #dashboard check
     total_requests_num= FlightPermission.objects.all().count()
-    # completed_requests_num = Schedule.objects.filter(status="Completed").count()
+    completed_requests_num = Schedule.objects.filter(status="Completed").count()
     clinics_num = Clinic.objects.all().count()
     complaint_num = Report.objects.all().count()
 
     
-    # top_row_data.append([total_requests_num, completed_requests_num, clinics_num, complaint_num])
+    top_row_data.append([total_requests_num, completed_requests_num, clinics_num, complaint_num])
     # data for pie chart
     pie_data = []
     # pie_data.append([solved_complaints, pending_complaints])

@@ -18,7 +18,7 @@ class RequestFlightView(CreateView):
 
 class PendingFlightRequestsListView(ListView):
     model = FlightRequest
-    template = 'flight/pending_requests.html'
+    template = 'flight/pending_flights.html'
 
     def pending_requests(request):
         pending_flight_requests = FlightRequest.objects.all()
@@ -33,7 +33,7 @@ class PendingFlightRequestsListView(ListView):
 
 class DelayedFlightRequestsListView(ListView):
     model = FlightRequest
-    template = 'delayed_request.html'
+    template = 'delayed_flights.html'
 
     def delayed_requests(request):
         delayed_flight_requests = FlightRequest.objects.filter(status="Delayed")
@@ -47,7 +47,7 @@ class DelayedFlightRequestsListView(ListView):
 
 class ScheduledFlightRequestsListView(ListView):
     model = FlightRequest
-    template = 'scheduled_request.html'
+    template = 'scheduled_flights.html'
 
     def scheduled_requests(request):
         scheduled_flight_requests = FlightRequest.objects.filter(status="Scheduled")
