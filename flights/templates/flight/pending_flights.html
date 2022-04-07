@@ -132,7 +132,7 @@
       {%endif%}
 
       {%if results %}
-      <p class="results">Found {{results}} clinic{{ results|pluralize }}</p>
+      <p class="results">Found {{results}} Pending requests{{ results|pluralize }}</p>
       
       {%endif%}
     </div>
@@ -143,7 +143,7 @@
   <div class="row no-gutters mt-4 mb-4">
     <div class="col-8">
       <h5 style=" color: #117BCC;
-      ">Registered Clinics</h5>
+      ">Pending requests</h5>
     </div>
     
     <div class="col-4">
@@ -171,13 +171,16 @@
           <th></th>
         </tr>
       </thead>
-      {%for request in pending_flight_requests %}
+      {% for request in requested_flights %}
       <tr>
         <td>{{request.clinic_name}}</td>
         <td>{{request.delivery_date }}</td>
         <td>{{request.total_volume}}</td>
         <td>{{request.priority_level}}</td>
         <td>{{request.refrigration}}</td>
+        <a>
+          <td>Action</td>
+        </a>
        
       </tr>
       {%empty%}
@@ -187,26 +190,22 @@
     </table>
   </div>
 
-  <a href="{% url 'clinic_upload' %}" >
-    <button class="GFG">
-        Add clinic
-    </button>
-</a>
+ 
 
 
   {% if is_paginated %}
   <div class="pagination">
     <span class="step-links">
       {% if clinics.has_previous %}
-      <a href="?page={{ clinics.previous_page_number }}">previous</a>
+      <a href="?page={{ requested_flights.previous_page_number }}">previous</a>
       {% endif %}
 
       <span>
-        Page {{ clinics.number }} of {{ clinics.paginator.num_pages }}.
+        Page {{ requested_flights.number }} of {{ requested_flights.paginator.num_pages }}.
       </span>
 
       {% if clinics.has_next %}
-      <a href="?page={{ clinics.next_page_number }}">next</a>
+      <a href="?page={{ requested_flights.next_page_number }}">next</a>
       {% endif %}
     </span>
   </div>

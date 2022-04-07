@@ -16,6 +16,7 @@ class FlightRequest(models.Model):
     priority_level = models.IntegerField()
     refrigration = models.BooleanField(choices=BOOL_CHOICES)
     status = models.CharField(max_length=30, choices=STATUS_CHOICES,default='pending')
+    delayed_reasons = models.CharField(max_length=300)
 
     def __str__(self):
         return self.clinic_name

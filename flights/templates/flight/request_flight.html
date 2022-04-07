@@ -10,32 +10,34 @@
   <br />
   <div class="card-header">
     <form method="post">
-      {%csrf_token%}
+      {% csrf_token %}
+         
       <div class="row">
         <div class="col">
             <label> Clinic (CSB) Name</label>
-            {{form.clinic_name}}
-          
+            
+            {{flight_form.clinic_name}}
         </div>
         <div class="col">
             <label>Total Volume (Litres)</label>
-            {{form.total_volume}}
+            {{flight_form.total_volume}}
         </div>
       </div>
       <div class="row">
         <div class="col">
             <label>Delivery Date </label>
-            {{form.delivery_date}}
+            {{flight_form.delivery_date}}
         </div>
         <div class="col">
             <label>Priority Level(1=High, 5=Low)</label>
-            {{form.priority_level}}
+            {{flight_form.priority_level}}
         </div>
         <div class="col">
-            <label>Registration Number</label>
-            {{form.refigration}}
+            <label>Refrigration</label>
+            {{flight_form.refrigration }}
         </div>
       </div>
+      
       <button
         class="btn btn-primary"
         style="margin-top: 1%; width: 10%"
@@ -55,7 +57,6 @@
     crossorigin="anonymous"></script>
   <script>
     let dropArea = document.getElementById('drop-area')
-
   </script>
 </main>
 </center>
