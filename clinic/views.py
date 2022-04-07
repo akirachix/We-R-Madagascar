@@ -45,7 +45,9 @@ def clinic_upload(request):
 
     except Exception as e: 
         print(e)
-        return render(request,"clinic/error.html",{'e':e})
+        message="There was an error uploading. Seems like you are uploading an empty file"
+
+        return render(request,"clinic/upload_clinics.html",{'message':message})
 
     context = {}
     return render(request, template, context)
