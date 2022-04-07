@@ -68,14 +68,11 @@ def search_clinic(request):
     if search_post:
         clinics = Clinic.objects.filter(Q(name__icontains=search_post))
         if not clinics:
-            print("Hello")
             message="Looks like the clinic doesn't exist. Try searching using the clinic name"
             return render (request,'clinic/view_clinics.html',{'clinics':all_clinics,'message':message})
         
         results=clinics.count()
     else:
         
-        print(clinics)
-        message="Looks like the clinic doesn't exist. Try searching using the clinic name"
         return render (request,'clinic/view_clinics.html',{'clinics':all_clinics,'message':message})
     return render (request,'clinic/view_clinics.html',{'clinics': clinics,'results':results})
