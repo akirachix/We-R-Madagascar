@@ -8,18 +8,7 @@ import logging
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import permission_required
-
-def clinic_display(request):
-    template = 'clinic/view_clinics.html'
-    
-    context = {
-        'clinics': Clinic.objects.all(),
-        'count': Clinic.objects.all().count()
-    }
-
-    return render (request, template, context)
-
-
+from django.db.models import Q
 def clinic_upload(request):
    
     template = "clinic/upload_clinics.html"
@@ -60,3 +49,31 @@ def clinic_upload(request):
 
     context = {}
     return render(request, template, context)
+
+
+def clinic_display(request):
+    template = 'clinic/view_clinics.html'
+    
+    context = {
+        'clinics': Clinic.objects.all(),
+        'count': Clinic.objects.all().count()
+    }
+
+    return render (request, template, context)
+
+def search_clinic(request):
+    search_post = request.GET.get('search')
+    all_clinics = Clinic.objects.all()
+    print(search_post)
+    if search_post:
+        clinics = Clinic.objects.filter(Q(name__icontains=search_post))
+        if not clinics:
+            message="Looks like the clinic doesn't exist. Try searching using the clinic name"
+            return render (request,'clinic/view_clinics.html',{'clinics':all_clinics,'message':message})
+        
+        results=clinics.count()
+    else:
+        
+        print(clinics)
+        return render (request,'clinic/view_clinics.html',{'clinics':all_clinics,'message':message})
+    return render (request,'clinic/view_clinics.html',{'clinics': clinics,'results':results})
