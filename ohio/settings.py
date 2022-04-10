@@ -34,6 +34,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -148,9 +149,9 @@ LOGIN_URL = '/accounts/login'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'test2',
-        'USER': 'alma',
-        'PASSWORD': 'realme6',
+        'NAME': 'dronecargo',
+        'USER': 'dronecargouser',
+        'PASSWORD': 'dronecargopass',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -202,7 +203,7 @@ USE_L10N = True
 USE_TZ = True
 
 CELERY_BROKER_URL = 'redis://[::1]:6379/0'
-
+# LOGIN_URL = '/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -236,8 +237,8 @@ DATABASES['default'].update(prod_db)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'zakiyamustafazm@gmail.com'
-EMAIL_HOST_PASSWORD = 'vrjcrxwbfbahvtlq'
+EMAIL_HOST_USER = 'dronecargomadagascar@gmail.com'
+EMAIL_HOST_PASSWORD = 'dronecargouser2022'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
