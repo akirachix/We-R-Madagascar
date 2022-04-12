@@ -178,16 +178,23 @@
         <td>{{request.total_volume}}</td>
         <td>{{request.priority_level}}</td>
         <td>{{request.refrigration}}</td>
+        
         <a>
-          <td>Action</td>
-        </a>
+          <td id="action">Action</td></a>
+          
+</div>
+</div>
+
+
        
       </tr>
       {%empty%}
       <p>Looks like clinic does not exist</p>
      
       {%endfor%}
+     
     </table>
+   
   </div>
 
  
@@ -211,5 +218,9 @@
   </div>
   {% endif %}
   </div>
+  <script>
+
+  </script>
+  
 </main>
 {%endblock%}
