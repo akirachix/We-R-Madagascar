@@ -16,16 +16,89 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 
-
-
-
-<form method="post" novalidate>
-    {% csrf_token %}
-    <form>
-      {{ form.as_table }}
-      <button type="submit">Schedule</button>
+<main class="admin-main">
+    <div class="panel panel-default">
+    <div style="overflow: auto; display: block;">
+      <div class="search">
+        <form method="get" class="w-100" action="{% url 'search_shipment %}">
+          <button type="submit" class="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+          <input type="search" placeholder="     Search by location" name="search" />
+        </form>
+        {%if message%}
+        <h6>{{message}}</h6>
+        {%endif%}
+  
+        {%if results%}
+        <p class="results">Found {{results}} shipment{{ results|pluralize }}</p>
+        {%endif%}
+      </div>
+    </div>
+<div class="card-header">
+    <form method="post">
+      {%csrf_token%}
+      <div class="row">
+        <div class="col">
+            <label>Shipment Id.</label>
+            {{form.shipment_id}}
+          
+        </div>
+        <div class="col">
+            <label>Clinic Name</label>
+            {{form.clinic_name}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <label>Medication</label>
+            {{form.medication}}
+        </div>
+        <div class="col">
+            <label>Units</label>
+            {{form.units}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <label>Delivery Date</label>
+            {{form.delivery_date}}
+        </div>
+        <div class="col">
+            <label>Take Of Time</label>
+            {{form.take_of_time}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <label>Delivery Time</label>
+            {{form.delivery_time}}
+        </div>
+        <div class="col">
+            <label>Status</label>
+            {{form.status}}
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Destination</label>
+                {{form.destination}}
+            </div>
+            <div class="col">
+                <label>Delay Reasons</label>
+                {{form.status}}
+            </div>
+           
+   
+      <button
+        class="btn btn-primary"
+        style="margin-top: 1%; width: 10%"
+        type="submit"
+      >
+        Schedule Shipment
+      </button>
     </form>
-  </form>
+
+
 
     </body>
     <style>

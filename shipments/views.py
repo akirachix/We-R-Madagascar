@@ -4,19 +4,30 @@ from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse_lazy 
 from django.views.generic.list import ListView
 from .models import Schedule
-from django.views.generic import CreateView
 from .forms import ScheduleForm,DelayedForm,RescheduleForm
 from . import views
 
 # Create your views here.
        
-class ScheduleFormView(CreateView):
-    form_class = ScheduleForm
-    model = Schedule
-    template_name = 'schedule.html'
-    success_url = reverse_lazy('shipment:shipment')
+def update(request):
+    if request.method == "POST":
+        form = ScheduleForm(request.POST)
 
+        if form.is_valid():
+            print("schedule form is valid")
+            form.save()
+            return redirect("shipments:shipment")
+        else:
+            print("ERROR : ", form.errors)
+    else:
+        form = ScheduleForm()
 
+    template_name = "schedule.html"
+    context = {
+        "form":form,
+    }
+
+    return render(request, template_name, context)
 def scheduledShipmentsList(request):
 
     mylist=Schedule.objects.all()
@@ -74,3 +85,19 @@ def completed_profile(request, id):
     view_profile = Schedule.objects.filter(id =id,status = 'Completed')
 
     return render (request, 'completed_profile.html', {'view_profile': view_profile})
+
+def search_shipment(request):
+    search_post = request.GET.get('search')
+    shipments = Schedule.objects.all()
+    print(search_post)
+    if search_post:
+        shipment = Schedule.objects.filter(Q(name__icontains=search_post))
+        if not shipment:
+            message="No scheduled shipment"
+            return render (request,'templates/scheduled_shipment.html',{'shipments':shipments,'message':message})
+        
+        results=shipments.count()
+    else:
+        
+        return render (request,'templates/scheduled_shipment.html',{'shipments':shipments,'message':message})
+    return render (request,'templates/scheduled_shipment.html',{'shipments': shipments,'results':results})
