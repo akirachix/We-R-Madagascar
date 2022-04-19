@@ -149,13 +149,23 @@ LOGIN_URL = '/accounts/login'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'wendy',
-        'USER': 'droneuser',
-        'PASSWORD': 'dronepass',
+        'NAME': 'dronecargo',
+        'USER': 'dronecargouser',
+        'PASSWORD': 'dronecargopass',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'wendy',
+#         'USER': 'droneuser',
+#         'PASSWORD': 'dronepass',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # DATABASES = {      
@@ -237,9 +247,8 @@ DATABASES['default'].update(prod_db)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'zakiyamustafazm@gmail.com'
-EMAIL_HOST_PASSWORD = 'vrjcrxwbfbahvtlq'
+EMAIL_HOST_USER = 'dronecargomadagascar@gmail.com'
+EMAIL_HOST_PASSWORD = 'dronecargouser2022'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
 

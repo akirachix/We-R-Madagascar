@@ -1,8 +1,11 @@
+from audioop import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
+from django.views import View
 from django.views.generic import ListView,CreateView
 from django.shortcuts import render
 from .models import FlightRequest
-from .forms import RequestFlightForm
+from .forms import DelayedReasonForm, RequestFlightForm
 from django.urls import reverse_lazy
 from .models import *
 from django.core.paginator import InvalidPage,Paginator
@@ -24,13 +27,63 @@ def request_flight(request):
     
     return render(request,'flight/request_flight.html', {'flight_form':flight_form})
 
-class PendingRequestsView(ListView):
+
+# def delayed_reason_request(request,id):
+   
+#     flight=FlightRequest.objects.get(id=id)
+#     delayed_reason_form = DelayedReasonForm()
+#     if request.method == 'POST':
+#         delayed_reason_form = DelayedReasonForm(request.POST,instance=flight)
+#         print("error")
+#         if delayed_reason_form.is_valid():
+#             delayed_reason_form.save()
+#             return redirect(reverse('delayed_requests'))
+#         else:
+#             delayed_reason_form = DelayedReasonForm(instance=flight)
+#             print(delayed_reason_form.errors.as_data())
+#     return render(request,'flight/pending_flights.html', {'delayed_reason_form':delayed_reason_form})
+
+# def pending_request(request,id):
+#     requested_flights=FlightRequest.objects.all()
+#     template_name='flight/pending_flights.html'
+#     flight=FlightRequest.objects.get(id=id)
+#     delayed_reason_form = DelayedReasonForm()
+#     if request.method == 'POST':
+#         delayed_reason_form = DelayedReasonForm(request.POST,instance=flight)
+#         print("error")
+#         if delayed_reason_form.is_valid():
+#             delayed_reason_form.save()
+#             return redirect(reverse('delayed_requests'))
+#         else:
+#             delayed_reason_form = DelayedReasonForm(instance=flight)
+#             print(delayed_reason_form.errors.as_data())
+#     context={
+#         "requested_flights":requested_flights,
+#         'delayed_reason_form':delayed_reason_form
+#     }
+#     return render(request,template_name,context)
+
+    
+
+
+class PendingRequestsView(View):
     model=FlightRequest
     template_name='flight/pending_flights.html'
-    context_object_name="requested_flights"
+    # context_object_name="requested_flights"
+    form_class=DelayedReasonForm()
 
+    def post(self, request, *args, **kwargs):
+        print("HELLO MOTHERSUCKER")
+        flight=FlightRequest.objects.get(id=args)
+        form = self.form_class(request.POST,instance=flight)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('delayed_requests'))
+        else:
+            return render(request, self.template_name, {'form': form})
 
     def get(self, request, *args,**kwargs):
+        print("HELLO MOTHERSUCKEeeeeeR")
         pending_flights=FlightRequest.objects.all()
         paginator=Paginator(pending_flights,30)
         is_paginated=True if paginator.num_pages > 1 else False
@@ -43,7 +96,8 @@ class PendingRequestsView(ListView):
 
         context={"requested_flights":current_page,"is_paginated":is_paginated,"count": FlightRequest.objects.all().count()}
         return render(request,self.template_name,context)
- 
+
+    
 def delayed_flights(request):
     delayed_flight_requests = FlightRequest.objects.filter(status="Delayed")
     delayed_flight_requests_count = delayed_flight_requests.count()
@@ -52,6 +106,26 @@ def delayed_flights(request):
         'delayed_flight_requests_count':delayed_flight_requests_count,
         }
     return render(request,"flight/delayed_flights.html",context)
+
+def modals(request,id):
+    requested_flights=FlightRequest.objects.all()
+    template_name='flight/pending_flights.html'
+    flight=FlightRequest.objects.get(id=id)
+    delayed_reason_form = DelayedReasonForm()
+    if request.method == 'POST':
+        delayed_reason_form = DelayedReasonForm(request.POST,instance=flight)
+        print("error")
+        if delayed_reason_form.is_valid():
+            delayed_reason_form.save()
+            return redirect(reverse('delayed_requests'))
+        else:
+            delayed_reason_form = DelayedReasonForm(instance=flight)
+            print(delayed_reason_form.errors.as_data())
+    context={
+        "requested_flights":requested_flights,
+        'delayed_reason_form':delayed_reason_form
+    }
+    return render(request,template_name,context)
 
 
 
