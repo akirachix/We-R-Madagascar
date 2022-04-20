@@ -183,15 +183,15 @@
         <td>{{request.priority_level}}</td>
         <td>{{request.refrigration}}</td>
        
-        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{request.id}}">
           Action
         </button></td>
     
        
       </tr>
       <!-- Modal -->
-      {% for request in requested_flights %}
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      
+      <div class="modal fade" id="myModal{{request.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -205,15 +205,15 @@
               on {{request.delivery_date}}</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#delayModal" data-dismiss="modal">Delay</button>
-              <button type="button" class="btn btn-primary">Schedule</button>
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#delayModal{{request.id}}" data-dismiss="modal">Delay</button>
+              <a href="{%url 'scheduled_requests' request.id%}"  class="btn btn-primary">Schedule</a>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Delay Modal -->
-      <div class="modal fade" id="delayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="delayModal{{request.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -223,10 +223,16 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form method="post" id="{{request.id}}" action=>
                 {% csrf_token %}
                 {{form}}
+                <!-- <input> -->
                 <label>Reason for Delay</label><br>
+                <input type="hidden" value="{{ request.id}}" >
+                <input type="text">
+                {{ form.delayed_reason }}
+            </div>
+            <div>
                
                 
                 <!-- <input> -->
@@ -238,7 +244,6 @@
           </div>
         </div>
       </div>
-      {%endfor%}
       
       {%empty%}
       <p>Looks like clinic does not exist</p>

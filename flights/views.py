@@ -70,20 +70,18 @@ class PendingRequestsView(View):
     model=FlightRequest
     template_name='flight/pending_flights.html'
     # context_object_name="requested_flights"
-    form_class=DelayedReasonForm()
-
-    def post(self, request, *args, **kwargs):
-        print("HELLO MOTHERSUCKER")
-        flight=FlightRequest.objects.get(id=args)
-        form = self.form_class(request.POST,instance=flight)
+    # form_class=DelayedReasonForm()
+    # print("HELLO MOTHERSUCKER")
+    def post(self, request,id):
+        print("HELLO MOM")
+        flight=FlightRequest.objects.get(id=id)
+        form = DelayedReasonForm(request.POST,instance=flight)
         if form.is_valid():
             form.save()
             return redirect(reverse('delayed_requests'))
-        else:
-            return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form})
 
     def get(self, request, *args,**kwargs):
-        print("HELLO MOTHERSUCKEeeeeeR")
         pending_flights=FlightRequest.objects.all()
         paginator=Paginator(pending_flights,30)
         is_paginated=True if paginator.num_pages > 1 else False
@@ -129,13 +127,34 @@ def modals(request,id):
 
 
 
-def scheduled_requests(request):
-    scheduled_flight_requests = FlightRequest.objects.filter(status="Scheduled")
-    scheduled_flight_requests_count = scheduled_flight_requests.count()
-    context = {
-        'scheduled_flight_requests':scheduled_flight_requests,
-        'scheduled_flight_requests_count':scheduled_flight_requests_count,
-        }
-    return render(request,"flight/scheduled_flights.html",context)
+# def scheduled_requests(request):
+    
+
+# def scheduled_flight(request, id):
+#     scheduled_flight= FlightRequest.objects.get(id=id)
+#     scheduled_flight.status="Scheduled"
+#     scheduled_flight.save()
+#     return render(request,"flight/scheduled_flights.html")
+
+class ScheduleRequestsView(View):
+    model=FlightRequest
+    template_name='flight/scheduled_flights.html'
+
+    def get(self,request):
+        scheduled_flight_requests = FlightRequest.objects.filter(status="Scheduled")
+        scheduled_flight_requests_count = scheduled_flight_requests.count()
+        context = {
+            'scheduled_flight_requests':scheduled_flight_requests,
+            'scheduled_flight_requests_count':scheduled_flight_requests_count,
+            }
+        return render(request,self.template_name,context)
+    
+    def post(self, request):
+        id=self.kwargs['request.id']
+
+        scheduled_flight= FlightRequest.objects.get(id=id)
+        scheduled_flight.status="Scheduled"
+        scheduled_flight.save()
+        return render(request,self.template_name)
 
 
