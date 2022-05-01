@@ -9,6 +9,7 @@ from .forms import DelayedReasonForm, RequestFlightForm
 from django.urls import reverse_lazy
 from .models import *
 from django.core.paginator import InvalidPage,Paginator
+from django.db.models import Q
 
 def request_flight(request):
     flight_form = RequestFlightForm()
@@ -45,12 +46,20 @@ class PendingRequestsView(View):
         is_paginated=True if paginator.num_pages > 1 else False
         page=request.GET.get("page") or 1
         search_post = request.GET.get('search')
+        if search_post:
+            clinics = FlightRequest.objects.filter(Q(clinic_name__icontains=search_post) & Q(status__icontains="Pending"))
+            if not clinics:
+                message="Looks like the clinic doesn't exist. Try searching using the clinic name"
+                return render(request,self.template_name,{'message':message,"requested_flights":pending_flights})
+            results=clinics.count()
+        else:
+            return render (request,self.template_name,{"requested_flights":pending_flights})
         try:
             current_page=paginator.page(page)
         except InvalidPage as e:
             raise Http404(str(e))
 
-        context={"requested_flights":current_page,"is_paginated":is_paginated,"count": FlightRequest.objects.all().count()}
+        context={"requested_flights":current_page,"is_paginated":is_paginated,"count": FlightRequest.objects.all().count(),"results":results}
         return render(request,self.template_name,context)
 
 
@@ -61,10 +70,30 @@ class DelayedFlightsView(View):
     def get(self,request):
         delayed_flight_requests = FlightRequest.objects.filter(status="Delayed")
         delayed_flight_requests_count = delayed_flight_requests.count()
+        search_post = request.GET.get('search')
+        if search_post:
+            clinics = FlightRequest.objects.filter(Q(clinic_name__icontains=search_post) & Q(status__icontains="Delayed"))
+            if not clinics:
+                
+                context={
+                    'delayed_flight_requests':delayed_flight_requests,
+                    'delayed_flight_requests_count':delayed_flight_requests_count,
+                    'message':"Looks like the clinic doesn't exist. Try searching using the clinic name"
+                    }
+                return render(request,self.template_name,context)
+            results=clinics.count()
+        else:
+            context={
+                    'delayed_flight_requests':delayed_flight_requests,
+                    'delayed_flight_requests_count':delayed_flight_requests_count,
+                    'results':results,
+                    }
+            return render(request,self.template_name,context)
         context={
-            'delayed_flight_requests':delayed_flight_requests,
-            'delayed_flight_requests_count':delayed_flight_requests_count,
-            }
+                    'delayed_flight_requests':clinics,
+                    'delayed_flight_requests_count':delayed_flight_requests_count,
+                    'results':results,
+                    }
         return render(request,self.template_name,context)
         
     def post(self, request):
@@ -85,16 +114,32 @@ class ScheduleRequestsView(View):
     def get(self,request):
         scheduled_flight_requests = FlightRequest.objects.filter(status="Scheduled")
         scheduled_flight_requests_count = scheduled_flight_requests.count()
+        search_post = request.GET.get('search')
+        if search_post:
+            clinics = FlightRequest.objects.filter(Q(clinic_name__icontains=search_post) & Q(status__icontains="Scheduled"))
+            if not clinics:
+                context = {
+                    'scheduled_flight_requests':scheduled_flight_requests,
+                    'scheduled_flight_requests_count':scheduled_flight_requests_count,
+                    'message':"Looks like the clinic doesn't exist. Try searching using the clinic name"
+                    }
+                return render(request,self.template_name,context)
+            results=clinics.count()
+        else:
+            context = {
+                    'scheduled_flight_requests':scheduled_flight_requests,
+                    'scheduled_flight_requests_count':scheduled_flight_requests_count,
+                    }
+            return render(request,self.template_name,context)
         context = {
-            'scheduled_flight_requests':scheduled_flight_requests,
-            'scheduled_flight_requests_count':scheduled_flight_requests_count,
-            }
+                    'scheduled_flight_requests':clinics,
+                    'scheduled_flight_requests_count':scheduled_flight_requests_count,
+                    'results':results,
+                    }
         return render(request,self.template_name,context)
     
     def post(self, request):
         id=request.POST.get('pk')
-        
-
         scheduled_flight= FlightRequest.objects.get(id=id)
         print(scheduled_flight)
         scheduled_flight.status="Scheduled"

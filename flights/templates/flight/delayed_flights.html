@@ -121,7 +121,7 @@
    
   <div style="overflow: auto; display: block;">
     <div class="search">
-      <form method="get" class="w-100" action="{% url 'search_clinic' %}">
+      <form method="get" class="w-100" action="{% url 'delayed_requests' %}">
         <button type="submit" class="search-button">
           <i class="fas fa-search"></i>
         </button>
@@ -168,6 +168,7 @@
           <th>Weight</th>
           <th>Priority</th>
           <th>Refrigration</th>
+          <th>Reason For Delay</th>
           <th></th>
         </tr>
       </thead>
@@ -178,6 +179,7 @@
         <td>{{request.total_volume}}</td>
         <td>{{request.priority_level}}</td>
         <td>{{request.refrigration}}</td>
+        <td>{{request.delayed_reasons}}</td>
        
       </tr>
       {%empty%}
@@ -186,13 +188,6 @@
       {%endfor%}
     </table>
   </div>
-
-  <!-- <a href="{% url 'clinic_upload' %}" >
-    <button class="GFG">
-        Add clinic
-    </button>
-</a> -->
-
 
   {% if is_paginated %}
   <div class="pagination">
