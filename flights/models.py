@@ -15,7 +15,7 @@ class FlightRequest(models.Model):
     delivery_date = models.DateTimeField()
     priority_level = models.IntegerField()
     refrigration = models.BooleanField(choices=BOOL_CHOICES)
-    status = models.CharField(max_length=30, choices=STATUS_CHOICES,default='pending')
+    status = models.CharField(max_length=30, choices=STATUS_CHOICES,default='Pending')
     delayed_reasons = models.CharField(max_length=300)
 
     def __str__(self):

@@ -206,7 +206,11 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#delayModal{{request.id}}" data-dismiss="modal">Delay</button>
-              <a href="{%url 'scheduled_requests' request.id%}"  class="btn btn-primary">Schedule</a>
+              <form method="POST" action="{%url 'scheduled_requests'%}">
+                {% csrf_token %}
+                <input type="hidden" name="pk" value="{{ request.id }}">
+                <button class="btn btn-primary" type="submit">Schedule</button>
+              </form>
             </div>
           </div>
         </div>
@@ -223,14 +227,13 @@
               </button>
             </div>
             <div class="modal-body">
-              <form method="post" id="{{request.id}}" action=>
+              <form method="post" id="{{request.id}}" action="{%url 'delayed_requests'%}">
                 {% csrf_token %}
                 {{form}}
                 <!-- <input> -->
                 <label>Reason for Delay</label><br>
-                <input type="hidden" value="{{ request.id}}" >
-                <input type="text">
-                {{ form.delayed_reason }}
+                <input type="hidden" name="pk" value="{{ request.id}}" >
+                <input type="text" name="reason" value="reason">
             </div>
             <div>
                
