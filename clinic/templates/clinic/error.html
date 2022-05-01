@@ -1,10 +1,16 @@
-{% extends 'flightres/base.html' %}
-{% load static %}
-{%block body%}
+{%  load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <body>
-    <center><h3 id="error-msg">Looks like you are trying to add data that already exists in the database.</h3></center>
+    {%if e%}
+    <center><h3 id="error-msg">Looks like there was an error while uploading the file:<br>
+        Possible problems :
+        You are uploading an empty csv file<br>
+        You are trying to upload data that already exists in the database<br>
+        Try uploading a different csv file
+
+    {%endif%}
 </body>
 </html>
-{%endblock%}
