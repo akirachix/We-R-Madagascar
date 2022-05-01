@@ -19,7 +19,7 @@ def request_flight(request):
             flight_request = flight_form.save(commit=False)
             flight_request.user = request.user
             flight_request.save()
-            return redirect('/pending-flights/')
+            return redirect('pending_requests')
         else:
             print(flight_form.errors.as_data())
 
@@ -77,30 +77,6 @@ class DelayedFlightsView(View):
         delayed_flight.delayed_reasons=reason
         delayed_flight.save()
         return redirect('delayed_requests')
-
-
-def modals(request,id):
-    requested_flights=FlightRequest.objects.all()
-    template_name='flight/pending_flights.html'
-    flight=FlightRequest.objects.get(id=id)
-    delayed_reason_form = DelayedReasonForm()
-    if request.method == 'POST':
-        delayed_reason_form = DelayedReasonForm(request.POST,instance=flight)
-        print("error")
-        if delayed_reason_form.is_valid():
-            delayed_reason_form.save()
-            return redirect(reverse('delayed_requests'))
-        else:
-            delayed_reason_form = DelayedReasonForm(instance=flight)
-            print(delayed_reason_form.errors.as_data())
-    context={
-        "requested_flights":requested_flights,
-        'delayed_reason_form':delayed_reason_form
-    }
-    return render(request,template_name,context)
-
-
-
 
 class ScheduleRequestsView(View):
     model=FlightRequest
