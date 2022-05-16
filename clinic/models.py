@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Clinic(models.Model):
     name = models.CharField(max_length=50)

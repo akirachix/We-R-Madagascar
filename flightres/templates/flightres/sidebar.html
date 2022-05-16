@@ -38,8 +38,29 @@
                     <i class="material-icons">flight</i>
                     <span>Flight </span>
                 </a>
+                <ul class="submenu">
+                    <li>
+                        <a href="{% url 'flight_request' %}" style="color: #A8A4A4;">Request Flight</a>
+                        
+                    </li>
+                    <li>
+                        <a href="{% url 'pending_requests' %}" style="color: #A8A4A4;">Pending Requests</a>
+                        
+                    </li>
+                    <li>
+                        <a href="{% url 'delayed_requests' %}" style="color: #A8A4A4;">Delayed Requests</a>
+                        
+                    </li>
+                    <li>
+                        <a href="{% url 'scheduled_requests' %}" style="color: #A8A4A4;">Scheduled Requests</a>
+                        
+                    </li>
+                    
+                </ul>
             
             </li>
+       
+           
             <!-- <li class="is-submenu">
                 <a href="{% url 'dashboard:flightview' %}" style="color: #A8A4A4;">
                     <i class="material-icons">location_on</i>
@@ -95,7 +116,7 @@
                     </li>
                 
                     <li>
-                        <a href="{% url 'view_clincs' %}" style="color: #A8A4A4;"> View Clinics</a>
+                        <a href="{% url 'view_clinics' %}" style="color: #A8A4A4;"> View Clinics</a>
                     </li>
                 </ul>
 

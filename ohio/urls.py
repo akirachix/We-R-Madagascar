@@ -30,7 +30,7 @@ from django.conf.urls.static import static
 from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
 from django.contrib.auth.views import LoginView, LogoutView
-from flightres.views import homeView
+from flightres.views import homeView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 import django.views.static
 
 # from registry.views import UserViewSet
@@ -57,10 +57,10 @@ urlpatterns = [
     path('', homeView, name='home'),
     path('accounts/login/', LoginView.as_view()),
     path('accounts/logout/', LogoutView.as_view(), name='logout'),
-    # path('password_reset/', PasswordResetView.as_view(), name='password_reset'),
-    # path('password_reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
-    # path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    # path('reset/done/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('password_reset/', PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('api/v1/', registryviews.APIView.as_view()),
     path('api/v1/operators', registryviews.OperatorList.as_view()),
     path('api/v1/operators/<uuid:pk>', registryviews.OperatorDetail.as_view()),
@@ -77,15 +77,14 @@ urlpatterns = [
     path('whatsapp/', include('whatsappmsg.urls')),
     path('api/v1/user/', include('authentication.urls')),
     path('np/clinic/', include('clinic.urls')),
+    path('np/flights/', include('flights.urls')),
     path('np/api/v1/', include('api.urls')),
     path('np/shipments/',include(('shipments.urls', 'shipments'), namespace="shipment")),
     path('np/dashboard/', include(('flightres.urls', 'flightres'), namespace='dashboard')),
     url(r'^assets/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
-    path('accounts/', include('registration.backends.default.urls')),
     # url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     # url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^api-token-auth/', obtain_auth_token),
-    
 ]
 
 if settings.DEBUG:
