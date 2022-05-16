@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'bulk_update_or_create',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -149,9 +150,9 @@ LOGIN_URL = '/accounts/login'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'dronecargo',
-        'USER': 'dronecargouser',
-        'PASSWORD': 'dronecargopass',
+        'NAME': 'robotics',
+        'USER': 'roboticsuser',
+        'PASSWORD': 'roboticspass',
         'HOST': 'localhost',
         'PORT': '5432',
     }

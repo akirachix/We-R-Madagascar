@@ -52,33 +52,42 @@
       <table class="table table-hover table-stripped" style="font-size: 1.2em">
         <thead>
           <tr id="table-headings">
-            <th>shipment_id </th>
-            <th>clinic_name</th>
-            <th>medication</th>
-            <th>units</th>
-            <th>delivery_date </th>
-            <th> take_of_time</th>
-            <th>delivery_time</th>
-            <th>destination </th>
-            <th> status</th>
+            <th>UID_quantification_planning </th>
+            <th>UID_planning</th>
+            <th>type_produit</th>
+            <th>produit</th>
+            <th>UID_produit </th>
+            <th> livraison_produit</th>
+            <th>quantite_prevu</th>
+            <th>quantite_envoyee </th>
+            <th> quantite_recu</th>
+            <th> quantite_intact</th>
+            <th>quantite_abime </th>
+            <th>quantite_perdu </th>
+            <th> explication</th>
           </tr>
         </thead>
-
+    
+    
         <tbody>
           {% for shipment in mylist %}
 
           <tr>
-            <td>{{shipment.shipment_id}}</td>
-            <td>{{shipment.clinic_name}}</td>
-            <td>{{shipment.medication}}</td>
-            <td>{{shipment.units}}</td>
-            <td>{{shipment.delivery_date}}</td>
-            <td>{{shipment.take_of_time}}</td>
-            <td>{{shipment.delivery_time}}</td>
-            <td>{{shipment.destination}}</td>
-            <td>{{shipment.status}}</td>
-            <td><a id="edit_shipment" href="{%url 'shipments:edit_shipment' shipment.id%}"><button type="submit"
-                  class="save btn btn-primary">Edit</button></td></a>
+            <td>{{shipment.UID_quantification_planning}}</td>
+            <td>{{shipment.UID_planning}}</td>
+            <td>{{shipment.type_produit}}</td>
+            <td>{{shipment.produit}}</td>
+            <td>{{shipment.UID_produit}}</td>
+            <td>{{shipment.livraison_produit}}</td>
+            <td>{{shipment.quantite_prevu}}</td>
+            <td>{{shipment.quantite_envoyee}}</td>
+            <td>{{shipment.quantite_recu}}</td>
+            <td>{{shipment.quantite_intact}}</td>
+            <td>{{shipment.quantite_abime}}</td>
+            <td>{{shipment.quantite_perdu}}</td>
+            <td>{{shipment.explication}}</td>
+            <!-- <td><a id="edit_shipment" href="{%url 'shipments:edit_shipment' shipment.id%}"><button type="submit"
+                  class="save btn btn-primary">Edit</button></td></a> -->
 
 
           </tr>
