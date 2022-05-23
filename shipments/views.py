@@ -6,6 +6,8 @@ from django.views.generic.list import ListView
 from .models import Schedule
 from .forms import ScheduleForm,DelayedForm,RescheduleForm
 from . import views
+from django.db.models import Q
+
 
 # Create your views here.
        
@@ -86,18 +88,20 @@ def completed_profile(request, id):
 
     return render (request, 'completed_profile.html', {'view_profile': view_profile})
 
-def search_shipment(request):
+
+
+def search_clinic(request):
     search_post = request.GET.get('search')
-    shipments = Schedule.objects.all()
+    all_shipments = Schedule.objects.all()
     print(search_post)
     if search_post:
-        shipment = Schedule.objects.filter(Q(name__icontains=search_post))
-        if not shipment:
-            message="No scheduled shipment"
-            return render (request,'templates/scheduled_shipment.html',{'shipments':shipments,'message':message})
+        shipments = Schedule.objects.filter(Q(shipment_id__icontains=search_post))
+        if not shipments:
+            message="Looks like the clinic doesn't exist. Try searching using the clinic name"
+            return render (request,'scheduled_shipments.html',{'shipments': all_shipments,'message':message})
         
         results=shipments.count()
     else:
         
-        return render (request,'templates/scheduled_shipment.html',{'shipments':shipments,'message':message})
-    return render (request,'templates/scheduled_shipment.html',{'shipments': shipments,'results':results})
+        return render (request,'scheduled_shipments.html',{'shipments': all_shipments,'message':message})
+    return render (request,'scheduled_shipments.html',{'shipments': shipments,'results':results})
