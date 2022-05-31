@@ -27,12 +27,13 @@
   <main class="admin-main">
     <div class="panel panel-default">
 
-
-    {% if message %}
+    {% if messages %}
+          {% for message in messages %}
               <div>
-                  <strong>{{message}}</strong>
+                  <strong>{{message|safe}}</strong>
               </div>
-              {% endif %}
+          {% endfor %}
+      {% else %}
       {{order}}
       <div class="csv-file">
         <form action="" method="post" enctype="multipart/form-data" class="auth_form">
@@ -44,7 +45,7 @@
 
           <button type="submit" class="common-button is-bg" style="background: #117BCC;">Upload</button>
       </form>
-      
+      {% endif %}
       </div>
      
 

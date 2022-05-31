@@ -34,7 +34,6 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
-    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,6 +55,7 @@ INSTALLED_APPS = [
     'clinic',
     'phonenumber_field',
     'shipments',
+    'flights',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -156,6 +156,16 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'wendy',
+#         'USER': 'droneuser',
+#         'PASSWORD': 'dronepass',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # DATABASES = {      
@@ -203,7 +213,7 @@ USE_L10N = True
 USE_TZ = True
 
 CELERY_BROKER_URL = 'redis://[::1]:6379/0'
-# LOGIN_URL = '/'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -241,5 +251,4 @@ EMAIL_HOST_USER = 'dronecargomadagascar@gmail.com'
 EMAIL_HOST_PASSWORD = 'dronecargouser2022'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
 
