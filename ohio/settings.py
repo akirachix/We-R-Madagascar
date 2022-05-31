@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'shipments',
     'flights',
+    'ajax_datatable',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

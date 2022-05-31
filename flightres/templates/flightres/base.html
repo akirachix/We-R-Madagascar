@@ -44,6 +44,16 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/apexcharts.css' %}" />
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    {% block extrastyle %}
+
+    <link href="{% static 'ajax_datatable/css/style.css' %}" rel="stylesheet" />
+    <!-- link rel='stylesheet' href="{% static 'datatables.net-bs/css/dataTables.bootstrap.min.css' %}" -->
+    <link rel='stylesheet' href="{% static 'datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel='stylesheet' href="{% static 'datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}">
+
+    {% endblock extrastyle %}
+
     {% block links %}
 
     {% endblock links %}
@@ -76,6 +86,23 @@
     <script>
         var csrftoken = '{{ csrf_token }}';
     </script>
+
+    {% block extrajs %}
+
+    <script type="text/javascript" src="{% static 'ajax_datatable/js/utils.js' %}"></script>
+
+    <script src="{% static 'datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <!-- script src="{% static 'datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script -->
+    <script src="{% static 'datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
+    <script src="{% static 'jszip/dist/jszip.min.js' %}"></script>
+    <script src="{% static 'pdfmake/build/pdfmake.min.js' %}"></script>
+    <script src="{% static 'pdfmake/build/vfs_fonts.js' %}"></script>
+
+    {% endblock extrajs %}
 
     {% block footer_links %}
 

@@ -118,8 +118,20 @@
 
 <main class="admin-main">
   <div class="panel panel-default">
+
+
+    <div class="table-responsive">
+      <table id="datatable_permissions" width="100%" class="table table-striped table-bordered dt-responsive compact nowrap">
+      </table>
+  </div>
+
+
+
+
+
+
    
-  <div style="overflow: auto; display: block;">
+  <!-- <div style="overflow: auto; display: block;">
     <div class="search">
       <form method="get" class="w-100" action="{% url 'scheduled_requests' %}">
         <button type="submit" class="search-button">
@@ -185,7 +197,7 @@
      
       {%endfor%}
     </table>
-  </div>
+  </div> -->
 
   <!-- <a href="{% url 'clinic_upload' %}" >
     <button class="GFG">
@@ -193,7 +205,7 @@
     </button>
 </a> -->
 
-
+<!-- 
   {% if is_paginated %}
   <div class="pagination">
     <span class="step-links">
@@ -210,7 +222,28 @@
       {% endif %}
     </span>
   </div>
-  {% endif %}
+  {% endif %} -->
   </div>
 </main>
 {%endblock%}
+
+<script language="javascript">
+
+  $(document).ready(function() {
+      AjaxDatatableViewUtils.initialize_table(
+          $('#datatable_permissions'),
+          "{% url 'ajax_datatable_permissions' %}",
+          {
+              // extra_options (example)
+              processing: false,
+              autoWidth: false,
+              full_row_select: true,
+              scrollX: false
+          }, {
+              // extra_data
+              // ...
+          },
+      );
+  });
+
+</script>
