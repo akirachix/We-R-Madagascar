@@ -56,4 +56,5 @@ class Schedules(models.Model):
 
     def __str__(self):
         return self.UID_produit
+        
 

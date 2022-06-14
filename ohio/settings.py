@@ -57,7 +57,13 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'shipments',
     'flights',
+    'django_crontab',
 ]
+
+CRONJOBS = [
+    ('*/2 * * * *', 'tester.cron.my_scheduled_job')
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -27,6 +27,8 @@ from django.contrib.auth.forms import (PasswordChangeForm, PasswordResetForm, Se
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from django.core.serializers import serialize
+
+from flights.models import FlightRequest
 from .models import FlightPermission, Report, LocalAuthorities, NoFlyZone, PermissionLogs, ReportsLogs
 from registry.models import Aircraft, Operator, Manufacturer, Address
 from django.contrib.messages.views import SuccessMessageMixin
@@ -229,7 +231,7 @@ def dashboardView(request):
     # rejected_requests_num = FlightPermission.objects.filter(status="Rejected").count()
     # delayed_requests_num = FlightPermission.objects.filter(status="Delayed").count()
     #dashboard check
-    total_requests_num= FlightPermission.objects.all().count()
+    total_requests_num= FlightRequest.objects.all().count()
     completed_requests_num = Schedules.objects.filter(livraison_produit="Livr\u00e9").count()
     clinics_num = Clinic.objects.all().count()
     complaint_num = Report.objects.all().count()

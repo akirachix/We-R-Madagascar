@@ -10,13 +10,26 @@ class FlightRequest(models.Model):
         ('Delayed','Delayed')
     )
 
-    clinic_name= models.CharField(max_length=50)
-    total_volume = models.IntegerField()
-    delivery_date = models.DateTimeField()
-    priority_level = models.IntegerField()
-    refrigration = models.BooleanField(choices=BOOL_CHOICES)
-    status = models.CharField(max_length=30, choices=STATUS_CHOICES,default='Pending')
-    delayed_reasons = models.CharField(max_length=300)
+    UID_planning= models.CharField(max_length=300)
+    pays= models.CharField(max_length=300)
+    region= models.CharField(max_length=300)
+    district= models.CharField(max_length=300)
+    commune=models.CharField(max_length=300)
+    Centre= models.CharField(max_length=300)
+    type_centre= models.CharField(max_length=300)
+    UID_centre = models.CharField(max_length=300)
+    code_vol= models.CharField(max_length=300)
+    date_planning= models.CharField(max_length=300)
+    heure_planning=models.CharField(max_length=300)
+    situation_vol=models.CharField(max_length=300)
+    situation_livraison=models.CharField(max_length=300)
+    motif_report=models.CharField(max_length=300)
+    motif_annulation=models.CharField(max_length=300)
+    project=models.CharField(max_length=300)
+ 
+
+
+
 
     def __str__(self):
-        return self.clinic_name
+        return self.destination

@@ -166,22 +166,49 @@
   <div class="card" style="width: 100%;">
     <table class="table table-hover table-stripped" style="font-size: 1.2em">
       <thead>
-        <tr>
-          <th>Clinic(CSB) Name</th>
-          <th>Delivery Date</th>
-          <th>Weight</th>
-          <th>Priority</th>
-          <th>Refrigration</th>
-          <th></th>
-        </tr>
+       <tr>
+
+       </tr>
+        <td>UID_planning</td>
+        <td>pays </td>  
+        <td>region  </td>  
+        <td>district   </td> 
+        <td>commune   </td>
+        <td>Centre  </td>  
+        <td>type_centre    </td>
+        <td>UID_centre    </td> 
+        <td>code_vol    </td>
+        <td>date_planning    </td>
+        <td>heure_planning </td>  
+        <td>situation_vol   </td>
+        <td>situation_livraison   </td>
+        <td>motif_report   </td>
+        <td>motif_annulation   </td>
+        <td>project </td>  
+       <tr></tr>
       </thead>
       {% for request in requested_flights %}
       <tr>
-        <td>{{request.clinic_name}}</td>
-        <td>{{request.delivery_date }}</td>
-        <td>{{request.total_volume}}</td>
-        <td>{{request.priority_level}}</td>
-        <td>{{request.refrigration}}</td>
+  
+     
+
+        <td>{{request.UID_planning}}</td>
+          <td>{{request.pays}}</td>
+          <td>{{request.region}}</td>
+          <td>{{request.district }}</td>
+          <td>{{request.commune}}</td>
+          <td>{{request.Centre }}</td>
+          <td>{{request.type_centre }}</td>
+          <td>{{request.UID_centre }}</td>
+          <td>{{request.code_vol}}</td>
+          <td>{{request.date_planning}}</td>
+          <td>{{request.heure_planning}}</td>
+          <td>{{request.situation_vol}}</td>
+          <td>{{request.situation_livraison }}</td>
+          <td>{{request.motif_report }}</td>
+          <td>{{request.motif_annulation}}</td>
+          <td>{{request.project}}</td>
+         
        
         <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{request.id}}">
           Action

@@ -4,8 +4,9 @@ from django.shortcuts import render,redirect
 from django.views import View
 from django.views.generic import ListView,CreateView
 from django.shortcuts import render
+import requests
 from .models import FlightRequest
-from .forms import DelayedReasonForm, RequestFlightForm
+# from .forms import DelayedReasonForm, RequestFlightForm
 from django.urls import reverse_lazy
 from .models import *
 from django.core.paginator import InvalidPage,Paginator
@@ -32,16 +33,14 @@ def request_flight(request):
 class PendingRequestsView(View):
     model=FlightRequest
     template_name='flight/pending_flights.html'
-    def post(self, request,id):
-        flight=FlightRequest.objects.get(id=id)
-        form = DelayedReasonForm(request.POST,instance=flight)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('delayed_requests'))
-        return render(request, self.template_name, {'form': form})
-
     def get(self, request, *args,**kwargs):
-        pending_flights=FlightRequest.objects.all().filter(status="Pending")
+        response = requests.get('https://drone.psi-mg.org/index.php/Export_data_by_tags/get_planning/12019112715581748016523394084163128401_qsclxSDCEDQ2/Planning_de_vol')
+        z=response.json()
+        x=z.get('posts')
+        print(x)
+        for y in x:
+            FlightRequest.objects.update_or_create(**y)
+        pending_flights=FlightRequest.objects.all()
         paginator=Paginator(pending_flights,30)
         is_paginated=True if paginator.num_pages > 1 else False
         page=request.GET.get("page") or 1

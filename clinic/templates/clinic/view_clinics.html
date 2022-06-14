@@ -168,19 +168,26 @@
     <table class="table table-hover table-stripped" style="font-size: 1.2em">
       <thead>
         <tr>
-          <th>Clinic Name</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th>Profile</th>
-          <th></th>
+          <th>pays</th>
+          <th>region</th>
+          <th>district</th>
+          <th>commune</th>
+          <th>centre</th>
+          <th>UID_centre</th>
+          <th>latitude</th>
+          <th>longitude</th>
         </tr>
       </thead>
       {%for clinic in clinics%}
       <tr>
-        <td>{{clinic.name}}</td>
-        <td>{{clinic.email}}</td>
-        <td>{{clinic.address}}</td>
-        <td>{{clinic.profile}}</td>
+        <td>{{clinic.pays}}</td>
+        <td>{{clinic.region}}</td>
+        <td>{{clinic.district}}</td>
+        <td>{{clinic.commune}}</td>
+        <td>{{clinic.centre}}</td>
+        <td>{{clinic.UID_centre}}</td>
+        <td>{{clinic.latitude}}</td>
+        <td>{{clinic.longitude}}</td>
        
       </tr>
       {%empty%}

@@ -2,6 +2,7 @@ import csv, io
 from django.db import IntegrityError
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+import requests
 from .models import Clinic
 from .forms import ClinicForm
 import logging
@@ -55,7 +56,15 @@ def clinic_upload(request):
 
 
 def clinic_display(request):
+    model = Clinic
     template = 'clinic/view_clinics.html'
+    def get(self, request, *args,**kwargs):
+        response = requests.get('https://drone.psi-mg.org/index.php/Export_data_by_tags/get_organisation_unit/12019112715581748016523394084163128401_qsclxSDCEDQ6/centre')
+        z=response.json()
+        x=z.get('posts')
+        print(x)
+        for y in x:
+            Clinic.objects.update_or_create(**y)
     
     context = {
         'clinics': Clinic.objects.all(),
