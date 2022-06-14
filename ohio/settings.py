@@ -167,7 +167,7 @@ DATABASES = {
 #     }
 # }
 
-
+CORS_ALLOW_CREDENTIALS = True
 # DATABASES = {      
 #     'default': {          
 #         'ENGINE': os.environ.get('SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'),          

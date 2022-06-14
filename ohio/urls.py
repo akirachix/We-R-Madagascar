@@ -76,6 +76,7 @@ urlpatterns = [
     path('api/v1/pilots/<uuid:pk>/privilaged', registryviews.PilotDetailPrivilaged.as_view()),
     path('whatsapp/', include('whatsappmsg.urls')),
     path('api/v1/user/', include('authentication.urls')),
+
     path('np/clinic/', include('clinic.urls')),
     path('np/flights/', include('flights.urls')),
     path('np/api/v1/', include('api.urls')),

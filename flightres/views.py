@@ -50,6 +50,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth import (login as auth_login, get_user_model)
 from shipments.models import Schedule
 
+
 def homeView(request):
     return render(request, 'flightres/home.html')
 
