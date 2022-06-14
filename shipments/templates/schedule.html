@@ -19,13 +19,67 @@
 
 
 
-<form method="post" novalidate>
-    {% csrf_token %}
-    <form>
-      {{ form.as_table }}
-      <button type="submit">Schedule</button>
+<div class="card-header">
+    <form method="post">
+      {%csrf_token%}
+      <div class="row">
+        <div class="col">
+            <label>Shipment Id.</label>
+            {{form.shipment_id}}
+          
+        </div>
+        <div class="col">
+            <label>Clinic Name</label>
+            {{form.clinic_name}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <label>Medication</label>
+            {{form.medication}}
+        </div>
+        <div class="col">
+            <label>Units</label>
+            {{form.units}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <label>Delivery Date</label>
+            {{form.delivery_date}}
+        </div>
+        <div class="col">
+            <label>Take Of Time</label>
+            {{form.take_of_time}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <label>Delivery Time</label>
+            {{form.delivery_time}}
+        </div>
+        <div class="col">
+            <label>Status</label>
+            {{form.status}}
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>Destination</label>
+                {{form.destination}}
+            </div>
+          
+           
+   
+      <button
+        class="btn btn-primary"
+        style="margin-top: 1%; width: 10%"
+        type="submit">
+      
+        Schedule Shipment
+      </button>
     </form>
-  </form>
+
+
 
     </body>
     <style>

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'django_crontab',
     # 'drf_yasg',
     'django_extensions',
     'registry',
@@ -55,7 +56,13 @@ INSTALLED_APPS = [
     'clinic',
     'phonenumber_field',
     'shipments',
+    'flights',
+    
 ]
+CRONJOBS = [
+    ('*/1 * * * *', 'flights.cron.scheduled_job')
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -124,27 +131,6 @@ LOGIN_REDIRECT_URL = '/np/dashboard'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 LOGIN_URL = '/accounts/login'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'droneregistry.sqlite3'),
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': 'werdb',
-#         'USER': 'weruser',
-#         'PASSWORD': 'wer@123',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -155,20 +141,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
-
-# DATABASES = {      
-#     'default': {          
-#         'ENGINE': os.environ.get('SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'),          
-#         'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),          
-#         'USER': os.environ.get('SQL_USER', 'postgres'),          
-#         'PASSWORD': os.environ.get('SQL_PASSWORD', 'postgis'),          
-#         'HOST': os.environ.get('SQL_HOST', 'localhost'),          
-#         'PORT': os.environ.get('SQL_PORT', '5432'),      
-#     }  
-# }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -236,9 +208,17 @@ DATABASES['default'].update(prod_db)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'zakiyamustafazm@gmail.com'
-EMAIL_HOST_PASSWORD = 'vrjcrxwbfbahvtlq'
+EMAIL_HOST_USER = 'dronecargomadagascar@gmail.com'
+EMAIL_HOST_PASSWORD = 'dronecargouser2022'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'shadyajoy@gmail.com'
+# EMAIL_HOST_PASSWORD = 'fletcher-undrunk'
+# EMAIL_PORT = 587
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 

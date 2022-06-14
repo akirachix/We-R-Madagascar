@@ -121,7 +121,7 @@
    
   <div style="overflow: auto; display: block;">
     <div class="search">
-      <form method="get" class="w-100" action="{% url 'search_clinic' %}">
+      <form method="get" class="w-100" action="{% url 'scheduled_requests' %}">
         <button type="submit" class="search-button">
           <i class="fas fa-search"></i>
         </button>
@@ -141,20 +141,15 @@
   <div class="w-100"></div>
 
   <div class="row no-gutters mt-4 mb-4">
-    <a href="{% url 'clinic_upload' %}" >
-      <button class="GFG">
-          Add clinic
-      </button>
-  </a>
     <div class="col-8">
       <h5 style=" color: #117BCC;
-      ">Registered Clinics</h5>
+      ">Scheduled requests</h5>
     </div>
     
     <div class="col-4">
       <div class="row no-gutters">
         <div class="col-6">
-          <p style="float: right;">Total registered clincs</p>
+          <p style="float: right;">Total scheduled requests</p>
         </div>
         <div class="col-6">
           <p style="float: left; color: #117BCC;
@@ -168,27 +163,35 @@
     <table class="table table-hover table-stripped" style="font-size: 1.2em">
       <thead>
         <tr>
-          <th>Clinic Name</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th>Profile</th>
+          <th>Clinic(CSB) Name</th>
+          <th>Delivery Date</th>
+          <th>Weight</th>
+          <th>Priority</th>
+          <th>Refrigration</th>
           <th></th>
         </tr>
       </thead>
-      {%for clinic in clinics%}
+      {%for request in scheduled_flight_requests %}
       <tr>
-        <td>{{clinic.name}}</td>
-        <td>{{clinic.email}}</td>
-        <td>{{clinic.address}}</td>
-        <td>{{clinic.profile}}</td>
+        <td>{{request.clinic_name}}</td>
+        <td>{{request.delivery_date }}</td>
+        <td>{{request.total_volume}}</td>
+        <td>{{request.priority_level}}</td>
+        <td>{{request.refrigration}}</td>
        
       </tr>
       {%empty%}
-      <p>Looks like clinic does not exist</p>
+      <p>Looks like the flight does not exist</p>
      
       {%endfor%}
     </table>
   </div>
+
+  <!-- <a href="{% url 'clinic_upload' %}" >
+    <button class="GFG">
+        Add clinic
+    </button>
+</a> -->
 
 
   {% if is_paginated %}

@@ -34,7 +34,27 @@
     width: 80%;
     float: right;
   }
+  .search{
+    margin-left: 30%;
+  }
 </style>
+<div class="search">
+  <form method="get" class="w-100" action="{% url 'shipments:search_shipment' %}">
+    <button type="submit" class="search-button">
+      <i class="fas fa-search"></i>
+    </button>
+    <input type="search" placeholder="shipment_id" name="search" />
+  </form>
+  {%if message%}
+  <h6>{{message}}</h6>
+  {%endif%}
+
+  {%if results%}
+  <p class="results">Found {{results}} clinic{{ results|pluralize }}</p>
+  {%endif%}
+</div>
+
+</div>
 
 
 <main class="admin-main">
