@@ -83,10 +83,10 @@ class DelayedFlightsView(View):
                 return render(request,self.template_name,context)
             results=clinics.count()
         else:
+            
             context={
                     'delayed_flight_requests':delayed_flight_requests,
                     'delayed_flight_requests_count':delayed_flight_requests_count,
-                    'results':results,
                     }
             return render(request,self.template_name,context)
         context={
