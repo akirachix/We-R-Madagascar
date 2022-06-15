@@ -1,95 +1,109 @@
-{% extends 'flightres/base.html' %} {% load static %} 
+{% extends 'flightres/base.html' %} {% load static %}
 
 <!Doctype html>
 <html>
-    <head>
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 
-    </head>
-    {% block body%}
-    <body>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+{% block body%}
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
 
 
 
 
+    <main class="admin-main">
+        <div class="panel panel-default">
+            <div class="card">
+                <form method="post">
+                    {%csrf_token%}
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Shipment Id.</label>
+                            {{form.shipment_id}}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Clinic Name</label>
+                            {{form.clinic_name}}
+                        </div>
+                    </div>
 
-<div class="card-header">
-    <form method="post">
-      {%csrf_token%}
-      <div class="row">
-        <div class="col">
-            <label>Shipment Id.</label>
-            {{form.shipment_id}}
-          
-        </div>
-        <div class="col">
-            <label>Clinic Name</label>
-            {{form.clinic_name}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-            <label>Medication</label>
-            {{form.medication}}
-        </div>
-        <div class="col">
-            <label>Units</label>
-            {{form.units}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-            <label>Delivery Date</label>
-            {{form.delivery_date}}
-        </div>
-        <div class="col">
-            <label>Take Of Time</label>
-            {{form.take_of_time}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-            <label>Delivery Time</label>
-            {{form.delivery_time}}
-        </div>
-        <div class="col">
-            <label>Status</label>
-            {{form.status}}
-        </div>
-        <div class="row">
-            <div class="col">
-                <label>Destination</label>
-                {{form.destination}}
+                    <div class="form-row"></div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress">Medication</label>
+                            {{form.medication}}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress2">Units</label>
+                            {{form.units}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="inputCity">Delivery Date</label>
+                            {{form.delivery_date}}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Take Off Time</label>
+                            {{form.delivery_time}}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputZip">Delivery Time</label>
+                            {{form.take_of_time}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress2">Status</label>
+                            {{form.status}}
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress2">Destination</label>
+                            {{form.destination}}
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">
+                        Schedule Shipment
+                    </button>
+                </form>
             </div>
-          
-           
-   
-      <button
-        class="btn btn-primary"
-        style="margin-top: 1%; width: 10%"
-        type="submit">
-      
-        Schedule Shipment
-      </button>
-    </form>
+        </div>
+    </main>
 
 
+</body>
+<style>
+    form {
+        width: 50%;
+        margin: 8% auto;
+    }
 
-    </body>
-    <style>
-        form{
-            text-align: center;
-            margin-left: 500px;
-        }
-   
-    </style>
-    {% endblock body %}
-        
-    </body> }
-    </html>
+    input {
+        width: 100% !important;
+    }
+</style>
+{% endblock body %}
+
+</body> }
+
+</html>

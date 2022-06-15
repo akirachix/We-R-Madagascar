@@ -1,63 +1,92 @@
-{% extends 'flightres/base.html' %} {% load static %} {% block links %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/custom-charts.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'css/apexcharts.css' %}" />
-{% endblock links %} {%block body%}
-<center>
-<main>
-<div class="main-card">
-    <h3>Register Flight</h3>
-  </div> 
-  <br />
-  <div class="card-header">
-    <form method="post">
-      {% csrf_token %}
-         
-      <div class="row">
-        <div class="col">
-            <label> Clinic (CSB) Name</label>
-            
-            {{flight_form.clinic_name}}
-        </div>
-        <div class="col">
-            <label>Total Volume (Litres)</label>
-            {{flight_form.total_volume}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-            <label>Delivery Date </label>
-            {{flight_form.delivery_date}}
-        </div>
-        <div class="col">
-            <label>Priority Level(1=High, 5=Low)</label>
-            {{flight_form.priority_level}}
-        </div>
-        <div class="col">
-            <label>Refrigration</label>
-            {{flight_form.refrigration }}
-        </div>
-      </div>
-      
-      <button
-        class="btn btn-primary"
-        style="margin-top: 1%; width: 10%"
-        type="submit"
-      >
-        Request Flight
-      </button>
-      <P>Cancel</P>
-    </form> 
-  </div>
+{% extends 'flightres/base.html' %} {% load static %}
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+<!Doctype html>
+<html>
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+</head>
+{% block body%}
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
     crossorigin="anonymous"></script>
-  <script>
-    let dropArea = document.getElementById('drop-area')
-  </script>
-</main>
-</center>
-{%endblock%}
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+
+  <main class="admin-main">
+    <div class="panel panel-default">
+      <div class="card">
+        <form method="post">
+          {%csrf_token%}
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Clinic (CSB) Name</label>
+              {{flight_form.clinic_name}}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Total Volume (Litres)</label>
+              {{flight_form.total_volume}}
+            </div>
+          </div>
+
+          <div class="form-row"></div>
+
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label for="inputCity">Delivery Date</label>
+              {{form.delivery_date}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="inputAddress2">Priority Level(1=High, 5=Low)</label>
+              {{flight_form.priority_level}}
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="inputAddress2">Refrigration</label>
+              {{flight_form.refrigration }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="inputAddress2">Delay Reason</label>
+              {{form.delay_reasons}}
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">
+            Request Flight
+          </button>
+          <P>Cancel</P>
+        </form>
+      </div>
+    </div>
+  </main>
+
+
+</body>
+<style>
+  form {
+    width: 50%;
+    margin: 8% auto;
+  }
+
+  input {
+    width: 100% !important;
+  }
+</style>
+{% endblock body %}

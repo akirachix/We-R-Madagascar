@@ -56,8 +56,7 @@ INSTALLED_APPS = [
     'clinic',
     'phonenumber_field',
     'shipments',
-    'flights',
-    
+    'flights',    
 ]
 CRONJOBS = [
     ('*/1 * * * *', 'flights.cron.scheduled_job')
