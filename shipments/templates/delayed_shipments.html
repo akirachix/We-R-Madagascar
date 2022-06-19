@@ -14,25 +14,12 @@
 
   th {
     color: #117BCC !important;
-    border-color: #EBEEF5;
+    font-weight: bold;
   }
 
-  .table>:not(:last-child)>:last-child>* {
-    border-bottom-color: #EBEEF5;
-  }
-
-  .table>tr>td {
-    border-bottom-color: #EBEEF5;
-  }
-
-  .table {
-    margin-bottom: 4%;
-  }
-
-  .admin-main {
-    position: relative;
-    width: 80%;
-    float: right;
+  .heading {
+    margin-bottom: 2.5%;
+    font-size: 1.5rem;
   }
 </style>
 
@@ -40,37 +27,52 @@
 <main class="admin-main">
   <div class="panel panel-default">
 
-    <h4 style="color: #117BCC;"> Delayed Shipments</h4>
+    <p class="heading" style="color: #117BCC;"> Delayed Shipments</p>
 
-    <div class="float-right">
+    <div class="float-right" style="margin-bottom:0.5% ; margin-top: 1.5%;">
       <p>Total Delayed Shipments:<h3>{{ delayed_count }}</h3></p>
     </div>
-    <div class="card" style="width: 100%;">
-      <table class="table table-hover table-stripped" style="font-size: 1.2em">
-        <thead>
-          <tr id="table-headings">
-            <th>shipment_id </th>
-            <th>destination </th>
-            <th> delay_reasons</th>
-            <th> status</th>
-          </tr>
-        </thead>
 
-        <tbody>
-          {% for shipment in shipments_list %} 
+
+    <div class="container">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length="3" data-order=" [[ 2, "asc" ]]">
+          <thead>
+              <tr>
+                <th>Shipment Id </th>
+                <th>Destination </th>
+                <th> Delay Reasons</th>
+                <th> Status</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for shipment in shipments_list %} 
   
-        <tr>
-          <td>{{shipment.shipment_id}}</td>
-          <td>{{shipment.destination}}</td>
-          <td>{{shipment.delay_reasons}}</td>
-          <td>{{shipment.status}}</td>
-          <td><a id="edit_delay" href="{%url 'shipments:edit_delays' shipment.id%}"><button type="submit" class="save btn btn-primary">Reschedule Shipment</button></td></a>
-        </tr>
-        {% endfor %}
-  
-      </tbody>
+              <tr>
+                <td>{{shipment.shipment_id}}</td>
+                <td>{{shipment.destination}}</td>
+                <td>{{shipment.delay_reasons}}</td>
+                <td>{{shipment.status}}</td>
+                <td><a id="edit_delay" href="{%url 'shipments:edit_delays' shipment.id%}"><button type="submit" class="save btn btn-primary">Reschedule Shipment</button></td></a>
+              </tr>
+            {% endfor %}
+          </tbody>
       </table>
     </div>
   </div>
 </main>
 {%endblock body%}
+
+<script>
+  $(function () {
+    $('#dataTable').DataTable({
+      "pageLength": 3,
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "filter": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+      });
+  });
+</script>

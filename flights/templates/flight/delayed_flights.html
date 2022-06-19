@@ -1,211 +1,104 @@
-{% include 'flightres/base.html' %}
+{% extends 'flightres/base.html' %} {% load static %}
 {% load static %}
 {% block links %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/custom-charts.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/apexcharts.css' %}" />
-
 {% endblock links %}
 
-  <style>
-    body {
-      font-family: 'Nunito', sans-serif;
-    }
 
-    .search {
-      width: 50%;
-      float: right;
-      margin-bottom: 2%;
-      margin-top: 7%;
-      overflow: auto;
-    }
+{% block body %}
+<style>
+  body {
+    font-family: 'Nunito', sans-serif;
+  }
 
-    #profile {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      box-shadow: gray 2px 2px 2px;
-      object-fit: cover;
-    }
-
-    .search>form>input {
-      width: 55%;
-      padding: 10px 10px;
-      color: #202020;
-      border: none;
-      border-radius: 8px 8px 8px 8px;
-      float: right;
-    }
-
-    form>input:focus {
-      outline: none;
-    }
+  th {
+    color: #117BCC !important;
+   font-weight: bold;
+  }
+  .heading{
+    margin-bottom: 2.5%;
+    font-size: 1.5rem;
+  }
+  /* .search{
+    margin-left: 30%;
+  } */
+</style>
 
 
-    .search-button:focus {
-      outline: none;
-    }
+<!-- <div class="search">
+  <form method="get" class="w-100" action="{% url 'shipments:search_shipment' %}">
+    <button type="submit" class="search-button">
+      <i class="fas fa-search"></i>
+    </button>
+    <input type="search" placeholder="shipment_id" name="search" />
+  </form>
+  {%if message%}
+  <h6>{{message}}</h6>
+  {%endif%}
 
-    .search-button {
-      border: none;
-      outline: none;
-      margin-left: 43%;
-      text-align: center;
-      padding: 5px 5px;
-      position: absolute;
-      margin-top: 0.5%;
-      padding-top: 1%;
-      background-color: transparent;
-      float: right;
-    }
-
-    .search-button>i {
-      text-decoration: none;
-      float: right;
-    }
-
-    .fas {
-      color: #4A4A4A;
-      float: right;
-
-    }
-
-    th {
-      color: #117BCC;
-      border-color: #EBEEF5;
-    }
-
-    .table>:not(:last-child)>:last-child>* {
-      border-bottom-color: #EBEEF5;
-    }
-
-    .table>tr>td {
-      border-bottom-color: #EBEEF5;
-    }
-
-    .table {
-      margin-bottom: 4%;
-    }
-
-    .admin-main {
-      position: relative;
-      width: 80%;
-      float: right;
-    }
-  
-    @media screen and (max-width: 1300px) {
-      .admin-main {
-        width: 80%;
-        margin: auto;
-        margin-right: 1.1%;
-      }
-
-      .search-button {
-        border: none;
-        outline: none;
-        margin-left: 43%;
-        text-align: center;
-        padding: 5px 5px;
-        position: absolute;
-        margin-top: 0.5%;
-        padding-top: 1%;
-        background-color: transparent;
-        float: right;
-      }
-    }
-  </style>
-
-{%block body%}
+  {%if results%}
+  <p class="results">Found {{results}} clinic{{ results|pluralize }}</p>
+  {%endif%}
+</div> -->
 
 <main class="admin-main">
   <div class="panel panel-default">
-   
-  <div style="overflow: auto; display: block;">
-    <div class="search">
-      <form method="get" class="w-100" action="{% url 'delayed_requests' %}">
-        <button type="submit" class="search-button">
-          <i class="fas fa-search"></i>
-        </button>
-        <input type="search" placeholder="Search by clinic name" name="search" />
-      </form>
-      {%if message%}
-      <h6>{{message}}</h6>
-      {%endif%}
 
-      {%if results %}
-      <p class="results">Found {{results}} clinic{{ results|pluralize }}</p>
-      
-      {%endif%}
+    <div class="float-right" style="margin-top: 3.5%; margin-bottom: 0.25%">
+      <p>Total Scheduled Shipments:
+      <h3>{{ schedule_count }}</h3>
+      </p>
     </div>
-  </div>
 
-  <div class="w-100"></div>
+      <p style=" color: #117BCC;" class="heading">Delayed Requests</p>
 
-  <div class="row no-gutters mt-4 mb-4">
-    <div class="col-8">
-      <h5 style=" color: #117BCC;
-      ">Delayed Requests</h5>
+    <div class="container">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length="3" data-order=" [[ 2, "asc" ]]">
+          <thead>
+              <tr>
+                <th>Clinic(CSB) Name</th>
+                <th>Delivery Date</th>
+                <th>Weight</th>
+                <th>Priority</th>
+                <th>Refrigration</th>
+                <th>Reason For Delay</th>
+                <th></th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for request in  delayed_flight_requests  %}
+            <tr>
+              <td>{{request.clinic_name}}</td>
+              <td>{{request.delivery_date }}</td>
+              <td>{{request.total_volume}}</td>
+              <td>{{request.priority_level}}</td>
+              <td>{{request.refrigration}}</td>
+              <td>{{request.delayed_reasons}}</td>
+             
+            </tr>
+            {%empty%}
+            <p>Looks like flight request does not exist</p>
+           
+            {%endfor%}
+          </tbody>
+      </table>
     </div>
-    
-    <div class="col-4">
-      <div class="row no-gutters">
-        <div class="col-6">
-          <p style="float: right;">Total delayed requests</p>
-        </div>
-        <div class="col-6">
-          <p style="float: left; color: #117BCC;
-        ">{{count}}  </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" style="width: 100%;">
-    <table class="table table-hover table-stripped" style="font-size: 1.2em">
-      <thead>
-        <tr>
-          <th>Clinic(CSB) Name</th>
-          <th>Delivery Date</th>
-          <th>Weight</th>
-          <th>Priority</th>
-          <th>Refrigration</th>
-          <th>Reason For Delay</th>
-          <th></th>
-        </tr>
-      </thead>
-      {% for request in  delayed_flight_requests  %}
-      <tr>
-        <td>{{request.clinic_name}}</td>
-        <td>{{request.delivery_date }}</td>
-        <td>{{request.total_volume}}</td>
-        <td>{{request.priority_level}}</td>
-        <td>{{request.refrigration}}</td>
-        <td>{{request.delayed_reasons}}</td>
-       
-      </tr>
-      {%empty%}
-      <p>Looks like flight request does not exist</p>
-     
-      {%endfor%}
-    </table>
-  </div>
-
-  {% if is_paginated %}
-  <div class="pagination">
-    <span class="step-links">
-      {% if clinics.has_previous %}
-      <a href="?page={{ clinics.previous_page_number }}">previous</a>
-      {% endif %}
-
-      <span>
-        Page {{ clinics.number }} of {{ clinics.paginator.num_pages }}.
-      </span>
-
-      {% if clinics.has_next %}
-      <a href="?page={{ clinics.next_page_number }}">next</a>
-      {% endif %}
-    </span>
-  </div>
-  {% endif %}
   </div>
 </main>
-{%endblock%}
+{%endblock body%}
+
+<script>
+  $(function () {
+    $('#dataTable').DataTable({
+      "pageLength": 3,
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "filter": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+      });
+  });
+</script>

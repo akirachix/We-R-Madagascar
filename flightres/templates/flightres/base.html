@@ -8,23 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- SOCIAL MEDIA META -->
-    <meta property="og:description" content="Nepal Drone Portal">
+    <meta property="og:description" content="Madagascar Drone Portal">
     <meta property="og:image" content="preview.html">
-    <meta property="og:site_name" content="Nepal Drone Portal">
-    <meta property="og:title" content="Nepal Drone Portal">
+    <meta property="og:site_name" content="Madagascar Drone Portal">
+    <meta property="og:title" content="Madagascar Drone Portal">
     <meta property="og:type" content="website">
     <meta property="og:url" content="http://naxa.com.np">
 
     <!-- TWITTER META -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@Nepal Drone Portal">
-    <meta name="twitter:creator" content="@Nepal Drone Portal">
-    <meta name="twitter:title" content="Nepal Drone Portal">
-    <meta name="twitter:description" content="Nepal Drone Portal">
+    <meta name="twitter:site" content="@Madagascar Drone Portal">
+    <meta name="twitter:creator" content="@Madagascar Drone Portal">
+    <meta name="twitter:title" content="Madagascar Drone Portal">
+    <meta name="twitter:description" content="Madagascar Drone Portal">
     <meta name="twitter:image" content="preview.html">
 
     <!--title-->
-    <title>Nepal Drone Portal</title>
+    <title>Madagascar Drone Portal</title>
 
     <!-- faveicon start   -->
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" sizes="32x32">
@@ -32,7 +32,9 @@
     <!-- stylesheet start -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'datatable/datatables.min.css' %}" />
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'datatable/DataTables-1.10.21/datatables.min.css' %}" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'datatable/DataTables-1.10.21/datatables.min.js' %}" /> -->
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/humanitarian-webfont.css' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,16 +47,17 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
-    {% block extrastyle %}
-
-    <link href="{% static 'ajax_datatable/css/style.css' %}" rel="stylesheet" />
-    <!-- link rel='stylesheet' href="{% static 'datatables.net-bs/css/dataTables.bootstrap.min.css' %}" -->
-    <link rel='stylesheet' href="{% static 'datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
-    <link rel='stylesheet' href="{% static 'datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}">
-
-    {% endblock extrastyle %}
 
     {% block links %}
+
+    <!-- Data tables css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <!-- end DT Css-->
+
+    <!-- Data tables script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 
     {% endblock links %}
 
@@ -89,12 +92,8 @@
 
     {% block extrajs %}
 
-    <script type="text/javascript" src="{% static 'ajax_datatable/js/utils.js' %}"></script>
 
-    <script src="{% static 'datatables.net/js/jquery.dataTables.min.js' %}"></script>
     <!-- script src="{% static 'datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script -->
-    <script src="{% static 'datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
-    <script src="{% static 'datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
     <script src="{% static 'datatables.net-buttons/js/buttons.print.min.js' %}"></script>
     <script src="{% static 'datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
     <script src="{% static 'datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
