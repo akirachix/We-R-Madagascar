@@ -4,97 +4,101 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/custom-charts.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/apexcharts.css' %}" />
 {% endblock links %}
-
-
 {% block body %}
 <style>
   body {
     font-family: 'Nunito', sans-serif;
   }
-
   th {
     color: #117BCC !important;
-    border-color: #EBEEF5;
-  }
+    font-weight: bold;
+    width: fit-content;
 
-  .table>:not(:last-child)>:last-child>* {
-    border-bottom-color: #EBEEF5;
   }
-
-  .table>tr>td {
-    border-bottom-color: #EBEEF5;
+  td{
+   
+    text-align: center;
+    padding: 10px;
   }
-
-  .table {
-    margin-bottom: 4%;
+  .heading{
+    margin-bottom: 2.5%;
+    font-size: 1.5rem;
   }
-
-  .admin-main {
-    position: relative;
-    width: 80%;
-    float: right;
+ 
+  table{
+    table-layout: fixed;
   }
 </style>
 
-
 <main class="admin-main">
   <div class="panel panel-default">
-
-    <div class="float-right">
+    <div class="float-right" style="margin-top: 3.5%; margin-bottom: 0.25%">
       <p>Total Scheduled Shipments:
       <h3>{{ schedule_count }}</h3>
       </p>
     </div>
-
-    <h4 style="color: #117BCC;"> Shipments Details</h4>
-
-    <div class="card" style="width: 100%;">
-      <table class="table table-hover table-stripped" style="font-size: 1.2em">
-        <thead>
-          <tr id="table-headings">
-            <th>UID_quantification_planning </th>
-            <th>UID_planning</th>
-            <th>type_produit</th>
-            <th>produit</th>
-            <th>UID_produit </th>
-            <th> livraison_produit</th>
-            <th>quantite_prevu</th>
-            <th>quantite_envoyee </th>
-            <th> quantite_recu</th>
-            <th> quantite_intact</th>
-            <th>quantite_abime </th>
-            <th>quantite_perdu </th>
-            <th> explication</th>
-          </tr>
-        </thead>
-    
-    
-        <tbody>
-          {% for shipment in mylist %}
-
-          <tr>
-            <td>{{shipment.UID_quantification_planning}}</td>
-            <td>{{shipment.UID_planning}}</td>
-            <td>{{shipment.type_produit}}</td>
-            <td>{{shipment.produit}}</td>
-            <td>{{shipment.UID_produit}}</td>
-            <td>{{shipment.livraison_produit}}</td>
-            <td>{{shipment.quantite_prevu}}</td>
-            <td>{{shipment.quantite_envoyee}}</td>
-            <td>{{shipment.quantite_recu}}</td>
-            <td>{{shipment.quantite_intact}}</td>
-            <td>{{shipment.quantite_abime}}</td>
-            <td>{{shipment.quantite_perdu}}</td>
-            <td>{{shipment.explication}}</td>
-            <!-- <td><a id="edit_shipment" href="{%url 'shipments:edit_shipment' shipment.id%}"><button type="submit"
-                  class="save btn btn-primary">Edit</button></td></a> -->
-
-
-          </tr>
-          {% endfor %}
-        </tbody>
+    <p class="heading" style="color: #117BCC;"> Shipments Details</p>
+    <div class="container">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length="3" data-order=" [[ 2, "asc" ]]">
+          <thead>
+            <thead>
+              <tr id="table-headings">
+                <th style="width: 100px;">UID_quantification_planning </th>
+                <th style="width: 100px;">UID_planning</th>
+                <th>type_produit</th>
+                <th>produit</th>
+                <th>UID_produit </th>
+                <th> livraison_produit</th>
+                <th>quantite_prevu</th>
+                <th>quantite_envoyee </th>
+                <th> quantite_recu</th>
+                <th> quantite_intact</th>
+                <th>quantite_abime </th>
+                <th>quantite_perdu </th>
+                <th> explication</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for shipment in mylist %}
+              <tr>
+                <td>{{shipment.UID_quantification_planning}}</td>
+                <td style=" word-break: break-word;">{{shipment.UID_planning}}</td>
+                <td>{{shipment.type_produit}}</td>
+                <td>{{shipment.produit}}</td>
+                <td>{{shipment.UID_produit}}</td>
+                <td>{{shipment.livraison_produit}}</td>
+                <td>{{shipment.quantite_prevu}}</td>
+                <td>{{shipment.quantite_envoyee}}</td>
+                <td>{{shipment.quantite_recu}}</td>
+                <td>{{shipment.quantite_intact}}</td>
+                <td>{{shipment.quantite_abime}}</td>
+                <td>{{shipment.quantite_perdu}}</td>
+                <td>{{shipment.explication}}</td>
+                <!-- <td><a id="edit_shipment" href="{%url 'shipments:edit_shipment' shipment.id%}"><button type="submit"
+                      class="save btn btn-primary">Edit</button></td></a> -->
+              </tr>
+              {%endfor%}
+          </tbody>
       </table>
     </div>
   </div>
 </main>
 {%endblock body%}
+<script>
+// $(document).ready(function () {
+//     $('#dataTable').DataTable();
+// });
+$(document).ready(function () {
+    $('#dataTable').DataTable({
+      "paging": true,
+      "pageLength": 10,
+      "lengthChange": true,
+      "searching": true,
+      "filter": true,
+      "ordering": true,
+      "bInfo": true,
+      "bSort": true,
+      "autoWidth": true
+      });
+    });
+</script>
