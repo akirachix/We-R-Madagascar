@@ -3,12 +3,12 @@ from django.db import models
 from django.utils import timezone
 
 class FlightRequest(models.Model):
-    BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
-    STATUS_CHOICES = (
-        ('Pending','Pending'),
-        ('Scheduled', 'Scheduled'),
-        ('Delayed','Delayed')
-    )
+    # BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
+    # STATUS_CHOICES = (
+    #     ('Pending','Pending'),
+    #     ('Scheduled', 'Scheduled'),
+    #     ('Delayed','Delayed')
+    # )
 
     UID_planning= models.CharField(max_length=300)
     pays= models.CharField(max_length=300)
@@ -25,6 +25,7 @@ class FlightRequest(models.Model):
     situation_livraison=models.CharField(max_length=300)
     motif_report=models.CharField(max_length=300)
     motif_annulation=models.CharField(max_length=300)
+    cancel=models.CharField(max_length=6)
     project=models.CharField(max_length=300)
  
 
@@ -32,4 +33,4 @@ class FlightRequest(models.Model):
 
 
     def __str__(self):
-        return self.destination
+        return self.date_planning

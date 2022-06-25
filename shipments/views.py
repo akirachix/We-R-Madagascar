@@ -17,7 +17,34 @@ import json
 #     model = Schedules
 #     template_name = 'schedule.html'
 #     success_url = reverse_lazy('shipment:shipment')
+import os
+from decouple import config
+import telerivet
 
+from django.shortcuts import render
+
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+import json
+
+@csrf_exempt
+def webhook(request):
+    print(request.POST.get('secret') )
+    webhook_secret = '2K2ZFHR3QDCWM46PZ6AR2NAPM6ZC7MZZ'
+    if request.POST.get('secret') != webhook_secret:
+        print("hey Guys")
+        return HttpResponse("Invalid webhook vd dcdd secret", 'text/plain', 403)
+    if request.POST.get('event') == 'incoming_message':
+        content = request.POST.get('content')
+        from_number = request.POST.get('from_number')
+        phone_id = request.POST.get('phone_id')
+        
+        return HttpResponse(json.dumps({
+            'messages': [
+                {'content': "Thanks for your messagessss!"}
+                ]
+                }), 'application/json') 
+    return("hello")
 
 def scheduledShipmentsList(request):
     response = requests.get('https://drone.psi-mg.org/index.php/Export_data_by_tags/get_quantification_produit/12019112715581748016523394084163128401_qsclxSDCEDQ3/Quantification_produit')
@@ -53,7 +80,7 @@ def edit_shipment(request, id):
     
 
 def checkDelayedShipments(request):
-    shipments_list =Schedules.objects.filter(status = 'Delayed')
+    shipments_list =Schedules.objects.all()
     delayed_count = shipments_list.count()
     return render(request,'delayed_shipments.html',{'shipments_list' : shipments_list ,'delayed_count':delayed_count})
 
