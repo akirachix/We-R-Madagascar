@@ -4,9 +4,10 @@ from . import views
 from .views import FlightPermissionList, approvePerm, flightReqResponseView, ComplainListView, dashboardView, \
     updateComplain, submitReply, AboutPageView, GuidelinesPageView, OperdatorDatabaseView, denyPerm, \
     assignPerm, bulkupload, FlightView , OperatorAddView, custom_zip, MapView
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
-    path('', dashboardView, name='dashboard'),
+    path('',csrf_exempt(dashboardView), name='dashboard'),
     path('permission/<str:type>', FlightPermissionList.as_view(), name="permission"),
     path('allflights', FlightView.as_view(), name="flightview"),
     path('custom_zip', custom_zip, name="custom_zip"),
@@ -31,6 +32,7 @@ urlpatterns = [
     path('upload_sheet-new', bulkupload, name="upload-sheet-new"),
     path('upload_data', views.dronedataupload, name="upload-data"),
     path('edit_data/<uuid:pk>', views.dronedataupdate, name="data-edit"),
-    path('add_operator', OperatorAddView.as_view(), name="add-operator")
+    path('add_operator', OperatorAddView.as_view(), name="add-operator"),
+    
 
 ]

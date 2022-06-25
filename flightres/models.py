@@ -5,7 +5,7 @@ from django.contrib import admin
 import uuid
 from django.contrib.auth.models import User
 import geopandas
-from api.twilio import Twilio
+# from api.twilio import Twilio
 import base64
 from registry.models import Aircraft
 from flightres.utils import reverseGeocode
@@ -48,7 +48,7 @@ class FlightPermission(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     is_special_permission = models.BooleanField(default=False)
 
-    twilio = Twilio()
+    # twilio = Twilio()
 
     def __init__(self, *args, **kwargs):
         super(FlightPermission, self).__init__(*args, **kwargs)
@@ -110,7 +110,7 @@ class Report(models.Model):
     is_escalated = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    twilio = Twilio()
+    # twilio = Twilio()
 
     def __init__(self, *args, **kwargs):
         super(Report, self).__init__(*args, **kwargs)

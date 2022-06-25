@@ -2,7 +2,7 @@ from django.urls import path
 from .models import Schedule
 from django.contrib.staticfiles.urls import urlpatterns
 
-from .views import update, edit_shipment,scheduledShipmentsList,checkDelayedShipments,edit_delay,checkCompletedShipments,completed_profile,search_clinic
+from .views import update, edit_shipment,scheduledShipmentsList,checkDelayedShipments,edit_delay,checkCompletedShipments,completed_profile,search_clinic,webhook
 app_name = "shipments"
 
 urlpatterns = [
@@ -10,6 +10,8 @@ urlpatterns = [
 
     path('search_shipments/',search_clinic,name='search_shipment'),
     path('schedule_shipments',update, name='schedule_shipments'),
+    path('twilliio',webhook, name='messages'),
+
     path('edit/<int:id>/',edit_shipment,name='edit_shipment'),
     path('delayed/',checkDelayedShipments , name='delayed_shipments'),
     path('reschedule/<int:id>/',edit_delay,name='edit_delays'),
