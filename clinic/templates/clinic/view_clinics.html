@@ -170,17 +170,19 @@
         <tr>
           <th>Clinic Name</th>
           <th>Email</th>
-          <th>Address</th>
-          <th>Profile</th>
+          <th>Location</th>
+          <th>District</th>
+          <th>Contact</th>
           <th></th>
         </tr>
       </thead>
       {%for clinic in clinics%}
       <tr>
-        <td>{{clinic.name}}</td>
+        <td>{{clinic.clinic_name}}</td>
         <td>{{clinic.email}}</td>
-        <td>{{clinic.address}}</td>
-        <td>{{clinic.profile}}</td>
+        <td>{{clinic.location}}</td>
+        <td>{{clinic.district}}</td>
+        <td>{{clinic.contact}}</td>
        
       </tr>
       {%empty%}

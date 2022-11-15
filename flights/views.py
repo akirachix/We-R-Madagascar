@@ -77,7 +77,7 @@ class DelayedFlightsView(View):
                 
                 context={
                     'delayed_flight_requests':delayed_flight_requests,
-                    'delayed_flight_requests_count':delayed_flight_requests_count,
+                    'delayed_fliht_requests_count':delayed_flight_requests_count,
                     'message':"Looks like the clinic doesn't exist. Try searching using the clinic name"
                     }
                 return render(request,self.template_name,context)
@@ -86,7 +86,7 @@ class DelayedFlightsView(View):
             context={
                     'delayed_flight_requests':delayed_flight_requests,
                     'delayed_flight_requests_count':delayed_flight_requests_count,
-                    'results':results,
+                    # 'results':results,
                     }
             return render(request,self.template_name,context)
         context={

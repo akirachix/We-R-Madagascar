@@ -1,8 +1,5 @@
 {% extends 'flightres/base.html' %} {% load static %} 
-{% load bootstrap4 %}
-{% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
-{{ form.media }}
+
 <!Doctype html>
 <html>
     <head>
@@ -26,7 +23,7 @@
     {% csrf_token %}
     <form>
       {{ form.as_table }}
-      <button type="submit">Edit shipment</button>
+      <button type="submit">Save shipment</button>
     </form>
   </form>
 

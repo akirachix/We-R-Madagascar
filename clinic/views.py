@@ -31,27 +31,25 @@ def clinic_upload(request):
         # setup a stream which is when we loop through each line we are able to handle a data in a stream
         io_string = io.StringIO(clinic_data_set)
         next(io_string)
-        
-
         clinic_csvf = csv.reader(io_string, delimiter=',', quotechar="|")
         clinic_data = []
-        for name,email,address,profile, *__ in clinic_csvf:
+        for clinic_name,email,location,district,contact, *__ in clinic_csvf:
             Clinic.objects.update_or_create(
-                name=name,
+                clinic_name=clinic_name,
                 email=email,
-                address=address,
-                profile=profile
+                location=location,
+                district=district,
+                contact=contact
             )
+        return render(request,"clinic/view_clinics.html")
         
-
     except Exception as e: 
         print(e)
         message="There was an error uploading. Seems like you are uploading an empty file"
 
         return render(request,"clinic/upload_clinics.html",{'message':message})
 
-    context = {}
-    return render(request, template, context)
+    
 
 
 def clinic_display(request):
@@ -69,7 +67,7 @@ def search_clinic(request):
     all_clinics = Clinic.objects.all()
     print(search_post)
     if search_post:
-        clinics = Clinic.objects.filter(Q(name__icontains=search_post))
+        clinics = Clinic.objects.filter(Q(clinic_name__icontains=search_post))
         if not clinics:
             message="Looks like the clinic doesn't exist. Try searching using the clinic name"
             return render (request,'clinic/view_clinics.html',{'clinics':all_clinics,'message':message})
