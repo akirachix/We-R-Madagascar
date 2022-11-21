@@ -77,6 +77,7 @@ urlpatterns = [
     path('whatsapp/', include('whatsappmsg.urls')),
     path('api/v1/user/', include('authentication.urls')),
     path('np/clinic/', include('clinic.urls')),
+    path('np/flights/', include('flights.urls')),
     path('np/api/v1/', include('api.urls')),
     path('np/shipments/',include(('shipments.urls', 'shipments'), namespace="shipment")),
     path('np/dashboard/', include(('flightres.urls', 'flightres'), namespace='dashboard')),

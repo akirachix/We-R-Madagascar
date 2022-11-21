@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'clinic',
     'phonenumber_field',
     'shipments',
+    'flights',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,45 +129,17 @@ LOGIN_URL = '/accounts/login'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'droneregistry.sqlite3'),
-#     }
-# }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': 'werdb',
-#         'USER': 'weruser',
-#         'PASSWORD': 'wer@123',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'dronecargo',
-        'USER': 'dronecargouser',
-        'PASSWORD': 'dronecargopass',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dronerobotics',
+        'USER': 'droneroboticsuser',
+        'PASSWORD': 'droneroboticspass',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-
-
-# DATABASES = {      
-#     'default': {          
-#         'ENGINE': os.environ.get('SQL_ENGINE', 'django.contrib.gis.db.backends.postgis'),          
-#         'NAME': os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),          
-#         'USER': os.environ.get('SQL_USER', 'postgres'),          
-#         'PASSWORD': os.environ.get('SQL_PASSWORD', 'postgis'),          
-#         'HOST': os.environ.get('SQL_HOST', 'localhost'),          
-#         'PORT': os.environ.get('SQL_PORT', '5432'),      
-#     }  
-# }
 
 
 
@@ -193,7 +166,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kathmandu'
+
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -225,9 +199,7 @@ LEAFLET_CONFIG = {
     'DEFAULT_CENTER': (27.71, 85.32),
     'DEFAULT_ZOOM': 6,
     'MIN_ZOOM': 1,
-    'MAX_ZOOM': 20,
-    #'TILES': "http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
-    
+    'MAX_ZOOM': 20,    
     
 }
 prod_db  =  dj_database_url.config(conn_max_age=500)
@@ -236,9 +208,8 @@ DATABASES['default'].update(prod_db)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'zakiyamustafazm@gmail.com'
-EMAIL_HOST_PASSWORD = 'vrjcrxwbfbahvtlq'
+EMAIL_HOST_USER = 'dronecargomadagascar@gmail.com'
+EMAIL_HOST_PASSWORD = 'dronecargouser2022'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
 

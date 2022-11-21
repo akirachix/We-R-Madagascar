@@ -8,10 +8,9 @@ class ScheduleForm(forms.ModelForm):
 
     class Meta:
         model = Schedule
-        fields = ('shipment_id','clinic_name','medication','units','delivery_date','take_of_time','delivery_time','status','destination',)
+        fields = ('clinic_name','medication','units','delivery_date','take_of_time','delivery_time','status','destination',)
         widgets = {
-            'shipment_id': forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
-            'clinic_name': forms.TextInput( attrs={'class': 'form-control','style':'width:50%',}),
+            'clinic_name': forms.Select( attrs={'class': 'form-control','style':'width:50%',}),
             'medication':  forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
             'units': forms.TextInput(attrs={'class': 'form-control','style':'width:50%'}), 
 
@@ -27,7 +26,6 @@ class ScheduleForm(forms.ModelForm):
         }
        
         labels={
-            'shipment_id':' Shipment Id',
             'clinic_name': ' Clinic Name',
             'medication':'Medication',
             'units':'Units',
@@ -46,10 +44,9 @@ class DelayedForm(forms.ModelForm):
 
     class Meta:
         model = Schedule
-        fields = ('shipment_id','clinic_name','medication','units','delivery_date','take_of_time','delivery_time','status','destination','delay_reasons')
+        fields = ('clinic_name','medication','units','delivery_date','take_of_time','delivery_time','status','destination','delay_reasons')
         widgets = {
-            'shipment_id': forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
-            'clinic_name': forms.TextInput( attrs={'class': 'form-control','style':'width:50%',}),
+            'clinic_name': forms.Select( attrs={'class': 'form-control','style':'width:50%',}),
             'medication':  forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
             'units': forms.TextInput(attrs={'class': 'form-control','style':'width:50%'}), 
             'delivery_date': forms.DateInput( attrs={'class': 'form-control','style':'width:50%'}),
@@ -65,7 +62,6 @@ class DelayedForm(forms.ModelForm):
         }
        
         labels={
-            'shipment_id':' Shipment Id',
             'clinic_name': ' Clinic Name',
             'medication':'Medication',
             'units':'Units',
@@ -82,10 +78,9 @@ class RescheduleForm(forms.ModelForm):
 
     class Meta:
         model = Schedule
-        fields = ('shipment_id','clinic_name','medication','units','delivery_date','take_of_time','delivery_time','status','destination','delay_reasons')
+        fields = ('clinic_name','medication','units','delivery_date','take_of_time','delivery_time','status','destination','delay_reasons')
         widgets = {
-            'shipment_id': forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
-            'clinic_name': forms.TextInput( attrs={'class': 'form-control','style':'width:50%',}),
+            'clinic_name': forms.Select( attrs={'class': 'form-control','style':'width:50%',}),
             'medication':  forms.TextInput( attrs={'class': 'form-control','style':'width:50%'}),
             'units': forms.TextInput(attrs={'class': 'form-control','style':'width:50%'}), 
 
@@ -103,7 +98,6 @@ class RescheduleForm(forms.ModelForm):
         }
        
         labels={
-            'shipment_id':' Shipment Id',
             'clinic_name': ' Clinic Name',
             'medication':'Medication',
             'units':'Units',
