@@ -4,7 +4,7 @@
 
 #### 2. Download source code
 
-```https://github.com/akirachix/We-R-Madagascar.git```
+```git clone https://github.com/akirachix/We-R-Madagascar.git```
 
 ```cd We-R-Madagascar```
 
@@ -14,7 +14,7 @@
 
 #### 4. Activate Virtual Environment
 
-```source venv/activate/bin/ ```
+```source venv/bin/activate ```
 
 #### 5. Install the requirements
 
